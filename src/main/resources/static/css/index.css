@@ -1,0 +1,409 @@
+@charset "utf-8";
+
+/* 共通のスタイル */
+
+body{
+  background-color: #111111;
+  text-align: center;
+}
+p,h2{
+  color: white;
+}
+h1{
+  color: #1FD9D9;
+}
+#h_img{
+  text-align: center;
+}
+
+#mid{
+  display: flex;
+  justify-content: center;
+}
+
+a:hover{
+}
+
+/*--------------slider-------------*/
+#slideshow {
+    position: relative;
+    max-width: 1200px;
+    min-width: 1000px;
+    height: 600px;
+    margin: auto;
+    overflow: hidden;
+    margin-bottom: 50px;
+}
+.slide-wrapper {
+    display: flex;
+    transition: transform 1s ease;
+}
+.slide {
+    min-width: 100%;
+    height: 100%;
+}
+#prev, #next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding:  10px 16px;
+    color: black;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: none;
+    font-size: 18px;
+    z-index: 1;
+    border-radius: 50px;
+}
+#prev {
+    left: 0;
+}
+#next {
+    right: 0;
+}
+
+
+
+
+
+
+
+/*----------NEWs----------*/
+.news_a {
+    text-decoration: none;
+    color: #333;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.news {
+  padding: 50px 0;
+}
+
+.inner {
+  width: 680px;
+  margin: 0 auto;
+  padding: 50px 0 100px;
+  margin-right: 20px;
+}
+
+.sub_ttl {
+  font-size: 20px;
+  text-align: left;
+  margin-bottom: 40px;
+  margin-left: 5px;
+  padding: 0 0 0 30px;
+  color: #ffffff;
+}
+
+.news_list {
+  margin: 0 5%;
+}
+
+.news_list_item {
+  padding: 25px 0;
+  border-bottom: 1px solid #3c3c3c;
+  text-align: left;
+  line-height: 25px;
+  font-size: 1rem;
+}
+
+.news_list_item:first-child {
+  border-top: 1px solid #3c3c3c;
+}
+.news_list_item a {
+ position: relative;
+ display: flex;
+ padding-right: 30px;
+}
+
+.news_list_date {
+  font-size: 15px;
+  display: flex;
+  margin-right: 17px;
+  align-items: center;
+  color: #1FD9D9;
+}
+#more{
+  text-decoration: none;
+  background-color: #3C3C3C;
+  border: none;
+  color: #8f8f8f; /*既読：白／未読：青にする*/
+  text-align: right;
+  font-size: 0.8rem;
+  /* margin: 0px auto 0 auto; */
+  margin: 0 -534px 0 0;
+  padding: 7px 20px 7px 20px;
+  border-radius: 0 0 5px 5px;
+}
+.hidden {
+    display: none;
+}
+
+/*----------MEMBER-------------*/
+
+#migi{
+  width: 350px;
+  padding: 20px;
+  margin-top: 20px;
+}
+#migi1{
+  padding: 20px;
+  background-color: #222222;
+  margin: 0 0 20px 0;
+  height: 230px;
+  width: 310px;
+}
+#migi_p{
+  font-size: 1.2rem;
+  padding: 20px 0 10px 0;
+}
+#migi_p2{
+  font-size: 0.7rem;
+  color: #666666;
+  margin-top: 10px;
+}
+#loginBtn{
+  color: #1FD9D9;
+  text-decoration: none;
+  background-color: #222222;
+  border: solid 3px #1FD9D9;
+  font-weight: bolder;
+  letter-spacing: 3px;
+  padding: 15px 70px;
+  margin-top: -10px;
+  margin-bottom: 15px;
+  border-radius: 50px;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+#loginBtn::before{
+  content: '';
+  width: 15%;
+  height: 100%;
+  background-color: #1FD9D9;
+  position: absolute;
+  left: -100%;
+  top: 0;
+  transition: .8s;
+  z-index: -1;
+}
+
+#loginBtn:hover::before{
+  left: 100%;
+}
+
+#login_d{
+  padding: 20px 10px 10px 10px;
+}
+#osi{
+  color: #656565;
+  font-size: 0.9rem;
+  margin: 0px 0 50px 0;
+  transition: 0.4s;
+}
+
+#osi:hover{
+  color: #1FD9D9;
+
+}
+
+#migi2{
+  background-color: #222222;
+}
+.migi2_a{
+  text-decoration: none;
+  color: white;
+  font-size: 1rem;
+  padding: 20px 10px;
+
+}
+.migi2_li{
+  padding: 28px 0px 25px 10px;
+  border-bottom: 1px solid #000000;
+  text-align: left;
+  transition: 0.4s;
+}
+
+.migi2_li:hover{
+  background-color: #333333;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.popup-content {
+    background-color: #222222;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 30px;
+    font-weight: 200;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #FFF;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+h2 {
+    margin-top: 0;
+    text-align: center;
+    padding: 10px 0;
+    font-weight: lighter;
+    letter-spacing: 2px;
+    margin-bottom: 40px;
+    border-bottom: #4e4e4e solid 1px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    text-align: left;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    color: #aaa;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    background-color: #333;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button[type="submit"] {
+    width: 50%;
+    padding: 10px 5px;
+    background-color: #333;
+    /* border: solid 1px #ccc; */
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 16px;
+    letter-spacing: 1px;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    transition: 0.4s;
+}
+
+.pas_forget{
+  display: block;
+  color: #aaa;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  transition: 0.3s;
+}
+
+.pas_forget:hover{
+  color: #fff;
+}
+
+button::before{
+  content: '';
+  width: 15%;
+  height: 100%;
+  background-color: #1FD9D9;
+  position: absolute;
+  left: -100%;
+  top: 0;
+  transition: .8s;
+  z-index: -1;
+}
+
+button:hover::before{
+  left: 100%;
+}
+
+.enter{
+  display: block;
+  text-decoration: none;
+  color: white;
+  font-weight: lighter;
+  transition: 0.4s;
+}
+
+.enter:hover{
+  color: #1FD9D9;
+}
+
+/* 広告 ---------------------- */
+.koukokuFl1{
+  margin: -50px auto 0 auto;
+  background-color: #1fd9d900;
+}
+
+.kouto{
+  width: auto;
+  height: 80px;
+  border: solid 1px #64646432;
+  transition: 0.5s;
+}
+
+.kouto:hover{
+  opacity: 0.9;
+  border: solid 1px #ffffff60;
+}
+
+.koukokuFl2{
+  display: flex;
+  justify-content: space-between;
+  width: 823.59px;
+  margin: 7px auto 180px auto;
+  background-color: #0a616100;
+}
+
+.koule{
+  width: 408px;
+  border: solid 1px #64646432;
+  transition: 0.5s;
+}
+
+.koule:hover{
+  opacity: 0.9;
+  border: solid 1px #ffffff60;
+}
+
+.kouri{
+  width: 408px;
+  border: solid 1px #64646432;
+  transition: 0.5s;
+}
+
+.kouri:hover{
+  opacity: 0.9;
+  border: solid 1px #ffffff60;
+}@charset "UTF-8";
