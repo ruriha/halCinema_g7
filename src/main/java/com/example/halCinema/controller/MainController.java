@@ -12,5 +12,10 @@ public class MainController {
 		// index.htmlを利用
 	    return "index"; 
 	  }	
+	  
+	  @RequestMapping("/toppage")
+	  public String toppage(){
+	    return "toppage"; 
+	  }	
 
 }

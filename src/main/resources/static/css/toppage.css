@@ -1,0 +1,466 @@
+@charset "utf-8";
+
+/* 共通のスタイル */
+
+body{
+  background-color: #111111;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+p,h2{
+  color: white;
+}
+h1{
+  color: #1FD9D9;
+}
+#h_img{
+  text-align: center;
+}
+
+#mid{
+  display: flex;
+  justify-content: center;
+}
+
+a:hover{
+  opacity: 0.7;
+}
+
+/*--------------slider-------------*/
+#slideshow {
+    position: relative;
+    max-width: 1200px;
+    min-width: 1000px;
+    height: 600px;
+    margin: auto;
+    overflow: hidden;
+}
+.slide-wrapper {
+    display: flex;
+    transition: transform 1s ease;
+}
+.slide {
+    min-width: 100%;
+    height: 100%;
+}
+#prev, #next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgb(37, 37, 37);
+    background-color: rgba(255, 255, 255, 0.462);
+    border: none;
+    font-size: 18px;
+    z-index: 1;
+    border-radius: 50px;
+    padding: 15px;
+}
+#prev {
+    left: 15px;
+    transition: 0.4s;
+}
+#next {
+    right: 15px;
+    transition: 0.4s;
+}
+
+#prev:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+    left: 10px;
+}
+
+#next:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+    right: 10px;
+}
+
+/*----------NEWs----------*/
+.news_a {
+  text-decoration: none;
+  color: #333;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.news {
+padding: 50px 0;
+}
+
+.inner {
+width: 680px;
+padding: 50px 0 100px 0;
+margin: auto;
+}
+
+.sub_ttl {
+font-size: 20px;
+text-align: left;
+margin-bottom: 40px;
+margin-left: 5px;
+padding: 0 0 0 30px;
+color: #ffffff;
+}
+
+.news_list {
+margin: 0 5%;
+}
+
+.news_list_item {
+padding: 25px 0;
+border-bottom: 1px solid #3c3c3c;
+text-align: left;
+line-height: 25px;
+font-size: 1rem;
+}
+
+.news_list_item:first-child {
+border-top: 1px solid #3c3c3c;
+}
+.news_list_item a {
+position: relative;
+display: flex;
+padding-right: 30px;
+}
+
+.news_list_item a p {
+  font-size: 0.95rem;
+  letter-spacing: 1.2px;
+}
+
+
+.news_list_date {
+font-size: 15px;
+display: flex;
+margin-right: 17px;
+align-items: center;
+color: #1FD9D9;
+}
+#more{
+text-decoration: none;
+background-color: #3C3C3C;
+border: none;
+color: #8f8f8f; /*既読：白／未読：青にする*/
+text-align: right;
+font-size: 0.8rem;
+/* margin: 0px auto 0 auto; */
+margin: 0 -534px 0 0;
+padding: 7px 20px 7px 20px;
+border-radius: 0 0 5px 5px;
+}
+.hidden {
+  display: none;
+}
+/*ーーーーーーーーーーーーースケジュールーーーーーーーーーーーーーーー*/
+#sche_b{
+  padding: 50px 0 0 0;
+  margin: 0 auto;
+  width: 1000px;
+}
+
+#sche_d{
+  display: flex;
+  justify-content: space-between;
+}
+#sche{
+  color: #1FD9D9;
+  font-size: 20px;
+  text-align: left;
+
+}
+#sche_a{
+  color: #1FD9D9;
+  font-size: 10px;
+  text-decoration: none;
+}
+#name{
+  font-size: 1.8rem;
+  text-align: left;
+  padding: 20px 0 10px 0;
+}
+#sub_name{
+  font-size: 0.7rem;
+  text-align: left;
+  padding: 0 0 10px 0;
+}
+#sub_a{
+  text-decoration: none;
+  color: #1FD9D9;
+}
+
+
+/*-----------カレンダー------------*/
+
+.calendar-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calendar-container {
+    width: 100%;
+    max-width: 933px; /* 必要に応じて調整 */
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+
+.calendar-container::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+}
+
+.calendar {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.day {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    background-color: #A2936B;
+    box-sizing: border-box;
+    line-height: 100px;
+    font-size: 2rem;
+    vertical-align: top;
+    margin-right: -1px; /* Border overlapping */
+}
+.day_f{
+  color: black;
+}
+.mini{
+  font-size: 1rem;
+}
+.select{
+  background-color: #1FD9D9;
+  color: white;
+}
+
+.scroll-button {
+    background-color: #A2936B;
+    padding: 65px 10px;
+    cursor: pointer;
+}
+
+.scroll-button:focus {
+    outline: none;
+}
+
+.scroll-button:active {
+    background-color: #A2936B;
+}
+
+
+/*ーーーーーーーーーーースケジュールーーーーーーーーーーーーーーー*/
+
+#s_div{
+  background-color: #222222;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+#s_top {
+  display: flex;
+  justify-content: space-between;
+  background-color: #b52f2f00;
+}
+#now{
+  font-size: 2rem;
+  text-align: left;
+  padding: 30px 0 0 30px;
+}
+
+.s_waku{
+  padding: 0px 50px 50px 50px;
+}
+
+.s_all{
+  border: solid #454544;
+  width: 900px;
+  margin: 20px auto;
+}
+.s_head{
+  display: flex;
+  justify-content: space-between;
+  border-bottom: solid #454544;
+  padding: 20px;
+}
+.eng{
+  padding: 0 10px;
+  opacity: 0.5;
+}
+.s_more {
+  text-decoration: none;
+  color: #1fd9d9;
+  font-size: 0.8rem;
+}
+.s_sp{
+  text-align: left;
+  padding: 20px 20px 0 20px;
+}
+.s_rooms{
+  display: flex;
+  padding: 20px;
+}
+.s_room{
+  padding: 10px;
+}
+.theater {
+  /* color: #1fd9d9; */
+  color: #a99f82;
+  padding: 5px;
+}
+.big{
+  font-size: 2rem;
+}
+.xd{
+  padding: 5px;
+}
+.min{
+  opacity: 0.5;
+  padding: 5px;
+}
+.s_time {
+  background-color: #11111170;
+  width: 130px;
+  margin: 0 0 0 12px;
+  /* font-size: 0.9rem; */
+}
+.start {
+  font-size: 2rem;
+  padding: 10px 0 0 10px;
+  text-align: left;
+  color: #fff;
+}
+.finish {
+  text-align: right;
+  padding: 10px 10px 20px 0;
+  color: #fff;
+}
+.buy{
+  background-color: #1FD9D9;
+  color: black;
+  text-decoration: none;
+  padding: 7px 39px;
+  text-align: left;
+}
+
+.maru{
+  background-color: white;
+  font-size: 1rem;
+  color: #1FD9D9;
+  padding: 0 1px;
+  margin: 0px 35px 0 -35px;
+}
+.batu{
+  background-color: #888888;
+  font-size: 1rem;
+  color: #666666;
+  margin: 0px 5px 0 -25px;
+  padding: 0 4px;
+}
+.f_bought,.s_bought{
+  color: #666666;
+}
+.bought{
+  background-color: #666666;
+  padding: 7px 34px;
+}
+
+
+
+/*------------作品一覧----------------*/
+.dropdown {
+    position: relative;
+    display: inline-block;
+    padding: 30px;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #adadad;
+}
+.dropdown-content a {
+    color: black;
+    padding: 12px 0px;
+    width: 400px;
+    text-decoration: none;
+    display: block;
+}
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+#drop_btn{
+  width: 400px;
+  padding: 10px;
+  background-color: #181818;
+  color: #888888;
+  text-align: left;
+  border: solid 1px #88888855;
+}
+
+#drop_btn:hover{
+  border: solid 1px #888888;
+}
+
+
+/*-----------------*/
+
+
+
+/* 広告 ---------------------- */
+.koukokuFl1{
+  margin: -50px auto 0 auto;
+  background-color: #1fd9d900;
+}
+
+.kouto{
+  width: auto;
+  height: 80px;
+  border: solid 1px #64646432;
+  transition: 0.5s;
+}
+
+.kouto:hover{
+  opacity: 0.9;
+  border: solid 1px #ffffff60;
+}
+
+.koukokuFl2{
+  display: flex;
+  justify-content: space-between;
+  width: 823.59px;
+  margin: 7px auto 180px auto;
+  background-color: #0a616100;
+}
+
+.koule{
+  width: 408px;
+  border: solid 1px #64646432;
+  transition: 0.5s;
+}
+
+.koule:hover{
+  opacity: 0.9;
+  border: solid 1px #ffffff60;
+}
+
+.kouri{
+  width: 408px;
+  border: solid 1px #64646432;
+  transition: 0.5s;
+}
+
+.kouri:hover{
+  opacity: 0.9;
+  border: solid 1px #ffffff60;
+}

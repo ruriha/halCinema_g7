@@ -1,0 +1,565 @@
+@charset "utf-8";
+
+/* 共通のスタイル */
+
+body{
+  background-color: #111111;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+}
+p,h2{
+  color: white;
+}
+h1{
+  color: #1FD9D9;
+}
+#h_img{
+  text-align: center;
+}
+
+#mid{
+  display: flex;
+  justify-content: center;
+}
+
+/* 切替ボタンの行フレーム */
+.showmovieFl {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+#choiceBoxFl1,
+#choiceBoxFl2 {
+  width: 80%;
+  background-color: rgba(0, 255, 255, 0);
+
+  margin: 60px auto 50px auto;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+/* 切替ボタンのフレーム */
+.choice_box {
+  background-color: rgba(0, 0, 255, 0);
+
+  display: flex;
+}
+
+/* 切替ボタン１ */
+.nowShow1,
+.nowShow2 {
+  display: block;
+  text-decoration: none;
+
+  width: 180px;
+  height: 40px;
+  border-radius: 30px;
+
+  background-color: #A2936B;
+  border: solid 2px #000;
+  text-align: center;
+  color: #232323;
+  font-size: 1.1rem;
+  line-height: 40px;
+  font-weight: 100;
+
+  margin-right: 10px;
+
+  transition: 0.4s;
+}
+
+.comingShow1,
+.comingShow2 {
+  display: block;
+  text-decoration: none;
+
+  width: 180px;
+  height: 40px;
+  border-radius: 30px;
+
+  background-color: rgb(61, 67, 68);
+  border: solid 2px #000;
+  text-align: center;
+  color: #000;
+  font-size: 1.1rem;
+  line-height: 40px;
+  font-weight: 100;
+
+  transition: 0.4s;
+}
+
+/* hover button１ */
+.comingShow1:hover {
+  background-color: #a2936b;
+}
+
+/* 切替ボタン２ */
+.nowShow2 {
+  display: block;
+  text-decoration: none;
+
+  width: 180px;
+  height: 40px;
+  border-radius: 30px;
+
+  background-color: rgb(61, 67, 68);
+  border: solid 2px #000;
+  text-align: center;
+  color: #000;
+  font-size: 1.1rem;
+  line-height: 40px;
+  font-weight: 100;
+
+  margin-right: 10px;
+
+  transition: 0.4s;
+}
+
+.comingShow2 {
+  display: block;
+  text-decoration: none;
+
+  width: 180px;
+  height: 40px;
+  border-radius: 30px;
+
+  background-color: #A2936B;
+  border: solid 2px #000;
+  text-align: center;
+  color: #232323;
+  font-size: 1.1rem;
+  line-height: 40px;
+  font-weight: 100;
+
+  transition: 0.4s;
+}
+
+/* hover button２ */
+.nowShow2:hover {
+  background-color:#A2936B;
+}
+
+/* 公開映画情報フレーム */
+.content-container {
+  margin: 0 auto;
+  width: 80%;
+  background-color: rgba(255, 170, 0, 0);
+}
+
+/* 公開映画情報（個別） */
+.content-item {
+  background-color: rgb(37, 37, 37);
+}
+
+.unique-item{
+  background-color: rgb(37, 37, 37);
+  display: flex;
+  padding: 20px;
+  margin-bottom:30px;
+}
+
+/* 映画画像*/
+.content-image {
+  width: 180px;
+  height: 100px;
+  background-color: #fff;
+
+  margin-right: 30px;
+}
+
+/* 映画詳細フレーム */
+.content-details {
+  background-color: #a4222200;
+  width: calc(100% - 210px);
+  position: relative;
+}
+
+/* 映画タイトル */
+.content-title {
+  font-size: 1rem;
+  font-weight: 300;
+  color: #f1f1f1;
+  margin: 10px 0 20px 0;
+}
+
+/* 映画詳細１ */
+.content-description {
+  font-size: 0.8rem;
+  font-weight: 200;
+  color: #f1f1f1;
+  margin-bottom: 30px;
+}
+
+/* もっと見る */
+.content-button1,
+.content-button2,
+.content-button3,
+.content-button4,
+.content-button5,
+.content-button6,
+.content-button7,
+.content-button8 {
+  background-color: transparent;
+  /* box-shadow: 1px 1px 1px aqua; */
+  border: none;
+  color: #A2936B;
+
+  position: absolute;
+  bottom: 0;
+  right: 0;
+
+  cursor: pointer;
+}
+
+/* 展開用映画詳細フレーム */
+.more-detailFl1,
+.more-detailFl2,
+.more-detailFl3,
+.more-detailFl4,
+.more-detailFl5,
+.more-detailFl6,
+.more-detailFl7,
+.more-detailFl8 {
+  width: calc(100% - 40px);
+  background-color: rgb(31, 31, 31);
+
+  margin: 20px auto 30px auto;
+  padding: 20px;
+  display: none;
+}
+
+/* 展開用・introduce */
+.introduce {
+  color: #a2936b;
+  height: 50px;
+
+  border-bottom: solid 1px #a2936b;
+  font-size: 1.3rem;
+  font-weight: 400;
+  line-height: 60px;
+}
+
+/* 展開用・詳細 */
+.more-detail {
+  font-weight: 100;
+  color: #dfdfdf;
+  margin: 30px 0 50px 0;
+}
+
+/* オフィシャルサイト遷移ボタン */
+.officialSiteCheck {
+  display: block;
+  text-decoration: none;
+  width: 140px;
+  height: 5px;
+  border-radius: 30px;
+
+  background-color: rgba(0, 0, 0, 0);
+  border: solid 1px #a2936b;
+  color: #a2936b;
+  font-size: 0.7rem;
+  line-height: 7px;
+  text-align: center;
+
+  float: right;
+  padding: 20px;
+  margin: -30px 0 0 0;
+
+  transition: 0.4s;
+}
+
+.officialSiteCheck:hover {
+  background-color: #a2936b;
+  color: #ffffff;
+  font-weight: semi-bold;
+}
+
+/* 展開用・schedule */
+.schedule {
+  color: #a2936b;
+  height: 50px;
+
+  border-bottom: solid 1px #a2936b;
+  font-size: 1.3rem;
+  font-weight: 400;
+  line-height: 60px;
+
+  margin-top: 100px;
+  margin-bottom: 50px;
+}
+
+/* 展開用・schedule日程 */
+.scheduleDate {
+  font-weight: 300;
+  font-size: 1.2rem;
+  line-height: 30px;
+  margin: 30px 0 40px 0;
+}
+
+/*-----------カレンダー------------*/
+
+.calendar-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendar-container1,.calendar-container2,.calendar-container3,.calendar-container4 {
+  width: 100%;
+  max-width: 925px; /* 必要に応じて調整 */
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+
+.calendar-container1::-webkit-scrollbar,.calendar-container2::-webkit-scrollbar,.calendar-container3::-webkit-scrollbar,.calendar-container4::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+.calendar1,.calendar2,.calendar3,.calendar4 {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.day {
+  display: inline-block;
+  width: 150px;
+  height: 150px;
+  /* background-color: #A2936B; */
+  background-color: #313131;
+  box-sizing: border-box;
+  line-height: 100px;
+  font-size: 2rem;
+  vertical-align: top;
+  margin-right: -1px; /* Border overlapping */
+}
+
+.today{
+  margin-left: 15px;
+}
+
+.day_f{
+color: rgb(95, 95, 95);
+margin-left: 15px;
+}
+
+.mini{
+font-size: 1rem;
+}
+
+.select{
+  background-color: #1fd9d9;
+  color: white;
+  }
+
+.selected{
+}
+
+.scroll-button {
+  background-color: #202020;
+  border: none;
+  padding: 65px 10px;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.scroll-button:focus {
+  outline: none;
+}
+
+.scroll-button:active {
+  background-color: #A2936B;
+}
+
+.scroll-button:hover{
+  background-color: #f1f1f1;
+}
+
+/*ーーーーーーーーーーースケジュールーーーーーーーーーーーーーーー*/
+
+#s_top {
+  display: flex;
+  justify-content: space-between;
+  background-color: #b52f2f00;
+}
+
+#now {
+  font-size: 2rem;
+  text-align: left;
+  padding: 30px 0 0 30px;
+}
+
+.s_waku {
+  /* padding: 0px 50px 50px 50px; */
+  background-color: rgba(0, 0, 255, 0);
+}
+
+.s_all{
+  border: solid #454544;
+  width: 900px;
+  margin: 20px auto;
+}
+
+.s_head{
+  display: flex;
+  justify-content: space-between;
+  border-bottom: solid #454544;
+  padding: 20px;
+}
+
+.eng {
+  padding: 0 10px;
+  opacity: 0.5;
+}
+
+.s_more {
+  text-decoration: none;
+  color: #1fd9d9;
+  font-size: 0.8rem;
+}
+
+.s_sp {
+  text-align: left;
+  padding: 20px 20px 0 20px;
+}
+
+.s_rooms {
+  display: flex;
+  padding: 20px;
+}
+
+.s_room {
+  padding: 10px;
+}
+
+.theater {
+  /* color: #1fd9d9; */
+  color: #a99f82;
+  padding: 5px;
+}
+
+.big {
+  font-size: 2rem;
+}
+
+.xd {
+  padding: 5px;
+}
+
+.min {
+  opacity: 0.5;
+  padding: 5px;
+}
+
+.s_time {
+  background-color: #111111;
+  width: 130px;
+  margin: 3px;
+  /* font-size: 0.9rem; */
+}
+
+.start {
+  font-size: 2rem;
+  padding: 10px 0 0 10px;
+  text-align: left;
+  color: #fff;
+}
+
+.finish {
+  text-align: right;
+  padding: 10px 10px 20px 0;
+  color: #fff;
+}
+
+.buyFl1 {
+  height: 30px;
+  line-height: 33px;
+  font-size: 0.9rem;
+  display: block;
+  display: flex;
+  background-color: #666666;
+  text-decoration: none;
+  color: #000000;
+  margin-bottom: -1px;
+  transition: 0.4s;
+}
+
+.buyFl1:hover{
+  opacity: 0.7;
+}
+
+.bought {
+  width: 30px;
+  margin: 0 0 0 0;
+  text-align: center;
+  background-color: #666666;
+  /* text-decoration: none;
+  padding: 7px 39px; */
+  /* padding: 7px 34px; */
+}
+
+.cantBuy {
+  width: calc(100% - 31px);
+  text-align: center;
+  background-color: #666666;
+  font-weight: 300;
+}
+
+.buyFl2 {
+  height: 30px;
+  line-height: 33px;
+  font-size: 0.9rem;
+  display: block;
+  display: flex;
+  background-color: #1fd9d9;
+  text-decoration: none;
+  color: #000000;
+  margin-bottom: -1px;
+  transition: 0.4s;
+}
+
+.buyFl2:hover{
+  opacity: 0.7;
+}
+
+.canBuy {
+  width: calc(100% - 30px);
+  text-align: center;
+  color: #fff;
+  background-color: #1fd9d9;
+}
+
+.f_bought,
+.s_bought {
+  color: #666666;
+}
+
+/*-----------------*/
+
+/* 下部のテキストフレーム１ */
+.text-container1 {
+  width: 77%;
+
+  font-weight: 200;
+  font-size: 1.1rem;
+  line-height: 25px;
+
+  margin: 50px auto 50px auto;
+}
+
+/* 下部のテキストフレーム２ */
+.text-container2 {
+  width: 77%;
+
+  font-weight: 100;
+  font-size: 0.9rem;
+  line-height: 25px;
+  border-top: solid 1px #4c4b4b;
+  color: #b3b3b3;
+
+  margin: 0 auto 120px auto;
+  padding-top: 30px;
+}
+@charset "UTF-8";
