@@ -24,6 +24,7 @@
 <!-- jQuaryの実行 -->
 <!-- <script type="text/javascript" src="js/common.js"></script> -->
 
+
   </head>
 
   <body>
@@ -166,50 +167,7 @@
             <div class="calendar-wrapper">
               <button id="scroll-left1" class="scroll-button">◀</button>
               <div class="calendar-container">
-                <div class="calendar">
-                  <!-- ここに日付を追加 -->
-                  <div class="day select">
-                    <p class="today">05/15<span class="mini">(水)</span></p>
-                  </div>
-                  <div class="day">
-                    <p class="day_f">05/15<span class="mini">(水)</span></p>
-                  </div>
-                  <div class="day">
-                    <p class="day_f">05/15<span class="mini">(水)</span></p>
-                  </div>
-                  <div class="day">
-                    <p class="day_f">05/15<span class="mini">(水)</span></p>
-                  </div>
-                  <div class="day">
-                    <p class="day_f">05/15<span class="mini">(水)</span></p>
-                  </div>
-                  <div class="day">
-                    <p class="day_f">05/15<span class="mini">(水)</span></p>
-                  </div>
-                  <div class="day">
-                    <p class="day_f">05/15<span class="mini">(水)</span></p>
-                  </div>
-                  <div class="day">
-                    <p class="day_f">05/15<span class="mini">(水)</span></p>
-                  </div>
-                  <div class="day">
-                    <p class="day_f">05/15<span class="mini">(水)</span></p>
-                  </div>
-                  <div class="day">
-                    <p class="day_f">05/15<span class="mini">(水)</span></p>
-                  </div>
-                  <div class="day">
-                    <p class="day_f">05/15<span class="mini">(水)</span></p>
-                  </div>
-                  <div class="day">
-                    <p class="day_f">05/15<span class="mini">(水)</span></p>
-                  </div>
-                  <div class="day">
-                    <p class="day_f">05/15<span class="mini">(水)</span></p>
-                  </div>
-                  <div class="day">
-                    <p class="day_f">05/15<span class="mini">(水)</span></p>
-                  </div>
+                <div class="calendar" id="calendar" th:each="date: ${dates}" th:utext="${date}">
                 </div>
               </div>
               <button id="scroll-right1" class="scroll-button">▶</button>
@@ -220,12 +178,10 @@
 
 
       <div id="s_top">
-        <p id="now">2024/05/15<span class="mini">(水)</span></p>
+        <p id="now" th:utext="${nowScreeningSchedule}"></p>
         <div class="dropdown">
             <button id="drop_btn">作品一覧　　　　　　　　　　　　　　　　　　　　　　　▼</button>
-            <div class="dropdown-content">
-                <a href="#BLUELOCK">劇場版ブルーロック -EPISODE 凪-</a>
-                <a href="#DETECTIVE CONAN 2024">名探偵コナン 100万ドルの五稜星</a>
+            <div class="dropdown-content" th:each="titleLink:${titleLinkList}" th:utext="${titleLink}">
             </div>
         </div>
       </div>
@@ -233,99 +189,7 @@
 
 
 
-      <div class="s_waku">
-
-
-
-
-        <div class="s_all">
-          <div id="BLUELOCK"></div>
-          <div class="s_head">
-            <p class="jp">劇場版ブルーロック -EPISODE 凪-<span class="eng">BLUELOCK</span></p>
-            <a href="showmovie.html" class="s_more">more&thinsp;⇀</a>
-          </div>
-
-          <p class="s_sp">★NEW</p>
-
-          <div class="s_rooms">
-            <div class="s_room">
-              <p class="theater">THEATER&thinsp;&thinsp;<span class="big">2</span></p>
-              <p class="xd">2D</p>
-              <p class="min">145min</p>
-            </div>
-
-            <div class="s_time">
-              <p class="start s_bought">10:10</p>
-              <p class="finish f_bought">~12:12</p>
-              <a class="buyFl1" href="#">
-                <img src="../images/cantBuy.png" alt="購入不可" />
-                <div class="cantBuy">購入不可</div>
-              </a>
-            </div>
-
-            <div class="s_time">
-              <p class="start">13:10</p>
-              <p class="finish">~15:12</p>
-              <a class="buyFl2" href="#">
-                <img src="../images/canBuy.png" alt="購入可" class="marubatsu" />
-                <div class="canBuy">購入</div>
-              </a>
-            </div>
-          </div>
-
-          <div class="s_rooms">
-
-            <div class="s_room">
-              <p class="theater">THEATER&thinsp;&thinsp;<span class="big">4</span></p>
-              <p class="xd">2D</p>
-              <p class="min">118min</p>
-            </div>
-
-            <div class="s_time">
-              <p class="start">13:10</p>
-              <p class="finish">~15:12</p>
-              <a class="buyFl2" href="#">
-                <img src="../images/canBuy.png" alt="購入可" class="marubatsu" />
-                <div class="canBuy">購入</div>
-              </a>
-            </div>
-          
-          </div>
-        </div>
-
-
-
-
-
-        <div class="s_all">
-
-          <div id="DETECTIVE CONAN 2024"></div>
-
-          <div class="s_head">
-            <p class="jp">名探偵コナン 100万ドルの五稜星<span class="eng">DETECTIVE CONAN 2024</span></p>
-            <a href="showmovie.html" class="s_more">more&thinsp;⇀</a>
-          </div>
-
-          <p class="s_sp">★NEW</p>
-
-          <div class="s_rooms">
-            <div class="s_room">
-              <p class="theater">THEATER&thinsp;&thinsp;<span class="big">1</span></p>
-              <p class="xd">2D</p>
-              <p class="min">117min</p>
-            </div>
-
-            <div class="s_time">
-              <p class="start">13:10</p>
-              <p class="finish">~15:12</p>
-              <a class="buyFl2" href="#">
-                <img src="../images/canBuy.png" alt="購入可" class="marubatsu" />
-                <div class="canBuy">購入</div>
-              </a>
-            </div>
-          </div>
-
-        </div>
+      <div class="s_waku" th:each="screenSchedule:${screenScheduleList}"  th:utext="${screenSchedule}">
       </div>
     </div>
 

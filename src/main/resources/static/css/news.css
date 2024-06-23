@@ -1,0 +1,57 @@
+@charset "UTF-8";@charset "utf-8";
+
+/* 共通のスタイル */
+
+body{
+  background-color: #111111;
+  color: white;
+  text-align: center;
+}
+#news{
+  background-color: #222222;
+  width: 900px;
+  margin: 30px auto 100px auto;
+  padding: 40px 0 50px 0;
+}
+#news-back{
+  display:block;
+  width: 8%;
+  height: 22px;
+  background-color: #44444400;
+  font-size: 0.8rem;
+  color: #444;
+  line-height: 23px;
+  border-radius: 2px;
+  border: solid 1px #444;
+  margin: 0 auto 0 auto;
+  transition: 0.4s;
+}
+#news-back:hover{
+  background-color: #444;
+  color: #fff;
+}
+#top{
+  display: inline-block;
+  font-size: 1.3rem;
+  color: #fff;
+  padding: 50px 0 15px 0;
+  margin: 0 auto;
+  letter-spacing: 3px;
+}
+#newsHr{
+  width: 6%;
+  margin: auto;
+  border-color: #1FD9D9;
+}
+#day{
+  color: #444;
+  text-align: right;
+  padding: 40px 100px 0 0;
+}
+#news-contents{
+  width: 70%;
+  margin: 0 auto;
+  padding: 35px 0 30px 0;
+  text-align: left;
+  line-height: 2rem;
+}
