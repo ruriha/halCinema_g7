@@ -1,0 +1,92 @@
+@charset "utf-8";
+
+/* 共通のスタイル */
+
+body{
+  text-align: center;
+}
+p,h2{
+  color: white;
+}
+h1{
+  color: #1FD9D9;
+}
+
+#title{
+  font-size: 1.5rem;
+  padding: 30px;
+}
+#time{
+  opacity: 0.7;
+}
+#name{}
+#side{
+  display: flex;
+  justify-content: space-between;
+  width: 500px;
+  margin: 0 auto;
+  padding: 0 0 30px 0;
+}
+
+#dai table {
+    width: 950px; /* 正方形にするために表の幅を設定 */
+    height:550px; /* 正方形にするために表の高さを設定 */
+    margin: 20px auto;
+    border-spacing: 0px 10px;
+    border-collapse: separate;
+}
+#tyuu table {
+    width: 600px; /* 正方形にするために表の幅を設定 */
+    height:550px; /* 正方形にするために表の高さを設定 */
+    margin: 20px auto;
+    border-spacing: 0px 10px;
+    border-collapse: separate;
+}
+#syou table {
+    width: 450px; /* 正方形にするために表の幅を設定 */
+    height:350px; /* 正方形にするために表の高さを設定 */
+    margin: 20px auto;
+    border-spacing: 0px 10px;
+    border-collapse: separate;
+}
+td {
+    font-size: 1rem;
+    border: 2px solid #ccc;
+    width: 50px; /* 正方形にするためにセルの幅を設定 */
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    color: white;
+}
+
+/*予約されてる*/
+.unselectable{
+  background-color: #A2936B;
+
+}
+/*予約しようとしてる*/
+.selected {
+    background-color: #1FD9D9; /* 選択されたセルの背景色 */
+    color: black;
+}
+.mozi{
+  border: none;
+}
+button{
+  border: none;
+  padding: 10px 60px;
+  border-radius: 30px;
+  margin: 30px 50px;
+}
+button:hover{
+  opacity: 0.5;
+}
+.next-button{
+  background-color: #1FD9D9;
+}
+.back-button{
+  background-color: #A2936B;
+}
+.fa-brands{
+  color: white;
+}@charset "UTF-8";

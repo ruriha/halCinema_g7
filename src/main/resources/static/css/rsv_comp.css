@@ -1,0 +1,76 @@
+@charset "utf-8";
+
+/* 共通のスタイル */
+
+body{
+    min-width: 1200px;
+    background-color: #111111;
+    background-image: url(../images/background.png);
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+.container {
+    width: 80%;
+    margin: 20px auto;
+    padding: 50px 0;
+    text-align: center;
+    background-color: #222222;
+}
+
+.pp{
+    width: 75%;
+    margin: 0 auto;
+    padding: 0 0 10px 0;
+    text-align: left;
+    color: #fff;
+}
+
+p.color {
+    width: 75%;
+    margin: 0 auto;
+    font-size: 0.9rem;
+    text-align: left;
+    color: #A2936B;
+}
+
+.info {
+    color: #fff;
+}
+
+.info h2{
+    width: 75%;
+    margin: 0 auto;
+    padding: 30px 0 0 0;
+    text-align: left;
+    color: #5c5c5c;
+    font-size: 1.0rem;
+}
+
+.number {
+    width: 75%;
+    margin: 0 auto;
+    padding: 10px;
+    text-align: left;
+    border-radius: 4px;
+    background-color: #000;
+    font-weight: bold;
+}
+
+p.txt{
+    padding: 30px 0 0 0;
+    text-align: center;
+    font-weight: normal;
+}
+
+hr{
+    width: 70%;
+    margin: 60px auto 0 auto;
+}
+
+#log{
+    width: 27%;
+    padding: 50px 0 0 0;
+}
+

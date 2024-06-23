@@ -1,0 +1,133 @@
+@charset "utf-8";
+
+/* 共通のスタイル */
+
+
+body{
+    min-width: 1200px;
+    background-color: #111111;
+    background-image: url(../images/background.png);
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    background-color: #222222;
+    padding: 10px 10px 30px 10px
+}
+
+
+
+h1{
+    padding: 30px 0 0 0;
+    font-size: 1.5rem;
+    color: #fff;
+}
+
+hr{
+    width: 6%;
+    margin: 10px auto;
+    border: none;
+}
+
+h2{
+    margin: 50px 0 20px  0;
+    font-size: 1.2rem;
+    color: #fff;
+}
+
+
+
+table{
+    width: 70%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+}
+table tr td{
+    text-align: left;
+}
+table tr td {
+    border: 1px solid #444;
+    padding: 8px;
+}
+table tr td.item{
+    width: 20%;
+    font-weight: bold;
+    color: #000;
+    background-color: #1FD9D9;
+}
+table tr td.item2{
+    padding: 0 0 0 20px;
+    color: #fff;
+    background-color: #222222;
+}
+
+
+hr.line2{
+    width: 80%;
+    color: #595959;
+}
+
+
+.btn{
+    display: flex;
+    flex-direction: column;
+}
+.btn button {
+    width: 40%;
+    margin: 0 auto;
+    padding: 15px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.btn button.confirm-btn {
+    margin: 30px auto 20px auto;
+    font-weight: bold;
+    background-color: #A2936B;
+    color: #000;
+    border: none;
+}
+.btn button.back-btn {
+    padding: 15px;
+    border:  2px solid #444;
+    font-weight: bold;
+    color: #fff;
+    background-color: #222222;
+}
+.btn button.confirm-btn:hover {
+    background-color: #c4b482;
+}
+.btn button.back-btn:hover {
+    background-color: #a5a4a4;
+}
+
+
+
+
+
+
+
+/* ########### 599px以下 ########### */
+@media (max-width: 599px) {}
+
+
+
+/* ########### 600px以上～768px以下 ########### */
+@media (min-width: 600px) and (max-width: 768px) {}
+
+
+
+/* ########### 769px以上 ########### */
+@media (min-width: 769px) {}
+
+
+
+/* ########### 1000px以上 ########### */
+@media (min-width: 1000px) {}

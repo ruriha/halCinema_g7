@@ -1,0 +1,342 @@
+
+<!DOCTYPE html>
+
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>HALCINEMA｜TOP</title>
+
+    <link rel="stylesheet" type="text/css" href="../css/reset.css">
+    <link rel="stylesheet" type="text/css" href="../css/seat.css">
+    <link rel="stylesheet" type="text/css" href="../css/common.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+
+
+<!-- jQuary本体 CDN -->
+<!-- <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script> -->
+<!-- jQuaryの実行 -->
+<!-- <script type="text/javascript" src="js/common.js"></script> -->
+
+  </head>
+
+  <body>
+
+    <!-- ヘッダー ------------------------------------------------->
+    <header class="commonHeader">
+
+        <!-- ロゴ -->
+        <figure class="commonLogoBox">
+            <img class="commonLogo" src="../images/logo.svg" alt="HAL CINEMA">
+        </figure>
+
+
+        <!-- ナビゲーション：メニュー項目と遷移先は適宜変更してください -->
+        <nav class="commonNav">
+            <ul>
+                <li class="commonMenu"><a class="commonMenuLink" href="showmovie.html">MOVIES</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" href="member.html">MEMBERS</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" href="service.html">SERVICE</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" href="access.html">ACCESS</a></li>
+                <li class="commonMenu commonSnsMenu"><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
+                <li class="commonMenu commonSnsMenu"><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+            </ul>
+        </nav>
+    </header>
+    <div>
+      <p id="title" th:text="${screeningScheduleList[0][0]}"></p>
+      <div id="side">
+        <p id="time" th:text="${#temporals.format(screeningScheduleList[0][1], 'yyyy/MM/dd HH:mm')}"></p>
+        <p id="name" th:text="${memberList[0][0]+' 様'}"></p>
+      </div>
+    <div id="dai">
+      <table id="myTable">
+          <tr>
+			<td th:classappend="${s1 ? 'unselectable' : ''}">1</td>
+			<td th:classappend="${s2 ? 'unselectable' : ''}">2</td>
+			<td th:classappend="${s3 ? 'unselectable' : ''}">3</td>
+			<td th:classappend="${s4 ? 'unselectable' : ''}">4</td>
+              <td class="mozi">A</td>
+			<td th:classappend="${s6 ? 'unselectable' : ''}">5</td>
+			<td th:classappend="${s7 ? 'unselectable' : ''}">6</td>
+			<td th:classappend="${s8 ? 'unselectable' : ''}">7</td>
+			<td th:classappend="${s9 ? 'unselectable' : ''}">8</td>
+			<td th:classappend="${s10 ? 'unselectable' : ''}">9</td>
+			<td th:classappend="${s11 ? 'unselectable' : ''}">10</td>
+			<td th:classappend="${s12 ? 'unselectable' : ''}">11</td>
+			<td th:classappend="${s13 ? 'unselectable' : ''}">12</td>
+			<td th:classappend="${s14 ? 'unselectable' : ''}">13</td>
+			<td th:classappend="${s15 ? 'unselectable' : ''}">14</td>
+			<td th:classappend="${s16 ? 'unselectable' : ''}">15</td>
+			<td th:classappend="${s17 ? 'unselectable' : ''}">16</td>
+              <td class="mozi">A</td>
+			<td th:classappend="${s19 ? 'unselectable' : ''}">17</td>
+			<td th:classappend="${s20 ? 'unselectable' : ''}">18</td>
+			<td th:classappend="${s21 ? 'unselectable' : ''}">19</td>
+			<td th:classappend="${s22 ? 'unselectable' : ''}">20</td>
+          </tr>
+          <tr>
+			<td th:classappend="${s23 ? 'unselectable' : ''}">1</td>
+			<td th:classappend="${s24 ? 'unselectable' : ''}">2</td>
+			<td th:classappend="${s25 ? 'unselectable' : ''}">3</td>
+			<td th:classappend="${s26 ? 'unselectable' : ''}">4</td>
+              <td class="mozi">B</td>
+			<td th:classappend="${s28 ? 'unselectable' : ''}">5</td>
+			<td th:classappend="${s29 ? 'unselectable' : ''}">6</td>
+			<td th:classappend="${s30 ? 'unselectable' : ''}">7</td>
+			<td th:classappend="${s31 ? 'unselectable' : ''}">8</td>
+			<td th:classappend="${s32 ? 'unselectable' : ''}">9</td>
+			<td th:classappend="${s33 ? 'unselectable' : ''}">10</td>
+			<td th:classappend="${s34 ? 'unselectable' : ''}">11</td>
+			<td th:classappend="${s35 ? 'unselectable' : ''}">12</td>
+			<td th:classappend="${s36 ? 'unselectable' : ''}">13</td>
+			<td th:classappend="${s37 ? 'unselectable' : ''}">14</td>
+			<td th:classappend="${s38 ? 'unselectable' : ''}">15</td>
+			<td th:classappend="${s39 ? 'unselectable' : ''}">16</td>
+              <td class="mozi">B</td>
+			<td th:classappend="${s41 ? 'unselectable' : ''}">17</td>
+			<td th:classappend="${s42 ? 'unselectable' : ''}">18</td>
+			<td th:classappend="${s43 ? 'unselectable' : ''}">19</td>
+			<td th:classappend="${s44 ? 'unselectable' : ''}">20</td>
+          </tr>
+          <tr>
+			<td th:classappend="${s45 ? 'unselectable' : ''}">1</td>
+			<td th:classappend="${s46 ? 'unselectable' : ''}">2</td>
+			<td th:classappend="${s47 ? 'unselectable' : ''}">3</td>
+			<td th:classappend="${s48 ? 'unselectable' : ''}">4</td>
+              <td class="mozi">C</td>
+			<td th:classappend="${s50 ? 'unselectable' : ''}">5</td>
+			<td th:classappend="${s51 ? 'unselectable' : ''}">6</td>
+			<td th:classappend="${s52 ? 'unselectable' : ''}">7</td>
+			<td th:classappend="${s53 ? 'unselectable' : ''}">8</td>
+			<td th:classappend="${s54 ? 'unselectable' : ''}">9</td>
+			<td th:classappend="${s55 ? 'unselectable' : ''}">10</td>
+			<td th:classappend="${s56 ? 'unselectable' : ''}">11</td>
+			<td th:classappend="${s57 ? 'unselectable' : ''}">12</td>
+			<td th:classappend="${s58 ? 'unselectable' : ''}">13</td>
+			<td th:classappend="${s59 ? 'unselectable' : ''}">14</td>
+			<td th:classappend="${s60 ? 'unselectable' : ''}">15</td>
+			<td th:classappend="${s61 ? 'unselectable' : ''}">16</td>
+              <td class="mozi">C</td>
+			<td th:classappend="${s63 ? 'unselectable' : ''}">17</td>
+			<td th:classappend="${s64 ? 'unselectable' : ''}">18</td>
+			<td th:classappend="${s65 ? 'unselectable' : ''}">19</td>
+			<td th:classappend="${s66 ? 'unselectable' : ''}">20</td>
+          </tr>
+          <tr>
+			<td th:classappend="${s67 ? 'unselectable' : ''}">1</td>
+			<td th:classappend="${s68 ? 'unselectable' : ''}">2</td>
+			<td th:classappend="${s69 ? 'unselectable' : ''}">3</td>
+			<td th:classappend="${s70 ? 'unselectable' : ''}">4</td>
+              <td class="mozi">D</td>
+			<td th:classappend="${s72 ? 'unselectable' : ''}">5</td>
+			<td th:classappend="${s73 ? 'unselectable' : ''}">6</td>
+			<td th:classappend="${s74 ? 'unselectable' : ''}">7</td>
+			<td th:classappend="${s75 ? 'unselectable' : ''}">8</td>
+			<td th:classappend="${s76 ? 'unselectable' : ''}">9</td>
+			<td th:classappend="${s77 ? 'unselectable' : ''}">10</td>
+			<td th:classappend="${s78 ? 'unselectable' : ''}">11</td>
+			<td th:classappend="${s79 ? 'unselectable' : ''}">12</td>
+			<td th:classappend="${s80 ? 'unselectable' : ''}">13</td>
+			<td th:classappend="${s81 ? 'unselectable' : ''}">14</td>
+			<td th:classappend="${s82 ? 'unselectable' : ''}">15</td>
+			<td th:classappend="${s83 ? 'unselectable' : ''}">16</td>
+              <td class="mozi">D</td>
+			<td th:classappend="${s85 ? 'unselectable' : ''}">17</td>
+			<td th:classappend="${s86 ? 'unselectable' : ''}">18</td>
+			<td th:classappend="${s87 ? 'unselectable' : ''}">19</td>
+			<td th:classappend="${s88 ? 'unselectable' : ''}">20</td>
+          </tr>
+          <tr>
+			<td th:classappend="${s89 ? 'unselectable' : ''}">1</td>
+			<td th:classappend="${s90 ? 'unselectable' : ''}">2</td>
+			<td th:classappend="${s91 ? 'unselectable' : ''}">3</td>
+			<td th:classappend="${s92 ? 'unselectable' : ''}">4</td>
+              <td class="mozi">E</td>
+			<td th:classappend="${s94 ? 'unselectable' : ''}">5</td>
+			<td th:classappend="${s95 ? 'unselectable' : ''}">6</td>
+			<td th:classappend="${s96 ? 'unselectable' : ''}">7</td>
+			<td th:classappend="${s97 ? 'unselectable' : ''}">8</td>
+			<td th:classappend="${s98 ? 'unselectable' : ''}">9</td>
+			<td th:classappend="${s99 ? 'unselectable' : ''}">10</td>
+			<td th:classappend="${s100 ? 'unselectable' : ''}">11</td>
+			<td th:classappend="${s101 ? 'unselectable' : ''}">12</td>
+			<td th:classappend="${s102 ? 'unselectable' : ''}">13</td>
+			<td th:classappend="${s103 ? 'unselectable' : ''}">14</td>
+			<td th:classappend="${s104 ? 'unselectable' : ''}">15</td>
+			<td th:classappend="${s105 ? 'unselectable' : ''}">16</td>
+              <td class="mozi">E</td>
+			<td th:classappend="${s107 ? 'unselectable' : ''}">17</td>
+			<td th:classappend="${s108 ? 'unselectable' : ''}">18</td>
+			<td th:classappend="${s109 ? 'unselectable' : ''}">19</td>
+			<td th:classappend="${s110 ? 'unselectable' : ''}">20</td>
+          </tr>
+          <tr>
+			<td th:classappend="${s111 ? 'unselectable' : ''}">1</td>
+			<td th:classappend="${s112 ? 'unselectable' : ''}">2</td>
+			<td th:classappend="${s113 ? 'unselectable' : ''}">3</td>
+			<td th:classappend="${s114 ? 'unselectable' : ''}">4</td>
+              <td class="mozi">F</td>
+			<td th:classappend="${s116 ? 'unselectable' : ''}">5</td>
+			<td th:classappend="${s117 ? 'unselectable' : ''}">6</td>
+			<td th:classappend="${s118 ? 'unselectable' : ''}">7</td>
+			<td th:classappend="${s119 ? 'unselectable' : ''}">8</td>
+			<td th:classappend="${s120 ? 'unselectable' : ''}">9</td>
+			<td th:classappend="${s121 ? 'unselectable' : ''}">10</td>
+			<td th:classappend="${s122 ? 'unselectable' : ''}">11</td>
+			<td th:classappend="${s123 ? 'unselectable' : ''}">12</td>
+			<td th:classappend="${s124 ? 'unselectable' : ''}">13</td>
+			<td th:classappend="${s125 ? 'unselectable' : ''}">14</td>
+			<td th:classappend="${s126 ? 'unselectable' : ''}">15</td>
+			<td th:classappend="${s127 ? 'unselectable' : ''}">16</td>
+              <td class="mozi">F</td>
+			<td th:classappend="${s129 ? 'unselectable' : ''}">17</td>
+			<td th:classappend="${s130 ? 'unselectable' : ''}">18</td>
+			<td th:classappend="${s131 ? 'unselectable' : ''}">19</td>
+			<td th:classappend="${s132 ? 'unselectable' : ''}">20</td>
+          </tr>
+          <tr>
+			<td th:classappend="${s133 ? 'unselectable' : ''}">1</td>
+			<td th:classappend="${s134 ? 'unselectable' : ''}">2</td>
+			<td th:classappend="${s135 ? 'unselectable' : ''}">3</td>
+			<td th:classappend="${s136 ? 'unselectable' : ''}">4</td>
+              <td class="mozi">G</td>
+			<td th:classappend="${s138 ? 'unselectable' : ''}">5</td>
+			<td th:classappend="${s139 ? 'unselectable' : ''}">6</td>
+			<td th:classappend="${s140 ? 'unselectable' : ''}">7</td>
+			<td th:classappend="${s141 ? 'unselectable' : ''}">8</td>
+			<td th:classappend="${s142 ? 'unselectable' : ''}">9</td>
+			<td th:classappend="${s143 ? 'unselectable' : ''}">10</td>
+			<td th:classappend="${s144 ? 'unselectable' : ''}">11</td>
+			<td th:classappend="${s145 ? 'unselectable' : ''}">12</td>
+			<td th:classappend="${s146 ? 'unselectable' : ''}">13</td>
+			<td th:classappend="${s147 ? 'unselectable' : ''}">14</td>
+			<td th:classappend="${s148 ? 'unselectable' : ''}">15</td>
+			<td th:classappend="${s149 ? 'unselectable' : ''}">16</td>
+              <td class="mozi">G</td>
+			<td th:classappend="${s151 ? 'unselectable' : ''}">17</td>
+			<td th:classappend="${s152 ? 'unselectable' : ''}">18</td>
+			<td th:classappend="${s153 ? 'unselectable' : ''}">19</td>
+			<td th:classappend="${s154 ? 'unselectable' : ''}">20</td>
+          </tr>
+          <tr>
+			<td th:classappend="${s155 ? 'unselectable' : ''}">1</td>
+			<td th:classappend="${s156 ? 'unselectable' : ''}">2</td>
+			<td th:classappend="${s157 ? 'unselectable' : ''}">3</td>
+			<td th:classappend="${s158 ? 'unselectable' : ''}">4</td>
+              <td class="mozi">H</td>
+			<td th:classappend="${s160 ? 'unselectable' : ''}">5</td>
+			<td th:classappend="${s161 ? 'unselectable' : ''}">6</td>
+			<td th:classappend="${s162 ? 'unselectable' : ''}">7</td>
+			<td th:classappend="${s163 ? 'unselectable' : ''}">8</td>
+			<td th:classappend="${s164 ? 'unselectable' : ''}">9</td>
+			<td th:classappend="${s165 ? 'unselectable' : ''}">10</td>
+			<td th:classappend="${s166 ? 'unselectable' : ''}">11</td>
+			<td th:classappend="${s167 ? 'unselectable' : ''}">12</td>
+			<td th:classappend="${s168 ? 'unselectable' : ''}">13</td>
+			<td th:classappend="${s169 ? 'unselectable' : ''}">14</td>
+			<td th:classappend="${s170 ? 'unselectable' : ''}">15</td>
+			<td th:classappend="${s171 ? 'unselectable' : ''}">16</td>
+              <td class="mozi">H</td>
+			<td th:classappend="${s173 ? 'unselectable' : ''}">17</td>
+			<td th:classappend="${s174 ? 'unselectable' : ''}">18</td>
+			<td th:classappend="${s175 ? 'unselectable' : ''}">19</td>
+			<td th:classappend="${s176 ? 'unselectable' : ''}">20</td>
+          </tr>
+          <tr>
+			<td th:classappend="${s177 ? 'unselectable' : ''}">1</td>
+			<td th:classappend="${s178 ? 'unselectable' : ''}">2</td>
+			<td th:classappend="${s179 ? 'unselectable' : ''}">3</td>
+			<td th:classappend="${s180 ? 'unselectable' : ''}">4</td>
+              <td class="mozi">I</td>
+			<td th:classappend="${s182 ? 'unselectable' : ''}">5</td>
+			<td th:classappend="${s183 ? 'unselectable' : ''}">6</td>
+			<td th:classappend="${s184 ? 'unselectable' : ''}">7</td>
+			<td th:classappend="${s185 ? 'unselectable' : ''}">8</td>
+			<td th:classappend="${s186 ? 'unselectable' : ''}">9</td>
+			<td th:classappend="${s187 ? 'unselectable' : ''}">10</td>
+			<td th:classappend="${s188 ? 'unselectable' : ''}">11</td>
+			<td th:classappend="${s189 ? 'unselectable' : ''}">12</td>
+			<td th:classappend="${s190 ? 'unselectable' : ''}">13</td>
+			<td th:classappend="${s191 ? 'unselectable' : ''}">14</td>
+			<td th:classappend="${s192 ? 'unselectable' : ''}">15</td>
+			<td th:classappend="${s193 ? 'unselectable' : ''}">16</td>
+              <td class="mozi">I</td>
+			<td th:classappend="${s195 ? 'unselectable' : ''}">17</td>
+			<td th:classappend="${s196 ? 'unselectable' : ''}">18</td>
+			<td th:classappend="${s197 ? 'unselectable' : ''}">19</td>
+			<td th:classappend="${s198 ? 'unselectable' : ''}">20</td>
+          </tr>
+          <tr>
+			<td th:classappend="${s199 ? 'unselectable' : ''}">1</td>
+			<td th:classappend="${s200 ? 'unselectable' : ''}">2</td>
+			<td th:classappend="${s201 ? 'unselectable' : ''}">3</td>
+			<td th:classappend="${s202 ? 'unselectable' : ''}">4</td>
+              <td class="mozi">J</td>
+			<td th:classappend="${s204 ? 'unselectable' : ''}">5</td>
+			<td th:classappend="${s205 ? 'unselectable' : ''}">6</td>
+			<td th:classappend="${s206 ? 'unselectable' : ''}">7</td>
+			<td th:classappend="${s207 ? 'unselectable' : ''}">8</td>
+			<td th:classappend="${s208 ? 'unselectable' : ''}">9</td>
+			<td th:classappend="${s209 ? 'unselectable' : ''}">10</td>
+			<td th:classappend="${s210 ? 'unselectable' : ''}">11</td>
+			<td th:classappend="${s211 ? 'unselectable' : ''}">12</td>
+			<td th:classappend="${s212 ? 'unselectable' : ''}">13</td>
+			<td th:classappend="${s213 ? 'unselectable' : ''}">14</td>
+			<td th:classappend="${s214 ? 'unselectable' : ''}">15</td>
+			<td th:classappend="${s215 ? 'unselectable' : ''}">16</td>
+              <td class="mozi">J</td>
+			<td th:classappend="${s217 ? 'unselectable' : ''}">17</td>
+			<td th:classappend="${s218 ? 'unselectable' : ''}">18</td>
+			<td th:classappend="${s219 ? 'unselectable' : ''}">19</td>
+			<td th:classappend="${s220 ? 'unselectable' : ''}">20</td>
+          </tr>
+      </table>
+      <form id="myForm" method="post" th:action="@{/reserve_conf}">
+          <!-- Nunberはバック座席番号  Contentはフロント座席番号 -->
+          <!-- バック座席番号の増加はセル番号を数えているため「A]などの文字も数えているから -->
+          <input type="hidden" name="seatNumber" id="selectedCell1Number" value="">
+          <input type="hidden" name="selectedCell1Content" id="selectedCell1Content" value="">
+          <input type="hidden" name="guestSeatNumber" id="selectedCell2Number" value="">
+          <input type="hidden" name="selectedCell2Content" id="selectedCell2Content" value="">
+		  <input type="hidden" th:value="${screeningScheduleId}" name="screeningScheduleId">
+		  <input type="hidden" th:value="${memberId}" name="memberId">
+          <button type="button" class="back-button" onclick="goBack()">戻る</button>
+          <button class="next-button" type="submit">送信</button>
+      </form>
+    </div>
+
+
+        <!-- ナビゲーション：メニュー項目と遷移先は適宜変更してください -->
+        <nav class="commonNav">
+            <ul>
+              <li class="commonMenu"><a class="commonMenuLink" href="showmovie.html">MOVIES</a></li>
+              <li class="commonMenu"><a class="commonMenuLink" href="member.html">MEMBERS</a></li>
+              <li class="commonMenu"><a class="commonMenuLink" href="service.html">SERVICE</a></li>
+              <li class="commonMenu"><a class="commonMenuLink" href="access.html">ACCESS</a></li>
+                <li class="commonMenu commonSnsMenu"><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
+                <li class="commonMenu commonSnsMenu"><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+            </ul>
+        </nav>
+
+
+        <nav class="commonFooterNav">
+            <ul>
+                <li class="commonFooterMenu"><a class="commonFooterMenuLink" href="index.html">ホーム</a></li>
+                <li class="commonFooterMenu commonMenuLine">｜</li>
+                <li class="commonFooterMenu"><a class="commonFooterMenuLink" href="https://forms.gle/CPnin4yeeBP7LthE8">お問い合わせ</a></li>
+            </ul>
+        </nav>
+        <p class="commonFooterCopyright">&copy;2024 HAL CINEMA</p>
+    </footer>
+
+  </body>
+<script type="text/javascript" src="../js/seat3.js"></script>
+</html>
