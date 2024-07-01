@@ -245,6 +245,8 @@ public class MainController {
         model.addAttribute("selectedCell2Content", selectedCell2Content);
         model.addAttribute("screeningScheduleId", screeningScheduleId);
         model.addAttribute("memberId", memberId);
+//      戻るボタン
+        model.addAttribute("back", "/reserve?screeningScheduleId="+screeningScheduleId);
 	    return "rsv_cfm"; 
 	  }	
 	  
