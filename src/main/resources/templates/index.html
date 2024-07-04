@@ -196,17 +196,17 @@
                 <div class="popup-content">
                     <span class="close">&times;</span>
                     <h2>会員情報を入力してください</h2>
-                    <form id="loginForm">
+                    <form id="loginForm" method="post" th:action="@{/entry}">
                         <div class="form-group">
                             <label for="username">メールアドレス</label>
-                            <input type="text" id="username" name="username" required>
+                            <input type="text" id="usermail" name="usermail" required>
                         </div>
                         <div class="form-group">
                             <label for="password">パスワード</label>
                             <input type="password" id="password" name="password" required>
                         </div>
-                        <a class="pas_forget" href="#">パスワードをお忘れの方はこちら</a>
-                        <button type="submit" id="enterLight"><a href="toppage.html" class="enter">ENTER</a></button>
+                        <a class="pas_forget" href="https://forms.gle/CPnin4yeeBP7LthE8">パスワードをお忘れの方はこちら</a>
+                        <button type="submit" id="enterLight" class="enter">ENTER</button>
                     </form>
                 </div>
             </div>
