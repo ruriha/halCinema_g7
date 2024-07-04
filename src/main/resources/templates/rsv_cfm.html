@@ -8,7 +8,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>予約内容確認</title>
+    <title>予約確認</title>
 
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/common.css">
@@ -34,8 +34,8 @@
               <li class="commonMenu"><a class="commonMenuLink" href="member.html">MEMBERS</a></li>
               <li class="commonMenu"><a class="commonMenuLink" href="service.html">SERVICE</a></li>
               <li class="commonMenu"><a class="commonMenuLink" href="access.html">ACCESS</a></li>
-                <li class="commonMenu commonSnsMenu"><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
-                <li class="commonMenu commonSnsMenu"><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+              <li class="commonMenu commonSnsMenu"><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
+              <li class="commonMenu commonSnsMenu"><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
             </ul>
         </nav>
     </header>
@@ -95,6 +95,7 @@
       </div>
 
       <hr class="line2" color="#565656">
+      
 
       <form class="btn" method="post" th:action="@{/reserve_comp}">
 		<input type="hidden" th:value="${seatNumber}" name="seatNumber">
@@ -102,8 +103,8 @@
 		<input type="hidden" th:value="${screeningScheduleId}" name="screeningScheduleId">
 		<input type="hidden" th:value="${memberId}" name="memberId">
 		
-        <button type="submit" class="confirm-btn">決済する</button>
-        <button class="back-btn">戻る</button>
+		<a class="back-btn" th:href="@{/reserve(screeningScheduleId=${screeningScheduleId})}">戻る</a>
+        <button type="submit" class="confirm-btn">確定する</button>
       </form>
     </div>
 

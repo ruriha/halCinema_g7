@@ -56,6 +56,9 @@
         <p id="time" th:text="${#temporals.format(screeningScheduleList[0][1], 'yyyy/MM/dd HH:mm')}"></p>
         <p id="name" th:text="${memberList[0][0]+' 様'}"></p>
       </div>
+      <p class="attention">座席を選択して下さい。<span style="color: #A2936B;">■</span>：選択済み / <span style="color: aqua;">■</span>：選択中</p>
+
+    </div>
     <div id="dai">
       <table id="myTable">
           <tr>
@@ -306,16 +309,19 @@
           <input type="hidden" name="selectedCell1Content" id="selectedCell1Content" value="">
           <input type="hidden" name="guestSeatNumber" id="selectedCell2Number" value="">
           <input type="hidden" name="selectedCell2Content" id="selectedCell2Content" value="">
+          <p class="attention2">座席は会員様1名につき、2つまでお取り頂けます。但し、同伴者がいない場合の座席確保は、<br>他のお客様のご迷惑となりますのでお控え頂きますようお願い申し上げます。</p>
 		  <input type="hidden" th:value="${screeningScheduleId}" name="screeningScheduleId">
 		  <input type="hidden" th:value="${memberId}" name="memberId">
-          <button type="button" class="back-button" onclick="goBack()">戻る</button>
-          <button class="next-button" type="submit">送信</button>
+		  <div class="btnBox">
+	          <a class="back-button" th:href="@{/toppage(screenScheduleDate=${#temporals.format(screeningScheduleList[0][1], 'yyyy-MM-dd')})}">戻る</a>
+	          <button class="next-button" type="submit">送信</button>			  
+		  </div>
       </form>
     </div>
 
 
         <!-- ナビゲーション：メニュー項目と遷移先は適宜変更してください -->
-        <nav class="commonNav">
+        <!-- <nav class="commonNav">
             <ul>
               <li class="commonMenu"><a class="commonMenuLink" href="showmovie.html">MOVIES</a></li>
               <li class="commonMenu"><a class="commonMenuLink" href="member.html">MEMBERS</a></li>
@@ -324,7 +330,7 @@
                 <li class="commonMenu commonSnsMenu"><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
                 <li class="commonMenu commonSnsMenu"><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
             </ul>
-        </nav>
+        </nav> -->
 
 
         <nav class="commonFooterNav">
@@ -338,5 +344,5 @@
     </footer>
 
   </body>
-<script type="text/javascript" src="../js/seat3.js"></script>
+<script type="text/javascript" src="../js/seat.js"></script>
 </html>
