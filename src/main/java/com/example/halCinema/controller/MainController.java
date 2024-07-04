@@ -40,8 +40,8 @@ public class MainController {
 	
 	// index.html
 	  @RequestMapping("/")
-	  public String index(){
-		// index.htmlを利用
+	  public String index(HttpSession session){
+	    session.invalidate();
 	    return "index"; 
 	  }	
 	  
@@ -64,8 +64,7 @@ public class MainController {
 	  }
 	  
 	  
-	  
-	  //  ログアウト
+	  //  ログアウト（Securityなし仮）
 	  @RequestMapping("/logout")
 	  public String logout(HttpSession session){
 	      session.invalidate();
@@ -210,7 +209,14 @@ public class MainController {
 	  
 	  // news.html
 	  @RequestMapping("/news")
-	  public String news(){
+	  public String news(Model model, HttpSession session){
+//			会員情報取得
+		Integer memberId = (Integer) session.getAttribute("userId");
+		if (memberId != null) {
+	        model.addAttribute("topLink", "/toppage");			
+	    } else {
+	        model.addAttribute("topLink", "/");		
+	    }
 	    return "news"; 
 	  }	
 	  
