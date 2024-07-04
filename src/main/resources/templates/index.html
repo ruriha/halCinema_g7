@@ -2,40 +2,33 @@
 
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 
-  <head>
-
+<head>
     <meta charset="utf-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>HALCINEMA｜TOP</title>
 
-    <link rel="stylesheet" type="text/css" href="css/reset.css">
-    <link rel="stylesheet" type="text/css" href="css/index.css">
-    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" href="/css/reset.css">
+     <link rel="stylesheet" type="text/css" href="/css/index.css"> 
+     <link rel="stylesheet" type="text/css" href="/css/common.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
 
+    <!-- jQuary本体 CDN -->
+    <!-- <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script> -->
+    <!-- jQuaryの実行 -->
+    <!-- <script type="text/javascript" src="/js/common.js"></script> -->
+</head>
 
-<!-- jQuary本体 CDN -->
-<!-- <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script> -->
-<!-- jQuaryの実行 -->
-<!-- <script type="text/javascript" src="js/common.js"></script> -->
-
-  </head>
-
-  <body>
+<body>
 
     <!-- ヘッダー ------------------------------------------------->
     <header class="commonHeader">
-
         <!-- ロゴ -->
         <figure class="commonLogoBox">
-            <img class="commonLogo" src="../images/logo.svg" alt="HAL CINEMA">
+            <!-- <img class="commonLogo" src="../images/logo.svg" alt="HAL CINEMA"> -->
         </figure>
-
 
         <!-- ナビゲーション：メニュー項目と遷移先は適宜変更してください -->
         <nav class="commonNav">
@@ -54,13 +47,13 @@
     <div id="slideshow">
         <div class="slide-wrapper">
             <video autoplay muted loop id="bg-video" class="slide">
-              <source src="../images/halcinema_Opv.mp4" type="video/mp4">
-              お使いのブラウザはvideoタグをサポートしていません。
+                <source src="../images/halcinema_Opv.mp4" type="video/mp4">
+                お使いのブラウザはvideoタグをサポートしていません。
             </video>
             <img src="../images/cafe.png" class="slide" alt="Slide 2">
             <video autoplay muted loop id="bg-video" class="slide">
-              <source src="../images/guest_pv.mp4" type="video/mp4">
-              お使いのブラウザはvideoタグをサポートしていません。
+                <source src="../images/guest_pv.mp4" type="video/mp4">
+                お使いのブラウザはvideoタグをサポートしていません。
             </video>
         </div>
         <button id="prev"></button>
@@ -68,124 +61,119 @@
     </div>
 
     <div id="mid">
-      <div id="hidari">
-
-<!-- ニュース -->
-        <section class="news">
-          <div class="inner">
-            <p class="sub_ttl">N&thinsp;E&thinsp;W&thinsp;S</p>ν
-            <ul class="news_list">
-                <li class="news_list_item">
-                  <a href="news.html" class="news_a">
-                    <div class="news_list_date">
-                      <time>2024.05.16</time>
-                    </div>
-                    <p>theater2復旧のお知らせ</p>
-                    <span class="arrow"></span>
-                  </a>
-                </li>
-                <li class="news_list_item">
-                  <a href="" class="news_a">
-                    <div class="news_list_date">
-                      <time>2024.04.12</time>
-                    </div>
-                    <p>theater2故障のお知らせ、復旧の時期は未定</p>
-                    <span class="arrow"></span>
-                  </a>
-                </li>
-                <li class="news_list_item">
-                  <a href="" class="news_a">
-                    <div class="news_list_date">
-                      <time>2022.05.12</time>
-                    </div>
-                    <p>5/15日(木)～6/15日(金)まで、会員限定アンケートキャンペーンの実施のお知らせ</p>
-                    <span class="arrow"></span>
-                  </a>
-                </li>
-                <li class="news_list_item">
-                  <a href="" class="news_a">
-                    <div class="news_list_date">
-                      <time>2021.05.12</time>
-                    </div>
-                    <p>会員への連絡</p>
-                    <span class="arrow"></span>
-                  </a>
-                </li>
-                <li class="news_list_item">
-                  <a href="" class="news_a">
-                    <div class="news_list_date">
-                      <time>2020.07.12</time>
-                    </div>
-                    <p>サイトリニューアルしました</p>
-                    <span class="arrow"></span>
-                  </a>
-                </li>
-                <!-- hiddenクラスで隠す -->
-                <li class="news_list_item hidden">
-                  <a href="" class="news_a">
-                    <div class="news_list_date">
-                      <time>2020.06.12</time>
-                    </div>
-                    <p>サイトリニューアルしました。</p>
-                    <span class="arrow"></span>
-                  </a>
-                </li>
-                <li class="news_list_item hidden">
-                  <a href="" class="news_a">
-                    <div class="news_list_date">
-                      <time>2020.05.12</time>
-                    </div>
-                    <p>サイト開設しました。</p>
-                    <span class="arrow"></span>
-                  </a>
-                </li>
-          </ul>
-          <button id="more">open</button>
-          </div>
-
-        </section>
-      </div>
-
-
-<!-- メンバーズ -->
-      <div id="migi">
-        <div id="migi1">
-          <p id="migi_p">M&thinsp;E&thinsp;M&thinsp;B&thinsp;E&thinsp;R&thinsp;S&emsp;P&thinsp;A&thinsp;G&thinsp;E</p>
-          <p id="migi_p2">会員の方はこちら</p>
-          <div id="login_d"><button id="loginBtn">ENTER</button></div>
-          <a href="member.html" id="osi">推し活会員とは➣</a>
+        <div id="hidari">
+            <!-- ニュース -->
+            <section class="news">
+                <div class="inner">
+                    <p class="sub_ttl">N&thinsp;E&thinsp;W&thinsp;S</p>ν
+                    <ul class="news_list">
+                        <li class="news_list_item">
+                            <a href="news.html" class="news_a">
+                                <div class="news_list_date">
+                                    <time>2024.05.16</time>
+                                </div>
+                                <p>theater2復旧のお知らせ</p>
+                                <span class="arrow"></span>
+                            </a>
+                        </li>
+                        <li class="news_list_item">
+                            <a href="" class="news_a">
+                                <div class="news_list_date">
+                                    <time>2024.04.12</time>
+                                </div>
+                                <p>theater2故障のお知らせ、復旧の時期は未定</p>
+                                <span class="arrow"></span>
+                            </a>
+                        </li>
+                        <li class="news_list_item">
+                            <a href="" class="news_a">
+                                <div class="news_list_date">
+                                    <time>2022.05.12</time>
+                                </div>
+                                <p>5/15日(木)～6/15日(金)まで、会員限定アンケートキャンペーンの実施のお知らせ</p>
+                                <span class="arrow"></span>
+                            </a>
+                        </li>
+                        <li class="news_list_item">
+                            <a href="" class="news_a">
+                                <div class="news_list_date">
+                                    <time>2021.05.12</time>
+                                </div>
+                                <p>会員への連絡</p>
+                                <span class="arrow"></span>
+                            </a>
+                        </li>
+                        <li class="news_list_item">
+                            <a href="" class="news_a">
+                                <div class="news_list_date">
+                                    <time>2020.07.12</time>
+                                </div>
+                                <p>サイトリニューアルしました</p>
+                                <span class="arrow"></span>
+                            </a>
+                        </li>
+                        <!-- hiddenクラスで隠す -->
+                        <li class="news_list_item hidden">
+                            <a href="" class="news_a">
+                                <div class="news_list_date">
+                                    <time>2020.06.12</time>
+                                </div>
+                                <p>サイトリニューアルしました。</p>
+                                <span class="arrow"></span>
+                            </a>
+                        </li>
+                        <li class="news_list_item hidden">
+                            <a href="" class="news_a">
+                                <div class="news_list_date">
+                                    <time>2020.05.12</time>
+                                </div>
+                                <p>サイト開設しました。</p>
+                                <span class="arrow"></span>
+                            </a>
+                        </li>
+                    </ul>
+                    <button id="more">open</button>
+                </div>
+            </section>
         </div>
-        <div id="migi2">
-          <ul>
-            <li class="migi2_li"><a href="service.html#serviceNav" class="migi2_a">施設案内　　　　　　　　　　　　＞</a></li>
-            <li class="migi2_li"><a href="member.html" class="migi2_a">チケット購入方法　　　　　　　　＞</a></li>
-            <li class="migi2_li"><a href="showmovie.html" class="migi2_a">上映作品　　　　　　　　　　　　＞</a></li>
-            <li class="migi2_li"><a href="access.html#accessOpen" class="migi2_a">営業時間　　　　　　　　　　　　＞</a></li>
-          </ul>
+
+        <!-- メンバーズ -->
+        <div id="migi">
+            <div id="migi1">
+                <p id="migi_p">M&thinsp;E&thinsp;M&thinsp;B&thinsp;E&thinsp;R&thinsp;S&emsp;P&thinsp;A&thinsp;G&thinsp;E</p>
+                <p id="migi_p2">会員の方はこちら</p>
+                <div id="login_d"><button id="loginBtn">ENTER</button></div>
+                <a href="member.html" id="osi">推し活会員とは➣</a>
+            </div>
+            <div id="migi2">
+                <ul>
+                    <li class="migi2_li"><a href="service.html#serviceNav" class="migi2_a">施設案内　　　　　　　　　　　　＞</a></li>
+                    <li class="migi2_li"><a href="member.html" class="migi2_a">チケット購入方法　　　　　　　　＞</a></li>
+                    <li class="migi2_li"><a href="showmovie.html" class="migi2_a">上映作品　　　　　　　　　　　　＞</a></li>
+                    <li class="migi2_li"><a href="access.html#accessOpen" class="migi2_a">営業時間　　　　　　　　　　　　＞</a></li>
+                </ul>
+            </div>
         </div>
-      </div>
     </div>
 
-<!-- 広告 -->
-
+    <!-- 広告 -->
     <div class="koukokuFl1"><img src="../images/koukoku_top.png" alt="" class="kouto"></div>
     <div class="koukokuFl2">
-      <img src="../images/koukoku_left.png" alt="" class="koule">
-      <img src="../images/koukoku_right.png" alt="" class="kouri">
+        <img src="../images/koukoku_left.png" alt="" class="koule">
+        <img src="../images/koukoku_right.png" alt="" class="kouri">
     </div>
+
     <!-- フッター ------------------------------------------------->
     <footer class="commonFooter">
-
         <!-- NEWSLETTER -->
         <div class="commonLetterContein">
-          <hr class="commonLetterHr">
-          <div class="commonLetterBox">
-              <p class="commonLetterBoxItem commonLetterInfo">NEWSLETTER</p>
-              <p class="commonLetterBoxItem commonLetterDetail">HALCINEMAの新しい情報、特別なご案内などをお届けいたします。</p>
-              <a class="commonLetterBoxItem commomLettterLine" href="https://page.line.me/909kiqea">公式LINEに登録する   →</a>
-          </div>
+            <hr class="commonLetterHr">
+            <div class="commonLetterBox">
+                <p class="commonLetterBoxItem commonLetterInfo">NEWSLETTER</p>
+                <p class="commonLetterBoxItem commonLetterDetail">HALCINEMAの新しい情報、特別なご案内などをお届けいたします。</p>
+                <a class="commonLetterBoxItem commomLettterLine" href="https://page.line.me/909kiqea">公式LINEに登録する →</a>
+            </div>
         </div>
-
 
         <!-- ロゴ -->
         <figure class="commonLogoBox">
@@ -193,40 +181,38 @@
         </figure>
 
         <div id="loginPopup" class="popup">
-                <div class="popup-content">
-                    <span class="close">&times;</span>
-                    <h2>会員情報を入力してください</h2>
-					<span th:text="${errorMsg}"></span>
-					<form th:action="@{/login}" method="post" th:object="${loginForm}">
-                        <div class="form-group">
-                            <label for="username">メールアドレス</label>
-<!--                            <input type="text" id="username" name="username" required>-->
-							<input type="text" th:field="*{memberMailaddress}">
-                        </div>
-                        <div class="form-group">
-                            <label for="password">パスワード</label>
-<!--                            <input type="password" id="password" name="password" required>-->
-							<input type="password" th:field="*{memberPassword}">
-                        </div>
-                        <a class="pas_forget" href="#">パスワードをお忘れの方はこちら</a>
-                        <button type="submit" id="enterLight"><a href="toppage.html" class="enter">ENTER</a></button>
-                    </form>
-                </div>
+            <div class="popup-content">
+                <span class="close">&times;</span>
+                <h2>会員情報を入力してください</h2>
+                <span th:text="${errorMsg}"></span>
+                <form th:action="@{/login}" method="post" th:object="${loginForm}">
+                    <div class="form-group">
+                        <label for="username">メールアドレス</label>
+                        <!-- <input type="text" id="username" name="username" required> -->
+                        <input type="text" th:field="*{memberMailaddress}" id="username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">パスワード</label>
+                        <!-- <input type="password" id="password" name="password" required> -->
+                        <input type="password" th:field="*{memberPassword}" id="password" name="password" required>
+                    </div>
+                    <a class="pas_forget" href="#">パスワードをお忘れの方はこちら</a>
+                    <button type="submit" id="enterLight"><a href="toppage.html" class="enter">ENTER</a></button>
+                </form>
             </div>
-
+        </div>
 
         <!-- ナビゲーション：メニュー項目と遷移先は適宜変更してください -->
         <nav class="commonNav">
             <ul>
-              <li class="commonMenu"><a class="commonMenuLink" href="showmovie.html">MOVIES</a></li>
-              <li class="commonMenu"><a class="commonMenuLink" href="member.html">MEMBERS</a></li>
-              <li class="commonMenu"><a class="commonMenuLink" href="service.html">SERVICE</a></li>
-              <li class="commonMenu"><a class="commonMenuLink" href="access.html">ACCESS</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" href="showmovie.html">MOVIES</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" href="member.html">MEMBERS</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" href="service.html">SERVICE</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" href="access.html">ACCESS</a></li>
                 <li class="commonMenu commonSnsMenu"><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
                 <li class="commonMenu commonSnsMenu"><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
             </ul>
         </nav>
-
 
         <nav class="commonFooterNav">
             <ul>
@@ -238,7 +224,7 @@
         <p class="commonFooterCopyright">&copy;2024 HAL CINEMA</p>
     </footer>
 
-  </body>
-<script type="text/javascript" src="../js/index.js"></script>
-</html>
+</body>
 
+<script type="text/javascript" src="/js/index.js"></script>
+</html>

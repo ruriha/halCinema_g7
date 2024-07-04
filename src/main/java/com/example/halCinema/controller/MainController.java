@@ -36,12 +36,11 @@ public class MainController {
     
     
 	
-	// index.html
+//	 index.html
 	  @RequestMapping("/")
-	  public String index(){
-		// index.htmlを利用
-	    return "index"; 
-	  }	
+	  public String index() {
+	      return "index";
+	  }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
 	  
 	  // toppage.html
 	  @RequestMapping("/toppage")

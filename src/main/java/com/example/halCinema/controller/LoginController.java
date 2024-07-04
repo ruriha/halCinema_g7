@@ -29,11 +29,10 @@ public class LoginController {
         this.messageSource = messageSource;
     }
 
-    
-    @GetMapping("/login")
-    public String view(Model model, LoginForm form) {
-        return "login";
-    }
+	@GetMapping("/login")
+	public String view(Model model, LoginForm form) {
+	    return "login";
+	}
     
     @PostMapping("/login")
     public String login(Model model, LoginForm form) {
@@ -50,12 +49,13 @@ public class LoginController {
                 && passwordEncoder.matches(form.getMemberPassword(), userInfo.get().getMemberPassword());
         
         if (isCorrectUserAuth) {
-            return "redirect:/menu";
+            return "redirect:/toppage";
         } else {
         	var errorMsg = AppUtill.getMessage(messageSource, ErrorMessageConst.LOGIN_WRONG_INPUT);
         	
             model.addAttribute("errorMsg", errorMsg);
-            return "login";
+            return "menu";
         }
+
     }
 }
