@@ -299,6 +299,9 @@ public class MainController {
 	  @RequestMapping("/reserve_comp")
 	  public String reserve_comp(@RequestParam(required = false) Integer seatNumber,@RequestParam(required = false) Integer guestSeatNumber,@RequestParam(required = false) Integer screeningScheduleId, @RequestParam(required = false) Integer memberId,  Model model){
 //		予約
+		if(guestSeatNumber == null) {
+			guestSeatNumber = 0;
+		}
         Member member = MemberService.findMemberById(memberId);
         ScreeningSchedule screeningSchedule = ScreeningScheduleService.findScreeningScheduleById(screeningScheduleId);
         LocalDateTime reservationDatetime = LocalDateTime.now();
