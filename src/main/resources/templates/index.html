@@ -47,12 +47,12 @@
     <div id="slideshow">
         <div class="slide-wrapper">
             <video autoplay muted loop id="bg-video" class="slide">
-                <source src="../images/halcinema_Opv.mp4" type="video/mp4">
+                <source src="../static/images/halcinema_Opv.mp4" type="video/mp4">
                 お使いのブラウザはvideoタグをサポートしていません。
             </video>
-            <img src="../images/cafe.png" class="slide" alt="Slide 2">
+            <img src="../static/images/cafe.png" class="slide" alt="Slide 2">
             <video autoplay muted loop id="bg-video" class="slide">
-                <source src="../images/guest_pv.mp4" type="video/mp4">
+                <source src="../static/images/guest_pv.mp4" type="video/mp4">
                 お使いのブラウザはvideoタグをサポートしていません。
             </video>
         </div>
@@ -157,10 +157,10 @@
     </div>
 
     <!-- 広告 -->
-    <div class="koukokuFl1"><img src="../images/koukoku_top.png" alt="" class="kouto"></div>
+    <div class="koukokuFl1"><img src="../static/images/koukoku_top.png" alt="" class="kouto"></div>
     <div class="koukokuFl2">
-        <img src="../images/koukoku_left.png" alt="" class="koule">
-        <img src="../images/koukoku_right.png" alt="" class="kouri">
+        <img src="../static/images/koukoku_left.png" alt="" class="koule">
+        <img src="../static/images/koukoku_right.png" alt="" class="kouri">
     </div>
 
     <!-- フッター ------------------------------------------------->
@@ -177,7 +177,7 @@
 
         <!-- ロゴ -->
         <figure class="commonLogoBox">
-            <img class="commonLogo" src="../images/logo.svg" alt="HAL CINEMA">
+            <img class="commonLogo" src="../static/images/logo.svg" alt="HAL CINEMA">
         </figure>
 
         <div id="loginPopup" class="popup">
@@ -185,20 +185,19 @@
                 <span class="close">&times;</span>
                 <h2>会員情報を入力してください</h2>
                 <span th:text="${errorMsg}"></span>
-                <form th:action="@{/login}" method="post" th:object="${loginForm}">
-                    <div class="form-group">
-                        <label for="username">メールアドレス</label>
-                        <!-- <input type="text" id="username" name="username" required> -->
-                        <input type="text" th:field="*{memberMailaddress}" id="username" name="username" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">パスワード</label>
-                        <!-- <input type="password" id="password" name="password" required> -->
-                        <input type="password" th:field="*{memberPassword}" id="password" name="password" required>
-                    </div>
-                    <a class="pas_forget" href="#">パスワードをお忘れの方はこちら</a>
-                    <button type="submit" id="enterLight"><a href="toppage.html" class="enter">ENTER</a></button>
-                </form>
+				<form th:action="@{/login}" method="post" th:object="${loginForm}">
+				    <div class="form-group">
+				        <label for="username">メールアドレス</label>
+						<input type="text" id="username" name="username"/>
+				    </div>
+				    <div class="form-group">
+				        <label for="password">パスワード</label>
+						<input type="password" id="password" name="password"/>
+				    </div>
+				    <a class="pas_forget" href="#">パスワードをお忘れの方はこちら</a>
+					<button type="submit">Login</button>
+				</form>
+
             </div>
         </div>
 
@@ -222,9 +221,35 @@
             </ul>
         </nav>
         <p class="commonFooterCopyright">&copy;2024 HAL CINEMA</p>
-    </footer>
+
+		<!-- フッターの直前に追加 -->
+		<script>
+		    document.addEventListener('DOMContentLoaded', function () {
+		        const form = document.querySelector('form'); // フォーム要素を取得
+		
+		        form.addEventListener('submit', function (event) {
+		            event.preventDefault(); // デフォルトの送信を防止
+		
+		            // フォームの入力値を取得
+		            const username = document.getElementById('username').value;
+		            const password = document.getElementById('password').value;
+		
+		            // コンソールに出力
+		            console.log('メールアドレス:', username);
+		            console.log('パスワード:', password);
+		
+		            // ここでサーバーにデータを送信するなどの処理を実装することができます
+		
+		            // フォームをリセットする
+		            form.reset();
+		        });
+		    });
+		</script>
+
+		
+		</footer>
 
 </body>
 
-<script type="text/javascript" src="/js/index.js"></script>
+<script type="text/javascript" src="/static/js/index.js"></script>
 </html>

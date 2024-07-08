@@ -11,16 +11,21 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.halCinema.form.LoginForm;
 import com.example.halCinema.model.Member;
 import com.example.halCinema.model.ScreeningSchedule;
 import com.example.halCinema.service.EmailService;
 import com.example.halCinema.service.MemberService;
 import com.example.halCinema.service.ReservationService;
 import com.example.halCinema.service.ScreeningScheduleService;
+import com.example.halCinema.service.UserService;
 
 @Controller
 public class MainController {
@@ -37,10 +42,42 @@ public class MainController {
     
 	
 //	 index.html
-	  @RequestMapping("/")
-	  public String index() {
-	      return "index";
-	  }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+//	  @RequestMapping("/index")
+//	  public String index(Model model) {
+//	      model.addAttribute("loginForm", new LoginForm());
+//	      return "index";
+//	  }
+//
+//	  @PostMapping("/index")
+//	  public String processLogin(@ModelAttribute("loginForm") LoginForm loginForm) {
+//	      // ログイン処理
+//	      return "redirect:/toppage"; // ログイン後のリダイレクト先
+//	  }
+
+	    @Autowired
+	    private UserService userService;
+
+	    @GetMapping("/index")
+	    public String showLoginForm(Model model) {
+	        model.addAttribute("loginForm", new LoginForm());
+	        return "index";
+	    }
+
+	    @PostMapping("/index")
+	    public String login(@ModelAttribute("loginForm") LoginForm loginForm, BindingResult bindingResult, Model model) {
+	        if (bindingResult.hasErrors()) {
+	            return "menu";
+	        }
+
+	        boolean isAuthenticated = userService.authenticate(loginForm.getUsername(), loginForm.getMemberPassword());
+
+	        if (isAuthenticated) {
+	            return "redirect:/toppage";
+	        } else {
+	            model.addAttribute("errorMsg", "メールアドレスまたはパスワードが違います");
+	            return "menu";
+	        }
+	    }
 	  
 	  // toppage.html
 	  @RequestMapping("/toppage")

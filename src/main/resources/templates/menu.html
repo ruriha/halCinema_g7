@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>メニュー</title>
+    <meta charset="UTF-8">
+    <title>ユーザープロフィール</title>
 </head>
 <body>
-メニュー
+    <h1>ようこそ、<span th:text="${memberMailaddress}"></span>さん！</h1>
+    <p>あなたの役割: <span th:text="${role}"></span></p>
 </body>
 </html>
