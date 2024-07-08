@@ -75,70 +75,20 @@
           <div class="inner">
             <p class="sub_ttl">N&thinsp;E&thinsp;W&thinsp;S</p>ν
             <ul class="news_list">
-                <li class="news_list_item">
-                  <a href="news.html" class="news_a">
-                    <div class="news_list_date">
-                      <time>2024.05.16</time>
-                    </div>
-                    <p>theater2復旧のお知らせ</p>
-                    <span class="arrow"></span>
-                  </a>
-                </li>
-                <li class="news_list_item">
-                  <a href="" class="news_a">
-                    <div class="news_list_date">
-                      <time>2024.04.12</time>
-                    </div>
-                    <p>theater2故障のお知らせ、復旧の時期は未定</p>
-                    <span class="arrow"></span>
-                  </a>
-                </li>
-                <li class="news_list_item">
-                  <a href="" class="news_a">
-                    <div class="news_list_date">
-                      <time>2022.05.12</time>
-                    </div>
-                    <p>5/15日(木)～6/15日(金)まで、会員限定アンケートキャンペーンの実施のお知らせ</p>
-                    <span class="arrow"></span>
-                  </a>
-                </li>
-                <li class="news_list_item">
-                  <a href="" class="news_a">
-                    <div class="news_list_date">
-                      <time>2021.05.12</time>
-                    </div>
-                    <p>会員への連絡</p>
-                    <span class="arrow"></span>
-                  </a>
-                </li>
-                <li class="news_list_item">
-                  <a href="" class="news_a">
-                    <div class="news_list_date">
-                      <time>2020.07.12</time>
-                    </div>
-                    <p>サイトリニューアルしました</p>
-                    <span class="arrow"></span>
-                  </a>
-                </li>
-                <!-- hiddenクラスで隠す -->
-                <li class="news_list_item hidden">
-                  <a href="" class="news_a">
-                    <div class="news_list_date">
-                      <time>2020.06.12</time>
-                    </div>
-                    <p>サイトリニューアルしました。</p>
-                    <span class="arrow"></span>
-                  </a>
-                </li>
-                <li class="news_list_item hidden">
-                  <a href="" class="news_a">
-                    <div class="news_list_date">
-                      <time>2020.05.12</time>
-                    </div>
-                    <p>サイト開設しました。</p>
-                    <span class="arrow"></span>
-                  </a>
-                </li>
+				
+				<!-- ニュースの繰り返し表示場所 -->
+		        <th:block th:each="news : ${newsList}">
+		            <li class="news_list_item">
+                        <a th:href="@{/news/{id}(id=${news[0]})}" class="news_a">
+		                    <div class="news_list_date">
+		                        <time th:text="${#dates.format(news[2], 'yyyy.MM.dd')}"></time>
+		                    </div>
+		                    <p th:text="${news[1]}"></p>
+		                    <span class="arrow"></span>
+		                </a>
+		            </li>
+		        </th:block>
+		        
           </ul>
           <button id="more">open</button>
           </div>
