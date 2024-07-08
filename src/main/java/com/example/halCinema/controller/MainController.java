@@ -12,13 +12,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.halCinema.model.Member;
+import com.example.halCinema.model.News;
 import com.example.halCinema.model.ScreeningSchedule;
 import com.example.halCinema.service.EmailService;
 import com.example.halCinema.service.MemberService;
+import com.example.halCinema.service.NewsService;
 import com.example.halCinema.service.ReservationService;
 import com.example.halCinema.service.ScreeningScheduleService;
 
@@ -35,13 +38,20 @@ public class MainController {
     ReservationService ReservationService;
     @Autowired
     EmailService EmailService;
+    @Autowired
+    NewsService NewsService;
     
     
 	
 	// index.html
 	  @RequestMapping("/")
-	  public String index(HttpSession session){
+	  public String index(HttpSession session ,Model model){
 	    session.invalidate();
+
+	    //news表示
+        List<Object[]> newsList = NewsService.findNewsStreamingDate();
+        model.addAttribute("newsList", newsList);
+        
 	    return "index"; 
 	  }	
 	  
@@ -76,7 +86,7 @@ public class MainController {
 	  
 	  
 	  // toppage.html
-	  @RequestMapping("/toppage")
+	  @RequestMapping("/toppage/{id}")
 	  public String toppage(@RequestParam(name = "screenScheduleDate", required = false) String screenScheduleDate, Model model){
 		//  カレンダー  ////////
 		List<String> dates = new ArrayList<>();
@@ -204,12 +214,20 @@ public class MainController {
 		}
         model.addAttribute("screenScheduleList", screenScheduleList);
         
+		//newsの表示
+        Integer id = null;
+        News news = NewsService.findNewsById(id);
+        news.setNewsTitle(addLineBreaks1(news.getNewsTitle(), 23)); // タイトルに改行を追加
+        model.addAttribute("news", news);
+        
 	    return "toppage"; 
 	  }	
 	  
+	  
+	  
 	  // news.html
-	  @RequestMapping("/news")
-	  public String news(Model model, HttpSession session){
+	  @RequestMapping("/news/{id}")
+	  public String news(Model model, HttpSession session ,@PathVariable Integer id){
 //			会員情報取得
 		Integer memberId = (Integer) session.getAttribute("userId");
 		if (memberId != null) {
@@ -217,11 +235,36 @@ public class MainController {
 	    } else {
 	        model.addAttribute("topLink", "/");		
 	    }
-	    return "news"; 
+//	    return "news"; 
+
+        News news = NewsService.findNewsById(id);
+        news.setNewsTitle(addLineBreaks1(news.getNewsTitle(), 23)); // タイトルに改行を追加
+        model.addAttribute("news", news);
+        return "news";
 	  }	
+
+      // タイトルに改行を追加するメソッド
+      private String addLineBreaks1(String text, int maxLineLength) {
+          if (text == null || text.isEmpty()) {
+              return text;
+          }
+          StringBuilder result = new StringBuilder();
+          int length = text.length();
+          for (int i = 0; i < length; i++) {
+              result.append(text.charAt(i));
+              if ((i + 1) % maxLineLength == 0) {
+                  result.append("<br/>");
+              }
+          }
+          return result.toString();
+      }
+	  
+	  
 	  
 
-	  // 上映スケジュールの表示切替(toppage)
+
+
+	// 上映スケジュールの表示切替(toppage)
 	  @GetMapping("/screenScheduleSelect")
 	  public String screenScheduleSelect(@RequestParam(name = "screenScheduleDate") String screenScheduleDate, Model model){
 		  return "redirect:/toppage?screenScheduleDate="+screenScheduleDate+"#sche_b";
