@@ -11,13 +11,18 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.halCinema.form.LoginForm;
 import com.example.halCinema.model.Member;
 import com.example.halCinema.model.ScreeningSchedule;
 import com.example.halCinema.service.EmailService;
+import com.example.halCinema.service.LoginService;
 import com.example.halCinema.service.MemberService;
 import com.example.halCinema.service.ReservationService;
 import com.example.halCinema.service.ScreeningScheduleService;
@@ -37,11 +42,37 @@ public class MainController {
     
 	
 //	 index.html
-	  @RequestMapping("/")
-	  public String index() {
-	      return "index";
-	  }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
-	  
+//	  @RequestMapping("/index")
+//	  public String index() {
+//	      return "index";
+//	  }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+	 
+    @GetMapping("/login")
+    public String showLoginForm(Model model) {
+        model.addAttribute("loginForm", new LoginForm());
+        return "index";
+    }
+
+    @Autowired
+    LoginService loginService;
+
+    @PostMapping("/login")
+    public String login(@ModelAttribute("loginForm") LoginForm loginForm, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "index";
+        }
+
+        boolean isAuthenticated = loginService.authenticate(loginForm.getMemberMailaddress(), loginForm.getMemberPassword());
+
+        if (isAuthenticated) {
+            return "redirect:/toppage";
+        } else {
+            model.addAttribute("errorMsg", "メールアドレスまたはパスワードが違います");
+            return "index";
+        }
+    }
+
+    
 	  // toppage.html
 	  @RequestMapping("/toppage")
 	  public String toppage(@RequestParam(name = "screenScheduleDate", required = false) String screenScheduleDate, Model model){

@@ -1,6 +1,11 @@
 package com.example.halCinema.entity;
 
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.Collections;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,15 +18,14 @@ import lombok.Data;
 @Entity
 @Table(name="member")
 @Data
-public class UserInfo {
-    
+public class UserInfo implements UserDetails {
     @Id
     @Column(name="memberMailaddress")
     private String memberMailaddress;
-    
+
     @Column(nullable = false)
     private String memberPassword;
-    
+
     @Column(nullable = false)
     private String memberName;
 
@@ -71,5 +75,41 @@ public class UserInfo {
     @PreUpdate
     public void preUpdate() {
         this.memberUpdateday = LocalDate.now(); // 更新日を現在の日付に設定
+    }
+
+    // UserDetails インターフェースのメソッドを実装
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.emptyList();
+    }
+
+    @Override
+    public String getPassword() {
+        return memberPassword;
+    }
+
+    @Override
+    public String getUsername() {
+        return memberMailaddress;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }
