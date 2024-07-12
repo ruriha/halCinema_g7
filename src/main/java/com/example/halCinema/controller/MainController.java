@@ -27,6 +27,8 @@ import com.example.halCinema.service.MemberService;
 import com.example.halCinema.service.ReservationService;
 import com.example.halCinema.service.ScreeningScheduleService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class MainController {
 
@@ -47,28 +49,34 @@ public class MainController {
 //	      return "index";
 //	  }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
 	 
-    @GetMapping("/login")
-    public String showLoginForm(Model model) {
-        model.addAttribute("loginForm", new LoginForm());
-        return "index";
-    }
+    @Controller
+    @RequestMapping("/login")
+    public class LoginController {
 
-    @Autowired
-    LoginService loginService;
+        @Autowired
+        LoginService loginService;
 
-    @PostMapping("/login")
-    public String login(@ModelAttribute("loginForm") LoginForm loginForm, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
+        @GetMapping
+        public String showLoginForm(Model model) {
+            model.addAttribute("loginForm", new LoginForm());
             return "index";
         }
 
-        boolean isAuthenticated = loginService.authenticate(loginForm.getMemberMailaddress(), loginForm.getMemberPassword());
+        @PostMapping
+        public String login(@ModelAttribute("loginForm") LoginForm loginForm, BindingResult bindingResult, Model model, HttpSession session) {
+            if (bindingResult.hasErrors()) {
+                return "index";
+            }
 
-        if (isAuthenticated) {
-            return "redirect:/toppage";
-        } else {
-            model.addAttribute("errorMsg", "メールアドレスまたはパスワードが違います");
-            return "index";
+            boolean isAuthenticated = loginService.authenticate(loginForm.getMemberMailaddress(), loginForm.getMemberPassword());
+
+            if (isAuthenticated) {
+                session.setAttribute("user", loginForm.getMemberMailaddress()); // セッションにユーザー情報を設定
+                return "redirect:/toppage";
+            } else {
+                model.addAttribute("errorMsg", "メールアドレスまたはパスワードが違います");
+                return "index";
+            }
         }
     }
 

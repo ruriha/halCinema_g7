@@ -24,7 +24,7 @@ public class WebConfig implements WebMvcConfigurer {
     public SecurityFilterChain customSecurityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests((requests) -> requests
-                .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
+                .requestMatchers("/signup", "/css/**", "/js/**", "/images/**").permitAll()
                 .anyRequest().authenticated()
             )
             .formLogin((form) -> form

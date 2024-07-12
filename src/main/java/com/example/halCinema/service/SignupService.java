@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.halCinema.entity.UserInfo;
 import com.example.halCinema.form.SignupForm;
+import com.example.halCinema.model.Member;
 import com.example.halCinema.repository.UserInfoRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -27,4 +28,18 @@ public class SignupService {
         
         return repository.save(userInfo);
     }
+
+    public Member saveMember(Member member) {
+        // Dozerを使用してMemberクラスからUserInfoクラスへのマッピングを行う場合
+        var userInfo = mapper.map(member, UserInfo.class);
+        
+        // 他の必要な処理（例：パスワードのエンコードなど）
+        var encodedPassword = passwordEncoder.encode(member.getMemberPassword());
+        userInfo.setMemberPassword(encodedPassword);
+        
+        // UserInfoを保存し、必要に応じてMemberクラスに戻す
+        var savedUserInfo = repository.save(userInfo);
+        return mapper.map(savedUserInfo, Member.class);
+    }
+    
 }
