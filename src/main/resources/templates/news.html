@@ -57,7 +57,7 @@
 	
 	
     <div id="news">
-        <a href="/" id="news-back">Back</a>
+        <a th:href="@{${topLink}}" id="news-back">Back</a>
         <p id="top" th:utext="${news.newsTitle}"></p>
         <hr id="newsHr">
         <p id="news-contents" th:text="${news.newsContents}">
