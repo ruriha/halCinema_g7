@@ -41,10 +41,10 @@
         <!-- ナビゲーション：メニュー項目と遷移先は適宜変更してください -->
         <nav class="commonNav">
             <ul>
-                <li class="commonMenu"><a class="commonMenuLink" href="showmovie.html">MOVIES</a></li>
-                <li class="commonMenu"><a class="commonMenuLink" href="member.html">MEMBERS</a></li>
-                <li class="commonMenu"><a class="commonMenuLink" href="service.html">SERVICE</a></li>
-                <li class="commonMenu"><a class="commonMenuLink" href="access.html">ACCESS</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" th:href="@{/showmovie}">MOVIES</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" th:href="@{/member}">MEMBERS</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" th:href="@{/service}">SERVICE</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" th:href="@{/access}">ACCESS</a></li>
                 <li class="commonMenu commonSnsMenu"><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
                 <li class="commonMenu commonSnsMenu"><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
             </ul>
@@ -56,7 +56,7 @@
         <p id="time" th:text="${#temporals.format(screeningScheduleList[0][1], 'yyyy/MM/dd HH:mm')}"></p>
         <p id="name" th:text="${memberList[0][0]+' 様'}"></p>
       </div>
-      <p class="attention">座席を選択して下さい。<span style="color: #A2936B;">■</span>：選択済み / <span style="color: aqua;">■</span>：選択中</p>
+      <p class="attention">座席を選択して下さい。<span style="color: #A2936B;">■</span>：済み / <span style="color: aqua;">■</span>：選択中</p>
 
     </div>
     <div id="dai">

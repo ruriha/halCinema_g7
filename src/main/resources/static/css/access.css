@@ -1,0 +1,352 @@
+@charset "utf-8";
+
+
+
+
+/* 共通のスタイル */
+
+body{
+    padding: 0;
+    margin: 0;
+    background: #111111;
+    color: #fff;
+    font-family: "Josefin Sans", sans-serif;
+}
+ul{
+    list-style-type: none;
+}
+a{
+    text-decoration: none;
+    color: #fff;
+    border: none;
+}
+
+
+
+/*************************************************************************************
+ ヘッダー & フッター
+*************************************************************************************/
+
+/* ヘッダー ******************************/
+.commonHeader{
+    width: 100%;
+    height: auto;
+    text-align: center;
+    background-color: #111111;
+    font-family: 'Josefin Sans', sans-serif;
+    color: #FFF;
+}
+.commonHeader a{
+    text-decoration: none;
+    color: #FFF;
+}
+
+
+/* ロゴ ******************************/
+.commonLogoBox{
+    padding: 30px 0;
+}
+
+.commonLogo{
+    width: 10%;
+}
+
+
+/* ナビゲーション ******************************/
+.commonNav{}
+.commonMenu{
+    display: inline-block;
+    margin: 0 25px;
+    line-height: 2rem;
+    letter-spacing: 2px;
+    transition: border-bottom 0.5s ease;
+    border-bottom: 2px solid transparent;
+}
+.commonSnsMenu{
+    margin: 0 10px;
+}
+.commonSnsMenu .fa-brands{
+    font-size: 2rem;
+}
+.commonMenu:hover{
+    color: #1FD9D9;
+    cursor: pointer;
+    border-bottom: 2px solid #1FD9D9;
+}
+
+.commonMenuLink{
+    text-decoration: none;
+    color: #fff;
+    border: none;
+}
+.commonMenu:hover .commonMenuLink {
+    color: #1FD9D9;
+}
+.commonMenu:hover .fa-brands{
+    color: #1FD9D9;
+    cursor: pointer;
+}
+
+
+
+
+
+.accessMain{
+    text-align: center;
+}
+
+
+/* access */
+div.wrap{
+    width: 1000px;
+    margin: 0 auto;
+    padding: 40px 0;
+}
+
+.te{
+    width: 100%;
+    background-color: #222222;
+    padding: 0 0 50px 0;
+    
+}
+
+.txt2{
+    margin: 0;
+    padding: 50px 0 0 0;
+    color: #fff; 
+    font-size: 1.3rem;
+    letter-spacing: 3px;
+    margin-bottom: 1rem;
+}
+
+hr.line1{
+    width: 40px;
+    padding: 0 0 35px 0;
+    border-color: #00cccc;
+}
+
+.map{
+    width: 800px;
+    height: 400px;
+}
+
+.posi{
+    margin: 30px 0 40px 40px;
+    text-align: left;
+}
+
+hr{
+    width: 80%;
+    margin: 0 auto 0 auto;
+}
+
+
+
+.flex{
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.flex figure, .flex div {
+    margin: 0;
+    padding: 0;
+}
+
+figure img {
+    width: 50px; 
+    height: auto;
+}
+
+.txt3{
+    color: #00cccc; 
+    margin: 0;
+    padding: 10px 0 5px 0;
+}
+
+.center{
+    text-align: left;
+}
+
+.flex + .flex {
+    margin-top: 20px; 
+}
+
+
+
+.data {
+    text-align: center;
+    width: 100%;
+    height: 30%;
+    background-color: #222222;
+    padding: 0 0 50px 0;
+}
+
+.txt4{
+    color: #fff; 
+    margin: 0;
+    padding: 30px 0 0 0;
+}
+
+.time {
+    font-size: 3em;
+    color: #1FD9D9; 
+    margin: 120px 0;
+}
+
+.note {
+    font-size: 0.8em;
+    color: #605F5F; 
+    padding: 0 0 30px 0;
+}
+
+.accessTrainIcon{
+    width: 50px;
+    height: 50px;
+    background: url(../images/train.png) no-repeat center/contain;
+}
+.accessCarIcon{
+    width: 40px;
+    height: 50px;
+    margin: 0 5px;
+    background: url(../images/car.png) no-repeat center/contain;
+}
+.accessMapAccess{
+    text-align: left;
+    width: 800px;
+    margin: 20px auto;
+    font-family: sans-serif;
+    line-height: 1.5rem;
+}
+.accessMapHr{
+    width: 800px;
+    border-color: #444;
+    margin: 50px auto;
+}
+.accessBox{
+    display: flex;
+    text-align: left;
+    font-family: sans-serif;
+    justify-content: center;
+    margin: 50px 0;
+}
+.accessDetailInfo{
+    color: #1FD9D9;
+    padding: 10px 0;
+}
+
+
+
+/* フッター ******************************/
+.commonFooter{
+    width: 100%;
+    height: auto;
+    text-align: center;
+    background-color: #111111;
+    font-family: 'Josefin Sans', sans-serif;
+    color: #FFF;
+}
+.commonFooter a{
+    text-decoration: none;
+}
+.commonFooter .fa-brands{
+    color: #FFF;    
+}
+.commonLetterContein{
+    position: relative;
+    margin: 60px 0;
+}
+.commonLetterHr{
+    border-color: #444;
+}
+.commonLetterBox{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1000px;
+    background-color: #111111;  
+    border: 1px solid #444;
+    border-radius: 60px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    padding: 20px 40px;
+}
+.commonLetterBoxItem{}
+.commonLetterInfo{
+    color: #1FD9D9;
+    font-size: 1.2rem;
+    letter-spacing: 5px;
+    padding: 0 30px 0 0;
+}
+.commonLetterDetail{
+    border-left: 1px solid #444;
+    padding: 0 50px 0 30px;
+    color: #ddd;
+}
+.commomLettterLine{
+    display: block;
+    background-color: #1FD9D9;
+    color: #111111;
+    padding: 15px 30px;
+    border-radius: 30px;
+    font-family: sans-serif;
+    letter-spacing: 2px;
+    transition: 0.5s;
+}
+.commomLettterLine:hover{
+    background-color: #1cb7b7;
+}
+
+.commonFooterNav{
+    padding: 100px 0;
+    border-bottom: 1px solid #BBB;
+}
+.commonFooterMenu{
+    display: inline-block;
+    line-height: 32px;
+    letter-spacing: 2px;
+    color: #888;
+}
+.commonFooterMenuLink{
+    color: #888;
+}
+
+.commonFooterCopyright{
+    padding: 20px 0 10px 0;
+    font-family: sans-serif;
+    font-size: 0.8rem;
+}
+
+
+.accessMap{
+    width: 800px;
+    height: 450px;
+    margin: 0 auto;
+    background: url(../images/map.png) no-repeat center/contain;
+}
+
+
+
+
+/* ########### 599px以下 ########### */
+@media (max-width: 599px) {}
+
+
+
+/* ########### 600px以上～768px以下 ########### */
+@media (min-width: 600px) and (max-width: 768px) {}
+
+
+
+/* ########### 769px以上 ########### */
+@media (min-width: 769px) {}
+
+
+
+/* ########### 1000px以上 ########### */
+@media (min-width: 1000px) {}
+
+
+@charset "UTF-8";

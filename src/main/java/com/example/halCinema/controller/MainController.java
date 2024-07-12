@@ -86,7 +86,7 @@ public class MainController {
 	  
 	  
 	  // toppage.html
-	  @RequestMapping("/toppage/{id}")
+	  @RequestMapping("/toppage")
 	  public String toppage(@RequestParam(name = "screenScheduleDate", required = false) String screenScheduleDate, Model model){
 		//  カレンダー  ////////
 		List<String> dates = new ArrayList<>();
@@ -215,10 +215,8 @@ public class MainController {
         model.addAttribute("screenScheduleList", screenScheduleList);
         
 		//newsの表示
-        Integer id = null;
-        News news = NewsService.findNewsById(id);
-        news.setNewsTitle(addLineBreaks1(news.getNewsTitle(), 23)); // タイトルに改行を追加
-        model.addAttribute("news", news);
+        List<Object[]> newsList = NewsService.findNewsStreamingDate();
+        model.addAttribute("newsList", newsList);
         
 	    return "toppage"; 
 	  }	
@@ -387,5 +385,60 @@ public class MainController {
 	    return "rsv_comp"; 
 	  }	
 	  
+	  
+	  
+	  //  アクセスページ
+	  @RequestMapping("/access")
+	  public String access(Model model, HttpSession session){
+		Integer memberId = (Integer) session.getAttribute("userId");
+		if (memberId != null) {
+	        model.addAttribute("topLink", "/toppage");			
+	    } else {
+	        model.addAttribute("topLink", "/");		
+	    }
+	    return "access"; 
+	  }	
+	  
+	  
+	  
+	  //  メンバーページ
+	  @RequestMapping("/member")
+	  public String member(Model model, HttpSession session){
+		Integer memberId = (Integer) session.getAttribute("userId");
+		if (memberId != null) {
+	        model.addAttribute("topLink", "/toppage");			
+	    } else {
+	        model.addAttribute("topLink", "/");		
+	    }
+	    return "member"; 
+	  }	
+	  
+	  
+	  
+	  //  サービスページ
+	  @RequestMapping("/service")
+	  public String service(Model model, HttpSession session){
+		Integer memberId = (Integer) session.getAttribute("userId");
+		if (memberId != null) {
+	        model.addAttribute("topLink", "/toppage");			
+	    } else {
+	        model.addAttribute("topLink", "/");		
+	    }
+	    return "service"; 
+	  }	
+	  
+	  
+	  
+	  //  映画情報ページ
+	  @RequestMapping("/showmovie")
+	  public String showmovie(Model model, HttpSession session){
+		Integer memberId = (Integer) session.getAttribute("userId");
+		if (memberId != null) {
+	        model.addAttribute("topLink", "/toppage");			
+	    } else {
+	        model.addAttribute("topLink", "/");		
+	    }
+	    return "showmovie"; 
+	  }	
 
 }

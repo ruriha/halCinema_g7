@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>access</title>
+
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/access.css">
+
+    <!-- ヘッダーとフッター適用に必須↓ -->
+    <link rel="stylesheet" type="text/css" href="../css/common.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <header class="commonHeader">
+
+      <!-- ロゴ -->
+      <figure class="commonLogoBox">
+          <img class="commonLogo" src="../images/logo.svg " alt="HAL CINEMA">
+      </figure>
+
+
+      <!-- ナビゲーション：メニュー項目と遷移先は適宜変更してください -->
+      <nav class="commonNav">
+          <ul>
+            <li class="commonMenu"><a class="commonMenuLink" th:href="@{${topLink}}">TOP</a></li>
+            <li class="commonMenu"><a class="commonMenuLink" th:href="@{/showmovie}">MOVIES</a></li>
+            <li class="commonMenu"><a class="commonMenuLink" th:href="@{/member}">MEMBERS</a></li>
+            <li class="commonMenu"><a class="commonMenuLink" th:href="@{/service}">SERVICE</a></li>
+              <li class="commonMenu commonSnsMenu"><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
+              <li class="commonMenu commonSnsMenu"><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+          </ul>
+      </nav>
+    
+
+
+    </header>
+
+
+    <main class="accessMain">
+
+      <div class="wrap">
+  
+        <div class="te">
+  
+          <p class="txt2">ACCESS</p>
+          <hr class="line1">
+          <div class="accessMap"></div>
+          <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3261.538757295655!2d136.88305097576512!3d35.16812227275727!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x600376de618547db%3A0x76435e49b7e59323!2zSEFM5ZCN5Y-k5bGL!5e0!3m2!1sja!2sjp!4v1716364776034!5m2!1sja!2sjp" width="800" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> -->
+          <p class="accessMapAccess">
+            HALCINEMA <br> 〒450-0002 愛知県名古屋市中村区名駅４丁目２７−１
+          </p>
+          <hr class="accessMapHr">
+          
+
+          <div class="accessBox">
+            <div class="accessTrainIcon"></div>
+            <div class="accessDetailBox">
+              <p class="accessDetailInfo">電車でお越しの方</p>
+              <p class="accessDetail">
+                名古屋駅から徒歩3分 <br> JR・地下鉄・名鉄・近鉄から地下街が直結
+              </p>
+            </div>
+          </div>
+
+          <div class="accessBox">
+            <div class="accessCarIcon"></div>
+            <div class="accessDetailBox">
+              <p class="accessDetailInfo">車でお越しの方</p>
+              <p class="accessDetail">
+                ■ HALCINEMA駐車場 <br> ＜期間限定＞駐車場割引サービス実施中！
+              </p>
+            </div>
+          </div>
+        </div>
+      
+      </div>
+  
+  
+  
+      <div class="wrap" id="accessOpen">
+  
+        <div class="data">
+          <p class="txt2">OPEN / CLOSE</p>
+          <hr class="line1">
+          <p class="time">10:00 ～ 22:00</p>
+          <p class="note">※営業時間は、上記スケジュールやイベント状況により異なる場合がございます。<br>※各施設のサービス詳細は、SERVICEページよりご確認ください。</p>
+        </div>
+  
+      </div>
+  
+  
+  
+      <div class="wrap">
+  
+        <div class="data">
+          <p class="txt2">NAVI DIAL</p>
+          <hr class="line1">
+          <p class="time">0123-456-789</p>
+          <p class="note">※間違い電話が増えております。お間違えのないよう、番号をよくご確認のうえおかけください。</p>
+        </div>
+  
+      </div>
+        
+
+    </main>
+
+
+
+    <footer class="commonFooter">
+
+      <!-- NEWSLETTER -->
+      <div class="commonLetterContein">
+          <hr class="commonLetterHr">
+          <div class="commonLetterBox">
+              <p class="commonLetterBoxItem commonLetterInfo">NEWSLETTER</p>
+              <p class="commonLetterBoxItem commonLetterDetail">HALCINEMAの新しい情報、特別な<br>ご案内などをお届けいたします。</p>
+              <a class="commonLetterBoxItem commomLettterLine" href="https://page.line.me/909kiqea">公式LINEに登録する   →</a>
+          </div>
+      </div>
+
+
+      <!-- ロゴ -->
+      <figure class="commonLogoBox">
+          <img class="commonLogo" src="../images/logo.svg" alt="HAL CINEMA">
+      </figure>
+
+
+      <!-- ナビゲーション：メニュー項目と遷移先は適宜変更してください -->
+      <nav class="commonNav">
+          <ul>
+            <li class="commonMenu"><a class="commonMenuLink" th:href="@{${topLink}}">TOP</a></li>
+            <li class="commonMenu"><a class="commonMenuLink" th:href="@{/showmovie}">MOVIES</a></li>
+            <li class="commonMenu"><a class="commonMenuLink" th:href="@{/member}">MEMBERS</a></li>
+            <li class="commonMenu"><a class="commonMenuLink" th:href="@{/service}">SERVICE</a></li>
+              <li class="commonMenu commonSnsMenu"><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
+              <li class="commonMenu commonSnsMenu"><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+          </ul>
+      </nav>
+
+
+
+      <main>
+
+
+        
+
+
+      </main>
+
+
+
+      <nav class="commonFooterNav">
+          <ul>
+              <li class="commonFooterMenu"><a class="commonFooterMenuLink" th:href="@{${topLink}}">ホーム</a></li>
+              <li class="commonFooterMenu commonMenuLine">｜</li>
+              <li class="commonFooterMenu"><a class="commonFooterMenuLink" href="https://forms.gle/CPnin4yeeBP7LthE8">お問い合わせ</a></li>
+          </ul>
+      </nav>
+      <p class="commonFooterCopyright">&copy;2024 HAL CINEMA</p>
+  </footer>
+
+
+  </body>
+
+</html>
