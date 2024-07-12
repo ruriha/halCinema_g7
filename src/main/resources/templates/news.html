@@ -43,10 +43,10 @@
         <nav class="commonNav">
             <ul>
                 <li class="commonMenu"><a class="commonMenuLink" th:href="@{${topLink}}">TOP</a></li>
-                <li class="commonMenu"><a class="commonMenuLink" href="showmovie.html">MOVIES</a></li>
-                <li class="commonMenu"><a class="commonMenuLink" href="member.html">MEMBERS</a></li>
-                <li class="commonMenu"><a class="commonMenuLink" href="service.html">SERVICE</a></li>
-                <li class="commonMenu"><a class="commonMenuLink" href="access.html">ACCESS</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" th:href="@{/showmovie}">MOVIES</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" th:href="@{/member}">MEMBERS</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" th:href="@{/service}">SERVICE</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" th:href="@{/access}">ACCESS</a></li>
                 <li class="commonMenu commonSnsMenu"><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
                 <li class="commonMenu commonSnsMenu"><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
             </ul>
@@ -95,10 +95,10 @@
         <nav class="commonNav">
             <ul>
                 <li class="commonMenu"><a class="commonMenuLink" th:href="@{${topLink}}">TOP</a></li>
-                <li class="commonMenu"><a class="commonMenuLink" href="showmovie.html">MOVIES</a></li>
-                <li class="commonMenu"><a class="commonMenuLink" href="member.html">MEMBERS</a></li>
-                <li class="commonMenu"><a class="commonMenuLink" href="service.html">SERVICE</a></li>
-                <li class="commonMenu"><a class="commonMenuLink" href="access.html">ACCESS</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" th:href="@{/showmovie}">MOVIES</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" th:href="@{/member}">MEMBERS</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" th:href="@{/service}">SERVICE</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" th:href="@{/access}">ACCESS</a></li>
                 <li class="commonMenu commonSnsMenu"><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
                 <li class="commonMenu commonSnsMenu"><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
             </ul>
@@ -107,7 +107,7 @@
 
         <nav class="commonFooterNav">
             <ul>
-                <li class="commonFooterMenu"><a class="commonFooterMenuLink" th:href="@{/}">ホーム</a></li>
+                <li class="commonFooterMenu"><a class="commonFooterMenuLink" th:href="@{${topLink}}">ホーム</a></li>
                 <li class="commonFooterMenu commonMenuLine">｜</li>
                 <li class="commonFooterMenu"><a class="commonFooterMenuLink" href="https://forms.gle/CPnin4yeeBP7LthE8">お問い合わせ</a></li>
             </ul>

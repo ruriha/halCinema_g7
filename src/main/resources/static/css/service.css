@@ -1,0 +1,171 @@
+@charset "utf-8";
+
+
+#service{
+    background-color: #111111;
+    font-family: 'Josefin Sans', sans-serif;
+    color: #FFF;
+}
+.serviceMain{
+    width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+}
+.serviceMain a{
+    text-decoration: none;
+}
+
+/********************************************************************************
+  コンセプトムービー
+********************************************************************************/
+.serviceConceptDetail{
+    text-align: left;
+    line-height: 2rem;
+    font-family: sans-serif;
+    letter-spacing: 2px;
+    padding: 30px 0;
+}
+.serviceConceptDetailBold{
+    font-weight: bold;
+}
+
+
+/********************************************************************************
+  サービスナビゲーション
+********************************************************************************/
+.serviceNav{
+    padding: 20px 0;
+}
+.serviceMenuBox{
+    background-color: #222;
+    width: 800px;
+    margin: 0 auto;
+    padding: 15px 0;
+    border-radius: 60px;
+}
+.serviceMenu{
+    display: inline-block;
+    padding: 10px 20px 0 20px;
+    border-right: 1px solid #444;
+}
+.serviceMenu .fa-chevron-down{
+    color: #444;
+}
+.serviceMenuEnd{
+    border: none;
+}
+.serviceMenuLink{
+    color: #888;
+    display: block;
+}
+.serviceMenu:hover{
+    color: #fff;
+    cursor: pointer;
+    transition: 0.5s;
+}
+.serviceMenu:hover .serviceMenuLink{
+    color: #fff;
+    cursor: pointer;
+    transition: 0.5s;
+}
+.serviceMenu:hover .fa-chevron-down{
+    color: #fff;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+/********************************************************************************
+  サービスの特徴
+********************************************************************************/
+.serviceContain{
+    padding: 20px 0;
+}
+.serviceBox{
+    background-color: #222;
+    padding: 50px 40px;
+}
+.serviceInfo{
+    font-size: 1.3rem;
+    letter-spacing: 3px;
+    margin-bottom: 1rem;
+}
+.serviceInfoMini{
+    font-size: 0.6rem;
+    letter-spacing: 1px;
+    font-weight:100;
+    font-family: sans-serif;
+    color: #DDD;
+}
+.serviceHr{
+    width: 6%;
+    margin: auto;
+    margin-bottom: 50px;
+    border-color: #1FD9D9;
+}
+.serviceDetailBox{
+    display: flex;
+}
+.serviceDetailInfo{
+    text-align: left;
+    color: #1FD9D9;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    line-height: 2rem;
+}
+.serviceDetail{
+    text-align: left;
+    font-size: 0.9rem;
+    line-height: 2rem;
+    font-family: sans-serif;
+    padding: 30px 0;
+}
+.serviceDetailPs{
+    text-align: left;
+    color: #888;
+    font-size: 0.8rem;
+    line-height: 1.5rem;
+    font-family: sans-serif;
+}
+.serviceDetailLink{
+    color: #1FD9D9;
+    text-decoration: underline;
+}
+
+
+.serviceTopDetailInfo{
+    text-align: left;
+    color: #1FD9D9;
+    font-size: 1.2rem;
+    padding: 40px 0 30px 0;
+    letter-spacing: 2px;
+}
+.serviceTopDetail{
+    text-align: left;
+    font-size: 0.9rem;
+    line-height: 2rem;
+    font-family: sans-serif;
+}
+.serviceTopDetailImg{
+    width: 100%;
+    height: 520px;
+    background: url(../images/orilaunge.jpg) no-repeat center/cover;
+}
+
+.serviceDetailLeftImg1{
+    min-width: 450px;
+    height: 300px;
+    margin: 0 40px 0 0;
+    background: url(../images/foodmenu.jpg) no-repeat center/cover;
+}
+.serviceDetailRightImg1{
+    min-width: 450px;
+    height: 300px;
+    margin: 0 0 0 40px;
+    background: url(../images/goods.png) no-repeat center/cover;
+}
+.serviceDetailLeftImg2{
+    min-width: 450px;
+    height: 300px;
+    margin: 0 40px 0 0;
+    background: url(../images/Theater.jpg) no-repeat center/cover;
+}@charset "UTF-8";

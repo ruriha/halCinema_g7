@@ -40,10 +40,10 @@
         <!-- ナビゲーション：メニュー項目と遷移先は適宜変更してください -->
         <nav class="commonNav">
             <ul>
-                <li class="commonMenu"><a class="commonMenuLink" href="showmovie.html">MOVIES</a></li>
-                <li class="commonMenu"><a class="commonMenuLink" href="member.html">MEMBERS</a></li>
-                <li class="commonMenu"><a class="commonMenuLink" href="service.html">SERVICE</a></li>
-                <li class="commonMenu"><a class="commonMenuLink" href="access.html">ACCESS</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" th:href="@{/showmovie}">MOVIES</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" th:href="@{/member}">MEMBERS</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" th:href="@{/service}">SERVICE</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" th:href="@{/access}">ACCESS</a></li>
                 <li class="commonMenu commonSnsMenu"><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
                 <li class="commonMenu commonSnsMenu"><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
             </ul>
@@ -103,14 +103,14 @@
           <p id="migi_p">M&thinsp;E&thinsp;M&thinsp;B&thinsp;E&thinsp;R&thinsp;S&emsp;P&thinsp;A&thinsp;G&thinsp;E</p>
           <p id="migi_p2">会員の方はこちら</p>
           <div id="login_d"><button id="loginBtn">ENTER</button></div>
-          <a href="member.html" id="osi">推し活会員とは➣</a>
+          <a th:href="@{/member}" id="osi">推し活会員とは➣</a>
         </div>
         <div id="migi2">
           <ul>
-            <li class="migi2_li"><a href="service.html#serviceNav" class="migi2_a">施設案内　　　　　　　　　　　　＞</a></li>
-            <li class="migi2_li"><a href="member.html" class="migi2_a">チケット購入方法　　　　　　　　＞</a></li>
-            <li class="migi2_li"><a href="showmovie.html" class="migi2_a">上映作品　　　　　　　　　　　　＞</a></li>
-            <li class="migi2_li"><a href="access.html#accessOpen" class="migi2_a">営業時間　　　　　　　　　　　　＞</a></li>
+            <li class="migi2_li"><a th:href="@{/service#serviceNav}" class="migi2_a">施設案内　　　　　　　　　　　　＞</a></li>
+            <li class="migi2_li"><a th:href="@{/member}" class="migi2_a">チケット購入方法　　　　　　　　＞</a></li>
+            <li class="migi2_li"><a th:href="@{/showmovie}" class="migi2_a">上映作品　　　　　　　　　　　　＞</a></li>
+            <li class="migi2_li"><a th:href="@{/access#accessOpen}" class="migi2_a">営業時間　　　　　　　　　　　　＞</a></li>
           </ul>
         </div>
       </div>
@@ -165,10 +165,10 @@
         <!-- ナビゲーション：メニュー項目と遷移先は適宜変更してください -->
         <nav class="commonNav">
             <ul>
-              <li class="commonMenu"><a class="commonMenuLink" href="showmovie.html">MOVIES</a></li>
-              <li class="commonMenu"><a class="commonMenuLink" href="member.html">MEMBERS</a></li>
-              <li class="commonMenu"><a class="commonMenuLink" href="service.html">SERVICE</a></li>
-              <li class="commonMenu"><a class="commonMenuLink" href="access.html">ACCESS</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" th:href="@{/showmovie}">MOVIES</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" th:href="@{/member}">MEMBERS</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" th:href="@{/service}">SERVICE</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" th:href="@{/access}">ACCESS</a></li>
                 <li class="commonMenu commonSnsMenu"><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
                 <li class="commonMenu commonSnsMenu"><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
             </ul>
