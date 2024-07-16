@@ -8,7 +8,5 @@ public class SignupForm {
 	private String memberMailaddress;
 	
 	private String memberPassword;
-	
-	private String memberName; // 新しく追加
 
 }

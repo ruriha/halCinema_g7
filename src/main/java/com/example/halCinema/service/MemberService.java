@@ -14,6 +14,7 @@ import com.example.halCinema.repository.MemberRepositoty;
 public class MemberService {
 	
     @Autowired
+	static
     MemberRepositoty MemberRepositoty;
     
     //  座席予約時に必要
@@ -23,12 +24,12 @@ public class MemberService {
     
 	
 	//  会員情報取得
-    public List<Object[]> findReservationMember(Integer memberId) {
+    public static List<Object[]> findReservationMember(Integer memberId) {
         return MemberRepositoty.findReservationMember(memberId);
     }
     
 	//  会員のメールアドレス取得
-    public List<Object[]> findMailaddress(Integer memberId) {
+    public static List<Object[]> findMailaddress(Integer memberId) {
         return MemberRepositoty.findMailaddress(memberId);
     }
     

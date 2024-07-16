@@ -18,6 +18,7 @@ import com.example.halCinema.repository.ReservationRepositoty;
 public class ReservationService {
 	
     @Autowired
+	static
     ReservationRepositoty ReservationRepositoty;    
 
     public Reservation saveReservation(Integer seatNumber, Integer guestSeatNumber, Member member, ScreeningSchedule screeningSchedule, LocalDateTime reservationDatetime) {
@@ -32,13 +33,13 @@ public class ReservationService {
     
 
 	//  空き座席状況の取得
-    public List<Object[]> findReservationSeat(Integer screeningScheduleId) {
+    public static List<Object[]> findReservationSeat(Integer screeningScheduleId) {
         return ReservationRepositoty.findReservationSeat(screeningScheduleId);
     }
     
 
 	//  予約ID取得
-    public List<Object[]> findReservationId(Integer memberId, LocalDateTime reservationDatetime) {
+    public static List<Object[]> findReservationId(Integer memberId, LocalDateTime reservationDatetime) {
         return ReservationRepositoty.findReservationId(memberId, reservationDatetime);
     }
 

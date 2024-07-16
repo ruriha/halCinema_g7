@@ -186,13 +186,17 @@
                 <h2>会員情報を入力してください</h2>
                 <span th:text="${errorMsg}"></span>
 				<form th:action="@{/login}" method="post" th:object="${loginForm}">
-				    <label for="memberMailaddress">メールアドレス:</label>
-				    <input type="email" id="memberMailaddress" th:field="*{memberMailaddress}" required />
-				    
-				    <label for="memberPassword">パスワード:</label>
-				    <input type="password" id="memberPassword" th:field="*{memberPassword}" required />
-				    
-				    <button type="submit">ログイン</button>
+					<div>
+						<label>ログインID</label>
+						<input type="text" th:field="*{memberMailaddress}">
+					</div>
+					<div>
+						<label>パスワード</label>
+						<input type="password" th:field="*{memberPassword}">
+					</div>
+					<div>
+						<input type="submit" value="ログイン">
+					</div>
 				</form>
             </div>
         </div>

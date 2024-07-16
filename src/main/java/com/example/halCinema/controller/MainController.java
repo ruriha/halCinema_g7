@@ -8,16 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.halCinema.constant.ErrorMessageConst;
 import com.example.halCinema.form.LoginForm;
 import com.example.halCinema.model.Member;
 import com.example.halCinema.model.ScreeningSchedule;
@@ -26,59 +26,58 @@ import com.example.halCinema.service.LoginService;
 import com.example.halCinema.service.MemberService;
 import com.example.halCinema.service.ReservationService;
 import com.example.halCinema.service.ScreeningScheduleService;
+import com.example.halCinema.utill.AppUtill;
 
-import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class MainController {
 
-    @Autowired
-    ScreeningScheduleService ScreeningScheduleService;
-    @Autowired
-    MemberService MemberService;
-    @Autowired
-    ReservationService ReservationService;
-    @Autowired
-    EmailService EmailService;
+       private LoginService service = null;
     
-    
-	
-//	 index.html
-//	  @RequestMapping("/index")
-//	  public String index() {
-//	      return "index";
-//	  }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
-	 
-    @Controller
-    @RequestMapping("/login")
-    public class LoginController {
-
-        @Autowired
-        LoginService loginService;
-
-        @GetMapping
-        public String showLoginForm(Model model) {
-            model.addAttribute("loginForm", new LoginForm());
-            return "index";
+       private PasswordEncoder passwordEncoder = null;
+  
+       private MessageSource messageSource = null;
+		
+//	   @Autowired
+//	   LoginService loginService;
+//
+        public void LoginController(LoginService service, PasswordEncoder passwordEncoder, MessageSource messageSource) {
+            this.service = service;
+            this.passwordEncoder = passwordEncoder;
+            this.messageSource = messageSource;
         }
 
-        @PostMapping
-        public String login(@ModelAttribute("loginForm") LoginForm loginForm, BindingResult bindingResult, Model model, HttpSession session) {
-            if (bindingResult.hasErrors()) {
-                return "index";
-            }
+        
+       @GetMapping("/login")
+       public String view(Model model, LoginForm form) {
+           return "index";
+       }
 
-            boolean isAuthenticated = loginService.authenticate(loginForm.getMemberMailaddress(), loginForm.getMemberPassword());
+       @PostMapping("/login")
+       public String login(Model model, LoginForm form) {
+           // フォームのデータをコンソールに出力
+//           System.out.println("Login ID: " + form.getLoginId());
+//           System.out.println("Password: " + form.getPassword());
 
-            if (isAuthenticated) {
-                session.setAttribute("user", loginForm.getMemberMailaddress()); // セッションにユーザー情報を設定
-                return "redirect:/toppage";
-            } else {
-                model.addAttribute("errorMsg", "メールアドレスまたはパスワードが違います");
-                return "index";
-            }
-        }
-    }
+           var userInfo = service.searchUserById(form.getMemberMailaddress());
+           
+           var encordedPassword = passwordEncoder.encode(form.getMemberPassword());
+           
+           var isCorrectUserAuth = userInfo.isPresent()
+//           		&& form.getPassword().equals(userInfo.get().getPassword());
+                   && passwordEncoder.matches(form.getMemberPassword(), userInfo.get().getMemberPassword());
+           
+           if (isCorrectUserAuth) {
+               return "redirect:/toppage";
+           } else {
+           	var errorMsg = AppUtill.getMessage(messageSource, ErrorMessageConst.LOGIN_WRONG_INPUT);
+           	
+               model.addAttribute("errorMsg", errorMsg);
+               return "index";
+               
+           }
+       }
+//    }
 
     
 	  // toppage.html
@@ -292,10 +291,11 @@ public class MainController {
 	  @RequestMapping("/reserve_comp")
 	  public String reserve_comp(@RequestParam(required = false) Integer seatNumber,@RequestParam(required = false) Integer guestSeatNumber,@RequestParam(required = false) Integer screeningScheduleId, @RequestParam(required = false) Integer memberId,  Model model){
 //		予約
-        Member member = MemberService.findMemberById(memberId);
-        ScreeningSchedule screeningSchedule = ScreeningScheduleService.findScreeningScheduleById(screeningScheduleId);
+        Member member = new Member();
+        ScreeningSchedule screeningSchedule = new ScreeningSchedule();
         LocalDateTime reservationDatetime = LocalDateTime.now();
-        ReservationService.saveReservation(seatNumber, guestSeatNumber, member, screeningSchedule, reservationDatetime);
+        ReservationService reservationService = new ReservationService();
+		reservationService.saveReservation(seatNumber, guestSeatNumber, member, screeningSchedule, reservationDatetime);
 //	    メールアドレス取得
 		List<Object[]> memberMail = MemberService.findMailaddress(memberId);
 		Object[] mailElement = memberMail.get(0);
@@ -329,7 +329,8 @@ public class MainController {
 		
 //		QRコード生成とメール送信
 		String subject = "HALCINEMA | 映画の予約が完了しました";
-		EmailService.sendQRCodeEmail(mailAddress, subject, strReservationId, movieTitle, strScreeningDatetime, screenName, memberName);
+		EmailService emailService = new EmailService();
+		emailService.sendQRCodeEmail(mailAddress, subject, strReservationId, movieTitle, strScreeningDatetime, screenName, memberName);
 		
 	    return "rsv_comp"; 
 	  }	
