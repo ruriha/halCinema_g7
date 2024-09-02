@@ -45,4 +45,10 @@ public class ScreeningScheduleService {
     public List<Object[]> findSelectScreeningDatetime(Integer screenId, LocalDate nowDate, Integer movieId) {
         return ScreeningScheduleRepositoty.findSelectScreeningDatetime(screenId, nowDate, movieId);
     }
+    
+    
+	//  すべての上映スケジュール取得
+    public List<Object[]> findAllScreeningSchedule() {
+        return ScreeningScheduleRepositoty.findAllScreeningSchedule();
+    }
 }

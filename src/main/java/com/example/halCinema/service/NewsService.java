@@ -14,10 +14,12 @@ public class NewsService {
     @Autowired
     NewsRepository NewsRepository;
 
+    // 新しい順にニュースを取得するクエリ（リスト表示用）
     public List<Object[]> findNewsStreamingDate() {
         return NewsRepository.findNewsStreamingDate();
     }
 
+    // 特定のニュースをIDに基づいて取得するクエリ（詳細表示用）
     public News findNewsById(Integer newsId) {
         return NewsRepository.findNewsById(newsId);
     }

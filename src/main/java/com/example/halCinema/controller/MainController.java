@@ -434,7 +434,7 @@ public class MainController {
 	  public String showmovie(Model model, HttpSession session){
 		Integer memberId = (Integer) session.getAttribute("userId");
 		if (memberId != null) {
-	        model.addAttribute("topLink", "/toppage");			
+	        model.addAttribute("topLink", "/toppage");
 	    } else {
 	        model.addAttribute("topLink", "/");		
 	    }
