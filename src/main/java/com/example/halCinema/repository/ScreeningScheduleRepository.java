@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.example.halCinema.model.ScreeningSchedule;
 
-public interface ScreeningScheduleRepositoty  extends JpaRepository<ScreeningSchedule, Integer>{
+public interface ScreeningScheduleRepository  extends JpaRepository<ScreeningSchedule, Integer>{
 
 	//  座席予約システム(seat)の上映スケジュール取得
 	@Query("select ss.movie.movieTitle, ss.screeningDatetime, ss.screen.capacity , ss.screen.screenId " +
