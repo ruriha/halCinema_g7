@@ -22,6 +22,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 //NEWSの追加表示
+
+const hiddenItems = document.querySelectorAll('.hidden');
+const button = document.getElementById('more');
+const allItems = document.querySelectorAll('.news_list_item');
+// Re-hide the extra items
+for (let i = 5; i < allItems.length; i++) {
+    allItems[i].classList.add('hidden');
+}
+button.textContent = 'more +';
+
+
 document.getElementById('more').addEventListener('click', () => {
     const hiddenItems = document.querySelectorAll('.hidden');
     const button = document.getElementById('more');

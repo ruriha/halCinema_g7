@@ -12,15 +12,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.halCinema.model.Member;
+import com.example.halCinema.model.News;
 import com.example.halCinema.model.ScreeningSchedule;
 import com.example.halCinema.service.EmailService;
 import com.example.halCinema.service.MemberService;
+import com.example.halCinema.service.NewsService;
 import com.example.halCinema.service.ReservationService;
 import com.example.halCinema.service.ScreeningScheduleService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class MainController {
@@ -33,20 +38,57 @@ public class MainController {
     ReservationService ReservationService;
     @Autowired
     EmailService EmailService;
+    @Autowired
+    NewsService NewsService;
     
     
 	
 	// index.html
 	  @RequestMapping("/")
-	  public String index(){
-		// index.htmlを利用
+	  public String index(HttpSession session ,Model model){
+	    session.invalidate();
+
+	    //news表示
+        List<Object[]> newsList = NewsService.findNewsStreamingDate();
+        model.addAttribute("newsList", newsList);
+        
 	    return "index"; 
 	  }	
+	  
+	  
+	  //  ログイン（Securityなし仮）
+	  @RequestMapping("/entry")
+	  public String entry(@RequestParam(name = "usermail", required = false) String usermail, @RequestParam(name = "password", required = false) String password, HttpSession session){
+			List<Object[]> users = MemberService.loginEntry(usermail, password);
+	        if (!users.isEmpty()) {
+	            Object[] usersElement = users.get(0);
+	            Integer userId = (Integer) usersElement[0];
+	            
+	            // userId が null でないか確認
+	            if (userId != null) {
+	                session.setAttribute("userId", userId);
+	                return "redirect:/toppage";
+	            }
+	        }
+	        return "redirect:/";
+	  }
+	  
+	  
+	  //  ログアウト（Securityなし仮）
+	  @RequestMapping("/logout")
+	  public String logout(HttpSession session){
+	      session.invalidate();
+	      return "redirect:/";
+	  }
+	  
+	  
+	  
+	  
 	  
 	  // toppage.html
 	  @RequestMapping("/toppage")
 	  public String toppage(@RequestParam(name = "screenScheduleDate", required = false) String screenScheduleDate, Model model){
-        //  カレンダー  ////////
+		//  カレンダー  ////////
 		List<String> dates = new ArrayList<>();
         LocalDate today = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd");
@@ -84,12 +126,18 @@ public class MainController {
 		List<String> titleLinkList = new ArrayList<>();
 		List<String> screenScheduleList = new ArrayList<>();
 		List<Object[]> titleList = ScreeningScheduleService.findSelectScreeningTitle(nowDate);
+		String titleInfo = "";
+		for(Object[] title: titleList) {
+			String titleId = title[0].toString();
+			String titleName = (String)title[1];
+            titleInfo = titleInfo + "<a href=\"#m"+titleId+"\">"+titleName+"</a>";
+		}
+        titleLinkList.add(titleInfo);
+        model.addAttribute("titleLinkList", titleLinkList);
 		for(Object[] title: titleList) {
 			String titleId = title[0].toString();
 			Integer movieId = Integer.parseInt(titleId);
 			String titleName = (String)title[1];
-            String titleInfo = "<a href=\"#m"+titleId+"\">"+titleName+"</a>";
-            titleLinkList.add(titleInfo);
             
             String screenScheduleInfo1 =
             		"<div class=\"s_all\">"
@@ -164,20 +212,57 @@ public class MainController {
     		String screenScheduleInfo5 = screenScheduleInfo1 + screenScheduleInfo4 + "</div>";
     		screenScheduleList.add(screenScheduleInfo5);
 		}
-        model.addAttribute("titleLinkList", titleLinkList);
         model.addAttribute("screenScheduleList", screenScheduleList);
+        
+		//newsの表示
+        List<Object[]> newsList = NewsService.findNewsStreamingDate();
+        model.addAttribute("newsList", newsList);
         
 	    return "toppage"; 
 	  }	
 	  
+	  
+	  
 	  // news.html
-	  @RequestMapping("/news")
-	  public String news(){
-	    return "news"; 
+	  @RequestMapping("/news/{id}")
+	  public String news(Model model, HttpSession session ,@PathVariable Integer id){
+//			会員情報取得
+		Integer memberId = (Integer) session.getAttribute("userId");
+		if (memberId != null) {
+	        model.addAttribute("topLink", "/toppage");			
+	    } else {
+	        model.addAttribute("topLink", "/");		
+	    }
+//	    return "news"; 
+
+        News news = NewsService.findNewsById(id);
+        news.setNewsTitle(addLineBreaks1(news.getNewsTitle(), 23)); // タイトルに改行を追加
+        model.addAttribute("news", news);
+        return "news";
 	  }	
+
+      // タイトルに改行を追加するメソッド
+      private String addLineBreaks1(String text, int maxLineLength) {
+          if (text == null || text.isEmpty()) {
+              return text;
+          }
+          StringBuilder result = new StringBuilder();
+          int length = text.length();
+          for (int i = 0; i < length; i++) {
+              result.append(text.charAt(i));
+              if ((i + 1) % maxLineLength == 0) {
+                  result.append("<br/>");
+              }
+          }
+          return result.toString();
+      }
+	  
+	  
 	  
 
-	  // 上映スケジュールの表示切替(toppage)
+
+
+	// 上映スケジュールの表示切替(toppage)
 	  @GetMapping("/screenScheduleSelect")
 	  public String screenScheduleSelect(@RequestParam(name = "screenScheduleDate") String screenScheduleDate, Model model){
 		  return "redirect:/toppage?screenScheduleDate="+screenScheduleDate+"#sche_b";
@@ -186,9 +271,10 @@ public class MainController {
 
 	  // seat.html
 	  @RequestMapping("/reserve")
-	  public String reserve(@RequestParam(name = "screeningScheduleId") Integer screeningScheduleId, Model model){
+	  public String reserve(@RequestParam(name = "screeningScheduleId") Integer screeningScheduleId, Model model, HttpSession session){
 //		会員情報取得
-		Integer memberId = 1; //  ログイン時のセッションからID取得
+		Integer memberId = (Integer) session.getAttribute("userId");//  ログイン時のセッションからID取得
+		System.out.println("memberid:"+memberId);
 		List<Object[]> memberList = MemberService.findReservationMember(memberId);
 		model.addAttribute("memberList", memberList);
         model.addAttribute("memberId", memberId);
@@ -254,6 +340,9 @@ public class MainController {
 	  @RequestMapping("/reserve_comp")
 	  public String reserve_comp(@RequestParam(required = false) Integer seatNumber,@RequestParam(required = false) Integer guestSeatNumber,@RequestParam(required = false) Integer screeningScheduleId, @RequestParam(required = false) Integer memberId,  Model model){
 //		予約
+		if(guestSeatNumber == null) {
+			guestSeatNumber = 0;
+		}
         Member member = MemberService.findMemberById(memberId);
         ScreeningSchedule screeningSchedule = ScreeningScheduleService.findScreeningScheduleById(screeningScheduleId);
         LocalDateTime reservationDatetime = LocalDateTime.now();
@@ -296,5 +385,60 @@ public class MainController {
 	    return "rsv_comp"; 
 	  }	
 	  
+	  
+	  
+	  //  アクセスページ
+	  @RequestMapping("/access")
+	  public String access(Model model, HttpSession session){
+		Integer memberId = (Integer) session.getAttribute("userId");
+		if (memberId != null) {
+	        model.addAttribute("topLink", "/toppage");			
+	    } else {
+	        model.addAttribute("topLink", "/");		
+	    }
+	    return "access"; 
+	  }	
+	  
+	  
+	  
+	  //  メンバーページ
+	  @RequestMapping("/member")
+	  public String member(Model model, HttpSession session){
+		Integer memberId = (Integer) session.getAttribute("userId");
+		if (memberId != null) {
+	        model.addAttribute("topLink", "/toppage");			
+	    } else {
+	        model.addAttribute("topLink", "/");		
+	    }
+	    return "member"; 
+	  }	
+	  
+	  
+	  
+	  //  サービスページ
+	  @RequestMapping("/service")
+	  public String service(Model model, HttpSession session){
+		Integer memberId = (Integer) session.getAttribute("userId");
+		if (memberId != null) {
+	        model.addAttribute("topLink", "/toppage");			
+	    } else {
+	        model.addAttribute("topLink", "/");		
+	    }
+	    return "service"; 
+	  }	
+	  
+	  
+	  
+	  //  映画情報ページ
+	  @RequestMapping("/showmovie")
+	  public String showmovie(Model model, HttpSession session){
+		Integer memberId = (Integer) session.getAttribute("userId");
+		if (memberId != null) {
+	        model.addAttribute("topLink", "/toppage");
+	    } else {
+	        model.addAttribute("topLink", "/");		
+	    }
+	    return "showmovie"; 
+	  }	
 
 }
