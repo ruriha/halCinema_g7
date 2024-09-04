@@ -21,14 +21,6 @@ public interface MemberRepositoty extends JpaRepository<Member, Integer>{
 	           "from member m " +
 	           "where m.memberId = ?1")
 	List<Object[]> findMailaddress(Integer memberId);
-	
-	
-	//  ログイン
-	@Query("select m.memberId " +
-	           "from member m " +
-	           "where m.memberMailaddress = ?1 " +
-	           "and m.memberPassword = ?2")
-	List<Object[]> loginEntry(String memberMailaddress, String memberPassword);
 		
 
 }

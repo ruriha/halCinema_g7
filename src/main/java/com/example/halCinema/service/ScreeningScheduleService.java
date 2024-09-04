@@ -8,14 +8,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.halCinema.model.ScreeningSchedule;
-import com.example.halCinema.repository.ScreeningScheduleRepository;
+import com.example.halCinema.repository.ScreeningScheduleRepositoty;
 
 @Service
 @Transactional
 public class ScreeningScheduleService {
 	
     @Autowired
-    ScreeningScheduleRepository ScreeningScheduleRepositoty;
+    ScreeningScheduleRepositoty ScreeningScheduleRepositoty;
     
     //  座席予約時に必要
     public ScreeningSchedule findScreeningScheduleById(Integer screeningScheduleId) {
@@ -44,11 +44,5 @@ public class ScreeningScheduleService {
 	//  指定スクリーンの上映時間取得
     public List<Object[]> findSelectScreeningDatetime(Integer screenId, LocalDate nowDate, Integer movieId) {
         return ScreeningScheduleRepositoty.findSelectScreeningDatetime(screenId, nowDate, movieId);
-    }
-    
-    
-	//  すべての上映スケジュール取得
-    public List<Object[]> findAllScreeningSchedule() {
-        return ScreeningScheduleRepositoty.findAllScreeningSchedule();
     }
 }
