@@ -8,14 +8,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.halCinema.model.ScreeningSchedule;
-import com.example.halCinema.repository.ScreeningScheduleRepository;
+import com.example.halCinema.repository.ScreeningScheduleRepositoty;
 
 @Service
 @Transactional
 public class ScreeningScheduleService {
 	
     @Autowired
-    ScreeningScheduleRepository ScreeningScheduleRepositoty;
+    ScreeningScheduleRepositoty ScreeningScheduleRepositoty;
     
     //  座席予約時に必要
     public ScreeningSchedule findScreeningScheduleById(Integer screeningScheduleId) {
