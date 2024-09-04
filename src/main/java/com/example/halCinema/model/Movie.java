@@ -23,6 +23,10 @@ public class Movie {
     
     private Integer runningTime;
     
+    private Boolean releaseStatus;
+    
+    private String img;
+    
 
     @OneToMany(mappedBy="movie")
     private List<ScreeningSchedule> screeningSchedule;
@@ -66,6 +70,22 @@ public class Movie {
 
     public void setRunningTime(Integer runningTime) {
         this.runningTime = runningTime;
+    }
+
+    public Boolean getReleaseStatus() {
+        return releaseStatus;
+    }
+
+    public void setReleaseStatus(Boolean releaseStatus) {
+        this.releaseStatus = releaseStatus;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
     
     

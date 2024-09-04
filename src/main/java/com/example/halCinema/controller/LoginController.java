@@ -7,10 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.example.halCinema.constant.ErrorMessageConst;
 import com.example.halCinema.form.LoginForm;
 import com.example.halCinema.service.LoginService;
-import com.example.halCinema.utill.AppUtill;
 
 @Controller
 public class LoginController {
@@ -50,11 +48,11 @@ public class LoginController {
                 && passwordEncoder.matches(form.getMemberPassword(), userInfo.get().getMemberPassword());
         
         if (isCorrectUserAuth) {
-            return "redirect:/menu";
+            return "redirect:/toppage";
         } else {
-        	var errorMsg = AppUtill.getMessage(messageSource, ErrorMessageConst.LOGIN_WRONG_INPUT);
-        	
-            model.addAttribute("errorMsg", errorMsg);
+//        	var errorMsg = AppUtill.getMessage(messageSource, ErrorMessageConst.LOGIN_WRONG_INPUT);
+//        	
+//            model.addAttribute("errorMsg", errorMsg);
             return "login";
         }
     }
