@@ -42,11 +42,11 @@
         <!-- ナビゲーション：メニュー項目と遷移先は適宜変更してください -->
         <nav class="commonNav">
             <ul>
-                <li class="commonMenu"><a class="commonMenuLink" th:href="@{${topLink}}">TOP</a></li>
-                <li class="commonMenu"><a class="commonMenuLink" th:href="@{/showmovie}">MOVIES</a></li>
-                <li class="commonMenu"><a class="commonMenuLink" th:href="@{/member}">MEMBERS</a></li>
-                <li class="commonMenu"><a class="commonMenuLink" th:href="@{/service}">SERVICE</a></li>
-                <li class="commonMenu"><a class="commonMenuLink" th:href="@{/access}">ACCESS</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" href="index.html">TOP</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" href="showmovie.html">MOVIES</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" href="member.html">MEMBERS</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" href="service.html">SERVICE</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" href="access.html">ACCESS</a></li>
                 <li class="commonMenu commonSnsMenu"><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
                 <li class="commonMenu commonSnsMenu"><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
             </ul>
@@ -54,16 +54,23 @@
     </header>
 
 
-	
-	
     <div id="news">
-        <a th:href="@{${topLink}}" id="news-back">Back</a>
-        <p id="top" th:utext="${news.newsTitle}"></p>
+        <a href="#" id="news-back">Back</a>
+        <p id="top">theater2復旧のお知らせ</p>
         <hr id="newsHr">
-        <p id="news-contents" th:text="${news.newsContents}">
-            <!-- ニュースの内容はここに表示されます -->
+        <p id="news-contents">
+
+            いつも当シアターをご利用いただき、誠にありがとうございます。
+            このたび、シアター2の設備不具合により、一時的にご不便をおかけしておりましたが、
+            復旧作業が完了いたしましたことをお知らせいたします。皆様のご協力とご理解に心より感謝申し上げます。
+            シアター2は、2024年5月16日（土）より通常営業を再開いたします。これにより、予定されていたすべての上映スケジュールは通常通り行われる運びとなりました。
+            最新の上映スケジュールは、当シアターの公式ウェブサイトにてご確認いただけます。
+            再開に際し、より快適な環境で映画をお楽しみいただけるよう、音響設備や座席の点検も併せて行いました。引き続き、最高の映画体験を提供できるよう努めてまいります。
+            皆様のご来場を心よりお待ちしております。
+            今後とも、当シアターをよろしくお願い申し上げます。
+                
         </p>
-        <p id="day" th:text="${#dates.format(news.streamingDate, 'yyyy.MM.dd')}"></p><br>
+        <p id="day">2024.04.12</p><br>
     </div>
 
 
@@ -94,11 +101,11 @@
         <!-- ナビゲーション：メニュー項目と遷移先は適宜変更してください -->
         <nav class="commonNav">
             <ul>
-                <li class="commonMenu"><a class="commonMenuLink" th:href="@{${topLink}}">TOP</a></li>
-                <li class="commonMenu"><a class="commonMenuLink" th:href="@{/showmovie}">MOVIES</a></li>
-                <li class="commonMenu"><a class="commonMenuLink" th:href="@{/member}">MEMBERS</a></li>
-                <li class="commonMenu"><a class="commonMenuLink" th:href="@{/service}">SERVICE</a></li>
-                <li class="commonMenu"><a class="commonMenuLink" th:href="@{/access}">ACCESS</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" href="index.html">TOP</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" href="showmovie.html">MOVIES</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" href="member.html">MEMBERS</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" href="service.html">SERVICE</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" href="access.html">ACCESS</a></li>
                 <li class="commonMenu commonSnsMenu"><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
                 <li class="commonMenu commonSnsMenu"><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
             </ul>
@@ -107,7 +114,7 @@
 
         <nav class="commonFooterNav">
             <ul>
-                <li class="commonFooterMenu"><a class="commonFooterMenuLink" th:href="@{${topLink}}">ホーム</a></li>
+                <li class="commonFooterMenu"><a class="commonFooterMenuLink" href="index.html">ホーム</a></li>
                 <li class="commonFooterMenu commonMenuLine">｜</li>
                 <li class="commonFooterMenu"><a class="commonFooterMenuLink" href="https://forms.gle/CPnin4yeeBP7LthE8">お問い合わせ</a></li>
             </ul>

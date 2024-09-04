@@ -7,7 +7,6 @@ body{
 }
 p,h2{
   color: white;
-  margin-top: 20px;
 }
 h1{
   color: #1FD9D9;
@@ -17,9 +16,6 @@ h1{
   font-size: 1.5rem;
   padding: 30px;
 }
-.attention{
-  margin: 30px 0 -10px 0;
-}
 #time{
   opacity: 0.7;
 }
@@ -28,34 +24,34 @@ h1{
   display: flex;
   justify-content: space-between;
   width: 500px;
-  margin: 0px auto 0 auto;
+  margin: 0 auto;
   padding: 0 0 30px 0;
 }
 
 #dai table {
     width: 950px; /* 正方形にするために表の幅を設定 */
-    height:770px; /* 正方形にするために表の高さを設定 */
+    height:550px; /* 正方形にするために表の高さを設定 */
     margin: 20px auto;
-    border-spacing: 0px 20px;
+    border-spacing: 0px 10px;
     border-collapse: separate;
 }
 #tyuu table {
     width: 600px; /* 正方形にするために表の幅を設定 */
-    height:760px; /* 正方形にするために表の高さを設定 */
+    height:550px; /* 正方形にするために表の高さを設定 */
     margin: 20px auto;
-    border-spacing: 0px 20px;
+    border-spacing: 0px 10px;
     border-collapse: separate;
 }
 #syou table {
-    width: 500px; /* 正方形にするために表の幅を設定 */
-    height:530px; /* 正方形にするために表の高さを設定 */
+    width: 450px; /* 正方形にするために表の幅を設定 */
+    height:350px; /* 正方形にするために表の高さを設定 */
     margin: 20px auto;
-    border-spacing: 0px 20px;
+    border-spacing: 0px 10px;
     border-collapse: separate;
 }
 td {
     font-size: 1rem;
-    border: 1px solid #ccc;
+    border: 2px solid #ccc;
     width: 50px; /* 正方形にするためにセルの幅を設定 */
     text-align: center;
     vertical-align: middle;
@@ -66,7 +62,6 @@ td {
 /*予約されてる*/
 .unselectable{
   background-color: #A2936B;
-  opacity: 0.6;
 
 }
 /*予約しようとしてる*/
@@ -77,104 +72,21 @@ td {
 .mozi{
   border: none;
 }
-
-.btnBox {
-  display: flex;
-  justify-content: center;
-  align-items: center; /* 垂直方向の中央揃え */
-  width: 40%;
-  margin: 30px auto;
+button{
+  border: none;
+  padding: 10px 60px;
+  border-radius: 30px;
+  margin: 30px 50px;
+}
+button:hover{
+  opacity: 0.5;
 }
 .next-button{
-  width: 200px;
-  margin: 0 auto;
-  padding: 15px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: 0.4s;
-  
+  background-color: #1FD9D9;
 }
 .back-button{
-  display: inline-block;
-  width: 200px;
-  margin: 0 auto;
-  padding: 15px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: 0.4s;
-}
-.next-button{
-  color: #1FD9D9;
-  text-decoration: none;
-  background-color: #222222;
-  border: solid 3px #1FD9D9;
-  opacity: 0.8;
-  font-weight: bolder;
-  letter-spacing: 2px;
-  padding: 15px 0px;
-/*  margin: 30px auto 20px auto;*/
-  border-radius: 50px;
-  overflow: hidden;
-  position: relative;
-  z-index: 1;
-}
-.next-button:hover{
-  opacity: 1;
-}
-.next-button::before{
-  content: '';
-  width: 15%;
-  height: 100%;
-  background-color: #1FD9D9;
-  position: absolute;
-  left: -100%;
-  top: 0;
-  transition: .8s;
-  z-index: -1;
-}
-
-.next-button:hover::before{
-  left: 100%;
-}
-.back-button{
-  color: #9f9f9f;
-  text-decoration: none;
-  background-color: #222222;
-  border: solid 3px #989898;
-  opacity: 0.8;
-  font-weight: bolder;
-  letter-spacing: 2px;
-  padding: 20px 0px;
-  border-radius: 50px;
-  overflow: hidden;
-  position: relative;
-  z-index: 1;
-}
-.back-button:hover{
-  opacity: 1;
-  color: #9b9b9b;
-}
-.back-button::before{
-  content: '';
-  width: 15%;
-  height: 100%;
-  background-color: #1FD9D9;
-  position: absolute;
-  left: -100%;
-  top: 0;
-  transition: .8s;
-  z-index: -1;
-}
-.back-button:hover::before{
-  left: 100%;
-}
-.attention2{
-  color: #a7a7a7;
-  font-size: 0.8rem;
-  line-height: 23px;
-  letter-spacing: 1px;
-  margin: 30px 0 0 0;
+  background-color: #A2936B;
 }
 .fa-brands{
   color: white;
-}
+}@charset "UTF-8";

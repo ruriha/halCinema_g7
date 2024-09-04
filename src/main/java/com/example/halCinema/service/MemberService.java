@@ -32,11 +32,6 @@ public class MemberService {
         return MemberRepositoty.findMailaddress(memberId);
     }
     
-	//  ログイン
-    public List<Object[]> loginEntry(String memberMailaddress, String memberPassword) {
-        return MemberRepositoty.loginEntry(memberMailaddress, memberPassword);
-    }
-    
     
 
     
