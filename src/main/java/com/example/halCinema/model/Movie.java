@@ -1,6 +1,6 @@
 package com.example.halCinema.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -17,7 +17,7 @@ public class Movie {
 
     private String movieTitle;
 
-    private Date releaseDay;
+    private LocalDate releaseDay;
 
     private String movieDetails;
     
@@ -26,6 +26,10 @@ public class Movie {
     private Boolean releaseStatus;
     
     private String img;
+    
+    private String url;
+    
+    private String staff;
     
 
     @OneToMany(mappedBy="movie")
@@ -48,11 +52,11 @@ public class Movie {
         this.movieTitle = movieTitle;
     }
     
-    public Date getReleaseDay() {
+    public LocalDate getReleaseDay() {
         return releaseDay;
     }
 
-    public void setReleaseDay(Date releaseDay) {
+    public void setReleaseDay(LocalDate releaseDay) {
         this.releaseDay = releaseDay;
     }
     
@@ -86,6 +90,22 @@ public class Movie {
 
     public void setImg(String img) {
         this.img = img;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getStaff() {
+        return staff;
+    }
+
+    public void setStaff(String staff) {
+        this.staff = staff;
     }
     
     

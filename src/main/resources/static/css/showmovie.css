@@ -199,7 +199,39 @@ h1{
 .content-button5,
 .content-button6,
 .content-button7,
-.content-button8 {
+.content-button8,
+.content-button9,
+.content-button10,
+.content-button11,
+.content-button12,
+.content-button13,
+.content-button14,
+.content-button15,
+.content-button16,
+.content-button17,
+.content-button18,
+.content-button19,
+.content-button20,
+.content-button21,
+.content-button22,
+.content-button23,
+.content-button24,
+.content-button25,
+.content-button26,
+.content-button27,
+.content-button28,
+.content-button29,
+.content-button30,
+.content-button31,
+.content-button32,
+.content-button33,
+.content-button34,
+.content-button35,
+.content-button36,
+.content-button37,
+.content-button38,
+.content-button39,
+.content-button40 {
   background-color: transparent;
   /* box-shadow: 1px 1px 1px aqua; */
   border: none;
@@ -220,7 +252,39 @@ h1{
 .more-detailFl5,
 .more-detailFl6,
 .more-detailFl7,
-.more-detailFl8 {
+.more-detailFl8,
+.more-detailFl9,
+.more-detailFl10,
+.more-detailFl11,
+.more-detailFl12,
+.more-detailFl13,
+.more-detailFl14,
+.more-detailFl15,
+.more-detailFl16,
+.more-detailFl17,
+.more-detailFl18,
+.more-detailFl19,
+.more-detailFl20,
+.more-detailFl21,
+.more-detailFl22,
+.more-detailFl23,
+.more-detailFl24,
+.more-detailFl25,
+.more-detailFl26,
+.more-detailFl27,
+.more-detailFl28,
+.more-detailFl29,
+.more-detailFl30,
+.more-detailFl31,
+.more-detailFl32,
+.more-detailFl33,
+.more-detailFl34,
+.more-detailFl35,
+.more-detailFl36,
+.more-detailFl37,
+.more-detailFl38,
+.more-detailFl39,
+.more-detailFl40 {
   width: calc(100% - 40px);
   background-color: rgb(31, 31, 31);
 
@@ -300,81 +364,71 @@ h1{
 /*-----------カレンダー------------*/
 
 .calendar-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.calendar-container1,.calendar-container2,.calendar-container3,.calendar-container4 {
-  width: 100%;
-  max-width: 925px; /* 必要に応じて調整 */
-  overflow-x: auto;
-  white-space: nowrap;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+.calendar-container {
+    width: 100%;
+    max-width: 933px; /* 必要に応じて調整 */
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
 }
 
-.calendar-container1::-webkit-scrollbar,.calendar-container2::-webkit-scrollbar,.calendar-container3::-webkit-scrollbar,.calendar-container4::-webkit-scrollbar {
-  display: none; /* Safari and Chrome */
+.calendar-container::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
 }
 
-.calendar1,.calendar2,.calendar3,.calendar4 {
-  display: inline-block;
-  white-space: nowrap;
+.calendar {
+    display: inline-block;
+    white-space: nowrap;
 }
 
 .day {
-  display: inline-block;
-  width: 150px;
-  height: 150px;
-  /* background-color: #A2936B; */
-  background-color: #313131;
-  box-sizing: border-box;
-  line-height: 100px;
-  font-size: 2rem;
-  vertical-align: top;
-  margin-right: -1px; /* Border overlapping */
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    background-color: #454544;
+    box-sizing: border-box;
+    line-height: 100px;
+    font-size: 2rem;
+    vertical-align: top;
+    padding-bottom: 50px;
+    margin-right: 2px; /* Border overlapping */
+    cursor: pointer;
+    text-decoration: none;
+    color: #fff;
+  	font-family: Arial, sans-serif;
+  	text-align: center;
 }
-
-.today{
-  margin-left: 15px;
+.day:hover{
+  opacity: 1;
+  background-color: #1FD9D9;
+  transition: 0.2s;
 }
-
-.day_f{
-color: rgb(95, 95, 95);
-margin-left: 15px;
-}
-
 .mini{
-font-size: 1rem;
+  font-size: 0.8rem;
 }
-
 .select{
-  background-color: #1fd9d9;
+  background-color: #1FD9D9;
   color: white;
-  }
-
-.selected{
 }
 
 .scroll-button {
-  background-color: #202020;
-  border: none;
-  padding: 65px 10px;
-  cursor: pointer;
-  transition: 0.4s;
+    background-color: #454544;
+    padding: 65px 10px;
+    cursor: pointer;
 }
 
 .scroll-button:focus {
-  outline: none;
+    outline: none;
 }
 
 .scroll-button:active {
-  background-color: #A2936B;
-}
-
-.scroll-button:hover{
-  background-color: #f1f1f1;
+    background-color: #454544;
 }
 
 /*ーーーーーーーーーーースケジュールーーーーーーーーーーーーーーー*/

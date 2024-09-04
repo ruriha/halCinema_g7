@@ -21,6 +21,7 @@ import com.example.halCinema.model.News;
 import com.example.halCinema.model.ScreeningSchedule;
 import com.example.halCinema.service.EmailService;
 import com.example.halCinema.service.MemberService;
+import com.example.halCinema.service.MovieService;
 import com.example.halCinema.service.NewsService;
 import com.example.halCinema.service.ReservationService;
 import com.example.halCinema.service.ScreeningScheduleService;
@@ -40,6 +41,8 @@ public class MainController {
     EmailService EmailService;
     @Autowired
     NewsService NewsService;
+    @Autowired
+    MovieService MovieService;
     
     
 	
@@ -262,10 +265,16 @@ public class MainController {
 
 
 
-	// 上映スケジュールの表示切替(toppage)
+      // 上映スケジュールの表示切替(toppage)
 	  @GetMapping("/screenScheduleSelect")
 	  public String screenScheduleSelect(@RequestParam(name = "screenScheduleDate") String screenScheduleDate, Model model){
 		  return "redirect:/toppage?screenScheduleDate="+screenScheduleDate+"#sche_b";
+	  }	
+	  
+	  // 上映スケジュールの表示切替(showmovie)
+	  @GetMapping("/screenScheduleSelectInfo")
+	  public String screenScheduleSelectInfo(@RequestParam(name = "screenScheduleDate") String screenScheduleDate, Model model){
+		  return "redirect:/showmovie?screenScheduleDate="+screenScheduleDate+"#sche_b";
 	  }
 	  
 
@@ -431,13 +440,212 @@ public class MainController {
 	  
 	  //  映画情報ページ
 	  @RequestMapping("/showmovie")
-	  public String showmovie(Model model, HttpSession session){
+	  public String showmovie(@RequestParam(name = "screenScheduleDate", required = false) String screenScheduleDate, Model model, HttpSession session){
 		Integer memberId = (Integer) session.getAttribute("userId");
 		if (memberId != null) {
 	        model.addAttribute("topLink", "/toppage");
 	    } else {
 	        model.addAttribute("topLink", "/");		
 	    }
+		
+		//  公開中映画情報  ////////
+		List<String> nowShowingList = new ArrayList<>();
+		List<Object[]> nowShowingTitleList = MovieService.findMovieTitle();
+		Integer nowShowingCount = 1;
+		for(Object[] nowShowingTitle: nowShowingTitleList) {
+			String titleId = nowShowingTitle[0].toString();
+			Integer movieId = Integer.parseInt(titleId);
+			String titleName = (String)nowShowingTitle[1];
+			String staff = (String)nowShowingTitle[2];
+			String movieDetails = (String)nowShowingTitle[3];
+			String movieUrl = (String)nowShowingTitle[4];
+			String movieImg = (String)nowShowingTitle[5];
+			
+			
+			String nowShowingInfo1 = 
+					"<div class=\"content-item\">"
+					+ "<div class=\"unique-item\">"
+					+ "            <img src=\"../images/"+ movieImg +"\" alt=\"Image 1\" class=\"content-image\" />"
+					+ "            <div class=\"content-details\">"
+					+ "			   <h2 class=\"content-title\">"+ titleName +"</h2>"
+					+ "			   <p class=\"content-description\">"+ staff +"</p>"
+					+ "              <button class=\"content-button"+nowShowingCount+"\">+ more show</button>"
+					+ "            </div>"
+					+ "            </div>"
+					+ "            <div class=\"more-detailFl"+nowShowingCount+"\">"
+					+ "            <h1 class=\"introduce\">INTRODUCTION</h1>"
+					+ "			   <p class=\"more-detail\">"+ movieDetails +"</p>"
+					+ "			   <a href=\""+ movieUrl +"\" class=\"officialSiteCheck\">オフィシャルサイト &#8362;</a>"
+					+ "            <h1 class=\"schedule\">SCHEDULE</h1>"
+					+ "            <div class=\"calendar-wrapper\">"
+					+ "              <button id=\"scroll-left1\" class=\"scroll-button\">◀</button>"
+					+ "              <div class=\"calendar-container\">"
+					+ "                <div class=\"calendar\" id=\"calendar\">";
+			//  カレンダー  ////////
+	        //  上映スケジュール  //////////////////////
+	        LocalDate today = LocalDate.now();
+	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd");
+	        DateTimeFormatter screenScheduleDateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	        // 14日分の日付を生成
+	        for (int j = 0; j < 14; j++) {
+	            LocalDate date = today.plusDays(j);
+	            String formattedDate = date.format(formatter);
+	            String selectScreenScheduleDate = date.format(screenScheduleDateFormatter);
+	            String dayOfWeek = date.getDayOfWeek().toString().substring(0, 3); 
+	            String dayInfo = "<a class=\"day\" href=/screenScheduleSelectInfo?screenScheduleDate="+selectScreenScheduleDate+">"+formattedDate + "<span class=\"mini\">(" + dayOfWeek + ")</span></a>";
+	            nowShowingInfo1 = nowShowingInfo1 + dayInfo;
+	        }
+	        String nowScreenScheduleDate;
+	        String nowOfWeek;
+	        LocalDate nowDate;
+	        if(screenScheduleDate==null) {
+	        	nowDate = today;
+	            DateTimeFormatter todayFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+	            nowScreenScheduleDate = today.format(todayFormatter);
+	        	nowOfWeek = today.getDayOfWeek().toString().substring(0, 3); 
+	        }else {
+	        	LocalDate selectedDate = LocalDate.parse(screenScheduleDate, screenScheduleDateFormatter);
+	        	nowDate = selectedDate;
+	            DateTimeFormatter todayFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+	            nowScreenScheduleDate = selectedDate.format(todayFormatter);
+	        	nowOfWeek = selectedDate.getDayOfWeek().toString().substring(0, 3); 
+	        }
+	        String nowShowingInfo3 = nowShowingInfo1
+	        		+ "           </div>"
+	        		+ "           </div>"
+	        		+ "           <button id=\"scroll-right1\" class=\"scroll-button\">▶</button>"
+	        		+ "           </div>"
+	        		+ "           <div id=\"s_top\">"
+	        		+ "             <p id=\"now\">"+nowScreenScheduleDate+"<span class=\"mini\">("+nowOfWeek+")</span></p>"
+	        		+ "           </div>"
+	        		+ "            <div class=\"s_waku\">"
+	        		+ "              <div class=\"s_all\">"
+	        		+ "                <div id=\"BLUELOCK\"></div>"
+	        		+ "                <div class=\"s_head\">"
+	        		+ "                  <p class=\"jp\">"+titleName+"</p>"
+	        		+ "                </div>";
+
+    		List<Object[]> screenList = ScreeningScheduleService.findSelectScreeningScreen(movieId, nowDate);
+    		String screenScheduleInfo2 = "";
+    		String screenScheduleInfo4 = "";
+    		for(Object[] screen:screenList) {
+    			String screenId = screen[1].toString();
+    			Integer intScreenId = Integer.parseInt(screenId);
+    			String runningTime = screen[2].toString();
+    			Integer intRunningTime = Integer.parseInt(runningTime);
+    			screenScheduleInfo2 = screenScheduleInfo4
+    					+"<div class=\"s_rooms\">"
+    					+ "            <div class=\"s_room\">"
+    					+ "              <p class=\"theater\">THEATER&thinsp;&thinsp;<span class=\"big\">"
+    					+ screenId+"</span></p>"
+						+ "              <p class=\"xd\">2D</p>"
+						+ "              <p class=\"min\">"
+						+ runningTime+"min</p>"
+						+ "            </div>";
+    			
+        		List<Object[]> screenDatetimeList = ScreeningScheduleService.findSelectScreeningDatetime(intScreenId, nowDate, movieId);
+        		String screenScheduleInfo3 = "";
+                LocalDateTime now = LocalDateTime.now();
+        		for(Object[] screenDatetime:screenDatetimeList) {
+        			LocalDateTime screeningDatetime = (LocalDateTime)screenDatetime[1];
+                    DateTimeFormatter screeningDatetimeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+                    String strScreeningDatetime = screeningDatetime.format(screeningDatetimeFormatter);
+                    LocalDateTime endScreeningDatetime = screeningDatetime.plus(intRunningTime, ChronoUnit.MINUTES);
+                    String strEndScreeningDatetime = endScreeningDatetime.format(screeningDatetimeFormatter);
+                    String sBought;
+                    String fBought;
+                    String buyStatus;
+                    String buyStatusJp;
+                    String reserve;
+            		if (memberId != null) {
+                        if(now.isAfter(screeningDatetime)) {
+                        	buyStatus = "cantBuy";
+                        	buyStatusJp = "購入不可";
+                        	sBought = "s_bought";
+                        	fBought = "f_bought";
+                        	reserve = "href=#";
+                        }else {
+                        	buyStatus = "canBuy";         
+                        	buyStatusJp = "購入";  
+                        	sBought = "";
+                        	fBought = "";       
+                        	reserve = "href=/reserve?screeningScheduleId="+(Integer)screenDatetime[0];
+                        }
+            	    } else {
+                        if(now.isAfter(screeningDatetime)) {
+                        	buyStatus = "cantBuy";
+                        	buyStatusJp = "購入不可";
+                        	sBought = "s_bought";
+                        	fBought = "f_bought";
+                        	reserve = "href=#";
+                        }else {
+                        	buyStatus = "canBuy";         
+                        	buyStatusJp = "ログイン";  
+                        	sBought = "";
+                        	fBought = "";       
+                        	reserve = "href=/";
+                        }
+            	    }
+                    
+        			screenScheduleInfo3 = screenScheduleInfo3
+        					+ "<div class=\"s_time\">"
+        					+ "              <p class=\"start "+sBought+"\">"
+        					+ strScreeningDatetime
+        					+ "</p>"
+        					+ "              <p class=\"finish "+fBought+"\">~"
+        					+ strEndScreeningDatetime
+        					+ "</p>"
+        					+ "              <a class=\"buyFl1\" "+reserve+">"
+        					+ "                <img src=\"../images/"+buyStatus+".png\" alt=\""+buyStatusJp+"\" />"
+        					+ "                <div class=\""+buyStatus+"\">"+buyStatusJp+"</div>"
+        					+ "              </a>"
+        					+ "            </div>";
+        		}
+        		screenScheduleInfo4 = screenScheduleInfo2 + screenScheduleInfo3 + "</div>";
+        		nowShowingCount = nowShowingCount + 1;
+    		}
+    		String screenScheduleInfo5 = nowShowingInfo3 + screenScheduleInfo4 + "</div>" + "</div>" + "</div>" + "</div>";
+    		nowShowingList.add(screenScheduleInfo5);
+		}
+		model.addAttribute("nowShowingList", nowShowingList);	
+		
+        //  公開前映画情報  //////////////////////
+		List<String> upcomingList = new ArrayList<>();
+		List<Object[]> upcomingTitleList = MovieService.findUpcomingMovieTitle();
+		String upcommingInfo2 = "";
+		for(Object[] upcomingTitle: upcomingTitleList) {
+			String titleId = upcomingTitle[0].toString();
+			Integer movieId = Integer.parseInt(titleId);
+			String titleName = (String)upcomingTitle[1];
+			String staff = (String)upcomingTitle[2];
+			String movieDetails = (String)upcomingTitle[3];
+			String movieUrl = (String)upcomingTitle[4];
+			String movieImg = (String)upcomingTitle[5];
+			LocalDate releaseDay = (LocalDate)upcomingTitle[6];
+	        DateTimeFormatter releaseFormatter = DateTimeFormatter.ofPattern("yyyy年MM月公開予定");
+	        String releaseDayStr = releaseDay.format(releaseFormatter);
+			
+			String upcommingInfo1 =  "<div class=\"content-item\">"
+					+ "          <div class=\"unique-item\">"
+					+ "            <img src=\"../images/"+movieImg+"\" alt=\"Image 1\" class=\"content-image\" />"
+					+ "            <div class=\"content-details\">"
+					+ "              <h2 class=\"content-title\">"+titleName+"</h2>"
+					+ "              <p class=\"content-description\">"+staff+"</p>"
+					+ "              <button class=\"content-button"+nowShowingCount+"\">+ more show</button>"
+					+ "            </div>"
+					+ "          </div>"
+					+ "          <div class=\"more-detailFl"+nowShowingCount+"\">"
+					+ "            <h1 class=\"introduce\">INTRODUCTION</h1>"
+					+ "            <p class=\"more-detail\">"+movieDetails+"</p>"
+					+ "            <a href=\""+movieUrl+"\" class=\"officialSiteCheck\">オフィシャルサイト &#8362;</a>"
+					+ "            <h1 class=\"schedule\">SCHEDULE</h1>"
+					+ "            <p class=\"more-detail\">"+releaseDayStr+"</p>"
+					+ "          </div>"
+					+ "        </div>";
+			nowShowingCount = nowShowingCount + 1;
+			upcomingList.add(upcommingInfo1);
+		}
+		model.addAttribute("upcomingList", upcomingList);
 	    return "showmovie"; 
 	  }	
 
