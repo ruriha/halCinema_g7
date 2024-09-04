@@ -48,7 +48,7 @@ public class ScreeningScheduleService {
     
     
 	//  すべての上映スケジュール取得
-    public List<Object[]> findAllScreeningSchedule() {
-        return ScreeningScheduleRepositoty.findAllScreeningSchedule();
-    }
+//    public List<Object[]> findAllScreeningSchedule() {
+//        return ScreeningScheduleRepositoty.findAllScreeningSchedule();
+//    }
 }
