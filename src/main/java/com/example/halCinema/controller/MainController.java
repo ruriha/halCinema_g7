@@ -24,7 +24,9 @@ import com.example.halCinema.service.MemberService;
 import com.example.halCinema.service.MovieService;
 import com.example.halCinema.service.NewsService;
 import com.example.halCinema.service.ReservationService;
+import com.example.halCinema.service.ScreenService;
 import com.example.halCinema.service.ScreeningScheduleService;
+import com.example.halCinema.service.TimeTableService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -43,6 +45,10 @@ public class MainController {
     NewsService NewsService;
     @Autowired
     MovieService MovieService;
+    @Autowired
+    ScreenService ScreenService;
+    @Autowired
+    TimeTableService TimeTableService;
     
     
 	
@@ -450,7 +456,7 @@ public class MainController {
 		
 		//  公開中映画情報  ////////
 		List<String> nowShowingList = new ArrayList<>();
-		List<Object[]> nowShowingTitleList = MovieService.findMovieTitle();
+		List<Object[]> nowShowingTitleList = MovieService.findMovie();
 		Integer nowShowingCount = 1;
 		for(Object[] nowShowingTitle: nowShowingTitleList) {
 			String titleId = nowShowingTitle[0].toString();
@@ -611,7 +617,7 @@ public class MainController {
 		
         //  公開前映画情報  //////////////////////
 		List<String> upcomingList = new ArrayList<>();
-		List<Object[]> upcomingTitleList = MovieService.findUpcomingMovieTitle();
+		List<Object[]> upcomingTitleList = MovieService.findUpcomingMovie();
 		String upcommingInfo2 = "";
 		for(Object[] upcomingTitle: upcomingTitleList) {
 			String titleId = upcomingTitle[0].toString();
