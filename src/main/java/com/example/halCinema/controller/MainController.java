@@ -467,7 +467,8 @@ public class MainController {
 			String movieUrl = (String)nowShowingTitle[4];
 			String movieImg = (String)nowShowingTitle[5];
 			
-			
+			String nowShowingCountStr = nowShowingCount.toString();
+			System.out.println(nowShowingCountStr);
 			String nowShowingInfo1 = 
 					"<div class=\"content-item\">"
 					+ "<div class=\"unique-item\">"
@@ -475,10 +476,10 @@ public class MainController {
 					+ "            <div class=\"content-details\">"
 					+ "			   <h2 class=\"content-title\">"+ titleName +"</h2>"
 					+ "			   <p class=\"content-description\">"+ staff +"</p>"
-					+ "              <button class=\"content-button"+nowShowingCount+"\">+ more show</button>"
+					+ "              <button class=\"content-button"+nowShowingCountStr+"\">+ more show</button>"
 					+ "            </div>"
 					+ "            </div>"
-					+ "            <div class=\"more-detailFl"+nowShowingCount+"\">"
+					+ "            <div class=\"more-detailFl"+nowShowingCountStr+"\">"
 					+ "            <h1 class=\"introduce\">INTRODUCTION</h1>"
 					+ "			   <p class=\"more-detail\">"+ movieDetails +"</p>"
 					+ "			   <a href=\""+ movieUrl +"\" class=\"officialSiteCheck\">オフィシャルサイト &#8362;</a>"
@@ -608,10 +609,10 @@ public class MainController {
         					+ "            </div>";
         		}
         		screenScheduleInfo4 = screenScheduleInfo2 + screenScheduleInfo3 + "</div>";
-        		nowShowingCount = nowShowingCount + 1;
     		}
     		String screenScheduleInfo5 = nowShowingInfo3 + screenScheduleInfo4 + "</div>" + "</div>" + "</div>" + "</div>";
     		nowShowingList.add(screenScheduleInfo5);
+    		nowShowingCount = nowShowingCount + 1;
 		}
 		model.addAttribute("nowShowingList", nowShowingList);	
 		
@@ -630,17 +631,19 @@ public class MainController {
 			LocalDate releaseDay = (LocalDate)upcomingTitle[6];
 	        DateTimeFormatter releaseFormatter = DateTimeFormatter.ofPattern("yyyy年MM月公開予定");
 	        String releaseDayStr = releaseDay.format(releaseFormatter);
-			
+	        
+	        String nowShowingCountStr2 = nowShowingCount.toString();
+			System.out.println(nowShowingCountStr2);
 			String upcommingInfo1 =  "<div class=\"content-item\">"
 					+ "          <div class=\"unique-item\">"
 					+ "            <img src=\"../images/"+movieImg+"\" alt=\"Image 1\" class=\"content-image\" />"
 					+ "            <div class=\"content-details\">"
 					+ "              <h2 class=\"content-title\">"+titleName+"</h2>"
 					+ "              <p class=\"content-description\">"+staff+"</p>"
-					+ "              <button class=\"content-button"+nowShowingCount+"\">+ more show</button>"
+					+ "              <button class=\"content-button"+nowShowingCountStr2+"\">+ more show</button>"
 					+ "            </div>"
 					+ "          </div>"
-					+ "          <div class=\"more-detailFl"+nowShowingCount+"\">"
+					+ "          <div class=\"more-detailFl"+nowShowingCountStr2+"\">"
 					+ "            <h1 class=\"introduce\">INTRODUCTION</h1>"
 					+ "            <p class=\"more-detail\">"+movieDetails+"</p>"
 					+ "            <a href=\""+movieUrl+"\" class=\"officialSiteCheck\">オフィシャルサイト &#8362;</a>"
