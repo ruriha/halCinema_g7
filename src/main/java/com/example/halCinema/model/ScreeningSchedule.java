@@ -5,19 +5,16 @@ import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.SequenceGenerator;
 
 @Entity(name = "screeningSchedule")
 public class ScreeningSchedule {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "screening_schedule_seq")
-    @SequenceGenerator(name = "screening_schedule_seq", sequenceName = "screening_schedule_seq", allocationSize = 1)
+    @GeneratedValue
     private Integer screeningScheduleId;
     
     private LocalDateTime screeningDatetime;
