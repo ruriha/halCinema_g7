@@ -6,9 +6,11 @@ import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import com.example.halCinema.model.Reservation;
 
+@Repository
 public interface ReservationRepositoty  extends JpaRepository<Reservation, UUID>{
 	
 	//  空き座席状況取得
