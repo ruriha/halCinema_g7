@@ -22,6 +22,10 @@ public class Screen {
     @OneToMany(mappedBy="screen")
     private List<ScreeningSchedule> screeningSchedule;
     
+
+    @OneToMany(mappedBy="screen")
+    private List<TimeTable> timeTable;
+    
     
     public Integer getScreenId() {
         return screenId;
@@ -54,5 +58,14 @@ public class Screen {
 
     public void setScreeningSchedule(List<ScreeningSchedule> screeningSchedule) {
         this.screeningSchedule = screeningSchedule;
+    }
+
+
+    public List<TimeTable> getTimeTable() {
+        return timeTable;
+    }
+
+    public void setTimeTable(List<TimeTable> timeTable) {
+        this.timeTable = timeTable;
     }
 }
