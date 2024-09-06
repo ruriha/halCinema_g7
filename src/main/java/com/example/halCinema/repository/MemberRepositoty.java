@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import com.example.halCinema.model.Member;
 
+@Repository
 public interface MemberRepositoty extends JpaRepository<Member, Integer>{
 	
 	//  座席予約システム(seat)の会員情報取得
