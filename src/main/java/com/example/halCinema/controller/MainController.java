@@ -91,13 +91,11 @@ public class MainController {
 	  }
 	  
 	  
-	  
-	  
-	  
-	  // toppage.html
 	  @RequestMapping("/toppage")
-	  public String toppage(@RequestParam(name = "screenScheduleDate", required = false) String screenScheduleDate, Model model){
-		//  カレンダー  ////////
+	  public String toppage(@RequestParam(name = "screenScheduleDate", required = false) String screenScheduleDate, Model model, HttpSession session) {
+	    String loggedInUserEmail = (String) session.getAttribute("loggedInUserEmail");
+	    model.addAttribute("loggedInUserEmail", loggedInUserEmail);
+		  //  カレンダー  ////////
 		List<String> dates = new ArrayList<>();
         LocalDate today = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd");
