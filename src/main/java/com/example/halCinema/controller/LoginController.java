@@ -50,7 +50,7 @@ public class LoginController {
                 && passwordEncoder.matches(form.getMemberPassword(), userInfo.get().getMemberPassword());
         
         if (isCorrectUserAuth) {
-            return "redirect:/menu";
+            return "redirect:/toppage";
         } else {
         	var errorMsg = AppUtill.getMessage(messageSource, ErrorMessageConst.LOGIN_WRONG_INPUT);
         	

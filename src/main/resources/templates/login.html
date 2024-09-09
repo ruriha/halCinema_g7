@@ -147,17 +147,19 @@
                     <span class="close">&times;</span>
                     <h2>会員情報を入力してください</h2>
 					<form th:action="@{/login}" method="post" th:object="${loginForm}">
-						<div>
-							<label>ログインID</label>
-							<input type="text" th:field="*{memberMailaddress}">
+						<div class="form-group">
+							<label for="username">メールアドレス</label>
+							<input type="text" id="usermail" name="usermail" th:field="*{memberMailaddress}">
 						</div>
-						<div>
-							<label>パスワード</label>
-							<input type="password" th:field="*{memberPassword}">
+						<div class="form-group">
+							<label for="password">パスワード</label>
+							<input type="password" id="password" name="password" th:field="*{memberPassword}">
 						</div>
-						<div>
-							<input type="submit" value="ログイン">
-						</div>
+						<a class="pas_forget" href="https://forms.gle/CPnin4yeeBP7LthE8">パスワードをお忘れの方はこちら</a>
+<!--						<div>-->
+<!--							<input type="submit" value="ログイン">-->
+<!--						</div>-->
+						<button type="submit" id="enterLight" class="enter">ENTER</button>
 					</form>
                 </div>
             </div>
