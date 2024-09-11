@@ -41,16 +41,17 @@
         <!-- ナビゲーション：メニュー項目と遷移先は適宜変更してください -->
         <nav class="commonNav">
             <ul>
-              <li class="commonMenu"><a class="commonMenuLink" href="showmovie.html">MOVIES</a></li>
-              <li class="commonMenu"><a class="commonMenuLink" href="member.html">MEMBERS</a></li>
-              <li class="commonMenu"><a class="commonMenuLink" href="service.html">SERVICE</a></li>
-              <li class="commonMenu"><a class="commonMenuLink" href="access.html">ACCESS</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" th:href="@{/showmovie}">MOVIES</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" th:href="@{/member}">MEMBERS</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" th:href="@{/service}">SERVICE</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" th:href="@{/access}">ACCESS</a></li>
                 <li class="commonMenu commonSnsMenu"><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
                 <li class="commonMenu commonSnsMenu"><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
             </ul>
         </nav>
     </header>
-
+	
+	<p>ログインユーザー: <span th:text="${loggedInUserEmail}"></span></p>
 
     <!-- スライド -->
     <div id="slideshow">
@@ -76,70 +77,20 @@
           <div class="inner">
             <p class="sub_ttl">N&thinsp;E&thinsp;W&thinsp;S</p>ν
             <ul class="news_list">
-                <li class="news_list_item">
-                  <a href="news.html" class="news_a">
-                    <div class="news_list_date">
-                      <time>2024.05.16</time>
-                    </div>
-                    <p>theater2復旧のお知らせ</p>
-                    <span class="arrow"></span>
-                  </a>
-                </li>
-                <li class="news_list_item">
-                  <a href="" class="news_a">
-                    <div class="news_list_date">
-                      <time>2024.04.12</time>
-                    </div>
-                    <p>theater2故障のお知らせ、復旧の時期は未定</p>
-                    <span class="arrow"></span>
-                  </a>
-                </li>
-                <li class="news_list_item">
-                  <a href="" class="news_a">
-                    <div class="news_list_date">
-                      <time>2022.05.12</time>
-                    </div>
-                    <p>5/15日(木)～6/15日(金)まで、会員限定アンケートキャンペーンの実施のお知らせ</p>
-                    <span class="arrow"></span>
-                  </a>
-                </li>
-                <li class="news_list_item">
-                  <a href="" class="news_a">
-                    <div class="news_list_date">
-                      <time>2021.05.12</time>
-                    </div>
-                    <p>会員への連絡</p>
-                    <span class="arrow"></span>
-                  </a>
-                </li>
-                <li class="news_list_item">
-                  <a href="" class="news_a">
-                    <div class="news_list_date">
-                      <time>2020.07.12</time>
-                    </div>
-                    <p>サイトリニューアルしました</p>
-                    <span class="arrow"></span>
-                  </a>
-                </li>
-                <!-- hiddenクラスで隠す -->
-                <li class="news_list_item hidden">
-                  <a href="" class="news_a">
-                    <div class="news_list_date">
-                      <time>2020.06.12</time>
-                    </div>
-                    <p>サイトリニューアルしました。</p>
-                    <span class="arrow"></span>
-                  </a>
-                </li>
-                <li class="news_list_item hidden">
-                  <a href="" class="news_a">
-                    <div class="news_list_date">
-                      <time>2020.05.12</time>
-                    </div>
-                    <p>サイト開設しました。</p>
-                    <span class="arrow"></span>
-                  </a>
-                </li>
+				
+				<!-- ニュースの繰り返し表示場所 -->
+		        <th:block th:each="news : ${newsList}">
+		            <li class="news_list_item">
+                        <a th:href="@{/news/{id}(id=${news[0]})}" class="news_a">
+		                    <div class="news_list_date">
+		                        <time th:text="${#dates.format(news[2], 'yyyy.MM.dd')}"></time>
+		                    </div>
+		                    <p th:text="${news[1]}"></p>
+		                    <span class="arrow"></span>
+		                </a>
+		            </li>
+		        </th:block>
+		        
           </ul>
           <button id="more">open</button>
           </div>
@@ -220,10 +171,10 @@
         <!-- ナビゲーション：メニュー項目と遷移先は適宜変更してください -->
         <nav class="commonNav">
             <ul>
-                <li class="commonMenu"><a class="commonMenuLink" href="showmovie.html">MOVIES</a></li>
-                <li class="commonMenu"><a class="commonMenuLink" href="member.html">MEMBERS</a></li>
-                <li class="commonMenu"><a class="commonMenuLink" href="service.html">SERVICE</a></li>
-                <li class="commonMenu"><a class="commonMenuLink" href="access.html">ACCESS</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" th:href="@{/showmovie}">MOVIES</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" th:href="@{/member}">MEMBERS</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" th:href="@{/service}">SERVICE</a></li>
+                <li class="commonMenu"><a class="commonMenuLink" th:href="@{/access}">ACCESS</a></li>
                 <li class="commonMenu commonSnsMenu"><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
                 <li class="commonMenu commonSnsMenu"><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
             </ul>
@@ -233,11 +184,11 @@
 
       <nav class="commonFooterNav">
           <ul>
-              <li class="commonFooterMenu"><a class="commonFooterMenuLink" href="toppage.html">ホーム</a></li>
+              <li class="commonFooterMenu"><a class="commonFooterMenuLink" th:href="@{/toppage}">ホーム</a></li>
               <li class="commonFooterMenu commonMenuLine">｜</li>
               <li class="commonFooterMenu"><a class="commonFooterMenuLink" href="https://forms.gle/CPnin4yeeBP7LthE8">お問い合わせ</a></li>
               <li class="commonFooterMenu commonMenuLine">｜</li>
-              <li class="commonFooterMenu"><a class="commonFooterMenuLink" href="index.html">ログアウト</a></li>
+              <li class="commonFooterMenu"><a class="commonFooterMenuLink" th:href="@{/logout}">ログアウト</a></li>
           </ul>
       </nav>
         <p class="commonFooterCopyright">&copy;2024 HAL CINEMA</p>

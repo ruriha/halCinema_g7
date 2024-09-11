@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ゲスト映画情報ページ</title>
+
+    <!-- ヘッダーとフッター適用に必須↓ -->
+    <link rel="stylesheet" type="text/css" href="../css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../css/showmovie.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- ヘッダー ------------------------------------------------->
+    <header class="commonHeader">
+      <!-- ロゴ -->
+      <figure class="commonLogoBox">
+        <img class="commonLogo" src="../images/logo.svg" alt="HAL CINEMA" />
+      </figure>
+
+      <!-- ナビゲーション：メニュー項目と遷移先は適宜変更してください -->
+      <nav class="commonNav">
+        <ul>
+          <li class="commonMenu">
+            <a class="commonMenuLink" th:href="@{${topLink}}">TOP</a>
+          </li>
+          <li class="commonMenu">
+            <a class="commonMenuLink" th:href="@{/member}">MEMBERS</a>
+          </li>
+          <li class="commonMenu">
+            <a class="commonMenuLink" th:href="@{/service}">SERVICE</a>
+          </li>
+          <li class="commonMenu">
+            <a class="commonMenuLink" th:href="@{/access}">ACCESS</a>
+          </li>
+          <li class="commonMenu commonSnsMenu">
+            <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+          </li>
+          <li class="commonMenu commonSnsMenu">
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- メインコンテンツ -->
+    <main class="showmovieFl">
+      <!-- 切替ボタン１ -->
+      <div id="choiceBoxFl1">
+        <div class="choice_box">
+          <a href="#" class="nowShow1">Now Showing</a>
+          <a href="#" class="comingShow1">Coming Soon</a>
+        </div>
+      </div>
+      <!-- 映画情報フレーム全体１ -->
+      <div class="content-container" th:each="nowShowing:${nowShowingList}"  th:utext="${nowShowing}">
+      </div>
+
+      <!-- 切替ボタン２ -->
+      <div id="choiceBoxFl2">
+        <div class="choice_box">
+          <a href="#" class="nowShow2">Now Showing</a>
+          <a href="#" class="comingShow2">Coming Soon</a>
+        </div>
+      </div>
+
+      <!-- 映画情報フレーム全体２ -->
+      <div class="content-container" th:each="upcoming:${upcomingList}"  th:utext="${upcoming}">
+      </div>
+
+      <!-- <div class="text-container1">
+        <p>This is the first paragraph.</p>
+        <p>This is the second paragraph.</p>
+      </div>
+
+      <div class="text-container2">
+        <p>This is the first paragraph.</p>
+        <p>This is the second paragraph.</p>
+      </div> -->
+
+    </main>
+    <!-- フッター ------------------------------------------------->
+    <footer class="commonFooter">
+      <!-- NEWSLETTER -->
+      <div class="commonLetterContein">
+        <hr class="commonLetterHr">
+        <div class="commonLetterBox">
+            <p class="commonLetterBoxItem commonLetterInfo">NEWSLETTER</p>
+            <p class="commonLetterBoxItem commonLetterDetail">HALCINEMAの新しい情報、特別な<br>ご案内などをお届けいたします。</p>
+            <a class="commonLetterBoxItem commomLettterLine" href="https://page.line.me/909kiqea">公式LINEに登録する   →</a>
+        </div>
+    </div>
+
+      <!-- ロゴ -->
+      <figure class="commonLogoBox">
+        <img class="commonLogo" src="../images/logo.svg" alt="HAL CINEMA" />
+      </figure>
+
+      <!-- ナビゲーション：メニュー項目と遷移先は適宜変更してください -->
+      <nav class="commonNav">
+        <ul>
+          <li class="commonMenu">
+            <a class="commonMenuLink" th:href="@{${topLink}}">TOP</a>
+          </li>
+          <li class="commonMenu">
+            <a class="commonMenuLink" th:href="@{/member}">MEMBERS</a>
+          </li>
+          <li class="commonMenu">
+            <a class="commonMenuLink" th:href="@{/service}">SERVICE</a>
+          </li>
+          <li class="commonMenu">
+            <a class="commonMenuLink" th:href="@{/access}">ACCESS</a>
+          </li>
+          <li class="commonMenu commonSnsMenu">
+            <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+          </li>
+          <li class="commonMenu commonSnsMenu">
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          </li>
+        </ul>
+      </nav>
+
+      <nav class="commonFooterNav">
+        <ul>
+          <li class="commonFooterMenu">
+            <a class="commonFooterMenuLink" th:href="@{${topLink}}">ホーム</a>
+          </li>
+          <li class="commonFooterMenu commonMenuLine">｜</li>
+          <li class="commonFooterMenu">
+            <a class="commonFooterMenuLink" href="https://forms.gle/CPnin4yeeBP7LthE8">お問い合わせ</a>
+          </li>
+        </ul>
+      </nav>
+      <p class="commonFooterCopyright">&copy;2024 HAL CINEMA</p>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../js/showmovie.js"></script>
+  </body>
+</html>

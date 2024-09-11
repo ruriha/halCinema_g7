@@ -369,6 +369,7 @@ button[type="submit"] {
   color: white;
   font-weight: lighter;
   transition: 0.4s;
+  margin: 0 auto;
 }
 
 .enter:hover{

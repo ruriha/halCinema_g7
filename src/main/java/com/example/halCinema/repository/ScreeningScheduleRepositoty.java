@@ -1,13 +1,18 @@
 package com.example.halCinema.repository;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.halCinema.model.ScreeningSchedule;
 
+@Repository
 public interface ScreeningScheduleRepositoty  extends JpaRepository<ScreeningSchedule, Integer>{
 
 	//  座席予約システム(seat)の上映スケジュール取得
@@ -53,5 +58,38 @@ public interface ScreeningScheduleRepositoty  extends JpaRepository<ScreeningSch
 	           "order by ss.screeningDatetime")
 	List<Object[]> findSelectScreeningDatetime(Integer screenId, LocalDate nowDate, Integer movieId);
 	
+	
+	
+	
+	//  すべての上映スケジュール取得
+    @Query("select ss.movie.movieTitle, ss.screen.screenId, ss.screeningDatetime, ss.movie.runningTime " +
+    		"from screeningSchedule ss " +
+    		"inner join ss.movie mo")
+	List<Object[]> findAllScreeningSchedule();
+	
+	
+	
+	
+	//  上映スケジュールの最大ID取得
+    @Query("select max(ss.screeningScheduleId) from screeningSchedule ss")
+	List<Object[]> findMaxScreeningScheduleId();
+	
+	
+	
+	//  上映時間を更新
+    @Modifying
+    @Transactional
+    @Query("update screeningSchedule ss set ss.screeningDatetime = ?1 where ss.screeningScheduleId = ?2")
+	void updateScreeningDatetime(LocalDateTime screeningDatetime, Integer screeningScheduleId);
+	
+	
+	
+	//  上映時間を削除
+    @Modifying
+    @Transactional
+    @Query("delete from screeningSchedule ss where ss.screeningScheduleId = ?1")
+	void deleteScreeningDatetime(Integer screeningScheduleId);
+    
+
 
 }
