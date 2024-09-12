@@ -56,7 +56,7 @@
         <p id="time" th:text="${#temporals.format(screeningScheduleList[0][1], 'yyyy/MM/dd HH:mm')}"></p>
         <p id="name" th:text="${memberList[0][0]+' 様'}"></p>
       </div>
-      <p class="attention">座席を選択して下さい。<span style="color: #A2936B;">■</span>：予約済み / <span style="color: aqua;">■</span>：選択中</p>
+      <p class="attention">座席を選択して下さい。<span style="color: #A2936B;">■</span>：選択不可 / <span style="color: aqua;">■</span>：選択中</p>
 
     </div>
     <div id="syou">
