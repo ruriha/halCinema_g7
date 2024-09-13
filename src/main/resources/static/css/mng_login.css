@@ -1,0 +1,133 @@
+
+@charset "utf-8";
+
+/* 共通のスタイル */
+
+body{
+    background-color: #111111;
+}
+
+h1{
+    margin: 50px 0 30px 0;
+    font-size: 1.4rem;
+    color: #fff;
+}
+
+hr{
+    width: 75%;
+    margin: 30px auto 30px auto;
+}
+
+h2{
+    margin: 40px 0;
+    font-size: 1.3rem;
+    color: #fff;
+    font-weight: lighter;
+    letter-spacing: 3px;
+}
+
+
+
+.container {
+    text-align: center;
+}
+
+.viewer-section {
+    margin-bottom: 20px;
+}
+
+.viewer-button {
+    background-color: #181818;
+    border: 2px solid #181818;
+    color: #fff;
+    padding: 15px 30px;
+    font-size: 15px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.viewer-button:hover {
+    border: 2px solid #03e8e8;}
+
+.admin-login-section {
+    width: 65%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #222222;
+    
+}
+
+.admin-login-section h2 {
+    margin: 20px 0 50px 0;
+}
+
+.admin-login-section form {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    margin: 0 auto;
+    
+}
+
+label{
+    margin: 0 200px 0 0;
+    text-align: left;
+    color: #fff;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    margin-left: 3px;
+    letter-spacing: 1px;
+}
+
+.admin-login-section input {
+    width: 100%;
+    margin: 10px auto;
+    padding: 12px;
+    font-size: 16px;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    background-color: #111111;
+}
+
+.admin-login-section button {
+    width: 50%;
+    margin: 50px auto;
+    padding: 14px;
+    background-color: #181818;
+    border: 2px solid #181818;
+    color: #fff;
+    letter-spacing: 3px;
+    font-size: 17px;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: 0.5s;
+}
+
+.admin-login-section button:hover{
+    
+    border: 2px solid #03e8e8;
+    
+}
+
+.forgetPass{
+    margin-top: -30px;
+    font-size: 0.8rem;
+    
+    color: #6f6f6f;
+    margin-bottom: 20px;
+    transition: 0.2s;
+}
+
+.forgetPass:hover{
+    color: #515151;
+}

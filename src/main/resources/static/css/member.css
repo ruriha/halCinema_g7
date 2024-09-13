@@ -83,8 +83,8 @@ body{
 /*main*/
 
 .background{
-    width: 1000px;
-    margin: 30px auto;
+    width: 70%;
+    margin: 30px auto 80px auto;
     background-color: #222222;
     text-align: center;
     padding: 50px 0;
@@ -104,7 +104,8 @@ h1 {
 }
 
 table {
-    width: 100%;
+    width: 70%;
+    margin: 0 auto;
     border-collapse: collapse;
     margin-bottom: 1em;
 }
@@ -115,19 +116,13 @@ th, td {
     text-align: left;
 }
 
-th.header {
-    background-color: #000;
-    color: #fff;
-    /* text-align: center; */
-    font-size: 1.2em;
-}
-
 td.label {
     background-color: #222222;
+    font-size: 0.9rem;
 }
 
 td.price {
-    background-color: #1FD9D9;
+    background-color: #ffffff;
     color: #000;
     text-align: right;
 }
@@ -140,6 +135,7 @@ td.price {
 .txt1{
     padding: 20px 0 0 0;
     text-align: left;
+    font-size: 0.9rem;
     color: #1FD9D9;
 }
 
@@ -228,8 +224,9 @@ td.price {
 
 .ticket-info p {
     text-align: left;
-    width: 61%;
-    margin: 0 auto 20px auto
+    width: 80%;
+    margin: 0 auto 20px auto;
+    font-size: 0.9em;
 }
 
 .ticket-button {
@@ -414,7 +411,7 @@ td.price {
 }
 
 .memberContain{
-    width: 1000px;
+    width: 70%;
     margin: auto;
 }
 .memberInfo{
@@ -422,12 +419,16 @@ td.price {
 }
 
 .memberDetail{
+    width: 69%;
+    margin: 0 auto;
+    font-size: 0.85rem;
     text-align: left;
     color: #888;
 }
 .memberSignupInfo{
     font-family: sans-serif;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
+    letter-spacing: 5px;
     padding: 0 0 30px 0;
 }
 
@@ -445,4 +446,4 @@ td.price {
 }
 .movieDetailImg5{
     background: url(../images/guest.png) no-repeat center/cover;
-}@charset "UTF-8";
+}
