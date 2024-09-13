@@ -53,41 +53,41 @@ public class MainController {
     
 	
 	// index.html
-	  @RequestMapping("/")
-	  public String index(HttpSession session ,Model model){
-	    session.invalidate();
-
-	    //news表示
-        List<Object[]> newsList = NewsService.findNewsStreamingDate();
-        model.addAttribute("newsList", newsList);
-        
-	    return "index"; 
-	  }	
+//	  @RequestMapping("/")
+//	  public String index(HttpSession session ,Model model){
+//	    session.invalidate();
+//
+//	    //news表示
+//        List<Object[]> newsList = NewsService.findNewsStreamingDate();
+//        model.addAttribute("newsList", newsList);
+//        
+//	    return "index"; 
+//	  }	
 	  
 	  
 	  //  ログイン（Securityなし仮）
-	  @RequestMapping("/entry")
-	  public String entry(@RequestParam(name = "usermail", required = false) String usermail, @RequestParam(name = "password", required = false) String password, HttpSession session){
-			List<Object[]> users = MemberService.loginEntry(usermail, password);
-	        if (!users.isEmpty()) {
-	            Object[] usersElement = users.get(0);
-	            Integer userId = (Integer) usersElement[0];
-	            
-	            // userId が null でないか確認
-	            if (userId != null) {
-	                session.setAttribute("userId", userId);
-	                return "redirect:/toppage";
-	            }
-	        }
-	        return "redirect:/";
-	  }
+//	  @RequestMapping("/entry")
+//	  public String entry(@RequestParam(name = "usermail", required = false) String usermail, @RequestParam(name = "password", required = false) String password, HttpSession session){
+//			List<Object[]> users = MemberService.loginEntry(usermail, password);//
+//	        if (!users.isEmpty()) {
+//	            Object[] usersElement = users.get(0);
+//	            Integer userId = (Integer) usersElement[0];
+//	            
+//	            // userId が null でないか確認
+//	            if (userId != null) {
+//	                session.setAttribute("userId", userId);
+//	                return "redirect:/toppage";
+//	            }
+//	        }
+//	        return "redirect:/";
+//	  }
 	  
 	  
 	  //  ログアウト（Securityなし仮）
 	  @RequestMapping("/logout")
 	  public String logout(HttpSession session){
 	      session.invalidate();
-	      return "redirect:/";
+	      return "redirect:/login";
 	  }
 	  
 	  
@@ -238,7 +238,7 @@ public class MainController {
 		if (memberId != null) {
 	        model.addAttribute("topLink", "/toppage");			
 	    } else {
-	        model.addAttribute("topLink", "/");		
+	        model.addAttribute("topLink", "/login");		
 	    }
 //	    return "news"; 
 
@@ -407,7 +407,7 @@ public class MainController {
 		if (memberId != null) {
 	        model.addAttribute("topLink", "/toppage");			
 	    } else {
-	        model.addAttribute("topLink", "/");		
+	        model.addAttribute("topLink", "/login");		
 	    }
 	    return "access"; 
 	  }	
@@ -421,7 +421,7 @@ public class MainController {
 		if (memberId != null) {
 	        model.addAttribute("topLink", "/toppage");			
 	    } else {
-	        model.addAttribute("topLink", "/");		
+	        model.addAttribute("topLink", "/login");		
 	    }
 	    return "member"; 
 	  }	
@@ -435,7 +435,7 @@ public class MainController {
 		if (memberId != null) {
 	        model.addAttribute("topLink", "/toppage");			
 	    } else {
-	        model.addAttribute("topLink", "/");		
+	        model.addAttribute("topLink", "/login");		
 	    }
 	    return "service"; 
 	  }	
@@ -449,7 +449,7 @@ public class MainController {
 		if (memberId != null) {
 	        model.addAttribute("topLink", "/toppage");
 	    } else {
-	        model.addAttribute("topLink", "/");		
+	        model.addAttribute("topLink", "/login");		
 	    }
 		
 		//  公開中映画情報  ////////
