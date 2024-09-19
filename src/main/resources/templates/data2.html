@@ -60,12 +60,6 @@
 
         <div id="database">
           <table>
-<!--           <tr th:each="movie : ${movies}">
-            <td th:text="${movie.movie_id}"></td>
-            <td th:text="${movie.movie_title}"></td>
-            <td th:text="${#dates.format(movie.release_day, 'yyyy-MM-dd')}"></td>
-            <td th:text="${movie.movie_details}"></td>
-          </tr> -->
             <tr>
               <th>タイトル</th>
               <th>スクリーン</th>
@@ -75,6 +69,16 @@
               <th class="btn">編集/削除</th>
             </tr>
             <!--選択肢はJSの中に複数個所-->
+            
+           <tr th:each="screeningSchedule : ${screeningSchedules}">
+            <td class="title2"><p th:text="${screeningSchedule[1]}"></p></td>
+            <td class="sc"><p th:text="${screeningSchedule[2]}"></p></td>
+            <td class="day"><p th:text="${#dates.format(screeningSchedule[3], 'yyyy-MM-dd')}"></p></td>
+            <td class="open"><p th:text="${#dates.format(screeningSchedule[3], 'HH:mm')}"></p></td>
+            <td class="close"><p th:text="${#dates.format(screeningSchedule[3].plusMinutes(screeningSchedule[4]), 'HH:mm')}"></p></td>
+			<td class="btn"><div class="btn_g"><button class="edit"><i class="fas fa-edit"></i></button><button class="del"><i class="fas fa-trash-alt"></i></button></div></td>
+          </tr>
+          
             <tr>
               <td class="title2">
                 <p>title</p>

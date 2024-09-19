@@ -655,5 +655,19 @@ public class MainController {
 		model.addAttribute("upcomingList", upcomingList);
 	    return "showmovie"; 
 	  }	
+	  
+	  
+	  
+	  //  ３次開発  //////////////////////////////////////////////////////////////////////////////////////////////
+	  
+	  //  data2.html
+	  @RequestMapping("/data2")
+	  public String data2(Model model){
+		//  上映スケジュール一覧を取得して表示
+		List<Object[]> screeningSchedules = ScreeningScheduleService.findAllScreeningSchedule();
+		model.addAttribute("screeningSchedules", screeningSchedules);
+	    return "data2"; 
+	  }	
+	  
 
 }
