@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+
+<html lang="ja">
+
+  <head>
+
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>HALCINEMA｜TOP</title>
+
+    <link rel="stylesheet" type="text/css" href="../css/reset.css">
+    <link rel="stylesheet" type="text/css" href="../css/data.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+
+
+<!-- jQuary本体 CDN -->
+<!-- <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script> -->
+<!-- jQuaryの実行 -->
+<!-- <script type="text/javascript" src="js/common.js"></script> -->
+
+  </head>
+
+  <body>
+
+
+
+
+    <div id="mid">
+      <div id="hidari_soto">
+        <div id="hidari">
+          <div id="all">
+            <a href="data_1.html">映画情報　　　　　〉</a>
+            <a href="data_2.html">上映スケジュール　〉</a>
+            <a href="news">ログアウト　　　　〉</a>
+          </div>
+        </div>
+      </div>
+
+
+      <div id="migi">
+        <div id="box">
+          <div class="boxbox">
+            <a href="data_1.html" class="boxbtn"><img src="../images/movie.png" alt="button" class="icon">映画情報</a>
+          </div>
+          <div class="boxbox">
+            <a href="data_2.html" class="boxbtn" id="days"><img src="../images/calendar.png" alt="button" class="icon">上映スケジュール</a>
+          </div>
+          <div class="boxbox">
+            <a href="" class="boxbtn"><img src="../images/logout.png" alt="button" class="icon">ログアウト</a>
+          </div>
+        </div>
+
+        <div id="box-database-divider"></div>
+
+        <div id="database">
+          <table>
+<!--           <tr th:each="movie : ${movies}">
+            <td th:text="${movie.movie_id}"></td>
+            <td th:text="${movie.movie_title}"></td>
+            <td th:text="${#dates.format(movie.release_day, 'yyyy-MM-dd')}"></td>
+            <td th:text="${movie.movie_details}"></td>
+          </tr> -->
+            <tr>
+              <th>タイトル</th>
+              <th>スクリーン</th>
+              <th>上映日</th>
+              <th>上映開始時間</th>
+              <th>上映終了時間</th>
+              <th class="btn">編集/削除</th>
+            </tr>
+            <!--選択肢はJSの中に複数個所-->
+            <tr>
+              <td class="title2">
+                <p>title</p>
+              </td>
+              <td class="sc">
+                <p>1</p>
+              </td>
+              <td class="day">2024-04-12</td>
+              <td class="open">
+                <p>13:00</p>
+              </td>
+              <td class="close">15:10</td>
+              <td class="btn"><div class="btn_g"><button class="edit"><i class="fas fa-edit"></i></button><button class="del"><i class="fas fa-trash-alt"></i></button></div></td>
+            </tr>
+            <tr>
+              <td class="title2">
+                <p>title</p>
+              </td>
+              <td class="sc">
+                <p>1</p>
+              </td>
+              <td class="day">2024-04-12</td>
+              <td class="open">
+                <p>13:00</p>
+              </td>
+              <td class="close">15:10</td>
+              <td class="btn"><div class="btn_g"><button class="edit"><i class="fas fa-edit"></i></button><button class="del"><i class="fas fa-trash-alt"></i></button></div></td>
+            </tr>
+          </table>
+          <div id="btns">
+            <button id="new_b"><i class="fas fa-plus"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+  </body>
+<script type="text/javascript" src="../js/data2.js"></script>
+</html>
