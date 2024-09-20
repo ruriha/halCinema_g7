@@ -33,6 +33,13 @@ public class AdminLoginController {
         this.session = session;
     }
 
+    // ログインページを表示するためのGETリクエスト処理を追加
+    @GetMapping("/mng_login")
+    public String showLoginForm(Model model) {
+        model.addAttribute("adminloginForm", new AdminLoginForm());
+        return "mng_login";
+    }
+
     @PostMapping("/mng_login")
     public String processLogin(@ModelAttribute("adminloginForm") AdminLoginForm form, BindingResult result, Model model) {
         if (result.hasErrors()) {
