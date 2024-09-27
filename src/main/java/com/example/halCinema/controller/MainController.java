@@ -660,6 +660,14 @@ public class MainController {
 	  
 	  //  ３次開発  //////////////////////////////////////////////////////////////////////////////////////////////
 	  
+	  
+	  // data1.html
+	  @RequestMapping("/data1")
+	  public String data1() {
+		  return "data1";
+	  }
+	  
+	  
 	  //  data2.html
 	  @RequestMapping("/data2")
 	  public String data2(Model model){

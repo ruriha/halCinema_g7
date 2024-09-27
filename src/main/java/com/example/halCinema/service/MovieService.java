@@ -44,14 +44,14 @@ public class MovieService {
 	// 三次開発用 //////////////////////////////////////////////////////////////////////
     
     // 全映画情報を取得
-    public List<Object[]> getAllMovies() {
-        return MovieRepository.findAllMovies();
-    }
-    
-    // 映画情報を削除
-    public void deleteMovieById(Integer movieId) {
-        MovieRepository.deleteMovieById(movieId);
-    }
+//    public List<Object[]> getAllMovies() {
+//        return MovieRepository.findAllMovies();
+//    }
+//    
+//    // 映画情報を削除
+//    public void deleteMovieById(Integer movieId) {
+//        MovieRepository.deleteMovieById(movieId);
+//    }
     
     // 映画情報を追加
     // 映画情報を編集
