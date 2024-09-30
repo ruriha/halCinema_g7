@@ -2,6 +2,7 @@ package com.example.halCinema.controller;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -26,7 +27,14 @@ import com.example.halCinema.service.NewsService;
 import com.example.halCinema.service.ReservationService;
 import com.example.halCinema.service.ScreenService;
 import com.example.halCinema.service.ScreeningScheduleService;
+import com.example.halCinema.service.TimeService;
 import com.example.halCinema.service.TimeTableService;
+import com.example.halCinema.service.TimeTableService2;
+import com.example.halCinema.service.TimeTableService3;
+import com.example.halCinema.service.TimeTableService4;
+import com.example.halCinema.service.TimeTableService5;
+import com.example.halCinema.service.TimeTableService6;
+import com.example.halCinema.service.TimeTableService7;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -48,7 +56,23 @@ public class MainController {
     @Autowired
     ScreenService ScreenService;
     @Autowired
+    TimeService TimeService;
+    @Autowired
     TimeTableService TimeTableService;
+    @Autowired
+    TimeTableService2 TimeTableService2;
+    @Autowired
+    TimeTableService3 TimeTableService3;
+    @Autowired
+    TimeTableService4 TimeTableService4;
+    @Autowired
+    TimeTableService5 TimeTableService5;
+    @Autowired
+    TimeTableService6 TimeTableService6;
+    @Autowired
+    TimeTableService7 TimeTableService7;
+    @Autowired
+    NewsService newsService;
     
     
 	
@@ -68,7 +92,8 @@ public class MainController {
 	  //  ログイン（Securityなし仮）
 //	  @RequestMapping("/entry")
 //	  public String entry(@RequestParam(name = "usermail", required = false) String usermail, @RequestParam(name = "password", required = false) String password, HttpSession session){
-//			List<Object[]> users = MemberService.loginEntry(usermail, password);//
+//			List<Object[]> users = MemberService.loginEntry(usermail, password);
+//
 //	        if (!users.isEmpty()) {
 //	            Object[] usersElement = users.get(0);
 //	            Integer userId = (Integer) usersElement[0];
@@ -660,6 +685,7 @@ public class MainController {
 	  
 	  //  ３次開発  //////////////////////////////////////////////////////////////////////////////////////////////
 	  
+
 	  
 	  // data1.html
 	  @RequestMapping("/data1")
@@ -670,12 +696,231 @@ public class MainController {
 	  
 	  //  data2.html
 	  @RequestMapping("/data2")
-	  public String data2(Model model){
+	  public String data2(Model model){	 
 		//  上映スケジュール一覧を取得して表示
 		List<Object[]> screeningSchedules = ScreeningScheduleService.findAllScreeningSchedule();
 		model.addAttribute("screeningSchedules", screeningSchedules);
+		
+		//  情報公開中の公開中映画タイトル一覧取得
+		List<Object[]> movieTitles = MovieService.findMovieTitle();
+		model.addAttribute("movieTitles", movieTitles);
+		
+		//  スクリーン一覧取得
+		List<Object[]> screens = ScreenService.findAllScreen();
+		model.addAttribute("screens", screens);
+
+		Integer screeningScheduleIdCount = 1;
+		List<String> screeningScheduleList = new ArrayList<>();
+		String screeningScheduleInfo = "";
+		String screeningScheduleInfo3 = "";
+		for(Object[] screeningSchedule: screeningSchedules) {
+			String strScreeningScheduleId = screeningSchedule[0].toString();
+			Integer screeningScheduleId = Integer.parseInt(strScreeningScheduleId);
+			String movieTitle = (String)screeningSchedule[1];
+			String strScreenId = screeningSchedule[2].toString();
+			Integer screenId = Integer.parseInt(strScreenId);
+			LocalDateTime screeningDatetime = (LocalDateTime)screeningSchedule[3];
+            DateTimeFormatter screeningDayFormatter = DateTimeFormatter.ofPattern("yy-MM-dd");
+            String screeningday = screeningDatetime.format(screeningDayFormatter);
+            DateTimeFormatter screeningTimeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+            String screeningTime = screeningDatetime.format(screeningTimeFormatter);
+			String runningTime = screeningSchedule[4].toString();
+			Integer intRunningTime = Integer.parseInt(runningTime);
+            LocalDateTime endScreeningDatetime = screeningDatetime.plus(intRunningTime, ChronoUnit.MINUTES);
+            String strEndScreeningDatetime = endScreeningDatetime.format(screeningTimeFormatter);
+			String strMovieId = screeningSchedule[5].toString();
+			Integer movieId = Integer.parseInt(strMovieId);
+
+		    List<Object[]> freeTimes = null;
+				LocalDate today = LocalDate.now();
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+				String formattedDate = today.format(formatter);
+				String strDay = Integer.toString(today.getDayOfMonth());
+				
+
+	        if (strDay.equals("1") || strDay.equals("8") || strDay.equals("15") || strDay.equals("22") || strDay.equals("29")) {
+	      	    freeTimes = TimeTableService.findFreeTime(screenId, intRunningTime);
+	      	} else if (strDay.equals("2") || strDay.equals("9") || strDay.equals("16") || strDay.equals("23") || strDay.equals("30")) {
+	      	    freeTimes = TimeTableService2.findFreeTime(screenId, intRunningTime);
+	      	} else if (strDay.equals("3") || strDay.equals("10") || strDay.equals("17") || strDay.equals("24") || strDay.equals("31")) {
+	      	    freeTimes = TimeTableService3.findFreeTime(screenId, intRunningTime);
+	      	} else if (strDay.equals("4") || strDay.equals("11") || strDay.equals("18") || strDay.equals("25")) {
+	      	    freeTimes = TimeTableService4.findFreeTime(screenId, intRunningTime);
+	      	} else if (strDay.equals("5") || strDay.equals("12") || strDay.equals("19") || strDay.equals("26")) {
+	      	    freeTimes = TimeTableService5.findFreeTime(screenId, intRunningTime);
+	      	} else if (strDay.equals("6") || strDay.equals("13") || strDay.equals("20") || strDay.equals("27")) {
+	      	    freeTimes = TimeTableService6.findFreeTime(screenId, intRunningTime);
+	      	} else if (strDay.equals("7") || strDay.equals("14") || strDay.equals("21") || strDay.equals("28")) {
+	      	    freeTimes = TimeTableService7.findFreeTime(screenId, intRunningTime);
+	      	}
+		      
+		      List<String> startTimeList = new ArrayList<>();
+		      for (Object[] record : freeTimes) {
+		          Integer startTimeId = (Integer) record[0];
+		          List<Object[]> timeList = TimeService.findTime(startTimeId);
+		          LocalTime getTime = (LocalTime) timeList.get(0)[0];
+		          startTimeList.add(getTime.toString());
+		      }
+            
+			screeningScheduleInfo = screeningScheduleInfo + "<tr>"
+					+ "			<form>"
+					+ "			    <td class=\"title2\">"
+					+ "					<p id=\"titleTxt\">"+movieTitle+"</p>"
+					+ "					<select name=\"movieTitle\" class=\"cell-input\">"
+					+ "						<option value=\""+strMovieId+"\" selected>"+movieTitle+"</option>";
+			String screeningScheduleInfo4 = "";
+			for(Object[] movieTitleName: movieTitles) {
+				String strMovieTitle = (String)movieTitleName[0];
+				String strMovieId2 = movieTitleName[1].toString();
+				Integer movieId2 = Integer.parseInt(strMovieId2);
+				screeningScheduleInfo4 = screeningScheduleInfo4 + "<option value=\""+movieId2+"\">"+strMovieTitle+"</option>";
+			}
+			screeningScheduleInfo3 = screeningScheduleInfo + screeningScheduleInfo4 + "</select>"
+					+ "				</td>"
+					+ "			    <td class=\"sc\">"
+					+ "					<p>"+strScreenId+"</p>"
+					+ "					<select name=\"screenId\" class=\"cell-input\">"
+					+ "						<option value=\""+strScreenId+"\" selected>"+strScreenId+"</option>";
+			String screeningScheduleInfo6 = "";
+			for(Object[] screen: screens) {
+				String strScreenId2 = screen[0].toString();
+				Integer screenId2 = Integer.parseInt(strScreenId2);
+				screeningScheduleInfo6 = screeningScheduleInfo6 + "<option value=\""+screenId2+"\">"+screenId2+"</option>";
+			}					
+			String screeningScheduleInfo5 = screeningScheduleInfo3 + screeningScheduleInfo6 + "</select></td>"
+					+ "			    <td class=\"day\">"
+					+ "					<p>"+screeningday+"</p>"
+					+ "					<select name=\"day\" class=\"cell-input\">";
+			
+			
+			String screeningScheduleInfo8 = "<option>aa</option>";
+			String screeningScheduleInfo7 =screeningScheduleInfo5+screeningScheduleInfo8+ "</select></td>"
+					+ "				<td class=\"open\">"
+					+ "					<p>"+screeningTime+"</p>"
+					+ "					<select  name=\"open\" class=\\\"cell-input\">";
+			String screeningScheduleInfo9 = "";
+			for(String startTime: startTimeList) {
+				screeningScheduleInfo9 = screeningScheduleInfo9 + "<option value=\""+startTime+"\">"+startTime+"</option>";
+			}			
+			String screeningScheduleInfo10 = screeningScheduleInfo7+screeningScheduleInfo9+"</select></td>"
+					+ "				<td class=\"close\">"
+					+ "					<p>"+strEndScreeningDatetime+"</p>"
+					+ "				</td>"
+					+ "			    <td class=\"btn\">"
+					+ "			        <div class=\"btn_g\">"
+					+ "			            <button type=\"submit\" class=\"edit\"><i class=\"fas fa-edit\"></i></button>"
+					+ "						<form>"
+					+ "			            	<button class=\"del\"><i class=\"fas fa-trash-alt\"></i></button>"
+					+ "						</form>"
+					+ "			        </div>"
+					+ "			    </td>"
+					+ "			</form>"
+					+ "		</tr>";
+			screeningScheduleInfo = screeningScheduleInfo10;
+		}
+		screeningScheduleList.add(screeningScheduleInfo);
+		model.addAttribute("screeningScheduleList", screeningScheduleList);
+		
 	    return "data2"; 
 	  }	
 	  
+	  
+	  
+	  //  データ追加あとまわし
+//	  @PostMapping("/data2")
+//	  public String handleFormSubmit(@RequestBody AddFormData formData, Model model) {
+//	      String movieTitle = formData.getMovieTitle();
+//	      String screen = formData.getScreen();
+//	      String date = formData.getDate();
+//
+//	      // 上映スケジュール一覧を取得して表示
+//	      List<Object[]> screeningSchedules = ScreeningScheduleService.findAllScreeningSchedule();
+//	      model.addAttribute("screeningSchedules", screeningSchedules);
+//
+//	      // 情報公開中の公開中映画タイトル一覧取得
+//	      List<Object[]> movieTitles = MovieService.findMovieTitle();
+//	      model.addAttribute("movieTitles", movieTitles);
+//
+//	      // スクリーン一覧取得
+//	      List<Object[]> screens = ScreenService.findAllScreen();
+//	      model.addAttribute("screens", screens);
+//
+//	      // 日付の処理
+//	      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//	      LocalDate selectedDate = LocalDate.parse(date, formatter);
+//	      String strDay = Integer.toString(selectedDate.getDayOfMonth());
+//
+//	      Integer screenId = Integer.parseInt(screen);
+//	      List<Object[]> runningTimeList = MovieService.findRunningTime(movieTitle);
+//	      Integer runningTime = (Integer) runningTimeList.get(0)[0] + 15;
+//	      String strRunningTime = runningTime.toString();
+//	      
+//	      
+//
+//	      // フリータイムの取得
+//	      List<Object[]> freeTimes = null;
+//
+//	      if (strDay.equals("1") || strDay.equals("8") || strDay.equals("15") || strDay.equals("22") || strDay.equals("29")) {
+//	    	    freeTimes = TimeTableService.findFreeTime(screenId, runningTime);
+//	    	} else if (strDay.equals("2") || strDay.equals("9") || strDay.equals("16") || strDay.equals("23") || strDay.equals("30")) {
+//	    	    freeTimes = TimeTableService2.findFreeTime(screenId, runningTime);
+//	    	} else if (strDay.equals("3") || strDay.equals("10") || strDay.equals("17") || strDay.equals("24") || strDay.equals("31")) {
+//	    	    freeTimes = TimeTableService3.findFreeTime(screenId, runningTime);
+//	    	} else if (strDay.equals("4") || strDay.equals("11") || strDay.equals("18") || strDay.equals("25")) {
+//	    	    freeTimes = TimeTableService4.findFreeTime(screenId, runningTime);
+//	    	} else if (strDay.equals("5") || strDay.equals("12") || strDay.equals("19") || strDay.equals("26")) {
+//	    	    freeTimes = TimeTableService5.findFreeTime(screenId, runningTime);
+//	    	} else if (strDay.equals("6") || strDay.equals("13") || strDay.equals("20") || strDay.equals("27")) {
+//	    	    freeTimes = TimeTableService6.findFreeTime(screenId, runningTime);
+//	    	} else if (strDay.equals("7") || strDay.equals("14") || strDay.equals("21") || strDay.equals("28")) {
+//	    	    freeTimes = TimeTableService7.findFreeTime(screenId, runningTime);
+//	    	}
+//
+//	      
+//	      List<String> startTimeList = new ArrayList<>();
+//	      for (Object[] record : freeTimes) {
+//	          Integer startTimeId = (Integer) record[0];
+//	          List<Object[]> timeList = TimeService.findTime(startTimeId);
+//	          LocalTime getTime = (LocalTime) timeList.get(0)[0];
+//	          startTimeList.add(getTime.toString());
+//	      }
+//	      model.addAttribute("startTimeList", startTimeList);
+//	      
+//	      return "data2";
+//	  }
+
+
+	    public static class AddFormData {
+	        private String movieTitle;
+	        private String screen;
+	        private String date;
+
+	        public String getMovieTitle() {
+	            return movieTitle;
+	        }
+
+	        public void setMovieTitle(String movieTitle) {
+	            this.movieTitle = movieTitle;
+	        }
+
+	        public String getScreen() {
+	            return screen;
+	        }
+
+	        public void setScreen(String screen) {
+	            this.screen = screen;
+	        }
+
+	        public String getDate() {
+	            return date;
+	        }
+
+	        public void setDate(String date) {
+	            this.date = date;
+	        }
+	    }
 
 }
+
+
+

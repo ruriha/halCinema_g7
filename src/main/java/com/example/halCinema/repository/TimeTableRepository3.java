@@ -8,19 +8,19 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.halCinema.model.TimeTable;
+import com.example.halCinema.model.TimeTable3;
 
 @Repository
-public interface TimeTableRepository extends JpaRepository<TimeTable, Integer> {
+public interface TimeTableRepository3 extends JpaRepository<TimeTable3, Integer> {
 	
 	//  上映可能なタイムテーブル取得
 	@Query("SELECT tt1.time.timeId AS start_time_id " +
-		       "FROM timeTable tt1 " +
+		       "FROM timeTable3 tt1 " +
 		       "WHERE tt1.screen.screenId = ?1 " +
 		       "AND tt1.freeStatus = false " +
 		       "AND NOT EXISTS (" +
 		       "    SELECT 1 " +
-		       "    FROM timeTable tt2 " +
+		       "    FROM timeTable3 tt2 " +
 		       "    WHERE tt2.screen.screenId = tt1.screen.screenId " +
 		       "    AND tt2.time.timeId >= tt1.time.timeId " +
 		       "    AND tt2.time.timeId < tt1.time.timeId + ?2 " +
@@ -30,15 +30,13 @@ public interface TimeTableRepository extends JpaRepository<TimeTable, Integer> {
 		       "AND tt1.time.timeId <= 2159 - ?2 " +
 		       "ORDER BY tt1.time.timeId")
 	List<Object[]> findFreeTime(Integer screenId, Integer runningTime);
-
-
 	
 	
 	
 	//  空き状況を空きなしに更新
     @Modifying
     @Transactional
-    @Query("update timeTable tt set tt.freeStatus = true where tt.time.timeId = ?1 and tt.screen.screenId = ?2")
+    @Query("update timeTable3 tt set tt.freeStatus = true where tt.time.timeId = ?1 and tt.screen.screenId = ?2")
 	void updateTrueFreeStatus(Integer timeId, Integer screenId);
 	
 	
@@ -46,7 +44,7 @@ public interface TimeTableRepository extends JpaRepository<TimeTable, Integer> {
 	//  空き状況を空きありに更新
     @Modifying
     @Transactional
-    @Query("update timeTable tt set tt.freeStatus = false where tt.time.timeId = ?1 and tt.screen.screenId = ?2")
+    @Query("update timeTable3 tt set tt.freeStatus = false where tt.time.timeId = ?1 and tt.screen.screenId = ?2")
 	void updateFalseFreeStatus(Integer timeId, Integer screenId);
 	
 }

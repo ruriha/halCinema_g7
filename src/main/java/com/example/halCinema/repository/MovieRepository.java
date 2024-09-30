@@ -22,9 +22,14 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
 	
 	
 	//  情報公開中の映画タイトルを取得
-	@Query("select mo.movieTitle from movie mo where mo.releaseStatus = TRUE and mo.releaseDay <= CURRENT_DATE")
+	@Query("select mo.movieTitle, mo.movieId from movie mo where mo.releaseStatus = TRUE and mo.releaseDay <= CURRENT_DATE")
 	List<Object[]> findMovieTitle();
 	
+	//  タイトルから上映時間を取得
+	@Query("select mo.runningTime from movie mo where mo.movieTitle = ?1")
+	List<Object[]> findRunningTime(String movieTitle);
+	
+
 
 	
 	
@@ -45,4 +50,5 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
     // 映画情報を追加	
     // 映画情報を編集
 	
+
 }

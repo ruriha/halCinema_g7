@@ -68,46 +68,72 @@
               <th>上映終了時間</th>
               <th class="btn">編集/削除</th>
             </tr>
-            <!--選択肢はJSの中に複数個所-->
-            
-           <tr th:each="screeningSchedule : ${screeningSchedules}">
-            <td class="title2"><p th:text="${screeningSchedule[1]}"></p></td>
-            <td class="sc"><p th:text="${screeningSchedule[2]}"></p></td>
-            <td class="day"><p th:text="${#dates.format(screeningSchedule[3], 'yyyy-MM-dd')}"></p></td>
-            <td class="open"><p th:text="${#dates.format(screeningSchedule[3], 'HH:mm')}"></p></td>
-            <td class="close"><p th:text="${#dates.format(screeningSchedule[3].plusMinutes(screeningSchedule[4]), 'HH:mm')}"></p></td>
-			<td class="btn"><div class="btn_g"><button class="edit"><i class="fas fa-edit"></i></button><button class="del"><i class="fas fa-trash-alt"></i></button></div></td>
-          </tr>
-          
-            <tr>
-              <td class="title2">
-                <p>title</p>
-              </td>
-              <td class="sc">
-                <p>1</p>
-              </td>
-              <td class="day">2024-04-12</td>
-              <td class="open">
-                <p>13:00</p>
-              </td>
-              <td class="close">15:10</td>
-              <td class="btn"><div class="btn_g"><button class="edit"><i class="fas fa-edit"></i></button><button class="del"><i class="fas fa-trash-alt"></i></button></div></td>
-            </tr>
-            <tr>
-              <td class="title2">
-                <p>title</p>
-              </td>
-              <td class="sc">
-                <p>1</p>
-              </td>
-              <td class="day">2024-04-12</td>
-              <td class="open">
-                <p>13:00</p>
-              </td>
-              <td class="close">15:10</td>
-              <td class="btn"><div class="btn_g"><button class="edit"><i class="fas fa-edit"></i></button><button class="del"><i class="fas fa-trash-alt"></i></button></div></td>
-            </tr>
+				
+			<div th:utext="${screeningScheduleList}"></div>
+				        
+<!--			<tr th:each="screeningSchedule : ${screeningSchedules}">-->
+<!--			    <td class="title2">-->
+<!--					<p id="titleTxt" th:text="${screeningSchedule[1]}"></p>-->
+<!--					<select class="cell-input" id="movieTitleSelect" style="display: none;">-->
+<!--					  <option th:text="${screeningSchedule[1]}" disabled selected></option>-->
+<!--					  <option th:each="movieTitle : ${movieTitles}" th:text="${movieTitle[0]}"></option>-->
+<!--					</select>-->
+<!--				</td>-->
+<!--			    <td class="sc">-->
+<!--					<p th:text="${screeningSchedule[2]}"></p>-->
+<!--					<select class="cell-input" id="screenSelect" style="display: none;">-->
+<!--					  <option th:text="${screeningSchedule[2]}" disabled selected></option>-->
+<!--					  <option th:each="screen : ${screens}" th:text="${screen[0]}"></option>-->
+<!--					</select>-->
+<!--				</td>-->
+<!--			    <td class="day"><p th:text="${#temporals.format(screeningSchedule[3], 'yyyy-MM-dd')}"></p></td>-->
+<!--				<td class="open"><p th:text="${#temporals.format(screeningSchedule[3], 'HH:mm')}"></p></td>-->
+<!--				<td class="close"><p th:text="${#temporals.format(screeningSchedule[3].plusMinutes(screeningSchedule[4]), 'HH:mm')}"></p></td>-->
+<!--			    <td class="btn">-->
+<!--			        <div class="btn_g">-->
+<!--			            <button class="edit edit2"><i class="fas fa-edit"></i></button>-->
+<!--			            <button class="del"><i class="fas fa-trash-alt"></i></button>-->
+<!--			        </div>-->
+<!--			    </td>-->
+<!--			</tr>-->
+			
+			
+			<!--データ追加　あとまわし-->
+			<tr class="addRow">
+				<form id="addForm">
+				    <td class="title2">
+						<select class="cell-input" id="movieTitleSelect">
+						  <option th:each="movieTitle : ${movieTitles}" th:text="${movieTitle[0]}"></option>
+						</select>
+					</td>
+				    <td class="sc">
+						<select class="cell-input" id="screenSelect">
+						  <option th:each="screen : ${screens}" th:text="${screen[0]}"></option>
+						</select>
+					</td>
+				    <td class="day">
+						<select class="cell-input" id="date-select">
+						</select>
+					</td>
+					<td class="open">
+						<select class="cell-input" id="open-select">
+						  <option th:each="startTime : ${startTimeList}" th:text="${startTime}"></option>
+						</select>
+					</td>
+					<td class="close">
+						<p>登録後に反映されます</p>
+					</td>
+				    <td class="btn">
+				        <div class="btn_g">
+				            <button class="save" type="submit"><i class="fas fa-save"></i></button>
+				            <button class="del"><i class="fas fa-trash-alt"></i></button>
+				        </div>
+				    </td>
+				</form>
+			</tr>
+			
           </table>
+          
           <div id="btns">
             <button id="new_b"><i class="fas fa-plus"></i></button>
           </div>
@@ -116,7 +142,7 @@
     </div>
 
 
+	<script type="text/javascript" src="../js/data2.js"></script>
 
   </body>
-<script type="text/javascript" src="../js/data2.js"></script>
 </html>
