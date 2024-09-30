@@ -40,15 +40,13 @@ public class MovieService {
     }
     
 
-
-    
     
     //  タイトルから上映時間を取得
     public List<Object[]> findRunningTime(String movieTitle) {
         return MovieRepository.findRunningTime(movieTitle);
     }
 
-}
+
 
 	// 三次開発用 //////////////////////////////////////////////////////////////////////
     
