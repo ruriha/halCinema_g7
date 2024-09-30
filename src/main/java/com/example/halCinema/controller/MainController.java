@@ -92,7 +92,8 @@ public class MainController {
 	  //  ログイン（Securityなし仮）
 //	  @RequestMapping("/entry")
 //	  public String entry(@RequestParam(name = "usermail", required = false) String usermail, @RequestParam(name = "password", required = false) String password, HttpSession session){
-//			List<Object[]> users = MemberService.loginEntry(usermail, password);//
+//			List<Object[]> users = MemberService.loginEntry(usermail, password);
+//
 //	        if (!users.isEmpty()) {
 //	            Object[] usersElement = users.get(0);
 //	            Integer userId = (Integer) usersElement[0];
@@ -684,6 +685,16 @@ public class MainController {
 	  
 	  //  ３次開発  //////////////////////////////////////////////////////////////////////////////////////////////
 	  
+
+	  
+	  // data1.html
+	  @RequestMapping("/data1")
+	  public String data1() {
+		  return "data1";
+	  }
+	  
+	  
+	  //  data2.html
 	  @RequestMapping("/data2")
 	  public String data2(Model model){	 
 		//  上映スケジュール一覧を取得して表示
