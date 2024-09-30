@@ -39,4 +39,11 @@ public class MovieService {
         return MovieRepository.findById(movieId).orElse(null);
     }
 
+    
+    
+    //  タイトルから上映時間を取得
+    public List<Object[]> findRunningTime(String movieTitle) {
+        return MovieRepository.findRunningTime(movieTitle);
+    }
+
 }

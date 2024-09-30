@@ -52,7 +52,7 @@ public class AdminLoginController {
         if (CREDENTIALS.containsKey(loginId) && CREDENTIALS.get(loginId).equals(password)) {
             // 認証成功時、セッションにログインIDを保存
             session.setAttribute("loggedInUserId", loginId);
-            return "redirect:/menu";
+            return "redirect:/data2";
         } else {
             model.addAttribute("loginError", "ユーザーIDまたはパスワードが間違っています");
             return "mng_login";

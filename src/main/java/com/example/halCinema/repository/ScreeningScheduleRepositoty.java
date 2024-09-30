@@ -62,7 +62,7 @@ public interface ScreeningScheduleRepositoty  extends JpaRepository<ScreeningSch
 	
 	
 	//  すべての上映スケジュール取得
-    @Query("select ss.screeningScheduleId, ss.movie.movieTitle, ss.screen.screenId, ss.screeningDatetime, ss.movie.runningTime " +
+    @Query("select ss.screeningScheduleId, ss.movie.movieTitle, ss.screen.screenId, ss.screeningDatetime, ss.movie.runningTime, ss.movie.movieId " +
     		"from screeningSchedule ss " +
     		"inner join ss.movie mo")
 	List<Object[]> findAllScreeningSchedule();

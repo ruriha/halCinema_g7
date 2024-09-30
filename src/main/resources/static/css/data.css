@@ -220,3 +220,15 @@ button#new_b i {
 #days{
   font-size: 0.75rem;
 }
+
+
+
+
+/*追加したCSS*/
+.edit2{
+	opacity: 0.5;
+}.edit2:hover{
+	cursor: not-allowed;
+}
+
+
