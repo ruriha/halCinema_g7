@@ -29,6 +29,10 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
 	@Query("select mo.runningTime from movie mo where mo.movieTitle = ?1")
 	List<Object[]> findRunningTime(String movieTitle);
 	
+	//  タイトルから映画IDを取得
+	@Query("select mo.movieId from movie mo where mo.movieTitle = ?1")
+	List<Object[]> findMovieId(String movieTitle);
+	
 
 
 	

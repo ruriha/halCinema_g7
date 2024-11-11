@@ -2,9 +2,11 @@ package com.example.halCinema.controller;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.halCinema.model.Member;
+import com.example.halCinema.model.Movie;
 import com.example.halCinema.model.News;
+import com.example.halCinema.model.Screen;
 import com.example.halCinema.model.ScreeningSchedule;
 import com.example.halCinema.service.EmailService;
 import com.example.halCinema.service.MemberService;
@@ -695,11 +699,137 @@ public class MainController {
 	  
 	  //  data2.html
 	  @RequestMapping("/data2")
-	  public String data2(Model model){	 
+	  public String data2(Model model, @RequestParam(required = false) LocalDate sDate, @RequestParam(required = false) Integer screenId, @RequestParam(required = false) String titleName, @RequestParam(required = false) LocalTime screeningTime){
+		//  上映スケジュールの取得
+		List<Object[]> screeningSchedules = ScreeningScheduleService.findAllScreeningSchedule();
+        for (Object[] screeningSchedule : screeningSchedules) {
+            LocalTime startTime = LocalTime.of(8, 0);
+            LocalTime endTime = LocalTime.of(21, 59);
+            List<String> updateTimes = new ArrayList<>();
+            if (screeningSchedule[4] != null) {
+                // 除外する時間範囲のリストを生成
+                List<TimeRange> excludeRanges = new ArrayList<>();
+                for (Object[] screeningSchedule2 : screeningSchedules) {
+                    LocalDateTime scheduleStart = (LocalDateTime) screeningSchedule2[3];
+                    if (scheduleStart.toLocalDate().equals(sDate) && screeningSchedule2[2].equals(screenId)) {
+                        int durationMinutes = (int) screeningSchedule2[4] + 15 + (int) screeningSchedule[4];
+                        excludeRanges.add(new TimeRange(scheduleStart.toLocalTime().minusMinutes((int)screeningSchedule[4]), durationMinutes));
+                    }
+                }
+                for (LocalTime time = startTime; !time.isAfter(endTime.minusMinutes((int)screeningSchedule[4])); time = time.plusMinutes(1)) {
+                    if (isTimeExcluded(time, excludeRanges)) {
+                        continue;
+                    }
+                    updateTimes.add(time.toString());
+                }
+            }        	
+            Object[] updatedScreeningSchedule = Arrays.copyOf(screeningSchedule, screeningSchedule.length + 1);
+            updatedScreeningSchedule[screeningSchedule.length] = updateTimes;
+            screeningSchedules.set(screeningSchedules.indexOf(screeningSchedule), updatedScreeningSchedule);
+        }
+		model.addAttribute("screeningSchedules", screeningSchedules);
+
+		//  タイトル, スクリーンのプルダウン生成
+        model.addAttribute("title", titleName);
+		model.addAttribute("sDate", sDate);
+		model.addAttribute("screen", screenId);
+		model.addAttribute("screeningTimeStr", screeningTime);
+		List<Object[]> movieTitles = MovieService.findMovieTitle();
+		model.addAttribute("movieTitles", movieTitles);
+		List<Object[]> screens = ScreenService.findAllScreen();
+		model.addAttribute("screens", screens);
+		//  上映時間のプルダウン生成
+		if(titleName != null) {
+			List<Object[]> movieId = MovieService.findMovieId(titleName);
+			Object[] movieIdElement = movieId.get(0);
+			Integer movieIdStr = (Integer)movieIdElement[0];
+			model.addAttribute("movieId", movieIdStr);
+			
+			List<Object[]> movieRunningTime = MovieService.findRunningTime(titleName);
+			Object[] movieRunningTimeElement = movieRunningTime.get(0);
+			Integer runningTime = (Integer)movieRunningTimeElement[0];
+
+	        LocalTime startTime = LocalTime.of(8, 0);
+	        LocalTime endTime = LocalTime.of(21, 59);
+	        List<String> times = new ArrayList<>();
+	        if (sDate != null && screenId != null && runningTime != null) {
+	            // 除外する時間範囲のリストを生成
+	            List<TimeRange> excludeRanges = new ArrayList<>();
+	            for (Object[] screeningSchedule : screeningSchedules) {
+	                LocalDateTime scheduleStart = (LocalDateTime) screeningSchedule[3];
+	                if (scheduleStart.toLocalDate().equals(sDate) && screeningSchedule[2].equals(screenId)) {
+	                    int durationMinutes = (int) screeningSchedule[4] + 15 + runningTime;
+	                    excludeRanges.add(new TimeRange(scheduleStart.toLocalTime().minusMinutes(runningTime), durationMinutes));
+	                }
+	            }
+	            for (LocalTime time = startTime; !time.isAfter(endTime.minusMinutes(runningTime)); time = time.plusMinutes(1)) {
+	                if (isTimeExcluded(time, excludeRanges)) {
+	                    continue;
+	                }
+	                times.add(time.toString());
+	            }
+	        }
+	        model.addAttribute("times", times);
+	        
+	        if(screeningTime != null) {
+	        	LocalTime endScreening = screeningTime.plusMinutes(runningTime);
+		        model.addAttribute("endScreening", endScreening);	        	
+	        }
+		}
+		
 	    return "data2"; 
-	  }	
+	  }
 	  
-	  
+
+	  // 指定された時間が空いているかどうかを判定
+	  private boolean isTimeExcluded(LocalTime time, List<TimeRange> excludeRanges) {
+		  for (TimeRange range : excludeRanges) {
+			  if (range.overlaps(time)) {
+				  return true;
+			  }
+		  }
+		  return false;
+	  }
+	  private boolean canFitDuration(LocalTime startTime, int durationMinutes, LocalTime endTime) {
+		  LocalTime endTimeCandidate = startTime.plusMinutes(durationMinutes);
+		  return !endTimeCandidate.isAfter(endTime);
+	  }
+	  public class TimeRange {
+		  private LocalTime start;
+		  private LocalTime end;
+		  
+		  public TimeRange(LocalTime start, int durationMinutes) {
+			  this.start = start;
+			  this.end = start.plusMinutes(durationMinutes);
+		   	}
+		  public boolean overlaps(LocalTime time) {
+			  return !time.isBefore(start) && !time.isAfter(end);
+		   	}
+	  }
+		  
+		  
+	  //  上映スケジュール削除
+	  @RequestMapping("/ssDel")
+	  public String ssDel(@RequestParam(required = false) Integer delId){
+		ScreeningScheduleService.deleteScreeningDatetime(delId);
+	    return "redirect:/data2"; 
+	  }
+	  //  上映スケジュール追加
+	  @RequestMapping("/addSchedule")
+	  public String addSchedule(@RequestParam(required = false) LocalDate sDate, @RequestParam(required = false) Integer screenId, @RequestParam(required = false) String titleName, @RequestParam(required = false) LocalTime screeningTime, @RequestParam(required = false) Integer movieId) {
+	      LocalDateTime screeningDatetime = sDate.atTime(screeningTime);
+		  Screen screen = ScreenService.findScreenById(screenId);
+		  Movie movie = MovieService.findMovieById(movieId);
+		  ScreeningScheduleService.addScreeningSchedule(screeningDatetime, screen, movie);
+		  return "redirect:/data2";
+	  }
+	  //  上映スケジュール更新
+	  @RequestMapping("/ssUpdate")
+	  public String ssUpdate(@RequestParam(required = false) LocalDate updateDay, @RequestParam(required = false) LocalTime updateTime, @RequestParam(required = false) Integer updateId){
+	    LocalDateTime updateDatetime = updateDay.atTime(updateTime);
+		ScreeningScheduleService.updateScreeningDatetime(updateDatetime, updateId);
+	    return "redirect:/data2"; 
+	  }
 	  
 
 
