@@ -3,6 +3,7 @@ package com.example.halCinema.model;
 import java.time.LocalDate;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -32,7 +33,7 @@ public class Movie {
     private String staff;
     
 
-    @OneToMany(mappedBy="movie")
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.REMOVE)
     private List<ScreeningSchedule> screeningSchedule;
     
     
@@ -108,7 +109,6 @@ public class Movie {
         this.staff = staff;
     }
     
-    
     public List<ScreeningSchedule> getScreeningSchedule() {
         return screeningSchedule;
     }
@@ -116,5 +116,4 @@ public class Movie {
     public void setScreeningSchedule(List<ScreeningSchedule> screeningSchedule) {
         this.screeningSchedule = screeningSchedule;
     }
-
 }

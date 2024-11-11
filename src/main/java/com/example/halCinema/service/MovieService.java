@@ -68,5 +68,18 @@ public class MovieService {
     // 映画情報を追加
     // 映画情報を編集
     
+ // MovieService クラスに getAllMovies メソッドを追加
+    public List<Movie> getAllMovies() {
+        return MovieRepository.findAll();
+    }
+    
+    @Autowired
+    private MovieRepository movieRepository;
+
+    public void deleteMovieById(Integer id) {  // 型をIntegerに変更
+        movieRepository.deleteById(id);
+    }
+
+    
 }
 
