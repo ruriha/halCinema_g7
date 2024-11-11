@@ -1,109 +1,74 @@
 <!DOCTYPE html>
-
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
-
-
-  <head>
-
+<head>
     <meta charset="utf-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>HALCINEMA｜TOP</title>
-
     <link rel="stylesheet" type="text/css" href="../css/reset.css">
     <link rel="stylesheet" type="text/css" href="../css/data.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
-
-
-<!-- jQuary本体 CDN -->
-<!-- <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script> -->
-<!-- jQuaryの実行 -->
-<!-- <script type="text/javascript" src="js/common.js"></script> -->
-
-  </head>
-
-  <body>
-
-
-
-
+</head>
+<body>
     <div id="mid">
-      <div id="hidari_soto">
-        <div id="hidari">
-          <div id="all">
-            <a href="data_1.html">映画情報　　　　　〉</a>
-            <a href="data_2.html">上映スケジュール　〉</a>
-            <a href="news">ログアウト　　　　〉</a>
-          </div>
+        <div id="hidari_soto">
+            <div id="hidari">
+                <div id="all">
+                    <a href="data_1.html">映画情報　　　　　〉</a>
+                    <a href="data_2.html">上映スケジュール　〉</a>
+                    <a href="news">ログアウト　　　　〉</a>
+                </div>
+            </div>
         </div>
-      </div>
-
-      <div id="migi">
-        <div id="box">
-          <div class="boxbox">
-            <a href="data_1.html" class="boxbtn"><img src="../images/movie.png" alt="button" class="icon">映画情報</a>
-          </div>
-          <div class="boxbox">
-            <a href="data_2.html" class="boxbtn" id="days"><img src="../images/calendar.png" alt="button" class="icon">上映スケジュール</a>
-          </div>
-          <div class="boxbox">
-            <a href="" class="boxbtn"><img src="../images/logout.png" alt="button" class="icon">ログアウト</a>
-          </div>
+        <div id="migi">
+            <div id="box">
+                <div class="boxbox">
+                    <a href="data_1.html" class="boxbtn"><img src="../images/movie.png" alt="button" class="icon">映画情報</a>
+                </div>
+                <div class="boxbox">
+                    <a href="data_2.html" class="boxbtn" id="days"><img src="../images/calendar.png" alt="button" class="icon">上映スケジュール</a>
+                </div>
+                <div class="boxbox">
+                    <a href="" class="boxbtn"><img src="../images/logout.png" alt="button" class="icon">ログアウト</a>
+                </div>
+            </div>
+            <div id="box-database-divider"></div>
+            <div id="database">
+                <table>
+                    <tr>
+                        <th>タイトル</th>
+                        <th>公開日</th>
+                        <th>上映時間</th>
+                        <th>作品詳細</th>
+                        <th>作品画像</th>
+                        <th>公開状態</th>
+                        <th class="btn">編集/削除</th>
+                    </tr>
+                    <tr th:each="movie : ${movies}">
+                        <td class="title" th:text="${movie.movieTitle}" th:attr="data-id=${movie.movieId}"></td>
+                        <td class="data" th:text="${movie.releaseDay}"></td>
+                        <td class="int" th:text="${movie.runningTime}"></td>
+                        <td class="description" th:text="${movie.movieDetails}"></td>
+                        <td class="img" th:text="${movie.img}"></td>
+						<td class="tgl">
+						    <input type="checkbox" th:checked="${movie.releaseStatus}" disabled>
+						</td>
+                        <td class="btn">
+                            <div class="btn_g">
+                                <button class="edit"><i class="fas fa-edit"></i></button>
+                                <button class="del"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <div id="btns">
+                    <button id="new_b"><i class="fas fa-plus"></i></button>
+                </div>
+            </div>
         </div>
-
-        <div id="box-database-divider"></div>
-
-        <div id="database">
-          <table>
-<!--           <tr th:each="movie : ${movies}">
-            <td th:text="${movie.movie_id}"></td>
-            <td th:text="${movie.movie_title}"></td>
-            <td th:text="${#dates.format(movie.release_day, 'yyyy-MM-dd')}"></td>
-            <td th:text="${movie.movie_details}"></td>
-          </tr> -->
-            <tr>
-              <th>タイトル</th>
-              <th>公開日</th>
-              <th>上映時間</th>
-              <th>作品詳細</th>
-              <th>作品画像</th>
-              <th>公開状態</th>
-              <th class="btn">編集/削除</th>
-            </tr>
-            <tr>
-              <td class="title">名探偵コナン 100万ドルの五稜星</td>
-              <td class="data">2024-04-12</td>
-              <td class="int">120</td>
-              <td class="description">北海道・函館にある斧江財閥の収蔵庫に、怪盗キッドからの予告状が届いた。今回キッドが狙うのは、幕末を生きた新選組副長・土方歳三にまつわる日本刀だという。ビッグジュエルを追い求めるキッドが、なぜ刀を狙うのか……？一方、西の名探偵・服部平次とコナン達も、函館で開催される剣道大会の為に現地を訪れており、犯行予告当日、平次がキッドの変装を見事見破り追い詰めるが……！？時を同じくして、胸に十文字の切り傷がつけられた遺体が函館倉庫街で見つかる。捜査線上に浮かび上がったのは、“死の商人”と呼ばれ、アジア一帯で武器商人として活動する日系アメリカ人の男。彼は戦時中の軍需産業に深く関わっていた斧江家初代当主が函館のどこかに隠したとされるお宝を探していた。それは、当時、日本の敗色濃厚だった戦況を一変させるほどの強力な兵器だという噂も……。 そして、そのお宝とキッドが狙う刀はどうやら関係があるようで、刀を狙うキッドに対し、謎の“剣士”の影が迫り……。</td>
-              <td class="img">file:///C:/Users/aaa/OneDrive/%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97/HAL%E3%82%B7%E3%83%8D%E3%83%9E/site/templates/data_edit.html</td>
-              <td class="tgl"><input type="checkbox" disabled></td>
-              <td class="btn"><div class="btn_g"><button class="edit"><i class="fas fa-edit"></i></button><button class="del"><i class="fas fa-trash-alt"></i></button></div></td>
-            </tr>
-            <tr>
-              <td class="title">名探偵コナン 100万ドルの五稜星</td>
-              <td class="data">2024-04-12</td>
-              <td class="int">120</td>
-              <td class="description">北海道・函館にある斧江財閥の収蔵庫に、怪盗キッドからの予告状が届いた。今回キッドが狙うのは、幕末を生きた新選組副長・土方歳三にまつわる日本刀だという。ビッグジュエルを追い求めるキッドが、なぜ刀を狙うのか……？一方、西の名探偵・服部平次とコナン達も、函館で開催される剣道大会の為に現地を訪れており、犯行予告当日、平次がキッドの変装を見事見破り追い詰めるが……！？時を同じくして、胸に十文字の切り傷がつけられた遺体が函館倉庫街で見つかる。捜査線上に浮かび上がったのは、“死の商人”と呼ばれ、アジア一帯で武器商人として活動する日系アメリカ人の男。彼は戦時中の軍需産業に深く関わっていた斧江家初代当主が函館のどこかに隠したとされるお宝を探していた。それは、当時、日本の敗色濃厚だった戦況を一変させるほどの強力な兵器だという噂も……。 そして、そのお宝とキッドが狙う刀はどうやら関係があるようで、刀を狙うキッドに対し、謎の“剣士”の影が迫り……。</td>
-              <td class="img">file:///C:/Users/aaa/OneDrive/%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97/HAL%E3%82%B7%E3%83%8D%E3%83%9E/site/templates/data_edit.html</td>
-              <td class="tgl"><input type="checkbox" disabled></td>
-
-              <td class="btn"><div class="btn_g"><button class="edit"><i class="fas fa-edit"></i></button><button class="del"><i class="fas fa-trash-alt"></i></button></div></td>
-            </tr>
-          </table>
-          <div id="btns">
-            <button id="new_b"><i class="fas fa-plus"></i></button>
-
-          </div>
-        </div>
-      </div>
     </div>
-
-
-
-  </body>
+</body>
 <script type="text/javascript" src="../js/data_1.js"></script>
 </html>
