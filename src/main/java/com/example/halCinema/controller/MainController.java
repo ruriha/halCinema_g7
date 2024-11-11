@@ -9,14 +9,18 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.halCinema.model.Member;
+import com.example.halCinema.model.Movie;
 import com.example.halCinema.model.News;
 import com.example.halCinema.model.ScreeningSchedule;
 import com.example.halCinema.service.EmailService;
@@ -683,24 +687,31 @@ public class MainController {
 	  
 	  
 	  //  ３次開発  //////////////////////////////////////////////////////////////////////////////////////////////
-	  
-
-	  
-	  // data1.html
+	  @Autowired
+	  private MovieService movieService;  // サービス層からデータを取得
+	
 	  @RequestMapping("/data1")
-	  public String data1() {
-		  return "data_1";
+	  public String data1(Model model) {
+	      List<Movie> movies = movieService.getAllMovies();
+	      model.addAttribute("movies", movies);  // moviesリストをテンプレートに渡す
+	      return "data_1";
 	  }
 	  
-	  
-	  //  data2.html
+	  @DeleteMapping("/movies/{id}")
+	  public ResponseEntity<Void> deleteMovie(@PathVariable("id") Integer id) {  // Integer型に統一
+	      try {
+	          movieService.deleteMovieById(id);
+	          return ResponseEntity.ok().build();
+	      } catch (Exception e) {
+	          return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+	      }
+	  }
+
+	    //  data2.html
 	  @RequestMapping("/data2")
 	  public String data2(Model model){	 
 	    return "data2"; 
 	  }	
-	  
-	  
-	  
 
 
 }
