@@ -200,7 +200,7 @@ input {
   box-sizing: border-box;
   padding: 5px;
 }
-button.edit, button.save, button.del, button#new_b {
+button.edit, button.save, button.save2, button.save3, button.del, button#new_b {
   background: none;
   border: none;
   padding: 0 5px;
@@ -208,7 +208,7 @@ button.edit, button.save, button.del, button#new_b {
   cursor: pointer;
 }
 
-button.edit i, button.save i, button.del i, button#new_b i {
+button.edit i, button.save i, button.save2 i, button.save3 i, button.del i, button#new_b i {
   color: #fff; /* アイコンの色を調整（必要に応じて変更） */
   font-size: 1.2em; /* アイコンのサイズを調整（必要に応じて変更） */
 }
@@ -221,7 +221,20 @@ button#new_b i {
   font-size: 0.75rem;
 }
 
+button.save2{
+	opacity: 0.5;
+	cursor: not-allowed;
+}
 
+button.save3{
+	display: none;
+}
+.updateOpenField{
+	display: none;
+}
+.beforeOpenField{
+	display: block;
+}
 
 
 /*追加したCSS*/

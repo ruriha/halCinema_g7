@@ -35,9 +35,9 @@
       <div id="hidari_soto">
         <div id="hidari">
           <div id="all">
-            <a href="data_1.html">映画情報　　　　　〉</a>
-            <a href="data_2.html">上映スケジュール　〉</a>
-            <a href="news">ログアウト　　　　〉</a>
+            <a th:href="@{/data1}">映画情報　　　　　〉</a>
+            <a th:href="@{/data2}">上映スケジュール　〉</a>
+            <a th:href="@{/mng_login}">ログアウト　　　　〉</a>
           </div>
         </div>
       </div>
@@ -46,13 +46,13 @@
       <div id="migi">
         <div id="box">
           <div class="boxbox">
-            <a href="data_1.html" class="boxbtn"><img src="../images/movie.png" alt="button" class="icon">映画情報</a>
+            <a class="boxbtn" th:href="@{/data1}"><img src="../images/movie.png" alt="button" class="icon">映画情報</a>
           </div>
           <div class="boxbox">
-            <a href="data_2.html" class="boxbtn" id="days"><img src="../images/calendar.png" alt="button" class="icon">上映スケジュール</a>
+            <a class="boxbtn" id="days" th:href="@{/data2}"><img src="../images/calendar.png" alt="button" class="icon">上映スケジュール</a>
           </div>
           <div class="boxbox">
-            <a href="" class="boxbtn"><img src="../images/logout.png" alt="button" class="icon">ログアウト</a>
+            <a class="boxbtn" th:href="@{/mng_login}"><img src="../images/logout.png" alt="button" class="icon">ログアウト</a>
           </div>
         </div>
 
@@ -66,41 +66,93 @@
               <th>上映日</th>
               <th>上映開始時間</th>
               <th>上映終了時間</th>
-              <th class="btn">編集/削除</th>
+              <th class="btn">保存/削除</th>
             </tr>
+            
+			<!-- データ追加 -->
+			<form id="screenForm" method="post">
+			    <tr>
+			        <td class="title2">
+			            <select class="cell-input" name="titleName" id="titleName">
+			                <option th:if="${title == null}" disabled selected value>選択してください</option>
+			                <option th:if="${title != null}" th:text="${title}" th:value="${title}"></option>
+			                <option th:each="movieTitle : ${movieTitles}" th:text="${movieTitle[0]}" th:value="${movieTitle[0]}"></option>
+			            </select>
+			            <input type="hidden" name="movieId" id="movieId" th:value="${movieId}">
+			        </td>
+			        <td class="sc">
+			            <select class="cell-input" name="screenId" id="screenId">
+			                <option th:if="${screen == null}" disabled selected value>選択してください</option>
+			                <option th:if="${screen != null}" th:value="${screen}" th:text="${screen}"></option>
+			                <option th:each="screen : ${screens}" th:value="${screen[0]}" th:text="${screen[0]}"></option>
+			            </select>
+			        </td>
+			        <td class="day">
+			            <input type="date" class="cell-input" name="sDate" id="date" th:value="${sDate != null ? sDate : ''}">
+			        </td>
+			        <td class="open">
+			            <select class="cell-input" name="screeningTime" id="screeningTime">
+			                <option th:if="${screeningTimeStr == null}" disabled selected value>上映日を選択してください</option>
+			                <option th:if="${screeningTimeStr != null}" th:value="${screeningTimeStr}" th:text="${screeningTimeStr}"></option>
+			                <option th:each="time : ${times}" th:text="${time}" th:value="${time}"></option>
+			            </select>
+			        </td>
+			        <td class="close">
+						<span th:if="${endScreening == null}">上映開始時間を選択してください</span>
+						<span th:if="${endScreening != null}" th:text="${endScreening}"></span>
+					</td>
+			        <td class="btn">
+			            <div class="btn_g">
+			                <button th:if="${endScreening == null}" type="submit" class="save2" disabled><i class="fas fa-save"></i></button>
+			                <button th:if="${endScreening != null}" type="submit" class="save"><i class="fas fa-save"></i></button>
+			            </div>
+			        </td>
+			    </tr>
+			</form>
+            
+            
 				
-				        
-<!--			<tr th:each="screeningSchedule : ${screeningSchedules}">-->
-<!--			    <td class="title2">-->
-<!--					<p id="titleTxt" th:text="${screeningSchedule[1]}"></p>-->
-<!--					<select class="cell-input" id="movieTitleSelect" style="display: none;">-->
-<!--					  <option th:text="${screeningSchedule[1]}" disabled selected></option>-->
-<!--					  <option th:each="movieTitle : ${movieTitles}" th:text="${movieTitle[0]}"></option>-->
-<!--					</select>-->
-<!--				</td>-->
-<!--			    <td class="sc">-->
-<!--					<p th:text="${screeningSchedule[2]}"></p>-->
-<!--					<select class="cell-input" id="screenSelect" style="display: none;">-->
-<!--					  <option th:text="${screeningSchedule[2]}" disabled selected></option>-->
-<!--					  <option th:each="screen : ${screens}" th:text="${screen[0]}"></option>-->
-<!--					</select>-->
-<!--				</td>-->
-<!--			    <td class="day"><p th:text="${#temporals.format(screeningSchedule[3], 'yyyy-MM-dd')}"></p></td>-->
-<!--				<td class="open"><p th:text="${#temporals.format(screeningSchedule[3], 'HH:mm')}"></p></td>-->
-<!--				<td class="close"><p th:text="${#temporals.format(screeningSchedule[3].plusMinutes(screeningSchedule[4]), 'HH:mm')}"></p></td>-->
-<!--			    <td class="btn">-->
-<!--			        <div class="btn_g">-->
-<!--			            <button class="edit edit2"><i class="fas fa-edit"></i></button>-->
-<!--			            <button class="del"><i class="fas fa-trash-alt"></i></button>-->
-<!--			        </div>-->
-<!--			    </td>-->
-<!--			</tr>-->
+			<!-- データ参照 -->
+			<tr th:each="screeningSchedule : ${screeningSchedules}">
+			    <td class="title2">
+					<p id="titleTxt" th:text="${screeningSchedule[1]}"></p>
+				</td>
+			    <td class="sc">
+					<p th:text="${screeningSchedule[2]}"></p>
+				</td>
+			    <td class="day"><p th:text="${#temporals.format(screeningSchedule[3], 'yyyy-MM-dd')}"></p></td>
+				<td class="open">
+					<p th:text="${#temporals.format(screeningSchedule[3], 'HH:mm')}" class="beforeOpenField" ></p>
+		            <select class="cell-input updateOpenField" name="updateOpen" id="updateOpen">
+		                <option disabled selected th:value="${#temporals.format(screeningSchedule[3], 'HH:mm')}" th:text="${#temporals.format(screeningSchedule[3], 'HH:mm')}"></option>
+		                <option th:each="updateTime : ${screeningSchedule[6]}" th:text="${updateTime}" th:value="${updateTime}"></option>
+		            </select>        			
+				</td>
+				<td class="close">
+					<input class="runningTimeField" type="hidden" th:value="${screeningSchedule[4]}"/>					
+					<p class="beforeClose" th:text="${#temporals.format(screeningSchedule[3].plusMinutes(screeningSchedule[4]), 'HH:mm')}"></p>
+					<p class="afterClose"></p>
+				</td>
+			    <td class="btn">
+			        <div class="btn_g">
+			            <form method="post" th:action="@{/ssUpdate}">
+							<input type="hidden" th:value="${#temporals.format(screeningSchedule[3], 'yyyy-MM-dd')}" name="updateDay"/>
+							<input class="updateTimeEdit" type="hidden" th:value="${#temporals.format(screeningSchedule[3], 'HH:mm')}" name="updateTime"/>
+							<input type="hidden" th:value="${screeningSchedule[0]}" name="updateId"/>
+	            			<button type="button" class="edit" onclick="toggleUpdateField(this)"><i class="fas fa-edit"></i></button>
+	            			<button type="submit" class="save3"><i class="fas fa-save"></i></button>
+			            </form>
+			            <form method="post" th:action="@{/ssDel}">
+							<input type="hidden" th:value="${screeningSchedule[0]}" name="delId"/>
+			            	<button type="submit" class="del"><i class="fas fa-trash-alt"></i></button>							
+						</form>
+			        </div>
+			    </td>
+			</tr>
+			
+			
 			
           </table>
-          
-          <div id="btns">
-            <button id="new_b"><i class="fas fa-plus"></i></button>
-          </div>
         </div>
       </div>
     </div>
