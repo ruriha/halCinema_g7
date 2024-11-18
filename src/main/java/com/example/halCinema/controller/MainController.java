@@ -713,7 +713,15 @@ public class MainController {
 
 	    //  data2.html
 	  @RequestMapping("/data2")
-	  public String data2(Model model, @RequestParam(required = false) LocalDate sDate, @RequestParam(required = false) Integer screenId, @RequestParam(required = false) String titleName, @RequestParam(required = false) LocalTime screeningTime, @RequestParam(required = false) LocalDate seachDate, @RequestParam(required = false) Integer searchScreen, @RequestParam(required = false) String searchTitle){
+	  public String data2(Model model, @RequestParam(required = false) LocalDate sDate, @RequestParam(required = false) Integer screenId, @RequestParam(required = false) String titleName, @RequestParam(required = false) LocalTime screeningTime, @RequestParam(required = false) LocalDate seachDate, @RequestParam(required = false) Integer searchScreen, @RequestParam(required = false) String searchTitle, HttpSession session){
+		//  管理者ログインの状態確認
+		String loggedInUserId = (String) session.getAttribute("loggedInUserId");
+		System.out.println(loggedInUserId);
+		String btnStatus = null;
+		if(loggedInUserId != null) {
+			btnStatus = "visible";
+		}
+		model.addAttribute("btnStatus", btnStatus);
 		//  上映スケジュールの取得
 		List<Object[]> screeningSchedules = null;
 		if(searchTitle != null || searchScreen != null || seachDate != null) {
@@ -908,6 +916,14 @@ public class MainController {
 	    LocalDateTime updateDatetime = updateDay.atTime(updateTime);
 		ScreeningScheduleService.updateScreeningDatetime(updateDatetime, updateId);
 	    return "redirect:/data2"; 
+	  }
+	  
+
+	  // 管理者ログアウト（Securityなし仮）
+	  @RequestMapping("/mng_logout")
+	  public String mng_logout(HttpSession session){
+	      session.invalidate();
+	      return "redirect:/mng_login";
 	  }
 	 
 
