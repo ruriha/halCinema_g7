@@ -65,6 +65,42 @@ public class ScreeningScheduleService {
     }
     
     
+	//  指定月の上映スケジュール取得
+    public List<Object[]> findMonthScreeningSchedule(Integer month) {
+        return ScreeningScheduleRepositoty.findMonthScreeningSchedule(month);
+    }	
+    
+    
+    //  指定条件の上映スケジュール取得
+    public List<Object[]> findSelectAllScreeningSchedule(Integer searchScreen, LocalDate searchDate, Integer searchMovieId) {
+        return ScreeningScheduleRepositoty.findSelectAllScreeningSchedule(searchScreen, searchDate, searchMovieId);
+    }
+    //  指定条件の上映スケジュール取得
+    public List<Object[]> findSelectTitleScreeningSchedule(Integer searchMovieId) {
+        return ScreeningScheduleRepositoty.findSelectTitleScreeningSchedule(searchMovieId);
+    }    
+    //  指定条件の上映スケジュール取得
+    public List<Object[]> findSelectDateScreeningSchedule(LocalDate searchDate) {
+        return ScreeningScheduleRepositoty.findSelectDateScreeningSchedule(searchDate);
+    }    
+    //  指定条件の上映スケジュール取得
+    public List<Object[]> findSelectScreenScreeningSchedule(Integer searchScreen) {
+        return ScreeningScheduleRepositoty.findSelectScreenScreeningSchedule(searchScreen);
+    }    
+    //  指定条件の上映スケジュール取得
+    public List<Object[]> findSelectScreenAndDateScreeningSchedule(Integer searchScreen, LocalDate searchDate) {
+        return ScreeningScheduleRepositoty.findSelectScreenAndDateScreeningSchedule(searchScreen, searchDate);
+    }    
+    //  指定条件の上映スケジュール取得
+    public List<Object[]> findSelectScreenAndTitleScreeningSchedule(Integer searchScreen, Integer searchMovieId) {
+        return ScreeningScheduleRepositoty.findSelectScreenAndTitleScreeningSchedule(searchScreen, searchMovieId);
+    }    
+    //  指定条件の上映スケジュール取得
+    public List<Object[]> findSelectDateAndTitleScreeningSchedule(LocalDate searchDate, Integer searchMovieId) {
+        return ScreeningScheduleRepositoty.findSelectDateAndTitleScreeningSchedule(searchDate, searchMovieId);
+    }
+    
+    
 	//  上映スケジュールの最大ID取得
     public List<Object[]> findMaxScreeningScheduleId() {
         return ScreeningScheduleRepositoty.findMaxScreeningScheduleId();
