@@ -59,7 +59,84 @@
         <div id="box-database-divider"></div>
 
         <div id="database">
-          <table>
+			
+			<!-- 検索 -->
+			<div class="dataContent">
+				<p class="dataLbl">フィルター</p>
+				<div class="dataBox">
+					<form method="post" th:action="@{/data2}">
+						<table class="dataTable">
+							<tr>
+								<td class="dataTh">タイトル</td>
+								<td class="dataTh2">
+						            <select class="cell-input" name="searchTitle">
+						                <option disabled selected value>選択してください</option>
+						                <option th:each="movieTitle : ${movieTitles}" th:text="${movieTitle[0]}" th:value="${movieTitle[0]}"></option>
+						            </select>
+								</td>
+								<td>　</td>
+							</tr>
+							<tr>
+								<td class="dataTh">スクリーン</td>
+								<td class="dataTh2">
+						            <select class="cell-input" name="searchScreen">
+						                <option disabled selected value>選択してください</option>
+						                <option th:each="screen : ${screens}" th:value="${screen[0]}" th:text="${screen[0]}"></option>
+						            </select>
+								</td>
+								<td>　</td>
+							</tr>
+							<tr>
+								<td class="dataTh">上映日</th>
+								<td class="dataTh2">
+			            			<input type="date" class="cell-input" name="seachDate">									
+								</td>
+								<td>　</td>
+							</tr>
+							<tr class="dataBtn">
+								<td colspan="3">
+									<button type="submit">検索</button>
+								</td>
+							</tr>
+						</table>
+					</form>
+				</div>
+			</div>
+			
+			<!-- 一括登録 -->
+			<div class="dataContent">
+				<p class="dataLbl">一括登録</p>
+				<div class="dataBox">
+					<form method="post" th:action="@{/addBlukSchedule}">
+						<table class="dataTable">
+							<tr>
+								<td class="dataAddTh">
+						            <select class="cell-input" name="month">
+						                <option disabled selected value>選択してください</option>
+						                <option value="1">1</option>
+						                <option value="2">2</option>
+						                <option value="3">3</option>
+						                <option value="4">4</option>
+						                <option value="5">5</option>
+						                <option value="6">6</option>
+						                <option value="7">7</option>
+						                <option value="8">8</option>
+						                <option value="9">9</option>
+						                <option value="10">10</option>
+						                <option value="11">11</option>
+						                <option value="12">12</option>
+						            </select>									
+								</td>
+								<td class="dataAddTh2">ヵ月先までコピーする</td>
+								<td class="dataAddBtn"><button type="submit">登録</button></td>
+							</tr>
+						</table>
+					</form>
+				</div>
+			</div>
+			
+			
+          <table class="formTable">
             <tr>
               <th>タイトル</th>
               <th>スクリーン</th>

@@ -3,6 +3,7 @@ package com.example.halCinema.controller;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -712,19 +713,54 @@ public class MainController {
 
 	    //  data2.html
 	  @RequestMapping("/data2")
-	  public String data2(Model model, @RequestParam(required = false) LocalDate sDate, @RequestParam(required = false) Integer screenId, @RequestParam(required = false) String titleName, @RequestParam(required = false) LocalTime screeningTime){
+	  public String data2(Model model, @RequestParam(required = false) LocalDate sDate, @RequestParam(required = false) Integer screenId, @RequestParam(required = false) String titleName, @RequestParam(required = false) LocalTime screeningTime, @RequestParam(required = false) LocalDate seachDate, @RequestParam(required = false) Integer searchScreen, @RequestParam(required = false) String searchTitle){
 		//  上映スケジュールの取得
-		List<Object[]> screeningSchedules = ScreeningScheduleService.findAllScreeningSchedule();
+		List<Object[]> screeningSchedules = null;
+		if(searchTitle != null || searchScreen != null || seachDate != null) {
+			if(searchTitle != null) {
+				List<Object[]> searchMovieId = MovieService.findMovieId(searchTitle);
+				Object[] searchMovieIdElement = searchMovieId.get(0);
+				Integer searchMovieIdStr = (Integer)searchMovieIdElement[0];
+				if(searchScreen != null && seachDate != null) {
+					screeningSchedules = ScreeningScheduleService.findSelectAllScreeningSchedule(searchScreen, seachDate, searchMovieIdStr);							
+				}
+				else if(searchScreen != null) {
+					screeningSchedules = ScreeningScheduleService.findSelectScreenAndTitleScreeningSchedule(searchScreen, searchMovieIdStr);					
+				}
+				else if(seachDate != null) {
+					screeningSchedules = ScreeningScheduleService.findSelectDateAndTitleScreeningSchedule(seachDate, searchMovieIdStr);							
+				}
+				else {
+					screeningSchedules = ScreeningScheduleService.findSelectTitleScreeningSchedule(searchMovieIdStr);					
+				}
+			}
+			else if(searchScreen != null) {
+				if(seachDate != null) {
+					screeningSchedules = ScreeningScheduleService.findSelectScreenAndDateScreeningSchedule(searchScreen, seachDate);							
+				}
+				else {
+					screeningSchedules = ScreeningScheduleService.findSelectScreenScreeningSchedule(searchScreen);						
+				}						
+			}
+			else if(seachDate != null) {
+				screeningSchedules = ScreeningScheduleService.findSelectDateScreeningSchedule(seachDate);							
+			}			
+		}else {
+			screeningSchedules = ScreeningScheduleService.findAllScreeningSchedule();
+		}
+		List<Object[]> screeningSchedules2 = ScreeningScheduleService.findAllScreeningSchedule();
+		
         for (Object[] screeningSchedule : screeningSchedules) {
             LocalTime startTime = LocalTime.of(8, 0);
             LocalTime endTime = LocalTime.of(21, 59);
             List<String> updateTimes = new ArrayList<>();
+            LocalDateTime screeningDate = (LocalDateTime) screeningSchedule[3];
             if (screeningSchedule[4] != null) {
                 // 除外する時間範囲のリストを生成
                 List<TimeRange> excludeRanges = new ArrayList<>();
-                for (Object[] screeningSchedule2 : screeningSchedules) {
+                for (Object[] screeningSchedule2 : screeningSchedules2) {
                     LocalDateTime scheduleStart = (LocalDateTime) screeningSchedule2[3];
-                    if (scheduleStart.toLocalDate().equals(sDate) && screeningSchedule2[2].equals(screenId)) {
+                    if (scheduleStart.toLocalDate().equals(screeningDate.toLocalDate()) && screeningSchedule2[2].equals(screeningSchedule[2])) {
                         int durationMinutes = (int) screeningSchedule2[4] + 15 + (int) screeningSchedule[4];
                         excludeRanges.add(new TimeRange(scheduleStart.toLocalTime().minusMinutes((int)screeningSchedule[4]), durationMinutes));
                     }
@@ -768,7 +804,7 @@ public class MainController {
 	        if (sDate != null && screenId != null && runningTime != null) {
 	            // 除外する時間範囲のリストを生成
 	            List<TimeRange> excludeRanges = new ArrayList<>();
-	            for (Object[] screeningSchedule : screeningSchedules) {
+	            for (Object[] screeningSchedule : screeningSchedules2) {
 	                LocalDateTime scheduleStart = (LocalDateTime) screeningSchedule[3];
 	                if (scheduleStart.toLocalDate().equals(sDate) && screeningSchedule[2].equals(screenId)) {
 	                    int durationMinutes = (int) screeningSchedule[4] + 15 + runningTime;
@@ -834,6 +870,36 @@ public class MainController {
 		  Screen screen = ScreenService.findScreenById(screenId);
 		  Movie movie = MovieService.findMovieById(movieId);
 		  ScreeningScheduleService.addScreeningSchedule(screeningDatetime, screen, movie);
+		  return "redirect:/data2";
+	  }
+	  //  上映スケジュール一括追加
+	  @RequestMapping("/addBlukSchedule")
+	  public String addBulkSchedule(@RequestParam(required = false) Integer month) {
+		  List<Object[]> screeningSchedules = ScreeningScheduleService.findMonthScreeningSchedule(LocalDate.now().getMonthValue());
+		  for (int i = LocalDate.now().getMonthValue() + 1 ; i < LocalDate.now().getMonthValue() + month +1 ; i++) {
+			  int i2;
+			  int year;
+			  if(i>12) {
+				  i2 = i % 12;
+				  year = LocalDate.now().getYear() +1;
+			  }else {
+				  i2 = i;
+				  year = LocalDate.now().getYear();
+			  }
+			  
+			  
+		      for (Object[] screeningSchedule : screeningSchedules) {
+		          LocalDateTime scheduleDateTime = (LocalDateTime) screeningSchedule[3];
+		          LocalDate scheduleDate = scheduleDateTime.toLocalDate();
+	              YearMonth yearMonth = YearMonth.of(scheduleDate.getYear(), i2);
+	              if (scheduleDate.getDayOfMonth() <= yearMonth.lengthOfMonth()) {
+	            	  LocalDateTime updatedDateTime = scheduleDateTime.withYear(year).withMonth(i2);
+					  Screen screen = ScreenService.findScreenById((Integer)screeningSchedule[2]);
+					  Movie movie = MovieService.findMovieById((Integer)screeningSchedule[5]);
+					  ScreeningScheduleService.addScreeningSchedule(updatedDateTime, screen, movie);
+	              }	
+		      }
+		  }
 		  return "redirect:/data2";
 	  }
 	  //  上映スケジュール更新

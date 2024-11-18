@@ -58,7 +58,7 @@ a {
 #database{
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
   overflow-x: auto; /* 横スクロールを可能にする */
   white-space: nowrap;
   padding: 130px 0 0 10px;
@@ -100,31 +100,30 @@ a {
 
 #box-database-divider {
   border-top: 2px solid #666; /* 線のスタイルを設定 */
-  margin: 20px 0; /* 線の上下の余白を設定 */
+  margin: 40px 0; /* 線の上下の余白を設定 */
 }
 
-
-table {
+.formTable{
     width: 100%;
     border-collapse: collapse;
     margin: 0 auto;
     margin-top: 20px;
     font-size: 0.8rem;
   }
-  table, th, td {
+  .formTable table, .formTable th, .formTable td {
     border: 1px solid white;
   }
-  th, td {
+  .formTable th, .formTable td {
     padding: 7px;
     text-align: left;
     white-space: normal; /* テキストの折り返しを許可 */
     word-wrap: break-word; /* テキストをセル内で折り返す */
     overflow-wrap: break-word; /* テキストの折り返しを許可 */
   }
-  th {
+  .formTable th {
     background-color: #777;
   }
-  tr:nth-child(even) {
+  .formTable tr:nth-child(even) {
     background-color: #333;
   }
   .id{
@@ -243,5 +242,62 @@ button.save3{
 }.edit2:hover{
 	cursor: not-allowed;
 }
+
+
+
+.dataContent{
+	display: flex;
+	width: 78vw;
+	padding: 30px 30px 30px 0;
+}
+.dataLbl{
+	width: 20%;
+	font-size: 1.3rem;
+}
+.dataBox{
+	background: #333;
+	padding: 20px;
+	width: 100%;
+}
+.dataTable{
+	width: 100%;
+	margin:0;
+	text-align: left;
+}
+.dataBtn{
+	text-align: right;
+}
+.dataBtn button:hover{
+	cursor: pointer;
+}
+.dataTh{
+	width: 20%;
+	padding: 10px 0;
+}
+.dataTh2{
+	width: 50%;
+}
+
+
+.dataAddTh{
+	width: 20%;
+	padding: 10px 10px 10px 0;
+}
+.dataAddTh2{
+/*	width: 50%;*/
+}
+.dataAddBtn{
+	text-align: right;
+}
+.dataAddBtn button:hover{
+	cursor: pointer;
+}
+
+
+
+
+
+
+
 
 

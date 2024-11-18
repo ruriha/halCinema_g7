@@ -68,6 +68,72 @@ public interface ScreeningScheduleRepositoty  extends JpaRepository<ScreeningSch
     	    "order by ss.screeningDatetime DESC")
 	List<Object[]> findAllScreeningSchedule();
 	
+	//  指定月の上映スケジュール取得
+    @Query("select ss.screeningScheduleId, ss.movie.movieTitle, ss.screen.screenId, ss.screeningDatetime, ss.movie.runningTime, ss.movie.movieId " +
+    		"from screeningSchedule ss " +
+    		"inner join ss.movie mo " +
+    	    "where MONTH(ss.screeningDatetime) = ?1 " +
+    	    "order by ss.screeningDatetime ASC")
+	List<Object[]> findMonthScreeningSchedule(Integer month);
+	
+	
+	
+	//  指定条件の上映スケジュール取得
+	@Query("select ss.screeningScheduleId, ss.movie.movieTitle, ss.screen.screenId, ss.screeningDatetime, ss.movie.runningTime, ss.movie.movieId " +
+	           "from screeningSchedule ss " +
+	           "inner join ss.movie mo " +
+	           "where ss.screen.screenId = ?1 "+
+	           "and date(ss.screeningDatetime) = ?2 "+
+	           "and ss.movie.movieId = ?3 "+
+	           "order by ss.screeningDatetime DESC")
+	List<Object[]> findSelectAllScreeningSchedule(Integer searchScreen, LocalDate searchDate, Integer searchMovieId);
+	//  指定条件の上映スケジュール取得
+	@Query("select ss.screeningScheduleId, ss.movie.movieTitle, ss.screen.screenId, ss.screeningDatetime, ss.movie.runningTime, ss.movie.movieId " +
+	           "from screeningSchedule ss " +
+	           "inner join ss.movie mo " +
+	           "where ss.movie.movieId = ?1 "+
+	           "order by ss.screeningDatetime DESC")
+	List<Object[]> findSelectTitleScreeningSchedule(Integer searchMovieId);
+	//  指定条件の上映スケジュール取得
+	@Query("select ss.screeningScheduleId, ss.movie.movieTitle, ss.screen.screenId, ss.screeningDatetime, ss.movie.runningTime, ss.movie.movieId " +
+	           "from screeningSchedule ss " +
+	           "inner join ss.movie mo " +
+	           "where date(ss.screeningDatetime) = ?1 " +
+	           "order by ss.screeningDatetime DESC")
+	List<Object[]> findSelectDateScreeningSchedule(LocalDate searchDate);
+	
+	//  指定条件の上映スケジュール取得
+	@Query("select ss.screeningScheduleId, ss.movie.movieTitle, ss.screen.screenId, ss.screeningDatetime, ss.movie.runningTime, ss.movie.movieId " +
+	           "from screeningSchedule ss " +
+	           "inner join ss.movie mo " +
+	           "where ss.screen.screenId = ?1 "+
+	           "order by ss.screeningDatetime DESC")
+	List<Object[]> findSelectScreenScreeningSchedule(Integer searchScreen);
+	//  指定条件の上映スケジュール取得
+	@Query("select ss.screeningScheduleId, ss.movie.movieTitle, ss.screen.screenId, ss.screeningDatetime, ss.movie.runningTime, ss.movie.movieId " +
+	           "from screeningSchedule ss " +
+	           "inner join ss.movie mo " +
+	           "where ss.screen.screenId = ?1 "+
+	           "and date(ss.screeningDatetime) = ?2 "+
+	           "order by ss.screeningDatetime DESC")
+	List<Object[]> findSelectScreenAndDateScreeningSchedule(Integer searchScreen, LocalDate searchDate);
+	//  指定条件の上映スケジュール取得
+	@Query("select ss.screeningScheduleId, ss.movie.movieTitle, ss.screen.screenId, ss.screeningDatetime, ss.movie.runningTime, ss.movie.movieId " +
+	           "from screeningSchedule ss " +
+	           "inner join ss.movie mo " +
+	           "where ss.screen.screenId = ?1 "+
+	           "and ss.movie.movieId = ?2 "+
+	           "order by ss.screeningDatetime DESC")
+	List<Object[]> findSelectScreenAndTitleScreeningSchedule(Integer searchScreen, Integer searchMovieId);
+	//  指定条件の上映スケジュール取得
+	@Query("select ss.screeningScheduleId, ss.movie.movieTitle, ss.screen.screenId, ss.screeningDatetime, ss.movie.runningTime, ss.movie.movieId " +
+	           "from screeningSchedule ss " +
+	           "inner join ss.movie mo " +
+	           "where date(ss.screeningDatetime) = ?1 "+
+	           "and ss.movie.movieId = ?2 "+
+	           "order by ss.screeningDatetime DESC")
+	List<Object[]> findSelectDateAndTitleScreeningSchedule(LocalDate searchDate, Integer searchMovieId);
+	
 	
 	
 	
