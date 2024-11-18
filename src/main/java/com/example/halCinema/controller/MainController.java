@@ -716,7 +716,6 @@ public class MainController {
 	  public String data2(Model model, @RequestParam(required = false) LocalDate sDate, @RequestParam(required = false) Integer screenId, @RequestParam(required = false) String titleName, @RequestParam(required = false) LocalTime screeningTime, @RequestParam(required = false) LocalDate seachDate, @RequestParam(required = false) Integer searchScreen, @RequestParam(required = false) String searchTitle, HttpSession session){
 		//  管理者ログインの状態確認
 		String loggedInUserId = (String) session.getAttribute("loggedInUserId");
-		System.out.println(loggedInUserId);
 		String btnStatus = null;
 		if(loggedInUserId != null) {
 			btnStatus = "visible";
