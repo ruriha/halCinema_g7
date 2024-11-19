@@ -318,7 +318,7 @@ public class MainController {
 	  @RequestMapping("/reserve")
 	  public String reserve(@RequestParam(name = "screeningScheduleId") Integer screeningScheduleId, Model model, HttpSession session){
 //		会員情報取得
-		Integer memberId = (Integer) session.getAttribute("userId");//  ログイン時のセッションからID取得
+		UUID memberId = (UUID) session.getAttribute("userId");//  ログイン時のセッションからID取得
 		System.out.println("memberid:"+memberId);
 		List<Object[]> memberList = MemberService.findReservationMember(memberId);
 		model.addAttribute("memberList", memberList);
@@ -362,7 +362,7 @@ public class MainController {
 
 	  // rsv_cfm.html
 	  @RequestMapping("/reserve_conf")
-	  public String reserve_conf(@RequestParam(required = false) Integer seatNumber,@RequestParam(required = false) Integer guestSeatNumber,@RequestParam(required = false) Integer screeningScheduleId ,@RequestParam(required = false) Integer memberId,@RequestParam(required = false) String selectedCell1Content,@RequestParam(required = false) String selectedCell2Content,  Model model){
+	  public String reserve_conf(@RequestParam(required = false) Integer seatNumber,@RequestParam(required = false) Integer guestSeatNumber,@RequestParam(required = false) Integer screeningScheduleId ,@RequestParam(required = false) UUID memberId,@RequestParam(required = false) String selectedCell1Content,@RequestParam(required = false) String selectedCell2Content,  Model model){
 //		上映スケジュール取得
 		List<Object[]> screeningScheduleList = ScreeningScheduleService.findSelectScreeningSchedule(screeningScheduleId);
 		model.addAttribute("screeningScheduleList", screeningScheduleList);
@@ -383,7 +383,7 @@ public class MainController {
 
 	  // rsv_comp.html
 	  @RequestMapping("/reserve_comp")
-	  public String reserve_comp(@RequestParam(required = false) Integer seatNumber,@RequestParam(required = false) Integer guestSeatNumber,@RequestParam(required = false) Integer screeningScheduleId, @RequestParam(required = false) Integer memberId,  Model model){
+	  public String reserve_comp(@RequestParam(required = false) Integer seatNumber,@RequestParam(required = false) Integer guestSeatNumber,@RequestParam(required = false) Integer screeningScheduleId, @RequestParam(required = false) UUID memberId,  Model model){
 //		予約
 		if(guestSeatNumber == null) {
 			guestSeatNumber = 0;
@@ -700,7 +700,6 @@ public class MainController {
 	      model.addAttribute("movies", movies);  // moviesリストをテンプレートに渡す
 	      return "data_1";
 	  }
-	  
 	  @DeleteMapping("/movies/{id}")
 	  public ResponseEntity<Void> deleteMovie(@PathVariable("id") Integer id) {  // Integer型に統一
 	      try {
@@ -747,11 +746,11 @@ public class MainController {
 				}
 				else {
 					screeningSchedules = ScreeningScheduleService.findSelectScreenScreeningSchedule(searchScreen);						
-				}						
+				}
 			}
 			else if(seachDate != null) {
 				screeningSchedules = ScreeningScheduleService.findSelectDateScreeningSchedule(seachDate);							
-			}			
+			}
 		}else {
 			screeningSchedules = ScreeningScheduleService.findAllScreeningSchedule();
 		}
@@ -924,7 +923,35 @@ public class MainController {
 	      session.invalidate();
 	      return "redirect:/mng_login";
 	  }
-	 
+	  
+	  
+	  
+	  //  ４次開発  //////////////////////////////////////////////////////////////////////////////////////////////
+	  
+	  
+	  // 物販システム  /////////////
+//	  @RequestMapping("/shop")
+//	  public String shop(){
+//	  	  会員認証されている場合はshopへ
+//	  	  そうでない場合は店頭トップへリダイレクト
+//	      return "shop";
+//	  }
+	  
+	  
+	  
+//	  @RequestMapping("/shopConf")
+//	  public String shopConf(){
+//	  	  選択した商品名や商品の個数を受け取り、内容を確認させる
+//	      return "shop_conf";
+//	  }
+	  
+	  
+	  
+//	  @RequestMapping("/shopConp")
+//	  public String shopConp(){
+//	  	  購入した商品を登録して、購入履歴確認メールを送信する
+//	      return "shop_conp";
+//	  }
 
 
 }

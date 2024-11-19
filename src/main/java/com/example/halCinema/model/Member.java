@@ -2,6 +2,7 @@ package com.example.halCinema.model;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,7 +14,8 @@ public class Member {
 
     @Id
     @GeneratedValue
-    private Integer memberId;
+    private UUID memberId;
+//    private Integer memberId;
 
     private String memberName;
 
@@ -40,13 +42,21 @@ public class Member {
     private List<Reservation> reservation;
     
     
-    public Integer getMemberId() {
+    public UUID getMemberId() {
         return memberId;
     }
 
-    public void setMemberId(Integer memberId) {
+    public void setMemberId(UUID memberId) {
         this.memberId = memberId;
     }
+    
+//    public Integer getMemberId() {
+//        return memberId;
+//    }
+//
+//    public void setMemberId(Integer memberId) {
+//        this.memberId = memberId;
+//    }
     
     public String getMemberName() {
         return memberName;
