@@ -29,6 +29,6 @@ public interface ReservationRepositoty  extends JpaRepository<Reservation, UUID>
 	           "from reservation r " +
 	           "where r.member.memberId = ?1 "+
 	           "and r.reservationDatetime = ?2")
-	List<Object[]> findReservationId(Integer memberId, LocalDateTime reservationDatetime);
+	List<Object[]> findReservationId(UUID memberId, LocalDateTime reservationDatetime);
 	
 }
