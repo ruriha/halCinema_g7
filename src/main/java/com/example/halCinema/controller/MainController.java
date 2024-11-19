@@ -31,17 +31,12 @@ import com.example.halCinema.service.EmailService;
 import com.example.halCinema.service.MemberService;
 import com.example.halCinema.service.MovieService;
 import com.example.halCinema.service.NewsService;
+import com.example.halCinema.service.OrderDetailService;
+import com.example.halCinema.service.OrderService;
+import com.example.halCinema.service.ProductService;
 import com.example.halCinema.service.ReservationService;
 import com.example.halCinema.service.ScreenService;
 import com.example.halCinema.service.ScreeningScheduleService;
-import com.example.halCinema.service.TimeService;
-import com.example.halCinema.service.TimeTableService;
-import com.example.halCinema.service.TimeTableService2;
-import com.example.halCinema.service.TimeTableService3;
-import com.example.halCinema.service.TimeTableService4;
-import com.example.halCinema.service.TimeTableService5;
-import com.example.halCinema.service.TimeTableService6;
-import com.example.halCinema.service.TimeTableService7;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -63,23 +58,13 @@ public class MainController {
     @Autowired
     ScreenService ScreenService;
     @Autowired
-    TimeService TimeService;
-    @Autowired
-    TimeTableService TimeTableService;
-    @Autowired
-    TimeTableService2 TimeTableService2;
-    @Autowired
-    TimeTableService3 TimeTableService3;
-    @Autowired
-    TimeTableService4 TimeTableService4;
-    @Autowired
-    TimeTableService5 TimeTableService5;
-    @Autowired
-    TimeTableService6 TimeTableService6;
-    @Autowired
-    TimeTableService7 TimeTableService7;
-    @Autowired
     NewsService newsService;
+    @Autowired
+    ProductService ProductService;
+    @Autowired
+    OrderService OrderService;
+    @Autowired
+    OrderDetailService OrderDetailService;
     
     
 	
@@ -929,18 +914,27 @@ public class MainController {
 	  //  ４次開発  //////////////////////////////////////////////////////////////////////////////////////////////
 	  
 	  
+	  //  店頭システムトップではセッションは削除する
+	  
+	  
 	  // 物販システム  /////////////
 //	  @RequestMapping("/shop")
-//	  public String shop(){
-//	  	  会員認証されている場合はshopへ
-//	  	  そうでない場合は店頭トップへリダイレクト
-//	      return "shop";
+//	  public String shop(Model model, HttpSession session){
+//	  	  // 会員認証状態を確認
+//		  String loggedInMemberId = (String) session.getAttribute("loggedInMemberId");
+//	  	  if(loggedInMemberId == null) {
+//		      return "redirect:/店頭トップ";
+//	  	  }else {
+//	  		  List<Object[]> products = ProductService.findAllProduct();
+//      	  model.addAttribute("products", products);	   
+//		      return "shop";
+//	  	  }
 //	  }
 	  
 	  
 	  
 //	  @RequestMapping("/shopConf")
-//	  public String shopConf(){
+//	  public String shopConf(Model model){
 //	  	  選択した商品名や商品の個数を受け取り、内容を確認させる
 //	      return "shop_conf";
 //	  }
