@@ -15,7 +15,6 @@ public class Member {
     @Id
     @GeneratedValue
     private UUID memberId;
-//    private Integer memberId;
 
     private String memberName;
 
@@ -36,6 +35,18 @@ public class Member {
     private Boolean memberStatus;
 
     private String memberPassword;
+
+    private String cardNumber;
+
+    private String cardName;
+
+    private Integer cardCvc;
+
+    private Integer cardYear;
+
+    private Integer cardMonth;
+
+    private Boolean delete;
     
     
     @OneToMany(mappedBy="member")
@@ -49,14 +60,6 @@ public class Member {
     public void setMemberId(UUID memberId) {
         this.memberId = memberId;
     }
-    
-//    public Integer getMemberId() {
-//        return memberId;
-//    }
-//
-//    public void setMemberId(Integer memberId) {
-//        this.memberId = memberId;
-//    }
     
     public String getMemberName() {
         return memberName;
@@ -136,6 +139,54 @@ public class Member {
     
     public String getMemberPassword() {
         return memberPassword;
+    }
+
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+    
+    public String getCardNumber() {
+        return cardNumber;
+    }
+
+    public void setCardName(String cardName) {
+        this.cardName = cardName;
+    }
+    
+    public String getCardName() {
+        return cardName;
+    }
+
+    public void setCardCvc(Integer cardCvc) {
+        this.cardCvc = cardCvc;
+    }
+    
+    public Integer getCardCvc() {
+        return cardCvc;
+    }
+
+    public void setCardYear(Integer cardYear) {
+        this.cardYear = cardYear;
+    }
+    
+    public Integer getCardYear() {
+        return cardYear;
+    }
+
+    public void setCardMonth(Integer cardMonth) {
+        this.cardMonth = cardMonth;
+    }
+    
+    public Integer getCardMonth() {
+        return cardMonth;
+    }
+    
+    public Boolean getDelete() {
+        return delete;
+    }
+
+    public void setDelete(Boolean delete) {
+        this.delete = delete;
     }
     
     
