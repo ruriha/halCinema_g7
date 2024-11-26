@@ -9,12 +9,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
-@Entity(name = "orderDetail")
-public class OrderDetail {
+@Entity(name = "saleDetail")
+public class SaleDetail {
 
     @Id
     @GeneratedValue
-    private UUID orderDetailId;
+    private UUID saleDetailId;
 
     private Integer quentity;
     
@@ -24,16 +24,16 @@ public class OrderDetail {
     private Product product;
     
     @ManyToOne
-    @JoinColumn(name="orderId")
-    private Order order;
+    @JoinColumn(name="saleId")
+    private Sale sale;
     
     
-    public UUID getOrderDetailId() {
-        return orderDetailId;
+    public UUID getSaleDetailId() {
+        return saleDetailId;
     }
 
-    public void setOrderDetailId(UUID orderDetailId) {
-        this.orderDetailId = orderDetailId;
+    public void setSaleDetailId(UUID saleDetailId) {
+        this.saleDetailId = saleDetailId;
     }
     
     
@@ -57,12 +57,12 @@ public class OrderDetail {
         this.product = product;
     }
     
-    public Order getOrder() {
-        return order;
+    public Sale getSale() {
+        return sale;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setSale(Sale sale) {
+        this.sale = sale;
     }
     
 

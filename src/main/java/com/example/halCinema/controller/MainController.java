@@ -9,6 +9,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,22 +20,25 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.halCinema.model.Member;
 import com.example.halCinema.model.Movie;
 import com.example.halCinema.model.News;
+import com.example.halCinema.model.Product;
+import com.example.halCinema.model.Sale;
 import com.example.halCinema.model.Screen;
 import com.example.halCinema.model.ScreeningSchedule;
 import com.example.halCinema.service.EmailService;
 import com.example.halCinema.service.MemberService;
 import com.example.halCinema.service.MovieService;
 import com.example.halCinema.service.NewsService;
-import com.example.halCinema.service.OrderDetailService;
-import com.example.halCinema.service.OrderService;
 import com.example.halCinema.service.ProductService;
 import com.example.halCinema.service.ReservationService;
+import com.example.halCinema.service.SaleDetailService;
+import com.example.halCinema.service.SaleService;
 import com.example.halCinema.service.ScreenService;
 import com.example.halCinema.service.ScreeningScheduleService;
 
@@ -62,9 +66,9 @@ public class MainController {
     @Autowired
     ProductService ProductService;
     @Autowired
-    OrderService OrderService;
+    SaleService SaleService;
     @Autowired
-    OrderDetailService OrderDetailService;
+    SaleDetailService SaleDetailService;
 	  
 	  
 	  //  ログアウト（Securityなし仮）
@@ -885,34 +889,71 @@ public class MainController {
 	  
 	  
 	  // 物販システム  /////////////
-//	  @RequestMapping("/shop")
-//	  public String shop(Model model, HttpSession session){
-//	  	  // 会員認証状態を確認
-//		  String loggedInMemberId = (String) session.getAttribute("loggedInMemberId");
-//	  	  if(loggedInMemberId == null) {
-//		      return "redirect:/店頭トップ";
-//	  	  }else {
-//	  		  List<Object[]> products = ProductService.findAllProduct();
-//      	  model.addAttribute("products", products);	   
-//		      return "shop";
-//	  	  }
-//	  }
+	  @RequestMapping("/shop")
+	  public String shop(Model model, HttpSession session){
+	  	  // 会員認証状態を確認
+		  UUID loggedInMemberId = (UUID) session.getAttribute("loggedInMemberId");
+	  	  if(loggedInMemberId == null) {
+		      return "redirect:/systemtop";
+	  	  }else {
+	  		  List<Object[]> products = ProductService.findAllProduct();
+      	  model.addAttribute("products", products);	   
+		      return "shop";
+	  	  }
+	  }
 	  
 	  
 	  
-//	  @RequestMapping("/shopConf")
-//	  public String shopConf(Model model){
-//	  	  選択した商品名や商品の個数を受け取り、内容を確認させる
-//	      return "shop_conf";
-//	  }
+	  @RequestMapping("/shopConf")
+	  public String shopConf(Model model){
+	      return "shop_conf";
+	  }
+	  
+	  
+	  @RequestMapping("/buy")
+	  public String buy(@RequestBody Map<String, Object> orderData, HttpSession session){
+		  UUID memberId = (UUID) session.getAttribute("loggedInMemberId");
+//		  UUID memberId = UUID.fromString("6d78b80b-8207-44a3-8ece-82737e26c74a");
+
+	      Member member = MemberService.findMemberById(memberId);
+		  LocalDateTime orderDatetime = LocalDateTime.now();
+		  SaleService.saveSale(orderDatetime, member);
+		  List<Object[]> order = SaleService.findSaleId(orderDatetime);
+		  Object[] orderElement = order.get(0);
+		  UUID orderId = (UUID) orderElement[0];
+		  for (Map.Entry<String, Object> entry : orderData.entrySet()) {
+			  String productName = entry.getKey();
+	          Map<String, Object> details = (Map<String, Object>) entry.getValue();
+	          int quantity = (int) details.get("quantity");
+		      Sale orderItem = SaleService.findSaleById(orderId);
+			  List<Object[]> product = ProductService.findProductId(productName);
+			  Object[] productElement = product.get(0);
+			  UUID productId = (UUID) productElement[0];
+		      Product productItem = ProductService.findProductById(productId);
+			  SaleDetailService.saveSaleDetail(quantity, productItem, orderItem);
+	      }
+		  //  メールアドレス取得
+		  List<Object[]> memberMail = MemberService.findMailaddress(memberId);
+		  Object[] mailElement = memberMail.get(0);
+		  String mailAddress = (String) mailElement[0];
+		  //  会員情報取得
+		  List<Object[]> memberList = MemberService.findReservationMember(memberId);
+		  Object[] memberElement = memberList.get(0);
+		  String memberName = (String) memberElement[0];
+			
+		  //  メール送信
+		  String strOrderId = orderId.toString();
+		  String subject = "HALCINEMA | 購入明細をお届けします";
+		  EmailService.sendBoughtEmail(mailAddress, subject, memberName, strOrderId, orderData);
+	      return "redirect:/shopConp";
+	  }
 	  
 	  
 	  
-//	  @RequestMapping("/shopConp")
-//	  public String shopConp(){
-//	  	  購入した商品を登録して、購入履歴確認メールを送信する
-//	      return "shop_conp";
-//	  }
+	  @RequestMapping("/shopConp")
+	  public String shopConp(){
+	      return "shop_conp";
+	  }
 
 
 }

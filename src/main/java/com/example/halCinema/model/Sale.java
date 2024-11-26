@@ -12,14 +12,14 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
-@Entity(name = "order")
-public class Order {
-
+@Entity(name = "sale")
+public class Sale {
+	
     @Id
     @GeneratedValue
-    private UUID orderId;
+    private UUID saleId;
 
-    private LocalDateTime orderDatetime;
+    private LocalDateTime saleDatetime;
     
     
     @ManyToOne
@@ -27,25 +27,25 @@ public class Order {
     private Member member;
     
     
-    @OneToMany(mappedBy="order")
-    private List<OrderDetail> orderDetail;
+    @OneToMany(mappedBy="sale")
+    private List<SaleDetail> saleDetail;
     
     
-    public UUID getOrderId() {
-        return orderId;
+    public UUID getSaleId() {
+        return saleId;
     }
 
-    public void setOrderId(UUID orderId) {
-        this.orderId = orderId;
+    public void setSaleId(UUID saleId) {
+        this.saleId = saleId;
     }
     
     
-    public LocalDateTime getOrderDatetime() {
-        return orderDatetime;
+    public LocalDateTime getSaleDatetime() {
+        return saleDatetime;
     }
 
-    public void setOrderDatetime(LocalDateTime orderDatetime) {
-        this.orderDatetime = orderDatetime;
+    public void setSaleDatetime(LocalDateTime saleDatetime) {
+        this.saleDatetime = saleDatetime;
     }
     
     public Member getMember() {
@@ -58,12 +58,12 @@ public class Order {
     
     
     
-    public List<OrderDetail> getOrderDetail() {
-        return orderDetail;
+    public List<SaleDetail> getSaleDetail() {
+        return saleDetail;
     }
 
-    public void setOrderDetail(List<OrderDetail> orderDetail) {
-        this.orderDetail = orderDetail;
+    public void setSaleDetail(List<SaleDetail> saleDetail) {
+        this.saleDetail = saleDetail;
     }
     
 
