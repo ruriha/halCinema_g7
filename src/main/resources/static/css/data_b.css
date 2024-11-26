@@ -1,0 +1,280 @@
+body {
+  background-color: black;
+  color: white;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  min-width: 1500px;
+}
+a {
+  color: white;
+  text-decoration: none;
+}
+#mid {
+  display: flex;
+}
+#hidari_soto{
+  position: fixed;
+  background-color: black;
+  z-index: 1000;
+  width: 250px;
+  padding: 0 0 1000px 0;
+}
+#hidari {
+  width: 200px;
+  padding: 0;
+  margin: 30px 20px;
+  background-color: #333;
+  border-radius: 5px;
+  height: 140px;
+  z-index: 1000;
+}
+#hidari a {
+  display: block;
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+#hidari a:hover {
+  background-color: #555; /* ホバー時のリンク背景色 */
+}
+#all {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  position: relative;
+}
+#only {
+  display: flex;
+  flex-direction: column;
+  padding: 0px 10px 10px 10px;
+}
+#migi {
+  flex-grow: 1;
+  padding: 0px 20px 20px 250px;
+  width: 80%;
+}
+#database{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  overflow-x: auto; /* 横スクロールを可能にする */
+  white-space: nowrap;
+  padding: 130px 0 0 10px;
+}
+
+#box{
+  display: flex;
+  position: fixed;
+  z-index: 1000;
+  background-color: black;
+  width: calc(100% - 20px);
+  padding: 20px 0 40px 0;
+  border-bottom: 3px solid #fff;
+}
+.boxbox {
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+  background-color: #444;
+  display: block;
+  text-align: center;
+  position: relative;
+}
+.boxbtn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  color: white;
+  text-decoration: none; /* リンクの下線を消す */
+}
+.icon {
+  width: 50px;
+  height: 50px; /* アイコンのサイズに合わせて調整 */
+  margin-bottom: 5px; /* アイコンとテキストの間隔 */
+}
+
+#box-database-divider {
+  border-top: 2px solid #666; /* 線のスタイルを設定 */
+  margin: 20px 0; /* 線の上下の余白を設定 */
+}
+
+
+
+.formTable{
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    margin-top: 20px;
+    font-size: 0.8rem;
+  }
+  .formTable table, .formTable th, .formTable td {
+    border: 1px solid white;
+  }
+  .formTable th, .formTable td {
+    padding: 7px;
+    text-align: left;
+    white-space: normal; /* テキストの折り返しを許可 */
+    word-wrap: break-word; /* テキストをセル内で折り返す */
+    overflow-wrap: break-word; /* テキストの折り返しを許可 */
+  }
+  .formTable th {
+    background-color: #777;
+  }
+  .formTable tr:nth-child(even) {
+    background-color: #333;
+  }
+  .id{
+    width: 20px;
+  }
+  
+td.description{
+  max-width: 200px; /* 最大幅を設定 */
+  overflow: hidden;
+  text-overflow: ellipsis; /* 文字列がオーバーフローした場合に省略記号で表示 */
+  white-space: nowrap; /* テキストが折り返されないようにする */
+  position: relative; /* 相対位置指定 */
+}
+.img{
+  max-width: 100px; /* 最大幅を設定 */
+  overflow: hidden;
+  text-overflow: ellipsis; /* 文字列がオーバーフローした場合に省略記号で表示 */
+  white-space: nowrap; /* テキストが折り返されないようにする */
+  position: relative; /* 相対位置指定 */
+}
+td.description:hover {
+  overflow: visible; /* マウスオーバー時にテキストを全て表示 */
+  white-space: normal; /* 折り返しを許可 */
+  z-index: 1; /* 表示順序を設定 */
+}
+.img:hover {
+  overflow: visible; /* マウスオーバー時にテキストを全て表示 */
+  white-space: normal; /* 折り返しを許可 */
+  z-index: 1; /* 表示順序を設定 */
+}
+.tgl{
+  width: 68px;
+  text-align: center;
+}
+input {
+  margin: 0; /* デフォルトのマージンを削除 */
+}
+.int{
+  width: 70px;
+}
+.data{
+  width: 100px;
+}
+.btn{
+  width: 70px;
+  padding: 5px; /* 上下左右の余白を追加 */
+  text-align: center;
+}
+.btn_g{
+  display: flex;
+  gap: 2px;
+}
+.edit .del{
+  font-size: 0.7rem;
+  padding: 5px;
+}
+.title2{
+  width: 400px;
+}
+#btns{
+  display: flex;
+}
+#new_b{
+  margin: 5px;
+  margin-right: 5px;
+}
+#del_b{
+  margin: 5px;
+}
+
+.cell-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 5px;
+}
+button.edit, button.save,button.save2, button.del, button#new_b {
+  background: none;
+  border: none;
+  padding: 0 5px;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+button.edit i, button.save i,button.save2, button.del i, button#new_b i {
+  color: #fff; /* アイコンの色を調整（必要に応じて変更） */
+  font-size: 1.2em; /* アイコンのサイズを調整（必要に応じて変更） */
+}
+
+button#new_b i {
+  padding: 5px;
+}
+
+#days{
+  font-size: 0.75rem;
+}
+
+button.save2{
+	opacity: 0.5;
+	cursor: not-allowed;
+	display: block;
+}
+button.save{
+	display: none;
+}
+
+
+.dataContent{
+	display: flex;
+	width: 78vw;
+	padding: 30px 30px 30px 0;
+}
+.dataLbl{
+	width: 20%;
+	font-size: 1.3rem;
+}
+.dataBox{
+	background: #333;
+	padding: 20px;
+	width: 100%;
+}
+.dataTable{
+	width: 100%;
+	margin:0;
+	text-align: left;
+}
+.dataBtn{
+	text-align: right;
+}
+.dataBtn button:hover{
+	cursor: pointer;
+}
+.dataTh{
+	width: 20%;
+	padding: 10px 0;
+}
+.dataTh2{
+	width: 50%;
+}
+
+
+.dataAddTh{
+	width: 20%;
+	padding: 10px 10px 10px 0;
+}
+.dataAddTh2{
+/*	width: 50%;*/
+}
+.dataAddBtn{
+	text-align: right;
+}
+.dataAddBtn button:hover{
+	cursor: pointer;
+}

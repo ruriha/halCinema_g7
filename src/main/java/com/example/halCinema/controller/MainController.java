@@ -647,24 +647,50 @@ public class MainController {
 	  
 	  
 	  //  ３次開発  //////////////////////////////////////////////////////////////////////////////////////////////
-	  @Autowired
-	  private MovieService movieService;  // サービス層からデータを取得
-	
-	  @RequestMapping("/data1")
-	  public String data1(Model model) {
-	      List<Movie> movies = movieService.getAllMovies();
-	      model.addAttribute("movies", movies);  // moviesリストをテンプレートに渡す
-	      return "data_1";
-	  }
-	  @DeleteMapping("/movies/{id}")
-	  public ResponseEntity<Void> deleteMovie(@PathVariable("id") Integer id) {  // Integer型に統一
-	      try {
-	          movieService.deleteMovieById(id);
-	          return ResponseEntity.ok().build();
-	      } catch (Exception e) {
-	          return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-	      }
-	  }
+	@RequestMapping("/data1")
+	public String data1(Model model, @RequestParam(required = false) String titleName,
+			@RequestParam(required = false) LocalDate publicationDate,
+			@RequestParam(required = false) Integer runningTime, @RequestParam(required = false) String discription,
+			@RequestParam(required = false) String imgPath, @RequestParam(required = false) Boolean tgl) {
+
+		// 映画情報を取得
+		List<Movie> movies = MovieService.findAllMovies();
+		model.addAttribute("movies", movies); // HTMLテンプレートに渡す
+
+		return "data_1";
+	}
+
+	// 映画情報を削除するエンドポイント
+	// 例外処理を後から入れる
+	@RequestMapping("/deleteMovie")
+	public String deleteMovie(@RequestParam(required = false) Integer movieId) {
+		MovieService.deleteMovieById(movieId); // サービス層で削除
+		return "redirect:/data1"; // 削除後に一覧ページへリダイレクト
+	}
+
+	// 新しい映画データを追加するエンドポイント
+	@RequestMapping("/addMovie")
+	public String addMovie(@RequestParam("titleName") String titleName,
+			@RequestParam("publicationDate") String publicationDate,
+			@RequestParam("runningTime") Integer runningTime,
+			@RequestParam("discription") String discription,
+			@RequestParam("imgPath") String imgPath,
+			@RequestParam("tgl") Boolean tgl) {
+
+		// 新しいMovieオブジェクトを作成してセット
+		Movie newMovie = new Movie();
+		newMovie.setMovieTitle(titleName);
+		newMovie.setReleaseDay(LocalDate.parse(publicationDate)); // 文字列を LocalDate に変換
+		newMovie.setRunningTime(runningTime);
+		newMovie.setMovieDetails(discription);
+		newMovie.setImg(imgPath);
+		newMovie.setReleaseStatus(tgl);
+
+		// データベースに保存
+		MovieService.saveMovie(newMovie);
+
+		return "redirect:/data_1"; // 保存後にリストページにリダイレクト
+	}
 
 	    //  data2.html
 	  @RequestMapping("/data2")
@@ -885,7 +911,9 @@ public class MainController {
 	  //  ４次開発  //////////////////////////////////////////////////////////////////////////////////////////////
 	  
 	  
-	  //  店頭システムトップではセッションは削除する 
+
+	  //  店頭システムトップではloggedInMemberIdセッションは削除する 
+
 	  
 	  
 	  // 物販システム  /////////////
