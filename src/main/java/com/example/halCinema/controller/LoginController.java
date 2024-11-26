@@ -1,6 +1,7 @@
 package com.example.halCinema.controller;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.context.MessageSource;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -56,7 +57,7 @@ public class LoginController {
 
         if (!users.isEmpty()) {
             Object[] usersElement = users.get(0);
-            Integer userId = (Integer) usersElement[0];
+            UUID userId = (UUID) usersElement[0];
             
             // userId が null でないか確認
             if (userId != null) {

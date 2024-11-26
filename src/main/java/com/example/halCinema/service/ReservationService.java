@@ -2,6 +2,7 @@ package com.example.halCinema.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,7 +39,7 @@ public class ReservationService {
     
 
 	//  予約ID取得
-    public List<Object[]> findReservationId(Integer memberId, LocalDateTime reservationDatetime) {
+    public List<Object[]> findReservationId(UUID memberId, LocalDateTime reservationDatetime) {
         return ReservationRepositoty.findReservationId(memberId, reservationDatetime);
     }
 

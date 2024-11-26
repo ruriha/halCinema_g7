@@ -2,6 +2,7 @@ package com.example.halCinema.model;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,7 +14,7 @@ public class Member {
 
     @Id
     @GeneratedValue
-    private Integer memberId;
+    private UUID memberId;
 
     private String memberName;
 
@@ -34,17 +35,29 @@ public class Member {
     private Boolean memberStatus;
 
     private String memberPassword;
+
+    private String cardNumber;
+
+    private String cardName;
+
+    private Integer cardCvc;
+
+    private Integer cardYear;
+
+    private Integer cardMonth;
+
+    private Boolean delete;
     
     
     @OneToMany(mappedBy="member")
     private List<Reservation> reservation;
     
     
-    public Integer getMemberId() {
+    public UUID getMemberId() {
         return memberId;
     }
 
-    public void setMemberId(Integer memberId) {
+    public void setMemberId(UUID memberId) {
         this.memberId = memberId;
     }
     
@@ -126,6 +139,54 @@ public class Member {
     
     public String getMemberPassword() {
         return memberPassword;
+    }
+
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+    
+    public String getCardNumber() {
+        return cardNumber;
+    }
+
+    public void setCardName(String cardName) {
+        this.cardName = cardName;
+    }
+    
+    public String getCardName() {
+        return cardName;
+    }
+
+    public void setCardCvc(Integer cardCvc) {
+        this.cardCvc = cardCvc;
+    }
+    
+    public Integer getCardCvc() {
+        return cardCvc;
+    }
+
+    public void setCardYear(Integer cardYear) {
+        this.cardYear = cardYear;
+    }
+    
+    public Integer getCardYear() {
+        return cardYear;
+    }
+
+    public void setCardMonth(Integer cardMonth) {
+        this.cardMonth = cardMonth;
+    }
+    
+    public Integer getCardMonth() {
+        return cardMonth;
+    }
+    
+    public Boolean getDelete() {
+        return delete;
+    }
+
+    public void setDelete(Boolean delete) {
+        this.delete = delete;
     }
     
     

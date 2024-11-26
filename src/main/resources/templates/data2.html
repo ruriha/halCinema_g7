@@ -37,7 +37,7 @@
           <div id="all">
             <a th:href="@{/data1}">映画情報　　　　　〉</a>
             <a th:href="@{/data2}">上映スケジュール　〉</a>
-            <a th:href="@{/mng_login}">ログアウト　　　　〉</a>
+            <a th:href="@{/mng_logout}">ログアウト　　　　〉</a>
           </div>
         </div>
       </div>
@@ -52,7 +52,7 @@
             <a class="boxbtn" id="days" th:href="@{/data2}"><img src="../images/calendar.png" alt="button" class="icon">上映スケジュール</a>
           </div>
           <div class="boxbox">
-            <a class="boxbtn" th:href="@{/mng_login}"><img src="../images/logout.png" alt="button" class="icon">ログアウト</a>
+            <a class="boxbtn" th:href="@{/mng_logout}"><img src="../images/logout.png" alt="button" class="icon">ログアウト</a>
           </div>
         </div>
 
@@ -104,7 +104,7 @@
 			</div>
 			
 			<!-- 一括登録 -->
-			<div class="dataContent">
+			<div class="dataContent" th:if="${btnStatus != null}">
 				<p class="dataLbl">一括登録</p>
 				<div class="dataBox">
 					<form method="post" th:action="@{/addBlukSchedule}">
@@ -136,6 +136,9 @@
 			</div>
 			
 			
+			<p class="viewerInfo" th:if="${btnStatus == null}">閲覧専用ページです<br>データを編集・追加・削除するには管理者ログインをしてください</p>
+			
+			
           <table class="formTable">
             <tr>
               <th>タイトル</th>
@@ -143,11 +146,11 @@
               <th>上映日</th>
               <th>上映開始時間</th>
               <th>上映終了時間</th>
-              <th class="btn">保存/削除</th>
+              <th class="btn" th:if="${btnStatus != null}">保存/削除</th>
             </tr>
             
 			<!-- データ追加 -->
-			<form id="screenForm" method="post">
+			<form id="screenForm" method="post" th:if="${btnStatus != null}">
 			    <tr>
 			        <td class="title2">
 			            <select class="cell-input" name="titleName" id="titleName">
@@ -210,7 +213,7 @@
 					<p class="beforeClose" th:text="${#temporals.format(screeningSchedule[3].plusMinutes(screeningSchedule[4]), 'HH:mm')}"></p>
 					<p class="afterClose"></p>
 				</td>
-			    <td class="btn">
+			    <td class="btn" th:if="${btnStatus != null}">
 			        <div class="btn_g">
 			            <form method="post" th:action="@{/ssUpdate}">
 							<input type="hidden" th:value="${#temporals.format(screeningSchedule[3], 'yyyy-MM-dd')}" name="updateDay"/>
