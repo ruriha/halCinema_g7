@@ -1,4 +1,3 @@
-@charset "UTF-8";
 body {
   background-color: black;
   color: white;
@@ -100,8 +99,10 @@ a {
 
 #box-database-divider {
   border-top: 2px solid #666; /* 線のスタイルを設定 */
-  margin: 40px 0; /* 線の上下の余白を設定 */
+  margin: 20px 0; /* 線の上下の余白を設定 */
 }
+
+
 
 .formTable{
     width: 100%;
@@ -129,7 +130,8 @@ a {
   .id{
     width: 20px;
   }
-.description{
+  
+td.description{
   max-width: 200px; /* 最大幅を設定 */
   overflow: hidden;
   text-overflow: ellipsis; /* 文字列がオーバーフローした場合に省略記号で表示 */
@@ -143,8 +145,7 @@ a {
   white-space: nowrap; /* テキストが折り返されないようにする */
   position: relative; /* 相対位置指定 */
 }
-
-.description:hover {
+td.description:hover {
   overflow: visible; /* マウスオーバー時にテキストを全て表示 */
   white-space: normal; /* 折り返しを許可 */
   z-index: 1; /* 表示順序を設定 */
@@ -199,7 +200,7 @@ input {
   box-sizing: border-box;
   padding: 5px;
 }
-button.edit, button.save, button.save2, button.save3, button.del, button#new_b {
+button.edit, button.save,button.save2, button.del, button#new_b {
   background: none;
   border: none;
   padding: 0 5px;
@@ -207,7 +208,7 @@ button.edit, button.save, button.save2, button.save3, button.del, button#new_b {
   cursor: pointer;
 }
 
-button.edit i, button.save i, button.save2 i, button.save3 i, button.del i, button#new_b i {
+button.edit i, button.save i,button.save2, button.del i, button#new_b i {
   color: #fff; /* アイコンの色を調整（必要に応じて変更） */
   font-size: 1.2em; /* アイコンのサイズを調整（必要に応じて変更） */
 }
@@ -223,26 +224,11 @@ button#new_b i {
 button.save2{
 	opacity: 0.5;
 	cursor: not-allowed;
-}
-
-button.save3{
-	display: none;
-}
-.updateOpenField{
-	display: none;
-}
-.beforeOpenField{
 	display: block;
 }
-
-
-/*追加したCSS*/
-.edit2{
-	opacity: 0.5;
-}.edit2:hover{
-	cursor: not-allowed;
+button.save{
+	display: none;
 }
-
 
 
 .dataContent{

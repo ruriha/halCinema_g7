@@ -55,30 +55,31 @@ public class MovieService {
 
 	// 三次開発用 //////////////////////////////////////////////////////////////////////
     
-    // 全映画情報を取得
-//    public List<Object[]> getAllMovies() {
-//        return MovieRepository.findAllMovies();
-//    }
-//    
-//    // 映画情報を削除
-//    public void deleteMovieById(Integer movieId) {
-//        MovieRepository.deleteMovieById(movieId);
-//    }
+//     全映画情報を全件取得する
+    public List<Movie> findAllMovies() {
+        return MovieRepository.findAll(); // カスタムクエリを呼び出し
+    }
+
+    // 映画情報を削除する
+    public void deleteMovieById(Integer movieId) {
+        MovieRepository.deleteById(movieId); // JpaRepository の deleteById を使用
+    }
     
     // 映画情報を追加
+
+    // 映画情報を保存する
+    public void saveMovie(Movie movie) {
+        MovieRepository.save(movie);
+    }
     // 映画情報を編集
     
- // MovieService クラスに getAllMovies メソッドを追加
-    public List<Movie> getAllMovies() {
-        return MovieRepository.findAll();
-    }
     
-    @Autowired
-    private MovieRepository movieRepository;
-
-    public void deleteMovieById(Integer id) {  // 型をIntegerに変更
-        movieRepository.deleteById(id);
-    }
+//    @Autowired
+//    private MovieRepository movieRepository;
+//
+//    public void deleteMovieById(Integer id) {  // 型をIntegerに変更
+//        movieRepository.deleteById(id);
+//    }
 
     
 }
