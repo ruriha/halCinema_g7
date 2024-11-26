@@ -1,5 +1,6 @@
 package com.example.halCinema.repository;
 
+
 import java.util.List;
 import java.util.UUID;
 
@@ -15,5 +16,11 @@ public interface ProductRepository extends JpaRepository<Product, UUID>  {
 	//  すべての商品情報を取得
     @Query("select p.productId, p.productName, p.price from product p")
 	List<Object[]> findAllProduct();
+	
+	//  商品ID取得
+	@Query("select p.productId " +
+	           "from product p " +
+	           "where p.productName = ?1")
+	List<Object[]> findProductId(String productName);
 
 }

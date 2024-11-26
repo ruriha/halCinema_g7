@@ -22,7 +22,7 @@ public class Product {
     
     
     @OneToMany(mappedBy="product")
-    private List<OrderDetail> orderDetail;
+    private List<SaleDetail> orderDetail;
     
     
     public UUID getProductId() {
@@ -54,11 +54,11 @@ public class Product {
     
     
     
-    public List<OrderDetail> getOrderDetail() {
+    public List<SaleDetail> getOrderDetail() {
         return orderDetail;
     }
 
-    public void setOrderDetail(List<OrderDetail> orderDetail) {
+    public void setOrderDetail(List<SaleDetail> orderDetail) {
         this.orderDetail = orderDetail;
     }
     

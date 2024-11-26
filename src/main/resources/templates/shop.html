@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+
+<html lang="ja">
+
+  <head>
+
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>HALCINEMA｜TOP</title>
+
+    <link rel="stylesheet" type="text/css" href="../css/reset.css">
+    <link rel="stylesheet" type="text/css" href="../css/shop.css">
+    <link rel="stylesheet" type="text/css" href="../css/common.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+
+
+<!-- jQuary本体 CDN -->
+<!-- <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script> -->
+<!-- jQuaryの実行 -->
+<!-- <script type="text/javascript" src="js/common.js"></script> -->
+
+  </head>
+
+  <body>
+
+    
+    <div id="all">
+      <div id="hidari">
+        <figure class="commonLogoBox">
+            <img class="commonLogo" id="icon" src="../images/logo.svg" alt="HAL CINEMA">
+        </figure>
+        <button onclick="location.href='/systemtop'" class="sousa">TOPに戻る</button>
+        <button onclick="location.href='/shopConf'" class="sousa" id="kakunin">注文内容確認</button>
+      </div>
+
+      <div id="migi">
+		  
+		  
+		  
+		  
+
+
+        <!-- アイテム -->
+        <div class="gaiwaku" th:each="product : ${products}">
+          <p class="title" th:text="${product[1]}"></p>
+          <form class="kabu">
+			  <span class="en">\</span><label class="nedan" th:text="${product[2]}"></label>
+            <div class="kazu">
+              <button type="button" class="zougen minus">ー</button>
+              <input type="text" value="0" class="text" readonly>
+              <button type="button" class="zougen plus">＋</button>
+            </div>
+          </form>
+        </div>
+
+      
+
+      </div>
+    </div>
+
+
+
+  </body>
+<script type="text/javascript" src="../js/shop.js"></script>
+</html>
