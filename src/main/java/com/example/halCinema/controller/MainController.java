@@ -869,7 +869,7 @@ public class MainController {
 	  public String ssUpdate(@RequestParam(required = false) LocalDate updateDay, @RequestParam(required = false) LocalTime updateTime, @RequestParam(required = false) Integer updateId){
 	    LocalDateTime updateDatetime = updateDay.atTime(updateTime);
 		ScreeningScheduleService.updateScreeningDatetime(updateDatetime, updateId);
-	    return "redirect:/data2"; 
+	    return "redirect:/data2";
 	  }
 	  
 
@@ -885,7 +885,7 @@ public class MainController {
 	  //  ４次開発  //////////////////////////////////////////////////////////////////////////////////////////////
 	  
 	  
-	  //  店頭システムトップではセッションは削除する
+	  //  店頭システムトップではセッションは削除する 
 	  
 	  
 	  // 物販システム  /////////////
