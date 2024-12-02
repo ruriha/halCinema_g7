@@ -944,8 +944,15 @@ public class MainController {
 
 	  //  店頭システムトップではloggedInMemberIdセッションは削除する 
 	  @RequestMapping("/memberAuth")
-	  public String memberAuth(){
+	  public String memberAuth(Model model, @RequestParam(required = false) String next){
+		  model.addAttribute("next", next);
 	      return "member_auth";
+	  }
+	  
+	  @RequestMapping("/memberSave")
+	  public String memberSave(HttpSession session, @RequestParam(required = false) UUID getMemberId, @RequestParam(required = false) String next){
+          session.setAttribute("loggedInMemberId", getMemberId);
+	      return "redirect:"+next;
 	  }
 
 	  
