@@ -19,15 +19,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
 
-    <script src="https://unpkg.com/html5-qrcode/minified/html5-qrcode.min.js"></script>
-    
-	  <script type="module">
-	    import { BrowserQRCodeReader } from 'https://cdn.jsdelivr.net/npm/@zxing/browser@0.1.5/+esm';
+	<script type="module">
+	  import { BrowserQRCodeReader } from 'https://cdn.jsdelivr.net/npm/@zxing/browser@0.1.5/+esm';
 	
-	    // QRコードリーダーを初期化
+	  document.addEventListener('DOMContentLoaded', () => {
 	    const videoElement = document.getElementById('video');
 	    const inputElement = document.getElementById('getMemberId');
-	
 	    const codeReader = new BrowserQRCodeReader();
 	
 	    // カメラ映像を取得して表示
@@ -40,39 +37,30 @@
 	        console.error('カメラアクセスエラー:', err);
 	      });
 	
-	    // QRコードをスキャン
-	    codeReader.decodeFromVideoElement(videoElement)
-	      .then((result) => {
-	        console.log('スキャン成功:', result.text);
-	        inputElement.value = result.text; // QRコードの結果を取得
-	      })
-	      .catch((err) => {
-	        console.error('QRコードスキャンエラー:', err);
+	    // QRコードをスキャンし続ける関数
+	    function scanQRCode() {
+	      codeReader.decodeFromVideoElement(videoElement, (result, err) => {
+	        if (result) {
+	          console.log('スキャン成功:', result.text);
+	          inputElement.value = result.text; // QRコードの結果を取得
+				const form = document.getElementById("memberAuthForm");
+			    form.action = "/memberSave";
+			    form.method = "post";
+			    form.submit();
+	        } else if (err) {
+	          console.error('QRコードスキャンエラー:', err);
+	        }
 	      });
-	      
-	      
-      // QRコードのスキャンを設定
-      function onScanSuccess(decodedText, decodedResult) {
-        console.log(`Decoded QR Code: ${decodedText}`);
-        document.getElementById('getMemberId').value = decodedText; // QRコードの結果をフォームに設定
-        html5QrcodeScanner.stop(); // QRコードの読み取り停止
-      }
+	
+	      // スキャン後、次のフレームで再試行
+	      requestAnimationFrame(scanQRCode);
+	    }
+	
+	    // 最初のQRコードスキャン開始
+	    scanQRCode();
+	  });
+	</script>
 
-      function onScanFailure(error) {
-        console.warn(`QR Code scan error: ${error}`);
-      }
-
-      // QRコードリーダーの初期化
-      const html5QrcodeScanner = new Html5QrcodeScanner(
-        "qr-reader", 
-        {
-          fps: 10, 
-          qrbox: 250 
-        }, 
-        false
-      );
-      html5QrcodeScanner.render(onScanSuccess, onScanFailure);
-	  </script>
 
 <!-- jQuary本体 CDN -->
 <!-- <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script> -->
@@ -93,8 +81,9 @@
     <div class="ma_cameraBox" id="qr-reader">
 		<video id="video" class="video"></video>
 	</div>
-    <form method="post" id="memberAuthForm">
-      <input type="text" name="getMemberId" id="getMemberId">
+    <form method="post" id="memberAuthForm" action="/memberSave">
+      <input type="hidden" name="getMemberId" id="getMemberId">
+      <input type="hidden" name="next" th:value="${next}">
     </form>
 
     <div class="btn">
