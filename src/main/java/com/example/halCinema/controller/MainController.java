@@ -648,11 +648,44 @@ public class MainController {
 	public String data1(Model model, @RequestParam(required = false) String titleName,
 			@RequestParam(required = false) LocalDate publicationDate,
 			@RequestParam(required = false) Integer runningTime, @RequestParam(required = false) String discription,
-			@RequestParam(required = false) String imgPath, @RequestParam(required = false) Boolean tgl) {
+			@RequestParam(required = false) String imgPath, @RequestParam(required = false) Boolean tgl, 
+			@RequestParam(required = false) String searchTitle, @RequestParam(required = false) Boolean searchStatus, 
+			@RequestParam(required = false) Integer seachDate) {
 
 		// 映画情報を取得
-		List<Movie> movies = MovieService.findAllMovies();
-		model.addAttribute("movies", movies); // HTMLテンプレートに渡す
+		List<Movie> movies = null;
+		if(searchTitle != null || searchStatus != null || seachDate != null) {
+			if(searchTitle != null) {
+				if(searchStatus != null && seachDate != null) {
+					movies = MovieService.findSelectAllMovie(searchTitle, seachDate, searchStatus);							
+				}
+				else if(searchStatus != null) {
+					movies = MovieService.findSelectStatusAndTitleMovie(searchTitle, searchStatus);					
+				}
+				else if(seachDate != null) {
+					movies = MovieService.findSelectDateAndTitleMovie(searchTitle, seachDate);							
+				}
+				else {
+					movies = MovieService.findSelectTitleMovie(searchTitle);					
+				}
+			}
+			else if(searchStatus != null) {
+				if(seachDate != null) {
+					movies = MovieService.findSelectStatusAndDateMovie(seachDate, searchStatus);							
+				}
+				else {
+					movies = MovieService.findSelectStatusMovie(searchStatus);						
+				}
+			}
+			else if(seachDate != null) {
+				movies = MovieService.findSelectDateMovie(seachDate);							
+			}
+		}else {
+			movies = MovieService.findAllMovies();
+		}
+		model.addAttribute("movies", movies);
+//		List<Movie> movies = MovieService.findAllMovies();
+//		model.addAttribute("movies", movies); // HTMLテンプレートに渡す
 
 		return "data_1";
 	}
