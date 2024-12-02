@@ -281,3 +281,11 @@ button.save{
 .dataAddBtn button:hover{
 	cursor: pointer;
 }
+
+tglCenter{
+	width: auto;
+}
+
+tglTd{
+	background-color: red;
+}
