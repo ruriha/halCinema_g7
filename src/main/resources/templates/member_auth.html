@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+
+<html lang="ja">
+
+  <head>
+
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>HALCINEMA｜TOP</title>
+
+    <link rel="stylesheet" type="text/css" href="../css/reset.css">
+    <link rel="stylesheet" type="text/css" href="../css/member_auth.css">
+    <link rel="stylesheet" type="text/css" href="../css/common.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+
+	<script type="module">
+	  import { BrowserQRCodeReader } from 'https://cdn.jsdelivr.net/npm/@zxing/browser@0.1.5/+esm';
+	
+	  document.addEventListener('DOMContentLoaded', () => {
+	    const videoElement = document.getElementById('video');
+	    const inputElement = document.getElementById('getMemberId');
+	    const codeReader = new BrowserQRCodeReader();
+	
+	    // カメラ映像を取得して表示
+	    navigator.mediaDevices.getUserMedia({ video: true })
+	      .then((stream) => {
+	        videoElement.srcObject = stream;
+	        videoElement.play();
+	      })
+	      .catch((err) => {
+	        console.error('カメラアクセスエラー:', err);
+	      });
+	
+	    // QRコードをスキャンし続ける関数
+	    function scanQRCode() {
+	      codeReader.decodeFromVideoElement(videoElement, (result, err) => {
+	        if (result) {
+	          console.log('スキャン成功:', result.text);
+	          inputElement.value = result.text; // QRコードの結果を取得
+				const form = document.getElementById("memberAuthForm");
+			    form.action = "/memberSave";
+			    form.method = "post";
+			    form.submit();
+	        } else if (err) {
+	          console.error('QRコードスキャンエラー:', err);
+	        }
+	      });
+	
+	      // スキャン後、次のフレームで再試行
+	      requestAnimationFrame(scanQRCode);
+	    }
+	
+	    // 最初のQRコードスキャン開始
+	    scanQRCode();
+	  });
+	</script>
+
+
+<!-- jQuary本体 CDN -->
+<!-- <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script> -->
+<!-- jQuaryの実行 -->
+<!-- <script type="text/javascript" src="js/common.js"></script> -->
+
+  </head>
+
+  <body>
+
+    
+    <figure class="commonLogoBox">
+        <img class="commonLogo" id="icon" src="../images/logo.svg" alt="HAL CINEMA">
+    </figure>
+
+    <p class="ma_info">会員認証</p>
+
+    <div class="ma_cameraBox" id="qr-reader">
+		<video id="video" class="video"></video>
+	</div>
+    <form method="post" id="memberAuthForm" action="/memberSave">
+      <input type="hidden" name="getMemberId" id="getMemberId">
+      <input type="hidden" name="next" th:value="${next}">
+    </form>
+
+    <div class="btn">
+        <button onclick="location.href='/systemtop'" class="confirm-btn">TOPに戻る</button>
+    </div>
+    
+    
+  </body>
+</html>

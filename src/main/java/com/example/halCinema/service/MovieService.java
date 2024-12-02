@@ -54,18 +54,77 @@ public class MovieService {
 		return MovieRepository.findAll(); // カスタムクエリを呼び出し
 	}
 
+
 	// 映画情報を削除する
 	public void deleteMovieById(Integer movieId) {
 		if (movieId == null) {
 			throw new IllegalArgumentException("movieId must not be null");
 		}
-
 		if (!MovieRepository.existsById(movieId)) {
 			throw new IllegalArgumentException("No movie found with id: " + movieId);
 		}
 
 		MovieRepository.deleteById(movieId);
 	}
+
+
+    // 映画情報を編集
+    
+    
+//    @Autowired
+//    private MovieRepository movieRepository;
+//
+//    public void deleteMovieById(Integer id) {  // 型をIntegerに変更
+//        movieRepository.deleteById(id);
+//    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    //  指定条件の上映スケジュール取得
+    public List<Movie> findSelectAllMovie(String searchTitle, Integer seachDate, Boolean searchStatus) {
+        return MovieRepository.findSelectAllMovie(searchTitle, seachDate, searchStatus);
+    }
+    //  指定条件の上映スケジュール取得
+    public List<Movie> findSelectTitleMovie(String searchTitle) {
+        return MovieRepository.findSelectTitleMovie(searchTitle);
+    }
+    //  指定条件の上映スケジュール取得
+    public List<Movie> findSelectDateMovie(Integer seachDate) {
+        return MovieRepository.findSelectDateMovie(seachDate);
+    }
+    //  指定条件の上映スケジュール取得
+    public List<Movie> findSelectStatusMovie(Boolean searchStatus) {
+        return MovieRepository.findSelectStatusMovie(searchStatus);
+    }
+    //  指定条件の上映スケジュール取得
+    public List<Movie> findSelectStatusAndDateMovie(Integer seachDate, Boolean searchStatus) {
+        return MovieRepository.findSelectStatusAndDateMovie(seachDate, searchStatus);
+    }
+    //  指定条件の上映スケジュール取得
+    public List<Movie> findSelectStatusAndTitleMovie(String searchTitle, Boolean searchStatus) {
+        return MovieRepository.findSelectStatusAndTitleMovie(searchTitle, searchStatus);
+    }
+    //  指定条件の上映スケジュール取得
+    public List<Movie> findSelectDateAndTitleMovie(String searchTitle, Integer seachDate) {
+        return MovieRepository.findSelectDateAndTitleMovie(searchTitle, seachDate);
+    }
+
+
+
 
 	// 映画情報を追加
 	//	public void saveMovie(Movie movie) {

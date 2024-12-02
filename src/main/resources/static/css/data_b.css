@@ -263,6 +263,9 @@ button.save{
 .dataTh2{
 	width: 50%;
 }
+.dataCheckBox .cell-input{
+	width: auto;
+}
 
 
 .dataAddTh{
