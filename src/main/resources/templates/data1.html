@@ -102,23 +102,31 @@
 						<th>上映時間</th>
 						<th>作品詳細</th>
 						<th>作品画像</th>
+						<th>URL</th>
+						<th>スタッフ</th>
 						<th>公開状態</th>
 						<th class="btn">編集/削除</th>
 					</tr>
 
 					<!-- データの追加  -->
-					<form th:action="@{/addMovie}" id="movieForm" method="post" enctype="multipart/form-data">
+					<form th:action="@{/addMovie}" method="post" id="movieForm" enctype="multipart/form-data">
 						<tr>
-							<td class="title" name="titleName"><input type="text" class="cell-input" id="title"></td>
-							<td class="data" name="publicationDate"><input type="date" class="cell-input" id="data"></td>
-							<td class="int" name="runningTime"><input type="number" class="cell-input" id="int"></td>
-							<td class="description" name="discription"><input type="text" class="cell-input"id="description"></td>
-							<td class="img" name="imgPath"><input type="file" class="cell-input" id="img"></td>
-							<td class="tgl" name="tgl"><input type="checkbox" class="cell-input" id="tgl"></td>
+							<td class="title" name="titleName"><input type="text" class="cell-input" id="title"
+									name="titleName"></td>
+							<td class="data" name="publicationDate"><input type="date" class="cell-input" id="data"
+									name="publicationDate">
+							</td>
+							<td class="int"><input type="number" class="cell-input" id="int" name="runningTime"></td>
+							<td class="description"><input type="text" class="cell-input" id="description"
+									name="description"></td>
+							<td class="description"><input type="file" class="cell-input" id="img" name="imgPath"></td>
+							<td class="title"><input type="text" class="cell-input" id="title" name="url"></td>
+							<td class="title"><input type="text" class="cell-input" id="title" name="staff"></td>
+							<td class="tgl"><input type="checkbox" class="cell-input" id="tgl" name="tgl">
+							</td>
 							<td class="btn">
 								<div class="btn_g">
-									<button type="submit" class="save2" disabled id="save2"><i
-											class="fas fa-save"></i></button>
+									<button type="submit" class="save2" id="save2"><i class="fas fa-save"></i></button>
 									<button type="submit" class="save" id="save"><i class="fas fa-save"></i></button>
 								</div>
 							</td>
@@ -132,24 +140,28 @@
 						<td class="int" th:text="${movie.runningTime}"></td>
 						<td class="description" th:text="${movie.movieDetails}"></td>
 						<td class="img" th:text="${movie.img}"></td>
-						<td class="tgl">
-							<input type="checkbox" th:checked="${movie.releaseStatus}" disabled>
+						<td class="img" th:text="${movie.url}"></td>
+						<td class="img" th:text="${movie.staff}"></td>
+						<td class="tgl" id="tglTd">
+							<input id="tglCenter" type="checkbox" th:checked="${movie.releaseStatus}" disabled>
 						</td>
 						<td class="btn">
 							<div class="btn_g">
 								<!-- 編集ボタン -->
-								<form method="get" th:action="@{/addMovie}" style="display: inline;">
-									<button type="submit" class="edit" th:attr="data-id=${movie.movieId}">
-										<i class="fas fa-edit"></i>
-									</button>
-								</form>
+								<button type="submit" class="edit" th:attr="data-id=${movie.movieId}">
+									<i class="fas fa-edit"></i>
+								</button>
 
 								<!-- 削除ボタン -->
 								<form method="post" th:action="@{/deleteMovie}">
-									<button type="submit" class="del" name="movieId" th:value="${movie.movieId}">
+									<input type="hidden" name="movieId" th:value="${movie.movieId}" />
+									<button type="submit" class="del">
 										<i class="fas fa-trash-alt"></i>
 									</button>
 								</form>
+
+
+
 							</div>
 						</td>
 					</tr>

@@ -6,14 +6,17 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.SequenceGenerator;
 
 @Entity(name = "movie")
 public class Movie {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "movie_seq_generator")
+    @SequenceGenerator(name = "movie_seq_generator", sequenceName = "movie_movie_id_seq", allocationSize = 1)
     private Integer movieId;
 
     private String movieTitle;
