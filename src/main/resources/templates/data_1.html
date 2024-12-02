@@ -52,34 +52,40 @@
 				<div class="dataContent">
 					<p class="dataLbl">フィルター</p>
 					<div class="dataBox">
-						<form method="post" th:action="@{/data2}">
+						<form method="post" th:action="@{/data1}">
 							<table class="dataTable">
 								<tr>
 									<td class="dataTh">タイトル</td>
 									<td class="dataTh2">
-										<select class="cell-input" name="searchTitle">
-											<option disabled selected value>選択してください</option>
-											<option th:each="movieTitle : ${movieTitles}" th:text="${movieTitle[0]}"
-												th:value="${movieTitle[0]}"></option>
-										</select>
+										<input class="cell-input" type="text" name="searchTitle">
 									</td>
 									<td>　</td>
 								</tr>
 								<tr>
-									<td class="dataTh">スクリーン</td>
+									<td class="dataTh">公開月</th>
 									<td class="dataTh2">
-										<select class="cell-input" name="searchScreen">
-											<option disabled selected value>選択してください</option>
-											<option th:each="screen : ${screens}" th:value="${screen[0]}"
-												th:text="${screen[0]}"></option>
-										</select>
+							            <select class="cell-input" name="seachDate">
+							                <option disabled selected value>選択してください</option>
+							                <option>1</option>
+							                <option>2</option>
+							                <option>3</option>
+							                <option>4</option>
+							                <option>5</option>
+							                <option>6</option>
+							                <option>7</option>
+							                <option>8</option>
+							                <option>9</option>
+							                <option>10</option>
+							                <option>11</option>
+							                <option>12</option>
+							            </select>
 									</td>
 									<td>　</td>
 								</tr>
 								<tr>
-									<td class="dataTh">上映日</th>
-									<td class="dataTh2">
-										<input type="date" class="cell-input" name="seachDate">
+									<td class="dataTh">公開状態</td>
+									<td class="dataTh2 dataCheckBox">
+										<input type="checkbox" class="cell-input" name="searchStatus">
 									</td>
 									<td>　</td>
 								</tr>
