@@ -742,6 +742,11 @@ public class MainController {
 
 		return "redirect:/data1"; // 保存後に一覧ページにリダイレクト
 	}
+	
+	private void temp() {
+		// TODO 自動生成されたメソッド・スタブ
+
+	}
 
 	//  data2.html
 	@RequestMapping("/data2")
