@@ -1,5 +1,7 @@
 package com.example.halCinema.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -649,50 +651,43 @@ public class MainController {
 	public String data1(Model model, @RequestParam(required = false) String titleName,
 			@RequestParam(required = false) LocalDate publicationDate,
 			@RequestParam(required = false) Integer runningTime, @RequestParam(required = false) String discription,
-			@RequestParam(required = false) String imgPath, @RequestParam(required = false) Boolean tgl, 
-			@RequestParam(required = false) String searchTitle, @RequestParam(required = false) Boolean searchStatus, 
+			@RequestParam(required = false) String imgPath, @RequestParam(required = false) Boolean tgl,
+			@RequestParam(required = false) String searchTitle, @RequestParam(required = false) Boolean searchStatus,
 			@RequestParam(required = false) Integer seachDate) {
 
 		// 映画情報を取得
 		List<Movie> movies = null;
-		if(searchTitle != null || searchStatus != null || seachDate != null) {
-			if(searchTitle != null) {
-				if(searchStatus != null && seachDate != null) {
-					movies = MovieService.findSelectAllMovie(searchTitle, seachDate, searchStatus);							
+		if (searchTitle != null || searchStatus != null || seachDate != null) {
+			if (searchTitle != null) {
+				if (searchStatus != null && seachDate != null) {
+					movies = MovieService.findSelectAllMovie(searchTitle, seachDate, searchStatus);
+				} else if (searchStatus != null) {
+					movies = MovieService.findSelectStatusAndTitleMovie(searchTitle, searchStatus);
+				} else if (seachDate != null) {
+					movies = MovieService.findSelectDateAndTitleMovie(searchTitle, seachDate);
+				} else {
+					movies = MovieService.findSelectTitleMovie(searchTitle);
 				}
-				else if(searchStatus != null) {
-					movies = MovieService.findSelectStatusAndTitleMovie(searchTitle, searchStatus);					
+			} else if (searchStatus != null) {
+				if (seachDate != null) {
+					movies = MovieService.findSelectStatusAndDateMovie(seachDate, searchStatus);
+				} else {
+					movies = MovieService.findSelectStatusMovie(searchStatus);
 				}
-				else if(seachDate != null) {
-					movies = MovieService.findSelectDateAndTitleMovie(searchTitle, seachDate);							
-				}
-				else {
-					movies = MovieService.findSelectTitleMovie(searchTitle);					
-				}
+			} else if (seachDate != null) {
+				movies = MovieService.findSelectDateMovie(seachDate);
 			}
-			else if(searchStatus != null) {
-				if(seachDate != null) {
-					movies = MovieService.findSelectStatusAndDateMovie(seachDate, searchStatus);							
-				}
-				else {
-					movies = MovieService.findSelectStatusMovie(searchStatus);						
-				}
-			}
-			else if(seachDate != null) {
-				movies = MovieService.findSelectDateMovie(seachDate);							
-			}
-		}else {
+		} else {
 			movies = MovieService.findAllMovies();
 		}
 		model.addAttribute("movies", movies);
-//		List<Movie> movies = MovieService.findAllMovies();
-//		model.addAttribute("movies", movies); // HTMLテンプレートに渡す
+		//		List<Movie> movies = MovieService.findAllMovies();
+		//		model.addAttribute("movies", movies); // HTMLテンプレートに渡す
 
 		return "data1";
 	}
 
 	// 映画情報を削除するエンドポイント
-	// 例外処理を後から入れる
 	@PostMapping("/deleteMovie")
 	public String deleteMovie(@RequestParam(required = false) Integer movieId) {
 		if (movieId == null) {
@@ -714,32 +709,43 @@ public class MainController {
 			@RequestParam(value = "imgPath", required = false) MultipartFile imgFile,
 			@RequestParam(value = "tgl", defaultValue = "false") Boolean tgl) {
 
-		
 		LocalDate temp = LocalDate.parse(publicationDate);
 
 		// デフォルトの画像パスを設定
+		String uploadDir = new File("src/main/resources/static/images").getAbsolutePath();
 		String imgPath = "default_image_path.jpg";
-		if (imgFile != null && !imgFile.isEmpty()) {
-			imgPath = imgFile.getOriginalFilename(); // 画像のファイル名を直接保存
-		}
-		
-		MovieService.addMovie(titleName,temp,description,runningTime,tgl,imgPath,url,staff);
-		
-		
 
-		// 新しい映画データを作成
-//		Movie newMovie = new Movie();
-//		newMovie.setMovieTitle(titleName);
-//		newMovie.setReleaseDay(LocalDate.parse(publicationDate));
-//		newMovie.setRunningTime(runningTime);
-//		newMovie.setMovieDetails(description);
-//		newMovie.setImg(imgPath);
-//		newMovie.setReleaseStatus(tgl);
-//
-//		// サービスを介してデータベースに保存
-//		MovieService.saveMovie(newMovie);
+		if (imgFile != null && !imgFile.isEmpty()) {
+			String fileName = imgFile.getOriginalFilename(); // アップロードされたファイル名を取得
+
+			try {
+				// 保存先ファイルのフルパスを作成
+				File saveFile = new File(uploadDir, fileName);
+
+				// 保存先フォルダが存在しない場合は作成
+				if (!saveFile.getParentFile().exists()) {
+					saveFile.getParentFile().mkdirs();
+				}
+
+				// ファイルを保存
+				imgFile.transferTo(saveFile);
+
+				// 保存された画像のパスを設定
+				imgPath = "/images/" + fileName; // Webからアクセス可能な相対パス
+			} catch (IOException e) {
+				e.printStackTrace(); // エラー時のログ出力
+			}
+		}
+
+		// サービスに保存パスを渡して登録
+		MovieService.addMovie(titleName, temp, description, runningTime, tgl, imgPath, url, staff);
 
 		return "redirect:/data1"; // 保存後に一覧ページにリダイレクト
+	}
+	
+	private void temp() {
+		// TODO 自動生成されたメソッド・スタブ
+
 	}
 
 	//  data2.html
@@ -962,32 +968,28 @@ public class MainController {
 		return "redirect:/data2";
 	}
 
-	  // 管理者ログアウト（Securityなし仮）
-	  @RequestMapping("/mng_logout")
-	  public String mng_logout(HttpSession session){
-	      session.invalidate();
-	      return "redirect:/mng_login";
-	  }
-	  
-	  
-	  
-	  //  ４次開発  //////////////////////////////////////////////////////////////////////////////////////////////
-	  
-	  
+	// 管理者ログアウト（Securityなし仮）
+	@RequestMapping("/mng_logout")
+	public String mng_logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/mng_login";
+	}
 
-	  //  店頭システムトップではloggedInMemberIdセッションは削除する 
-	  @RequestMapping("/memberAuth")
-	  public String memberAuth(Model model, @RequestParam(required = false) String next){
-		  model.addAttribute("next", next);
-	      return "member_auth";
-	  }
-	  
-	  @RequestMapping("/memberSave")
-	  public String memberSave(HttpSession session, @RequestParam(required = false) UUID getMemberId, @RequestParam(required = false) String next){
-          session.setAttribute("loggedInMemberId", getMemberId);
-	      return "redirect:"+next;
-	  }
+	//  ４次開発  //////////////////////////////////////////////////////////////////////////////////////////////
 
+	//  店頭システムトップではloggedInMemberIdセッションは削除する 
+	@RequestMapping("/memberAuth")
+	public String memberAuth(Model model, @RequestParam(required = false) String next) {
+		model.addAttribute("next", next);
+		return "member_auth";
+	}
+
+	@RequestMapping("/memberSave")
+	public String memberSave(HttpSession session, @RequestParam(required = false) UUID getMemberId,
+			@RequestParam(required = false) String next) {
+		session.setAttribute("loggedInMemberId", getMemberId);
+		return "redirect:" + next;
+	}
 
 	// 物販システム  /////////////
 	@RequestMapping("/shop")

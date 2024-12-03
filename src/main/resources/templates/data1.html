@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>HALCINEMA｜TOP</title>
 	<link rel="stylesheet" type="text/css" href="../css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../css/common.css">
 	<link rel="stylesheet" type="text/css" href="../css/data_b.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 		integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
@@ -116,17 +117,17 @@
 					<!-- データの追加  -->
 					<form th:action="@{/addMovie}" method="post" id="movieForm" enctype="multipart/form-data">
 						<tr>
-							<td class="title" name="titleName"><input type="text" class="cell-input" id="title"
+							<td class="title"><input type="text" class="cell-input" id="title"
 									name="titleName"></td>
-							<td class="data" name="publicationDate"><input type="date" class="cell-input" id="data"
+							<td class="data"><input type="date" class="cell-input" id="data"
 									name="publicationDate">
 							</td>
 							<td class="int"><input type="number" class="cell-input" id="int" name="runningTime"></td>
 							<td class="description"><input type="text" class="cell-input" id="description"
 									name="description"></td>
 							<td class="description"><input type="file" class="cell-input" id="img" name="imgPath"></td>
-							<td class="title"><input type="text" class="cell-input" id="title" name="url"></td>
-							<td class="title"><input type="text" class="cell-input" id="title" name="staff"></td>
+							<td class="title"><input type="text" class="cell-input" id="url" name="url"></td>
+							<td class="title"><input type="text" class="cell-input" id="staff" name="staff"></td>
 							<td class="tgl"><input type="checkbox" class="cell-input" id="tgl" name="tgl">
 							</td>
 							<td class="btn">
@@ -140,13 +141,13 @@
  
  
 					<tr th:each="movie : ${movies}">
-						<td class="title" th:text="${movie.movieTitle}" th:attr="data-id=${movie.movieId}"></td>
+						<td class="title , description" th:text="${movie.movieTitle}" th:attr="data-id=${movie.movieId}"></td>
 						<td class="data" th:text="${movie.releaseDay}"></td>
 						<td class="int" th:text="${movie.runningTime}"></td>
 						<td class="description" th:text="${movie.movieDetails}"></td>
-						<td class="img" th:text="${movie.img}"></td>
-						<td class="img" th:text="${movie.url}"></td>
-						<td class="img" th:text="${movie.staff}"></td>
+						<td class="description" th:text="${movie.img}"></td>
+						<td class="description" th:text="${movie.url}"></td>
+						<td class="description" th:text="${movie.staff}"></td>
 						<td class="tgl" id="tglTd">
 							<input id="tglCenter" type="checkbox" th:checked="${movie.releaseStatus}" disabled>
 						</td>
