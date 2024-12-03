@@ -282,10 +282,7 @@ button.save{
 	cursor: pointer;
 }
 
-tglCenter{
-	width: auto;
-}
 
-tglTd{
-	background-color: red;
+#tglTd{
+	text-align: center;
 }
