@@ -23,9 +23,9 @@
  
 			<div id="hidari">
 				<div id="all">
-					<a href="data_1.html">映画情報　　　　　〉</a>
-					<a href="data_2.html">上映スケジュール　〉</a>
-					<a href="news">ログアウト　　　　〉</a>
+					<a th:href="@{/data1}">映画情報　　　　　〉</a>
+					<a th:href="@{/data2}">上映スケジュール　〉</a>
+					<a th:href="@{/mng_logout}">ログアウト　　　　〉</a>
 				</div>
 			</div>
  
@@ -35,15 +35,15 @@
 		<div id="migi">
 			<div id="box">
 				<div class="boxbox">
-					<a href="data_1.html" class="boxbtn"><img src="../images/movie.png" alt="button"
+					<a th:href="@{/data1}" class="boxbtn"><img src="../images/movie.png" alt="button"
 							class="icon">映画情報</a>
 				</div>
 				<div class="boxbox">
-					<a href="data_2.html" class="boxbtn" id="days"><img src="../images/calendar.png" alt="button"
+					<a th:href="@{/data2}" class="boxbtn" id="days"><img src="../images/calendar.png" alt="button"
 							class="icon">上映スケジュール</a>
 				</div>
 				<div class="boxbox">
-					<a href="" class="boxbtn"><img src="../images/logout.png" alt="button" class="icon">ログアウト</a>
+					<a th:href="@{/mng_loguot}" class="boxbtn"><img src="../images/logout.png" alt="button" class="icon">ログアウト</a>
 				</div>
 			</div>
 			<div id="box-database-divider"></div>
