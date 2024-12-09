@@ -36,63 +36,81 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
 	List<Object[]> findMovieId(String movieTitle);
 
 	// 三次開発用 //////////////////////////////////////////////////////////////////////
+	
+
+
+	//  すべての映画情報取得
+	@Query("select mo " +
+			"from movie mo " +
+    	    "order by mo.releaseDay DESC")
+	List<Movie> findAllMovie();
 
 	//  指定条件の映画情報取得
 	@Query("select mo " +
 			"from movie mo " +
 			"where mo.movieTitle like %?1% " +
 			"and month(mo.releaseDay) = ?2 " +
-			"and mo.releaseStatus = ?3 ")
+			"and mo.releaseStatus = ?3 "+
+    	    "order by mo.releaseDay DESC")
 	List<Movie> findSelectAllMovie(String searchTitle, Integer seachDate, Boolean searchStatus);
 
 	//  指定条件の上映スケジュール取得
 	@Query("select mo " +
 			"from movie mo " +
-			"where mo.movieTitle like %?1%")
+			"where mo.movieTitle like %?1% "+
+    	    "order by mo.releaseDay DESC")
 	List<Movie> findSelectTitleMovie(String searchTitle);
 
 	//  指定条件の上映スケジュール取得
 	@Query("select mo " +
 			"from movie mo " +
-			"where month(mo.releaseDay) = ?1")
+			"where month(mo.releaseDay) = ?1 "+
+    	    "order by mo.releaseDay DESC")
 	List<Movie> findSelectDateMovie(Integer seachDate);
 
 	//  指定条件の上映スケジュール取得
 	@Query("select mo " +
 			"from movie mo " +
-			"where mo.releaseStatus = ?1 ")
+			"where mo.releaseStatus = ?1 "+
+    	    "order by mo.releaseDay DESC")
 	List<Movie> findSelectStatusMovie(Boolean searchStatus);
 
 	//  指定条件の上映スケジュール取得
 	@Query("select mo " +
 			"from movie mo " +
 			"where month(mo.releaseDay) = ?1 " +
-			"and mo.releaseStatus = ?2 ")
+			"and mo.releaseStatus = ?2 "+
+    	    "order by mo.releaseDay DESC")
 	List<Movie> findSelectStatusAndDateMovie(Integer seachDate, Boolean searchStatus);
 
 	//  指定条件の上映スケジュール取得
 	@Query("select mo " +
 			"from movie mo " +
 			"where mo.movieTitle like %?1% " +
-			"and mo.releaseStatus = ?2 ")
+			"and mo.releaseStatus = ?2 "+
+    	    "order by mo.releaseDay DESC")
 	List<Movie> findSelectStatusAndTitleMovie(String searchTitle, Boolean searchStatus);
 
 	//  指定条件の上映スケジュール取得
 	@Query("select mo " +
 			"from movie mo " +
 			"where mo.movieTitle like %?1% " +
-			"and month(mo.releaseDay) = ?2 ")
+			"and month(mo.releaseDay) = ?2 "+
+    	    "order by mo.releaseDay DESC")
 	List<Movie> findSelectDateAndTitleMovie(String searchTitle, Integer seachDate);
 
-	// データの更新
-	@Modifying
-	@Transactional
-	@Query("UPDATE movie m SET m.movieTitle = :titleNameUpdate, m.releaseDay = :publicationDateUpdate, " +
-			"m.runningTime = :runningTimeUpdate, m.movieDetails = :descriptionUpdate, " +
-			"m.img = :imgPathUpdate, m.url = :urlUpdate, m.staff = :staff, m.releaseStatus = :releaseStatus " +
-			"WHERE m.movieId = :movieId")
+	// データの更新(画像以外)
+    @Modifying
+    @Transactional
+    @Query("update movie mo set mo.movieTitle = ?1, mo.releaseDay = ?2, mo.movieDetails = ?4, mo.runningTime = ?3, mo.releaseStatus = ?7, mo.url = ?5, mo.staff = ?6 where mo.movieId = ?8")
 	void updateMovie(String titleNameUpdate, LocalDate publicationDateUpdate, Integer runningTimeUpdate,
-			String descriptionUpdate, String imgPathUpdate, String urlUpdate, String staff,
+			String descriptionUpdate, String urlUpdate, String staff,
 			Boolean releaseStatus, Integer movieId);
+    // データ更新(画像)
+
+    @Modifying
+    @Transactional
+    @Query("update movie mo set mo.img = ?1 where mo.movieId = ?2")
+	void updateMovieImg(String imgPath, Integer movieId);
 
 }
