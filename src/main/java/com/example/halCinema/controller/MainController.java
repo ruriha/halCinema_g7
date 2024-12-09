@@ -223,7 +223,7 @@ public class MainController {
 	@RequestMapping("/news/{id}")
 	public String news(Model model, HttpSession session, @PathVariable Integer id) {
 		//			会員情報取得
-		Integer memberId = (Integer) session.getAttribute("userId");
+		UUID memberId = (UUID) session.getAttribute("userId");
 		if (memberId != null) {
 			model.addAttribute("topLink", "/toppage");
 		} else {
@@ -393,7 +393,7 @@ public class MainController {
 	//  アクセスページ
 	@RequestMapping("/access")
 	public String access(Model model, HttpSession session) {
-		Integer memberId = (Integer) session.getAttribute("userId");
+		UUID memberId = (UUID) session.getAttribute("userId");
 		if (memberId != null) {
 			model.addAttribute("topLink", "/toppage");
 		} else {
@@ -405,7 +405,7 @@ public class MainController {
 	//  メンバーページ
 	@RequestMapping("/member")
 	public String member(Model model, HttpSession session) {
-		Integer memberId = (Integer) session.getAttribute("userId");
+		UUID memberId = (UUID) session.getAttribute("userId");
 		if (memberId != null) {
 			model.addAttribute("topLink", "/toppage");
 		} else {
@@ -417,7 +417,7 @@ public class MainController {
 	//  サービスページ
 	@RequestMapping("/service")
 	public String service(Model model, HttpSession session) {
-		Integer memberId = (Integer) session.getAttribute("userId");
+		UUID memberId = (UUID) session.getAttribute("userId");
 		if (memberId != null) {
 			model.addAttribute("topLink", "/toppage");
 		} else {
@@ -430,7 +430,7 @@ public class MainController {
 	@RequestMapping("/showmovie")
 	public String showmovie(@RequestParam(name = "screenScheduleDate", required = false) String screenScheduleDate,
 			Model model, HttpSession session) {
-		Integer memberId = (Integer) session.getAttribute("userId");
+		UUID memberId = (UUID) session.getAttribute("userId");
 		if (memberId != null) {
 			model.addAttribute("topLink", "/toppage");
 		} else {
@@ -451,7 +451,6 @@ public class MainController {
 			String movieImg = (String) nowShowingTitle[5];
 
 			String nowShowingCountStr = nowShowingCount.toString();
-			System.out.println(nowShowingCountStr);
 			String nowShowingInfo1 = "<div class=\"content-item\">"
 					+ "<div class=\"unique-item\">"
 					+ "            <img src=\"../images/" + movieImg + "\" alt=\"Image 1\" class=\"content-image\" />"
