@@ -99,6 +99,8 @@
 						</form>
 					</div>
 				</div>
+				
+			<p class="viewerInfo" th:if="${btnStatus == null}">閲覧専用ページです<br>データを編集・追加・削除するには管理者ログインをしてください</p>
 
 
 
@@ -112,11 +114,11 @@
 						<th>URL</th>
 						<th>スタッフ</th>
 						<th>公開状態</th>
-						<th class="btn">編集/削除</th>
+						<th class="btn" th:if="${btnStatus != null}">編集/削除</th>
 					</tr>
 
 					<!-- データの追加  -->
-					<form th:action="@{/addMovie}" method="post" id="movieForm" enctype="multipart/form-data">
+					<form th:action="@{/addMovie}" method="post" id="movieForm" enctype="multipart/form-data" th:if="${btnStatus != null}">
 						<tr>
 							<td class="title"><input type="text" class="cell-input" id="title" name="titleName"></td>
 							<td class="data"><input type="date" class="cell-input" id="data" name="publicationDate">
@@ -174,7 +176,7 @@
 									disabled>
 							</td>
 
-							<td class="btn">
+							<td class="btn" th:if="${btnStatus != null}">
 								<div class="btn_g">
 									<!-- 編集ボタン -->
 									<button type="button" class="edit" th:attr="data-id=${movie.movieId}"
@@ -192,9 +194,6 @@
 											<i class="fas fa-trash-alt"></i>
 										</button>
 									</form>
-
-
-
 								</div>
 							</td>
 						</tr>
