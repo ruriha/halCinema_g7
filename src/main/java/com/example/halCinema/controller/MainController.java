@@ -761,14 +761,16 @@ public class MainController {
                               @RequestParam String imgPath,
                               @RequestParam String urlUpdate,
                               @RequestParam String staff,
-                              Boolean releaseStatus) {    	
+                              Boolean releaseStatus) {   	
+    	System.out.println(imgPath);
+    	
+
 
     	if(imgPathUpdate != null) {
 
     		String fileName = imgPathUpdate.getOriginalFilename();
     		
         	if(!imgPath.equals(fileName)) {
-        		MovieService.updateMovieImg(fileName, movieId);
         		String uploadDir = new File("src/main/resources/static/images").getAbsolutePath();
         		if (imgPathUpdate != null && !imgPathUpdate.isEmpty()) { // アップロードされたファイル名を取得
 
@@ -783,6 +785,7 @@ public class MainController {
 
         				// ファイルを保存
         				imgPathUpdate.transferTo(saveFile);
+        				imgPath = fileName;
 
         			} catch (IOException e) {
         				e.printStackTrace(); // エラー時のログ出力
@@ -792,9 +795,9 @@ public class MainController {
         	}
     		
     	}
+
     	MovieService.updateMovie(titleNameUpdate, publicationDateUpdate, runningTimeUpdate,
-                                 descriptionUpdate, urlUpdate, staff, releaseStatus, movieId);
-    	
+                                 descriptionUpdate, urlUpdate, staff, releaseStatus, movieId, imgPath); 
         return  "redirect:/data1";
     }
 

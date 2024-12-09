@@ -135,15 +135,9 @@ public class MovieService {
 	// 映画情報を編集
 	public void updateMovie(String titleNameUpdate, LocalDate publicationDateUpdate,
 			Integer runningTimeUpdate, String descriptionUpdate, 
-			String urlUpdate, String staff, Boolean releaseStatus, Integer movieId) {
+			String urlUpdate, String staff, Boolean releaseStatus, Integer movieId, String imgPath) {
 		MovieRepository.updateMovie(titleNameUpdate, publicationDateUpdate, runningTimeUpdate, descriptionUpdate,
-				 urlUpdate, staff, releaseStatus, movieId);
-	}
-
-
-	// 映画情報を編集(画像)
-	public void updateMovieImg(String imgPath, Integer movieId) {
-		MovieRepository.updateMovieImg(imgPath, movieId);
+				 urlUpdate, staff, releaseStatus, movieId, imgPath);
 	}
 
 }
