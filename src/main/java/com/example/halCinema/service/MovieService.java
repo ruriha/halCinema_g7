@@ -74,6 +74,13 @@ public class MovieService {
 	//    public void deleteMovieById(Integer id) {  // 型をIntegerに変更
 	//        movieRepository.deleteById(id);
 	//    }
+	
+
+
+	//  すべての映画情報取得
+	public List<Movie> findAllMovie() {
+		return MovieRepository.findAllMovie();
+	}
 
 	//  指定条件の上映スケジュール取得
 	public List<Movie> findSelectAllMovie(String searchTitle, Integer seachDate, Boolean searchStatus) {
@@ -126,11 +133,17 @@ public class MovieService {
 	}
 
 	// 映画情報を編集
-	public void updateMovie(Integer movieId, String titleNameUpdate, LocalDate publicationDateUpdate,
-			Integer runningTimeUpdate, String descriptionUpdate, String imgPathUpdate,
-			String urlUpdate, String staff, Boolean releaseStatus) {
+	public void updateMovie(String titleNameUpdate, LocalDate publicationDateUpdate,
+			Integer runningTimeUpdate, String descriptionUpdate, 
+			String urlUpdate, String staff, Boolean releaseStatus, Integer movieId) {
 		MovieRepository.updateMovie(titleNameUpdate, publicationDateUpdate, runningTimeUpdate, descriptionUpdate,
-				imgPathUpdate, urlUpdate, staff, releaseStatus, movieId);
+				 urlUpdate, staff, releaseStatus, movieId);
+	}
+
+
+	// 映画情報を編集(画像)
+	public void updateMovieImg(String imgPath, Integer movieId) {
+		MovieRepository.updateMovieImg(imgPath, movieId);
 	}
 
 }

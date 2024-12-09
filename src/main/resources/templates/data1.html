@@ -121,7 +121,7 @@
 							<td class="title"><input type="text" class="cell-input" id="title" name="titleName"></td>
 							<td class="data"><input type="date" class="cell-input" id="data" name="publicationDate">
 							</td>
-							<td class="int"><input type="number" class="cell-input" id="int" name="runningTime"></td>
+							<td class="int"><input type="number" class="cell-input int2" id="int" name="runningTime"></td>
 							<td class="description"><input type="text" class="cell-input" id="description"
 									name="description"></td>
 							<td class="description"><input type="file" class="cell-input" id="img" name="imgPath"></td>
@@ -138,50 +138,52 @@
 						</tr>
 					</form>
 
-					<form method="post" th:action="@{/update}">
-						<tr th:each="movie : ${movies}">
-							<td class="title , description" th:attr="data-id=${movie.movieId}">
+					<form method="post" th:action="@{/update}" id="updateForm" th:each="movie : ${movies}" enctype="multipart/form-data">
+						<tr>
+							<td class="title , description">
 								<p th:text="${movie.movieTitle}" class="movieTxt"></p>
-								<input type="text" class="cell-input none-input" id="title" name="titleNameUpdate">
+								<input type="text" class="cell-input none-input" id="title" th:value="${movie.movieTitle}" name="titleNameUpdate">
 							</td>
 							<td class="data">
 								<p th:text="${movie.releaseDay}" class="movieTxt"></p>
-								<input type="date" class="cell-input none-input" id="data" name="publicationDateUpdate">
+								<input type="date" class="cell-input none-input" id="data" name="publicationDateUpdate" th:value="${movie.releaseDay}">
 							</td>
 							<td class="int">
 								<p th:text="${movie.runningTime}" class="movieTxt"></p>
-								<input type="number" class="cell-input none-input" id="int" name="runningTimeUpdate">
+								<input type="number" class="cell-input none-input" id="int" name="runningTimeUpdate" th:value="${movie.runningTime}">
 							</td>
 							<td class="description">
 								<p th:text="${movie.movieDetails}" class="movieTxt"></p>
-								<input type="text" class="cell-input none-input" id="description"
+								<input type="text" class="cell-input none-input" id="description" th:value="${movie.movieDetails}"
 									name="descriptionUpdate">
 							</td>
 							<td class="description">
 								<p th:text="${movie.img}" class="movieTxt"></p>
+								<input type="hidden" th:value="${movie.img}" name="imgPath">
 								<input type="file" class="cell-input none-input" id="img" name="imgPathUpdate">
 							</td>
 							<td class="description">
 								<p th:text="${movie.url}" class="movieTxt"></p>
-								<input type="text" class="cell-input none-input" id="url" name="urlUpdate">
+								<input type="text" class="cell-input none-input" id="url" name="urlUpdate" th:value="${movie.url}">
 							</td>
 							<td class="description">
 								<p th:text="${movie.staff}" class="movieTxt"></p>
-								<input type="text" class="cell-input none-input" id="staff" name="staff">
+								<input type="text" class="cell-input none-input" id="staff" name="staff" th:value="${movie.staff}">
 							</td>
 							<td class="tgl" id="tglTd">
-								<input id="tglCenter" class="isTgl" type="checkbox" th:checked="${movie.releaseStatus}"
+								<input id="tglCenter" class="isTgl" type="checkbox" name="releaseStatus" th:checked="${movie.releaseStatus}"
 									disabled>
 							</td>
 
 							<td class="btn">
 								<div class="btn_g">
 									<!-- 編集ボタン -->
-									<button type="button" class="edit" th:attr="data-id=${movie.movieId}"
+									<input type="hidden" th:value="${movie.movieId}" name="movieId">
+									<button type="button" class="edit" 
 										onclick="upBtn(this)">
 										<i class="fas fa-edit"></i>
 									</button>
-									<button type="submit" class="save3" th:attr="data-id=${movie.movieId}">
+									<button type="submit" class="save3">
 										<i class="fas fa-save"></i>
 									</button>
 

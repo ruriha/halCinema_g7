@@ -227,7 +227,17 @@ function upBtn(button) {
         element.disabled = false;
     });
     
+    
 }
+
+
+
+//function submitUpdate() {
+//    const form = document.getElementById("updateForm");
+//    form.action = "/update";
+//    form.method = "post";
+//    form.submit();
+//}
 
 
 

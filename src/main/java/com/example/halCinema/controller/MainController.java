@@ -677,7 +677,7 @@ public class MainController {
 				movies = MovieService.findSelectDateMovie(seachDate);
 			}
 		} else {
-			movies = MovieService.findAllMovies();
+			movies = MovieService.findAllMovie();
 		}
 		model.addAttribute("movies", movies);
 		//		List<Movie> movies = MovieService.findAllMovies();
@@ -749,12 +749,43 @@ public class MainController {
                               @RequestParam LocalDate publicationDateUpdate,
                               @RequestParam Integer runningTimeUpdate,
                               @RequestParam String descriptionUpdate,
-                              @RequestParam String imgPathUpdate,
+                              @RequestParam(value = "imgPathUpdate", required = false) MultipartFile imgPathUpdate,
+                              @RequestParam String imgPath,
                               @RequestParam String urlUpdate,
                               @RequestParam String staff,
-                              @RequestParam Boolean releaseStatus) {
-        MovieService.updateMovie(movieId, titleNameUpdate, publicationDateUpdate, runningTimeUpdate,
-                                 descriptionUpdate, imgPathUpdate, urlUpdate, staff, releaseStatus);
+                              Boolean releaseStatus) {    	
+
+    	if(imgPathUpdate != null) {
+
+    		String fileName = imgPathUpdate.getOriginalFilename();
+    		
+        	if(!imgPath.equals(fileName)) {
+        		MovieService.updateMovieImg(fileName, movieId);
+        		String uploadDir = new File("src/main/resources/static/images").getAbsolutePath();
+        		if (imgPathUpdate != null && !imgPathUpdate.isEmpty()) { // アップロードされたファイル名を取得
+
+        			try {
+        				// 保存先ファイルのフルパスを作成
+        				File saveFile = new File(uploadDir, fileName);
+
+        				// 保存先フォルダが存在しない場合は作成
+        				if (!saveFile.getParentFile().exists()) {
+        					saveFile.getParentFile().mkdirs();
+        				}
+
+        				// ファイルを保存
+        				imgPathUpdate.transferTo(saveFile);
+
+        			} catch (IOException e) {
+        				e.printStackTrace(); // エラー時のログ出力
+        			}
+        		}
+        		
+        	}
+    		
+    	}
+    	MovieService.updateMovie(titleNameUpdate, publicationDateUpdate, runningTimeUpdate,
+                                 descriptionUpdate, urlUpdate, staff, releaseStatus, movieId);
         return  "redirect:/data1";
     }
 
