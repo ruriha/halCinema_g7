@@ -720,7 +720,7 @@ public class MainController {
 
 		// デフォルトの画像パスを設定
 		String uploadDir = new File("src/main/resources/static/images").getAbsolutePath();
-		String imgPath = "default_image_path.jpg";
+		String imgPath = "comingsoon.jpg";
 
 		if (imgFile != null && !imgFile.isEmpty()) {
 			String fileName = imgFile.getOriginalFilename(); // アップロードされたファイル名を取得
@@ -794,6 +794,7 @@ public class MainController {
     	}
     	MovieService.updateMovie(titleNameUpdate, publicationDateUpdate, runningTimeUpdate,
                                  descriptionUpdate, urlUpdate, staff, releaseStatus, movieId);
+    	
         return  "redirect:/data1";
     }
 
