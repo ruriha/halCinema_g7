@@ -111,7 +111,7 @@
 						<th>URL</th>
 						<th>スタッフ</th>
 						<th>公開状態</th>
-						<th class="btn" th:if="${btnStatus != null}">編集/削除</th>
+						<th class="btn btn2" th:if="${btnStatus != null}">編集/削除</th>
 					</tr>
 
 					<!-- データの追加  -->
@@ -126,7 +126,7 @@
 							<td class="description"><input type="file" class="cell-input" id="img" name="imgPath"></td>
 							<td class="title"><input type="text" class="cell-input" id="url" name="url"></td>
 							<td class="title"><input type="text" class="cell-input" id="staff" name="staff"></td>
-							<td class="tgl"><input type="checkbox" class="cell-input" id="tgl" name="tgl">
+							<td class="tgl tgl2"><input type="checkbox" class="cell-input" id="tgl" name="tgl">
 							</td>
 							<td class="btn">
 								<div class="btn_g">
@@ -185,19 +185,19 @@
 									<button type="submit" class="save3">
 										<i class="fas fa-save"></i>
 									</button>
+									
 
 									<!-- 削除ボタン -->
-									<form method="post" th:action="@{/deleteMovie}">
-										<input type="hidden" name="movieId" th:value="${movie.movieId}" />
-										<button type="submit" class="del">
+										<input type="hidden" name="movieId" th:value="${movie.movieId}" id="delMovieId" />
+										<button onclick="delSbm();" class="del">
 											<i class="fas fa-trash-alt"></i>
 										</button>
-									</form>
 								</div>
 							</td>
 						</tr>
+						
 					</form>
-					</tableclass="formTable">
+					</table>
 			</div>
 		</div>
 	</div>

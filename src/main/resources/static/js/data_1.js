@@ -1,5 +1,7 @@
 const save = document.getElementById("save")
 save.style.display = "none"
+document.getElementById('tgl').checked = false;
+
 
 document.getElementById("title").addEventListener("change", function() {
 	const titileForm = document.getElementById("title")
@@ -232,12 +234,18 @@ function upBtn(button) {
 
 
 
-//function submitUpdate() {
-//    const form = document.getElementById("updateForm");
-//    form.action = "/update";
-//    form.method = "post";
-//    form.submit();
-//}
+
+function delSbm() {
+    const movieId = document.getElementById("delMovieId").value;  // delMovieIdからmovieIdを取得
+
+    fetch('/deleteMovie', {
+        method: 'POST',  // POSTメソッドで送信
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',  // URLエンコードされたデータを送信
+        },
+        body: `movieId=${encodeURIComponent(movieId)}`  // movieIdをURLエンコードして送信
+    })
+}
 
 
 
