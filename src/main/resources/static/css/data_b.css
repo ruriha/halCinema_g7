@@ -58,7 +58,6 @@ a {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  overflow-x: auto; /* 横スクロールを可能にする */
   white-space: nowrap;
   padding: 130px 0 0 10px;
 }
@@ -292,6 +291,10 @@ button.save3{
 
 .none-input{
 	display: none;
+}
+
+.int2{
+	width: 60px;
 }
 
 
