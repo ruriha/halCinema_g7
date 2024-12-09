@@ -102,15 +102,9 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
 	// データの更新(画像以外)
     @Modifying
     @Transactional
-    @Query("update movie mo set mo.movieTitle = ?1, mo.releaseDay = ?2, mo.movieDetails = ?4, mo.runningTime = ?3, mo.releaseStatus = ?7, mo.url = ?5, mo.staff = ?6 where mo.movieId = ?8")
+    @Query("update movie mo set mo.movieTitle = ?1, mo.releaseDay = ?2, mo.movieDetails = ?4, mo.runningTime = ?3, mo.releaseStatus = ?7, mo.url = ?5, mo.staff = ?6, mo.img = ?9 where mo.movieId = ?8")
 	void updateMovie(String titleNameUpdate, LocalDate publicationDateUpdate, Integer runningTimeUpdate,
 			String descriptionUpdate, String urlUpdate, String staff,
-			Boolean releaseStatus, Integer movieId);
-    // データ更新(画像)
-
-    @Modifying
-    @Transactional
-    @Query("update movie mo set mo.img = ?1 where mo.movieId = ?2")
-	void updateMovieImg(String imgPath, Integer movieId);
+			Boolean releaseStatus, Integer movieId, String imgPath);
 
 }
