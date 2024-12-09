@@ -170,19 +170,64 @@ document.getElementById("tgl").addEventListener("change", function() {
 	}
 });
 
+//////////////////////////////
 
+function upBtn(button) {
+    const row = button.closest("tr");
+    const updateOpenField = row.querySelectorAll(".movieTxt");
+    const beforeOpenField = row.querySelectorAll(".none-input");
+    const edit = row.querySelectorAll(".edit");
+    const save3 = row.querySelectorAll(".save3");
+    const isTglElements = row.querySelectorAll(".isTgl");
 
-
-
-
-
-
-
-
-
-
-
-
+    
+    beforeOpenField.forEach(input => {
+		if (input.style.display === ""){
+			input.style.display ="none";
+		}
+	});
+	
+	    
+    save3.forEach(save => {
+		if (save.style.display === ""){
+			save.style.display ="none";
+		}
+	});
+	
+		
+	    
+    edit.forEach(edit1 => {
+		if (edit1.style.display === ""){
+			edit1.style.display ="block";
+		}
+	});
+	
+	beforeOpenField.forEach(input => {
+		input.style.display = input.style.display === "none" ? "block":"none";
+	});
+    
+	
+	updateOpenField.forEach(input => {
+		input.style.display = input.style.display === "none" ? "block":"none";
+	});
+	
+	
+	
+	
+	edit.forEach(edit1 => {
+		edit1.style.display = edit1.style.display === "none" ? "block":"none";
+	});
+	
+	
+	save3.forEach(save => {
+		save.style.display = save.style.display === "none" ? "block":"none";
+	});
+	
+    Array.from(isTglElements).forEach(element => {
+        element.disabled = false;
+    });
+    
+}
 
 
 

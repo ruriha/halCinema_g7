@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
- 
+
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,11 +16,11 @@
 	<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
 		rel="stylesheet">
 </head>
- 
+
 <body>
 	<div id="mid">
 		<div id="hidari_soto">
- 
+
 			<div id="hidari">
 				<div id="all">
 					<a th:href="@{/data1}">映画情報　　　　　〉</a>
@@ -28,10 +28,10 @@
 					<a th:href="@{/mng_logout}">ログアウト　　　　〉</a>
 				</div>
 			</div>
- 
+
 		</div>
- 
- 
+
+
 		<div id="migi">
 			<div id="box">
 				<div class="boxbox">
@@ -43,12 +43,13 @@
 							class="icon">上映スケジュール</a>
 				</div>
 				<div class="boxbox">
-					<a th:href="@{/mng_loguot}" class="boxbtn"><img src="../images/logout.png" alt="button" class="icon">ログアウト</a>
+					<a th:href="@{/mng_loguot}" class="boxbtn"><img src="../images/logout.png" alt="button"
+							class="icon">ログアウト</a>
 				</div>
 			</div>
 			<div id="box-database-divider"></div>
 			<div id="database">
- 
+
 				<!-- 検索 -->
 				<div class="dataContent">
 					<p class="dataLbl">フィルター</p>
@@ -58,28 +59,28 @@
 								<tr>
 									<td class="dataTh">タイトル</td>
 									<td class="dataTh2">
-											<input class="cell-input" type="text" name="searchTitle">
+										<input class="cell-input" type="text" name="searchTitle">
 									</td>
 									<td>　</td>
 								</tr>
 								<tr>
 									<td class="dataTh">公開月</td>
 									<td class="dataTh2">
-							            <select class="cell-input" name="seachDate">
-							                <option disabled selected value>選択してください</option>
-							                <option>1</option>
-							                <option>2</option>
-							                <option>3</option>
-							                <option>4</option>
-							                <option>5</option>
-							                <option>6</option>
-							                <option>7</option>
-							                <option>8</option>
-							                <option>9</option>
-							                <option>10</option>
-							                <option>11</option>
-							                <option>12</option>
-							            </select>
+										<select class="cell-input" name="seachDate">
+											<option disabled selected value>選択してください</option>
+											<option>1</option>
+											<option>2</option>
+											<option>3</option>
+											<option>4</option>
+											<option>5</option>
+											<option>6</option>
+											<option>7</option>
+											<option>8</option>
+											<option>9</option>
+											<option>10</option>
+											<option>11</option>
+											<option>12</option>
+										</select>
 									</td>
 									<td>　</td>
 								</tr>
@@ -98,9 +99,9 @@
 						</form>
 					</div>
 				</div>
- 
- 
- 
+
+
+
 				<table class="formTable">
 					<tr>
 						<th>タイトル</th>
@@ -113,14 +114,12 @@
 						<th>公開状態</th>
 						<th class="btn">編集/削除</th>
 					</tr>
- 
+
 					<!-- データの追加  -->
 					<form th:action="@{/addMovie}" method="post" id="movieForm" enctype="multipart/form-data">
 						<tr>
-							<td class="title"><input type="text" class="cell-input" id="title"
-									name="titleName"></td>
-							<td class="data"><input type="date" class="cell-input" id="data"
-									name="publicationDate">
+							<td class="title"><input type="text" class="cell-input" id="title" name="titleName"></td>
+							<td class="data"><input type="date" class="cell-input" id="data" name="publicationDate">
 							</td>
 							<td class="int"><input type="number" class="cell-input" id="int" name="runningTime"></td>
 							<td class="description"><input type="text" class="cell-input" id="description"
@@ -138,44 +137,73 @@
 							</td>
 						</tr>
 					</form>
- 
- 
-					<tr th:each="movie : ${movies}">
-						<td class="title , description" th:text="${movie.movieTitle}" th:attr="data-id=${movie.movieId}"></td>
-						<td class="data" th:text="${movie.releaseDay}"></td>
-						<td class="int" th:text="${movie.runningTime}"></td>
-						<td class="description" th:text="${movie.movieDetails}"></td>
-						<td class="description" th:text="${movie.img}"></td>
-						<td class="description" th:text="${movie.url}"></td>
-						<td class="description" th:text="${movie.staff}"></td>
-						<td class="tgl" id="tglTd">
-							<input id="tglCenter" type="checkbox" th:checked="${movie.releaseStatus}" disabled>
-						</td>
-						<td class="btn">
-							<div class="btn_g">
-								<!-- 編集ボタン -->
-								<button type="submit" class="edit" th:attr="data-id=${movie.movieId}">
-									<i class="fas fa-edit"></i>
-								</button>
- 
-								<!-- 削除ボタン -->
-								<form method="post" th:action="@{/deleteMovie}">
-									<input type="hidden" name="movieId" th:value="${movie.movieId}" />
-									<button type="submit" class="del">
-										<i class="fas fa-trash-alt"></i>
+
+					<form method="post" th:action="@{/update}">
+						<tr th:each="movie : ${movies}">
+							<td class="title , description" th:attr="data-id=${movie.movieId}">
+								<p th:text="${movie.movieTitle}" class="movieTxt"></p>
+								<input type="text" class="cell-input none-input" id="title" name="titleNameUpdate">
+							</td>
+							<td class="data">
+								<p th:text="${movie.releaseDay}" class="movieTxt"></p>
+								<input type="date" class="cell-input none-input" id="data" name="publicationDateUpdate">
+							</td>
+							<td class="int">
+								<p th:text="${movie.runningTime}" class="movieTxt"></p>
+								<input type="number" class="cell-input none-input" id="int" name="runningTimeUpdate">
+							</td>
+							<td class="description">
+								<p th:text="${movie.movieDetails}" class="movieTxt"></p>
+								<input type="text" class="cell-input none-input" id="description"
+									name="descriptionUpdate">
+							</td>
+							<td class="description">
+								<p th:text="${movie.img}" class="movieTxt"></p>
+								<input type="file" class="cell-input none-input" id="img" name="imgPathUpdate">
+							</td>
+							<td class="description">
+								<p th:text="${movie.url}" class="movieTxt"></p>
+								<input type="text" class="cell-input none-input" id="url" name="urlUpdate">
+							</td>
+							<td class="description">
+								<p th:text="${movie.staff}" class="movieTxt"></p>
+								<input type="text" class="cell-input none-input" id="staff" name="staff">
+							</td>
+							<td class="tgl" id="tglTd">
+								<input id="tglCenter" class="isTgl" type="checkbox" th:checked="${movie.releaseStatus}"
+									disabled>
+							</td>
+
+							<td class="btn">
+								<div class="btn_g">
+									<!-- 編集ボタン -->
+									<button type="button" class="edit" th:attr="data-id=${movie.movieId}"
+										onclick="upBtn(this)">
+										<i class="fas fa-edit"></i>
 									</button>
-								</form>
- 
- 
- 
-							</div>
-						</td>
-					</tr>
+									<button type="submit" class="save3" th:attr="data-id=${movie.movieId}">
+										<i class="fas fa-save"></i>
+									</button>
+
+									<!-- 削除ボタン -->
+									<form method="post" th:action="@{/deleteMovie}">
+										<input type="hidden" name="movieId" th:value="${movie.movieId}" />
+										<button type="submit" class="del">
+											<i class="fas fa-trash-alt"></i>
+										</button>
+									</form>
+
+
+
+								</div>
+							</td>
+						</tr>
+					</form>
 					</tableclass="formTable">
 			</div>
 		</div>
 	</div>
 </body>
 <script type="text/javascript" src="../js/data_1.js"></script>
- 
+
 </html>
