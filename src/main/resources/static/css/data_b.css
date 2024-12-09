@@ -200,7 +200,7 @@ input {
   box-sizing: border-box;
   padding: 5px;
 }
-button.edit, button.save,button.save2, button.del, button#new_b {
+button.edit, button.save,button.save2,button.save3, button.del, button#new_b {
   background: none;
   border: none;
   padding: 0 5px;
@@ -208,7 +208,7 @@ button.edit, button.save,button.save2, button.del, button#new_b {
   cursor: pointer;
 }
 
-button.edit i, button.save i,button.save2, button.del i, button#new_b i {
+button.edit i, button.save i,button.save2,button.save3, button.del i, button#new_b i {
   color: #fff; /* アイコンの色を調整（必要に応じて変更） */
   font-size: 1.2em; /* アイコンのサイズを調整（必要に応じて変更） */
 }
@@ -227,6 +227,9 @@ button.save2{
 	display: block;
 }
 button.save{
+	display: none;
+}
+button.save3{
 	display: none;
 }
 
@@ -286,3 +289,10 @@ button.save{
 #tglTd{
 	text-align: center;
 }
+
+.none-input{
+	display: none;
+}
+
+
+

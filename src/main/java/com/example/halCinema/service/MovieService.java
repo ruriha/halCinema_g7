@@ -54,7 +54,6 @@ public class MovieService {
 		return MovieRepository.findAll(); // カスタムクエリを呼び出し
 	}
 
-
 	// 映画情報を削除する
 	public void deleteMovieById(Integer movieId) {
 		if (movieId == null) {
@@ -67,71 +66,52 @@ public class MovieService {
 		MovieRepository.deleteById(movieId);
 	}
 
+	// 映画情報を編集
 
-    // 映画情報を編集
-    
-    
-//    @Autowired
-//    private MovieRepository movieRepository;
-//
-//    public void deleteMovieById(Integer id) {  // 型をIntegerに変更
-//        movieRepository.deleteById(id);
-//    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+	//    @Autowired
+	//    private MovieRepository movieRepository;
+	//
+	//    public void deleteMovieById(Integer id) {  // 型をIntegerに変更
+	//        movieRepository.deleteById(id);
+	//    }
 
-    //  指定条件の上映スケジュール取得
-    public List<Movie> findSelectAllMovie(String searchTitle, Integer seachDate, Boolean searchStatus) {
-        return MovieRepository.findSelectAllMovie(searchTitle, seachDate, searchStatus);
-    }
-    //  指定条件の上映スケジュール取得
-    public List<Movie> findSelectTitleMovie(String searchTitle) {
-        return MovieRepository.findSelectTitleMovie(searchTitle);
-    }
-    //  指定条件の上映スケジュール取得
-    public List<Movie> findSelectDateMovie(Integer seachDate) {
-        return MovieRepository.findSelectDateMovie(seachDate);
-    }
-    //  指定条件の上映スケジュール取得
-    public List<Movie> findSelectStatusMovie(Boolean searchStatus) {
-        return MovieRepository.findSelectStatusMovie(searchStatus);
-    }
-    //  指定条件の上映スケジュール取得
-    public List<Movie> findSelectStatusAndDateMovie(Integer seachDate, Boolean searchStatus) {
-        return MovieRepository.findSelectStatusAndDateMovie(seachDate, searchStatus);
-    }
-    //  指定条件の上映スケジュール取得
-    public List<Movie> findSelectStatusAndTitleMovie(String searchTitle, Boolean searchStatus) {
-        return MovieRepository.findSelectStatusAndTitleMovie(searchTitle, searchStatus);
-    }
-    //  指定条件の上映スケジュール取得
-    public List<Movie> findSelectDateAndTitleMovie(String searchTitle, Integer seachDate) {
-        return MovieRepository.findSelectDateAndTitleMovie(searchTitle, seachDate);
-    }
+	//  指定条件の上映スケジュール取得
+	public List<Movie> findSelectAllMovie(String searchTitle, Integer seachDate, Boolean searchStatus) {
+		return MovieRepository.findSelectAllMovie(searchTitle, seachDate, searchStatus);
+	}
 
+	//  指定条件の上映スケジュール取得
+	public List<Movie> findSelectTitleMovie(String searchTitle) {
+		return MovieRepository.findSelectTitleMovie(searchTitle);
+	}
 
+	//  指定条件の上映スケジュール取得
+	public List<Movie> findSelectDateMovie(Integer seachDate) {
+		return MovieRepository.findSelectDateMovie(seachDate);
+	}
 
+	//  指定条件の上映スケジュール取得
+	public List<Movie> findSelectStatusMovie(Boolean searchStatus) {
+		return MovieRepository.findSelectStatusMovie(searchStatus);
+	}
 
-	// 映画情報を追加
-	//	public void saveMovie(Movie movie) {
-	//		MovieRepository.save(movie);
-	//	}
+	//  指定条件の上映スケジュール取得
+	public List<Movie> findSelectStatusAndDateMovie(Integer seachDate, Boolean searchStatus) {
+		return MovieRepository.findSelectStatusAndDateMovie(seachDate, searchStatus);
+	}
 
-	public Movie addMovie(String MovieTitle,LocalDate ReleaseDay, String MovieDetails, Integer RunningTime,Boolean ReleaseStatus,String Img, String Url, String Staff) {
+	//  指定条件の上映スケジュール取得
+	public List<Movie> findSelectStatusAndTitleMovie(String searchTitle, Boolean searchStatus) {
+		return MovieRepository.findSelectStatusAndTitleMovie(searchTitle, searchStatus);
+	}
+
+	//  指定条件の上映スケジュール取得
+	public List<Movie> findSelectDateAndTitleMovie(String searchTitle, Integer seachDate) {
+		return MovieRepository.findSelectDateAndTitleMovie(searchTitle, seachDate);
+	}
+
+	public Movie addMovie(String MovieTitle, LocalDate ReleaseDay, String MovieDetails, Integer RunningTime,
+			Boolean ReleaseStatus, String Img, String Url, String Staff) {
 		Movie movie = new Movie();
 		movie.setMovieTitle(MovieTitle);
 		movie.setImg(Img);
@@ -141,9 +121,16 @@ public class MovieService {
 		movie.setUrl(Url);
 		movie.setStaff(Staff);
 		movie.setReleaseStatus(ReleaseStatus);
-		
+
 		return MovieRepository.save(movie);
 	}
+
 	// 映画情報を編集
+	public void updateMovie(Integer movieId, String titleNameUpdate, LocalDate publicationDateUpdate,
+			Integer runningTimeUpdate, String descriptionUpdate, String imgPathUpdate,
+			String urlUpdate, String staff, Boolean releaseStatus) {
+		MovieRepository.updateMovie(titleNameUpdate, publicationDateUpdate, runningTimeUpdate, descriptionUpdate,
+				imgPathUpdate, urlUpdate, staff, releaseStatus, movieId);
+	}
 
 }

@@ -731,7 +731,7 @@ public class MainController {
 				imgFile.transferTo(saveFile);
 
 				// 保存された画像のパスを設定
-				imgPath = "/images/" + fileName; // Webからアクセス可能な相対パス
+				imgPath = fileName; // Webからアクセス可能な相対パス
 			} catch (IOException e) {
 				e.printStackTrace(); // エラー時のログ出力
 			}
@@ -742,11 +742,22 @@ public class MainController {
 
 		return "redirect:/data1"; // 保存後に一覧ページにリダイレクト
 	}
-	
-	private void temp() {
-		// TODO 自動生成されたメソッド・スタブ
 
-	}
+
+    @PostMapping("/update")
+    public String updateMovie(@RequestParam Integer movieId,
+                              @RequestParam String titleNameUpdate,
+                              @RequestParam LocalDate publicationDateUpdate,
+                              @RequestParam Integer runningTimeUpdate,
+                              @RequestParam String descriptionUpdate,
+                              @RequestParam String imgPathUpdate,
+                              @RequestParam String urlUpdate,
+                              @RequestParam String staff,
+                              @RequestParam Boolean releaseStatus) {
+        MovieService.updateMovie(movieId, titleNameUpdate, publicationDateUpdate, runningTimeUpdate,
+                                 descriptionUpdate, imgPathUpdate, urlUpdate, staff, releaseStatus);
+        return  "redirect:/data1";
+    }
 
 	//  data2.html
 	@RequestMapping("/data2")
