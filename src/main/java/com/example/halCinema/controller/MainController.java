@@ -652,7 +652,15 @@ public class MainController {
 			@RequestParam(required = false) Integer runningTime, @RequestParam(required = false) String discription,
 			@RequestParam(required = false) String imgPath, @RequestParam(required = false) Boolean tgl,
 			@RequestParam(required = false) String searchTitle, @RequestParam(required = false) Boolean searchStatus,
-			@RequestParam(required = false) Integer seachDate) {
+			@RequestParam(required = false) Integer seachDate,HttpSession session) {
+		
+		//  管理者ログインの状態確認
+		String loggedInUserId = (String) session.getAttribute("loggedInUserId");
+		String btnStatus = null;
+		if (loggedInUserId != null) {
+			btnStatus = "visible";
+		}
+		model.addAttribute("btnStatus", btnStatus);
 
 		// 映画情報を取得
 		List<Movie> movies = null;

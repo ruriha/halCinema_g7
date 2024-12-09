@@ -6,7 +6,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>HALCINEMA｜TOP</title>
 	<link rel="stylesheet" type="text/css" href="../css/reset.css">
-	<link rel="stylesheet" type="text/css" href="../css/common.css">
 	<link rel="stylesheet" type="text/css" href="../css/data_b.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 		integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
@@ -20,7 +19,6 @@
 <body>
 	<div id="mid">
 		<div id="hidari_soto">
-
 			<div id="hidari">
 				<div id="all">
 					<a th:href="@{/data1}">映画情報　　　　　〉</a>
@@ -28,7 +26,6 @@
 					<a th:href="@{/mng_logout}">ログアウト　　　　〉</a>
 				</div>
 			</div>
-
 		</div>
 
 
@@ -43,7 +40,7 @@
 							class="icon">上映スケジュール</a>
 				</div>
 				<div class="boxbox">
-					<a th:href="@{/mng_loguot}" class="boxbtn"><img src="../images/logout.png" alt="button"
+					<a th:href="@{/mng_logout}" class="boxbtn"><img src="../images/logout.png" alt="button"
 							class="icon">ログアウト</a>
 				</div>
 			</div>
@@ -99,6 +96,8 @@
 						</form>
 					</div>
 				</div>
+				
+			<p class="viewerInfo" th:if="${btnStatus == null}">閲覧専用ページです<br>データを編集・追加・削除するには管理者ログインをしてください</p>
 
 
 
@@ -112,11 +111,11 @@
 						<th>URL</th>
 						<th>スタッフ</th>
 						<th>公開状態</th>
-						<th class="btn">編集/削除</th>
+						<th class="btn" th:if="${btnStatus != null}">編集/削除</th>
 					</tr>
 
 					<!-- データの追加  -->
-					<form th:action="@{/addMovie}" method="post" id="movieForm" enctype="multipart/form-data">
+					<form th:action="@{/addMovie}" method="post" id="movieForm" enctype="multipart/form-data" th:if="${btnStatus != null}">
 						<tr>
 							<td class="title"><input type="text" class="cell-input" id="title" name="titleName"></td>
 							<td class="data"><input type="date" class="cell-input" id="data" name="publicationDate">
@@ -175,7 +174,7 @@
 									disabled>
 							</td>
 
-							<td class="btn">
+							<td class="btn" th:if="${btnStatus != null}">
 								<div class="btn_g">
 									<!-- 編集ボタン -->
 									<input type="hidden" th:value="${movie.movieId}" name="movieId">
@@ -194,9 +193,6 @@
 											<i class="fas fa-trash-alt"></i>
 										</button>
 									</form>
-
-
-
 								</div>
 							</td>
 						</tr>
