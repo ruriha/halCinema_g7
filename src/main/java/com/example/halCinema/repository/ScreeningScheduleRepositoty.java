@@ -68,6 +68,15 @@ public interface ScreeningScheduleRepositoty  extends JpaRepository<ScreeningSch
     	    "order by ss.screeningDatetime DESC")
 	List<Object[]> findAllScreeningSchedule();
 	
+
+	//  指定スケジュールを除外したすべての上映スケジュール取得
+    @Query("select ss.screeningScheduleId, ss.movie.movieTitle, ss.screen.screenId, ss.screeningDatetime, ss.movie.runningTime, ss.movie.movieId " +
+    		"from screeningSchedule ss " +
+    		"inner join ss.movie mo " +
+	        "where ss.screeningScheduleId != ?1 "+
+    	    "order by ss.screeningDatetime DESC")
+	List<Object[]> findElseScreeningSchedule(Integer screeningScheduleId);
+	
 	//  指定月の上映スケジュール取得
     @Query("select ss.screeningScheduleId, ss.movie.movieTitle, ss.screen.screenId, ss.screeningDatetime, ss.movie.runningTime, ss.movie.movieId " +
     		"from screeningSchedule ss " +

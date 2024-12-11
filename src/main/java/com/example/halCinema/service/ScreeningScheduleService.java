@@ -65,6 +65,12 @@ public class ScreeningScheduleService {
     }
     
     
+	//  指定スケジュールを除外したすべての上映スケジュール取得
+    public List<Object[]> findElseScreeningSchedule(Integer screeningScheduleId) {
+        return ScreeningScheduleRepositoty.findElseScreeningSchedule(screeningScheduleId);
+    }
+    
+    
 	//  指定月の上映スケジュール取得
     public List<Object[]> findMonthScreeningSchedule(Integer month) {
         return ScreeningScheduleRepositoty.findMonthScreeningSchedule(month);
