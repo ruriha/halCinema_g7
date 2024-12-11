@@ -847,9 +847,10 @@ public class MainController {
 		} else {
 			screeningSchedules = ScreeningScheduleService.findAllScreeningSchedule();
 		}
-		List<Object[]> screeningSchedules2 = ScreeningScheduleService.findAllScreeningSchedule();
+		List<Object[]> screeningSchedules3 = ScreeningScheduleService.findAllScreeningSchedule();
 
 		for (Object[] screeningSchedule : screeningSchedules) {
+			List<Object[]> screeningSchedules2 = ScreeningScheduleService.findElseScreeningSchedule((Integer)screeningSchedule[0]);
 			LocalTime startTime = LocalTime.of(8, 0);
 			LocalTime endTime = LocalTime.of(21, 59);
 			List<String> updateTimes = new ArrayList<>();
@@ -906,7 +907,7 @@ public class MainController {
 			if (sDate != null && screenId != null && runningTime != null) {
 				// 除外する時間範囲のリストを生成
 				List<TimeRange> excludeRanges = new ArrayList<>();
-				for (Object[] screeningSchedule : screeningSchedules2) {
+				for (Object[] screeningSchedule : screeningSchedules3) {
 					LocalDateTime scheduleStart = (LocalDateTime) screeningSchedule[3];
 					if (scheduleStart.toLocalDate().equals(sDate) && screeningSchedule[2].equals(screenId)) {
 						int durationMinutes = (int) screeningSchedule[4] + 15 + runningTime;
