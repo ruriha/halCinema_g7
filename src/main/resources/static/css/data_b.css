@@ -186,6 +186,12 @@ input {
   font-size: 0.7rem;
   padding: 5px;
 }
+.del2{
+	opacity: 0.5;
+}
+.del2:hover{
+	cursor: not-allowed;
+}
 .title2{
   width: 400px;
 }

@@ -65,6 +65,12 @@ public class MovieService {
 
 		MovieRepository.deleteById(movieId);
 	}
+	
+
+    //  映画情報を削除
+    public void deleteMovie(Integer movieId) {
+    	MovieRepository.deleteMovie(movieId);
+    }
 
 	// 映画情報を編集
 

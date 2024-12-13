@@ -160,4 +160,10 @@ public class ScreeningScheduleService {
     public void deleteScreeningDatetime(Integer screeningScheduleId) {
     	ScreeningScheduleRepositoty.deleteScreeningDatetime(screeningScheduleId);
     }
+    
+	
+	//  上映スケジュールに映画IDが使われているか取得
+    public List<Object[]> findMovieScreeningSchedule(Integer movieId) {
+        return ScreeningScheduleRepositoty.findMovieScreeningSchedule(movieId);
+    }
 }
