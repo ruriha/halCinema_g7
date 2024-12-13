@@ -106,5 +106,14 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
 	void updateMovie(String titleNameUpdate, LocalDate publicationDateUpdate, Integer runningTimeUpdate,
 			String descriptionUpdate, String urlUpdate, String staff,
 			Boolean releaseStatus, Integer movieId, String imgPath);
+    
+    
+    
+
+	//  映画情報を削除
+    @Modifying
+    @Transactional
+    @Query("delete from movie mo where mo.movieId = ?1")
+	void deleteMovie(Integer movieId);
 
 }

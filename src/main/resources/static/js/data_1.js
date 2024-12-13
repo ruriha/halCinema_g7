@@ -1,6 +1,9 @@
 const save = document.getElementById("save")
 save.style.display = "none"
 document.getElementById('tgl').checked = false;
+document.getElementById('searchCheck').checked = true;
+
+
 
 
 document.getElementById("title").addEventListener("change", function() {
@@ -235,19 +238,22 @@ function upBtn(button) {
 
 
 
-function delSbm() {
-    const movieId = document.getElementById("delMovieId").value;  // delMovieIdからmovieIdを取得
 
+function delSbm(button) {
+    const td = button.closest("td");
+    const movieIdInput = td.querySelector(".delMovieId");
+
+    const movieId = movieIdInput.value;
+
+    // サーバーへ削除リクエスト送信
     fetch('/deleteMovie', {
-        method: 'POST',  // POSTメソッドで送信
+        method: 'POST',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',  // URLエンコードされたデータを送信
+            'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: `movieId=${encodeURIComponent(movieId)}`  // movieIdをURLエンコードして送信
-    })
+        body: `movieId=${encodeURIComponent(movieId)}`,
+    });
 }
-
-
 
 
 

@@ -35,6 +35,8 @@ public class Movie {
     
     private String staff;
     
+    private Boolean deleteBtn;
+    
 
     @OneToMany(mappedBy = "movie", cascade = CascadeType.REMOVE)
     private List<ScreeningSchedule> screeningSchedule;
@@ -111,6 +113,14 @@ public class Movie {
     public void setStaff(String staff) {
         this.staff = staff;
     }
+    
+    public Boolean getDeleteBtn() {
+		return deleteBtn;
+	}
+    
+    public void setDeleteBtn(Boolean deleteBtn) {
+		this.deleteBtn = deleteBtn;
+	}
     
     public List<ScreeningSchedule> getScreeningSchedule() {
         return screeningSchedule;

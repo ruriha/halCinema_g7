@@ -166,6 +166,16 @@ public interface ScreeningScheduleRepositoty  extends JpaRepository<ScreeningSch
     @Query("delete from screeningSchedule ss where ss.screeningScheduleId = ?1")
 	void deleteScreeningDatetime(Integer screeningScheduleId);
     
+    
+
+	//  上映スケジュールに映画IDが使われているか取得
+	@Query("select ss.movie.movieTitle, ss.screeningDatetime, ss.screen.capacity , ss.screen.screenId " +
+	           "from screeningSchedule ss " +
+	           "inner join ss.movie mo " +
+	           "inner join ss.screen s " +
+	           "where mo.movieId = ?1")
+	List<Object[]> findMovieScreeningSchedule(Integer movieId);
+    
 
 
 }

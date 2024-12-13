@@ -84,7 +84,7 @@
 								<tr>
 									<td class="dataTh">公開状態</td>
 									<td class="dataTh2 dataCheckBox">
-										<input type="checkbox" class="cell-input" name="searchStatus">
+										<input type="checkbox" class="cell-input" name="searchStatus" id="searchCheck">
 									<td>　</td>
 								</tr>
 								<tr class="dataBtn">
@@ -188,8 +188,12 @@
 									
 
 									<!-- 削除ボタン -->
-										<input type="hidden" name="movieId" th:value="${movie.movieId}" id="delMovieId" />
-										<button onclick="delSbm();" class="del">
+										<input type="hidden" name="movieId" th:value="${movie.movieId}" class="delMovieId" />
+										<button onclick="delSbm(this);" class="del" data-id="${movie.movieId}" th:if="${movie.deleteBtn == true}">
+											<i class="fas fa-trash-alt"></i>
+										</button>
+										
+										<button onclick="delSbm(this);" class="del del2" data-id="${movie.movieId}" th:if="${movie.deleteBtn != true}" disabled>
 											<i class="fas fa-trash-alt"></i>
 										</button>
 								</div>

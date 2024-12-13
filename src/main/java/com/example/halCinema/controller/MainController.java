@@ -687,6 +687,17 @@ public class MainController {
 		} else {
 			movies = MovieService.findAllMovie();
 		}
+		Boolean deleteBtn;
+		for (Movie movie : movies) {
+			Integer movieId = movie.getMovieId();
+			List<Object[]> onScheduleMovie = ScreeningScheduleService.findMovieScreeningSchedule(movieId);
+			if(onScheduleMovie.isEmpty() == true) {
+				deleteBtn = false;
+			}else {
+				deleteBtn = true;				
+			}
+			movie.setDeleteBtn(deleteBtn);
+		}
 		model.addAttribute("movies", movies);
 		//		List<Movie> movies = MovieService.findAllMovies();
 		//		model.addAttribute("movies", movies); // HTMLテンプレートに渡す
@@ -697,11 +708,10 @@ public class MainController {
 	// 映画情報を削除するエンドポイント
 	@PostMapping("/deleteMovie")
 	public String deleteMovie(@RequestParam(required = false) Integer movieId) {
-		if (movieId == null) {
-			throw new IllegalArgumentException("movieId must not be null");
-		}
-
-		MovieService.deleteMovieById(movieId);
+//		if (movieId == null) {
+//			throw new IllegalArgumentException("movieId must not be null");
+//		}
+		MovieService.deleteMovie(movieId);
 		return "redirect:/data1"; // 削除後のリダイレクト先
 	}
 
