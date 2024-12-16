@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>クレジットカード決済</title>
+    <link rel="stylesheet" href="../css/card.css">
+</head>
+<body>
+    <div class="background-overlay"></div>
+    <div class="container">
+        <h2>決済情報入力</h2>
+        <form id="payment-form">
+            <div class="payment-details">
+                <label>支払内容</label>
+                <div class="amount-box">
+                    <span class="amount-label">入会手数料</span>
+                    <span class="amount-value">¥1,000</span>
+                </div>
+            </div>
+
+            <div class="payment-method">
+                <div class="input-group">
+                    <label for="card-number">カード番号</label>
+                    <input type="text" id="card-number" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="card-name">カード名義</label>
+                    <input type="text" id="card-name" placeholder="TARO YAMADA" required>
+                </div>
+
+                <div class="security-info">
+                    <div class="input-group">
+                        <label for="expiry-month">有効期限 (月/年)</label>
+                        <div class="expiry-inputs">
+                            <select id="expiry-month" required>
+                                <option value="">月</option>
+                                <!-- 01-12のオプション -->
+                            </select>
+                            <span class="expiry-separator">/</span>
+                            <select id="expiry-year" required>
+                                <option value="">年</option>
+                                <!-- 年のオプション -->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-group security-code">
+                        <label for="security-code">セキュリティコード</label>
+                        <input type="text" id="security-code" placeholder="123" maxlength="3" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="button-container">
+                <button type="submit">支払う</button>
+            </div>
+
+            <div class="notes">
+                <p class="note">※お支払方法は一括払いのみとなります。</p>
+                <p class="note">※一部プリペイド式クレジットカードはご利用いただけない場合がございます。</p>
+                <p class="note">※カード情報は保存されません。</p>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

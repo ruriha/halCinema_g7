@@ -1,0 +1,97 @@
+body {
+    margin: 0;
+    font-family: 'Josefin Sans',sans-serif;
+    background: #000000;
+    color: #ffffff;
+    min-height: 100vh;
+}
+
+.flex-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 0;
+}
+
+.logo {
+    margin: 1rem 0 0 0;
+}
+
+.sections-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.section {
+    height: 300px;
+    margin: 0.6rem 0;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+}
+
+.section:nth-child(1) {
+    background-image: url("../images/orilaunge.jpg");
+}
+
+.section:nth-child(2) {
+    background-image: url("../images/Theater.jpg");
+}
+
+.section:nth-child(3) {
+    background-image: url("../images/goods.png");
+}
+
+.content {
+    position: relative;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+h2 {
+    font-size: 2rem!important;
+    margin: 0;
+    font-weight: 600;
+    color: #ffffff;
+    text-align: center;
+    letter-spacing: 8px;
+}
+
+.button-modern {
+    background: #0b0b0b;
+    color: white;
+    border: solid 2px #1FD9D9;
+    padding: 1rem 3rem;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.button-modern:hover {
+    background: #1ac5c5;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(31, 217, 217, 0.4);
+}
+
+@media (max-width: 768px) {
+    .section {
+        height: 250px;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    .button-modern {
+        padding: 0.8rem 2rem;
+    }
+}

@@ -1,0 +1,138 @@
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background: url('../images/background.png');
+    background-size: cover;
+    position: relative;
+    color: #ffffff;
+}
+
+.background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+}
+
+.container {
+    position: relative;
+    z-index: 2;
+    width: 90%;
+    max-width: 800px;
+    margin: 50px auto;
+}
+
+.form-container {
+    background: rgba(34, 34, 34, 0.95);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+h2 {
+    text-align: center;
+    margin: 0 0 40px;
+    font-size: 28px;
+    font-weight: 500;
+    color: #ffffff;
+}
+
+.info-section {
+    background: rgba(17, 17, 17, 0.5);
+    padding: 30px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.form-group:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #999;
+    font-size: 14px;
+}
+
+.confirm-data {
+    margin: 0;
+    font-size: 16px;
+    color: #ffffff;
+    padding: 8px 0;
+}
+
+.button-group {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.btn {
+    padding: 15px 40px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #1FD9D9;
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background-color: #1ac5c5;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(31, 217, 217, 0.2);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    border: 1px solid #1FD9D9;
+    color: #1FD9D9;
+}
+
+.btn-secondary:hover {
+    background-color: rgba(31, 217, 217, 0.1);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        margin: 20px auto;
+    }
+
+    .form-container {
+        padding: 20px;
+    }
+
+    .info-section {
+        padding: 20px;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}
