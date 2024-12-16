@@ -1,0 +1,428 @@
+/* shop.css */
+body {
+  background: url('../images/background.png');
+  background-size: contain;
+  background-attachment: fixed;
+  background-position: center;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: 'Josefin Sans', sans-serif;
+  color: #ffffff;
+}
+
+.background-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1;
+}
+
+.layout-container {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  min-height: 100vh;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* サイドバー */
+.sidebar {
+  background: rgba(0, 0, 0, 0.95);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.logo-box {
+  text-align: center;
+}
+
+.logo {
+  max-width: 180px;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+.nav-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.nav-button {
+  background: transparent;
+  color: #1FD9D9;
+  border: 2px solid #1FD9D9;
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.nav-button:hover {
+  background: #1FD9D9;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(31, 217, 217, 0.2);
+}
+
+.category-nav {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.category-btn {
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  background: transparent;
+  border: 2px solid rgba(31, 217, 217, 0.3);
+  color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.category-btn.active {
+  background: #1FD9D9;
+  border-color: #1FD9D9;
+  color: #fff;
+}
+
+.category-btn:not(.active):hover {
+  border-color: #1FD9D9;
+  color: #1FD9D9;
+}
+
+/* メインコンテンツ */
+.main-content {
+  padding: 2rem;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.page-title {
+  color: #1FD9D9;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 横3列 */
+    grid-template-rows: repeat(3, auto); /* 縦3列 */
+    gap: 2rem; /* 各セル間の間隔 */
+  }
+
+.product-card {
+  background: rgba(34, 34, 34, 0.95);
+  border-radius: 15px;
+  padding: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+.product-image {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.product-image img {
+  max-width: 100%;
+  height: auto;
+}
+
+.product-info {
+  text-align: center;
+}
+
+.product-title {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #fff;
+}
+
+.product-price {
+  font-size: 1.25rem;
+  color: #1FD9D9;
+  margin-bottom: 1rem;
+}
+
+.quantity-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.quantity-btn {
+  background: #1FD9D9;
+  color: #fff;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quantity-btn:hover {
+  background: #1ac5c5;
+  transform: scale(1.1);
+}
+
+.quantity-input {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.2rem;
+  width: 40px;
+  text-align: center;
+}
+
+/* CSSに追加 */
+.pagination {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.page-numbers {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.pagination-btn {
+  background: transparent;
+  color: #1FD9D9;
+  border: 2px solid #1FD9D9;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background: #1FD9D9;
+  color: #fff;
+}
+
+.pagination-btn:disabled {
+  border-color: rgba(31, 217, 217, 0.3);
+  color: rgba(31, 217, 217, 0.3);
+  cursor: not-allowed;
+}
+
+.page-btn {
+  background: transparent;
+  color: #fff;
+  border: 2px solid rgba(31, 217, 217, 0.3);
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.page-btn:hover {
+  border-color: #1FD9D9;
+  color: #1FD9D9;
+}
+
+.page-btn.active {
+  background: #1FD9D9;
+  border-color: #1FD9D9;
+  color: #fff;
+  cursor: default;
+}
+
+/* レスポンシブ対応の追加 */
+
+
+@media (max-width: 1024px) {
+  .layout-container {
+      grid-template-columns: 250px 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+      background-attachment: scroll;
+  }
+
+  .layout-container {
+      grid-template-columns: 1fr;
+      min-height: 100vh;
+  }
+
+  /* カテゴリナビゲーション */
+  .category-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(34, 34, 34, 0.95);
+      padding: 0.8rem;
+      margin: 0;
+      border: none;
+      z-index: 11;
+      display: flex;
+      gap: 0.5rem;
+  }
+
+  .category-btn {
+      margin: 0;
+      padding: 0.8rem;
+      flex: 1;
+      white-space: nowrap;
+  }
+
+  /* サイドバー */
+  .sidebar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(34, 34, 34, 0.95);
+      padding: 0.8rem;
+      z-index: 10;
+      flex-direction: row;
+      justify-content: center;
+      gap: 1rem;
+      height: auto;
+  }
+
+  .logo-box {
+      display: none;
+  }
+
+  .nav-buttons {
+      flex-direction: row;
+      gap: 0.5rem;
+      margin: 0;
+      width: 100%;
+      max-width: 600px;
+  }
+
+  .nav-button {
+      flex: 1;
+      padding: 0.8rem;
+      font-size: 0.9rem;
+  }
+
+  /* メインコンテンツ */
+  .main-content {
+      padding: 6rem 1rem 7rem 1rem;
+      margin: 0;
+  }
+
+  .products-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+  }
+
+  .product-card {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+  }
+
+  .product-image {
+      margin: 0;
+  }
+
+  .product-info {
+      text-align: left;
+  }
+
+  .quantity-control {
+      justify-content: flex-start;
+  }
+
+  .pagination {
+    margin: 2rem 0 0;
+}
+}
+
+@media (max-width: 480px) {
+  .nav-button span {
+      display: none;
+  }
+
+  .nav-button {
+      padding: 0.8rem;
+  }
+
+  .nav-button i {
+      font-size: 1.2rem;
+      margin: 0;
+  }
+
+  .product-card {
+      grid-template-columns: 80px 1fr;
+  }
+
+  .product-title {
+      font-size: 1.2rem;
+  }
+
+  .product-price {
+      font-size: 1.1rem;
+  }
+
+  .quantity-btn {
+      width: 32px;
+      height: 32px;
+  }
+
+  .category-btn {
+      padding: 0.6rem;
+      font-size: 0.9rem;
+  }
+
+  .quantity-control {
+      margin-top: 0.5rem;
+  }
+
+  .pagination-btn,
+  .page-btn {
+      width: 36px;
+      height: 36px;
+      font-size: 0.9rem;
+  }
+}

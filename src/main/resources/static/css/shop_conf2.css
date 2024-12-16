@@ -1,0 +1,124 @@
+body{
+    color: white;
+}
+
+#waku{
+    background-color: #222;
+    width: 800px;
+    margin: 50px auto;
+    border: 3px solid #1fd9d97d;
+    border-radius: 10px;
+    padding: 30px;
+}
+
+#cus_name{
+    font-size: 2rem;
+    text-align: center;
+}
+
+
+
+table, tr, td{
+    border:1px solid #1fd9d9;
+    color: white;
+    padding: 10px;
+    font-size: 1.2rem;
+    margin: 40px auto;
+    text-align: center;
+}
+
+#long{
+    width: 400px;
+}
+.long2{
+    width: 100px;
+}
+
+#kane{
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.btn{
+    width: 50%;
+    margin: 0 auto;
+    display: flex;
+}
+.btn button {
+    width: 130px;
+  height: 40px;
+  margin: 0 auto;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.btn button.confirm-btn{
+    color: #1FD9D9;
+  text-decoration: none;
+  background-color: #222222;
+  border: solid 3px #1FD9D9;
+  opacity: 0.8;
+  font-weight: lighter;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  padding: 0px 0px 0 0;
+  margin: 30px auto 20px auto;
+  border-radius: 50px;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  }
+.btn button.confirm-btn:hover{
+    opacity: 1;
+  }
+.btn button.confirm-btn::before{
+    content: '';
+    width: 15%;
+    height: 100%;
+    background-color: #1FD9D9;
+    position: absolute;
+    left: -100%;
+    top: 0;
+    transition: .8s;
+    z-index: -1;
+  }
+  
+.btn button.confirm-btn:hover::before{
+    left: 100%;
+  }
+
+.btn button.back-btn {
+    color: #9f9f9f;
+  text-decoration: none;
+  background-color: #222222;
+  border: solid 3px #989898;
+  opacity: 0.8;
+  font-weight: lighter;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  margin: 30px 90px 20px auto;
+  border-radius: 50px;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+.btn button.back-btn:hover{
+    opacity: 1;
+    color: #9b9b9b;
+  }
+.btn button.back-btn::before{
+    content: '';
+    width: 15%;
+    height: 100%;
+    background-color: #1FD9D9;
+    position: absolute;
+    left: -100%;
+    top: 0;
+    transition: .8s;
+    z-index: -1;
+  }
+  
+.btn button.back-btn:hover::before{
+    left: 100%;
+  }

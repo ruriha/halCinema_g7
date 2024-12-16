@@ -1,0 +1,158 @@
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background: url('../images/background.png');
+    background-size: cover;
+    position: relative;
+    color: #ffffff;
+}
+
+.background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+}
+
+.container {
+    position: relative;
+    z-index: 2;
+    width: 90%;
+    max-width: 800px;
+    margin: 50px auto;
+}
+
+.form-container {
+    background: rgba(34, 34, 34, 0.95);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+h2 {
+    text-align: center;
+    margin: 0 0 40px;
+    font-size: 28px;
+    font-weight: 500;
+}
+
+.form-section {
+    background: rgba(17, 17, 17, 0.5);
+    padding: 30px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #fff;
+    font-size: 14px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+select {
+    width: 100%;
+    padding: 12px 15px;
+    background-color: rgba(17, 17, 17, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+input:focus,
+select:focus {
+    border-color: #1FD9D9;
+    outline: none;
+}
+
+.date-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 15px;
+}
+
+.date-select {
+    width: 100%;
+}
+
+.radio-group {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.radio-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.radio-item label {
+    margin: 0;
+}
+
+.small-input {
+    max-width: 200px;
+}
+
+.button-container {
+    text-align: center;
+    margin-top: 40px;
+}
+
+button {
+    background-color: #1FD9D9;
+    color: #ffffff;
+    padding: 15px 60px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: #1ac5c5;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(31, 217, 217, 0.2);
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        margin: 20px auto;
+    }
+
+    .form-container {
+        padding: 20px;
+    }
+
+    .form-section {
+        padding: 20px;
+    }
+
+    .radio-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .date-inputs {
+        grid-template-columns: 1fr;
+    }
+}

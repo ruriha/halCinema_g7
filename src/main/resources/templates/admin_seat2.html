@@ -1,0 +1,236 @@
+
+<!DOCTYPE html>
+
+<html lang="ja">
+
+  <head>
+
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>HALCINEMA｜TOP</title>
+
+    <link rel="stylesheet" type="text/css" href="../css/reset.css">
+    <link rel="stylesheet" type="text/css" href="../css/seat.css">
+    <link rel="stylesheet" type="text/css" href="../css/common.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+
+
+<!-- jQuary本体 CDN -->
+<!-- <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script> -->
+<!-- jQuaryの実行 -->
+<!-- <script type="text/javascript" src="js/common.js"></script> -->
+
+  </head>
+
+  <body>
+
+    <!-- ヘッダー ------------------------------------------------->
+    <header class="commonHeader">
+
+        <!-- ロゴ -->
+        <figure class="commonLogoBox">
+            <img class="commonLogo" src="../images/logo.svg" alt="HAL CINEMA">
+        </figure>
+
+    </header>
+    <div>
+        <p id="title">名探偵コナン 100万ドルの五稜星</p>
+        <div id="side">
+          <p id="screen">スクリーン1</p>
+          <p>|</p>
+          <p id="time">2024/5/31 15:30~17:45</p>
+          <p>|</p>
+          <p id="name">レッドテール様</p>
+        </div>
+        <p class="attention">座席を選択して下さい。<span style="color: #A2936B;">■</span>：選択済み / <span style="color: aqua;">■</span>：選択中</p>
+      </div>
+    <div id="tyuu">
+      <table id="myTable">
+          <tr>
+              <td>1</td>
+              <td>2</td>
+              <td class="mozi">A</td>
+              <td>3</td>
+              <td>4</td>
+              <td class="unselectable">5</td>
+              <td class="unselectable">6</td>
+              <td>7</td>
+              <td>8</td>
+              <td>9</td>
+              <td>10</td>
+              <td class="mozi">A</td>
+              <td>11</td>
+              <td>12</td>
+          </tr>
+          <tr>
+              <td>1</td>
+              <td>2</td>
+              <td class="mozi">B</td>
+              <td>3</td>
+              <td>4</td>
+              <td>5</td>
+              <td>6</td>
+              <td>7</td>
+              <td>8</td>
+              <td>9</td>
+              <td>10</td>
+              <td class="mozi">B</td>
+              <td>11</td>
+              <td>12</td>
+          </tr>
+          <tr>
+              <td class="unselectable">1</td>
+              <td class="unselectable">2</td>
+              <td class="mozi">C</td>
+              <td>3</td>
+              <td>4</td>
+              <td>5</td>
+              <td>6</td>
+              <td>7</td>
+              <td>8</td>
+              <td>9</td>
+              <td>10</td>
+              <td class="mozi">C</td>
+              <td>11</td>
+              <td>12</td>
+          </tr>
+          <tr>
+              <td>1</td>
+              <td>2</td>
+              <td class="mozi">D</td>
+              <td>3</td>
+              <td class="unselectable">4</td>
+              <td>5</td>
+              <td>6</td>
+              <td>7</td>
+              <td>8</td>
+              <td>9</td>
+              <td>10</td>
+              <td class="mozi">D</td>
+              <td>11</td>
+              <td>12</td>
+          </tr>
+          <tr>
+              <td>1</td>
+              <td>2</td>
+              <td class="mozi">E</td>
+              <td>3</td>
+              <td>4</td>
+              <td>5</td>
+              <td>6</td>
+              <td>7</td>
+              <td>8</td>
+              <td>9</td>
+              <td>10</td>
+              <td class="mozi">E</td>
+              <td>11</td>
+              <td>12</td>
+          </tr>
+          <tr>
+              <td>1</td>
+              <td>2</td>
+              <td class="mozi">F</td>
+              <td>3</td>
+              <td>4</td>
+              <td>5</td>
+              <td>6</td>
+              <td>7</td>
+              <td>8</td>
+              <td>9</td>
+              <td>10</td>
+              <td class="mozi">F</td>
+              <td>11</td>
+              <td>12</td>
+          </tr>
+          <tr>
+              <td>1</td>
+              <td>2</td>
+              <td class="mozi">G</td>
+              <td>3</td>
+              <td>4</td>
+              <td class="unselectable">5</td>
+              <td class="unselectable">6</td>
+              <td class="unselectable">7</td>
+              <td>8</td>
+              <td>9</td>
+              <td>10</td>
+              <td class="mozi">G</td>
+              <td>11</td>
+              <td>12</td>
+          </tr>
+          <tr>
+              <td>1</td>
+              <td>2</td>
+              <td class="mozi">H</td>
+              <td>3</td>
+              <td>4</td>
+              <td>5</td>
+              <td>6</td>
+              <td>7</td>
+              <td>8</td>
+              <td>9</td>
+              <td>10</td>
+              <td class="mozi">H</td>
+              <td>11</td>
+              <td>12</td>
+          </tr>
+          <tr>
+              <td>1</td>
+              <td>2</td>
+              <td class="mozi">I</td>
+              <td>3</td>
+              <td>4</td>
+              <td>5</td>
+              <td>6</td>
+              <td>7</td>
+              <td>8</td>
+              <td>9</td>
+              <td>10</td>
+              <td class="mozi">I</td>
+              <td>11</td>
+              <td>12</td>
+          </tr>
+          <tr>
+              <td>1</td>
+              <td>2</td>
+              <td class="mozi">J</td>
+              <td>3</td>
+              <td>4</td>
+              <td>5</td>
+              <td>6</td>
+              <td>7</td>
+              <td>8</td>
+              <td>9</td>
+              <td>10</td>
+              <td class="mozi">J</td>
+              <td>11</td>
+              <td class="unselectable">12</td>
+          </tr>
+      </table>
+      <form id="myForm" method="post" action="">
+          <!-- Nunberはバック座席番号  Contentはフロント座席番号 -->
+          <!-- バック座席番号の増加はセル番号を数えているため「A]などの文字も数えているから -->
+          <input type="hidden" name="selectedCell1Number" id="selectedCell1Number" value="">
+          <input type="hidden" name="selectedCell1Content" id="selectedCell1Content" value="">
+          <input type="hidden" name="selectedCell2Number" id="selectedCell2Number" value="">
+          <input type="hidden" name="selectedCell2Content" id="selectedCell2Content" value="">
+          <p class="attention2">座席は会員様1名につき、2つまでお取り頂けます。但し、同伴者がいない場合の座席確保は、<br>他のお客様のご迷惑となりますのでお控え頂きますようお願い申し上げます。</p>
+          <button type="button" class="back-button" onclick="goBack()">戻る</button>
+          <button class="next-button" type="submit">送信</button>
+      </form>
+    </div>
+
+
+
+    <footer>
+        <p class="commonFooterCopyright">&copy;2024 HAL CINEMA</p>
+    </footer>
+
+  </body>
+<script type="text/javascript" src="../js/seat2.js"></script>
+</html>

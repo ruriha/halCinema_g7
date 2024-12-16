@@ -8,18 +8,18 @@
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/mng_login.css">
 
-    <title>Document</title>
+    <title>HALCINEMA SYSTEM | 管理者ログイン</title>
 </head>
 <body>
 
     <div class="container">
         <div class="viewer-section">
-            <h1>映画管理システム</h1>
+            <h1>HALCINEMA SYSTEM</h1>
             <a class="viewer-button" th:href="@{/data1}">閲覧者モード</a>
             <hr color="#727272">
         </div>
         <div class="admin-login-section">
-            <h2>HALCINEMA SYSTEM</h2>
+            <h2>管理者ログイン</h2>
 			<form th:action="@{/mng_login}" method="post" th:object="${adminloginForm}">
                 <div class="form-group">
                     <label for="admin-id">管理者ID</label>
