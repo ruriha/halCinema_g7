@@ -27,39 +27,23 @@
                 </button>
             </nav>
             <div class="category-nav">
-                <button onclick="location.href='shop.html'" class="category-btn">ドリンク</button>
-                <button class="category-btn active">フード</button>
+                <button class="category-btn active">ドリンク</button>
+                <button onclick="location.href='shop2.html'" class="category-btn">フード</button>
                 <button onclick="location.href='shop3.html'" class="category-btn">グッズ</button>
             </div>
         </aside>
 
         <main class="main-content">
             <div class="products-grid">
+                <!-- 同じ構造を繰り返し -->
+                <!-- 2個目から8個目まで同じ商品カードを繰り返し -->
+                <!-- 例：2個目 -->
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="../images/welcome.jpg" alt="ポップコーンS">
+                        <img src="../images/welcome.jpg" alt="ドリンクS">
                     </div>
                     <div class="product-info">
-                        <h3 class="product-title">ポップコーンS</h3>
-                        <p class="product-price">¥600</p>
-                        <div class="quantity-control">
-                            <button type="button" class="quantity-btn minus">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                            <input type="text" value="0" class="quantity-input" readonly>
-                            <button type="button" class="quantity-btn plus">
-                                <i class="fas fa-plus"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="../images/welcome.jpg" alt="ポップコーンM">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">ポップコーンM</h3>
+                        <h3 class="product-title">ドリンクS</h3>
                         <p class="product-price">¥800</p>
                         <div class="quantity-control">
                             <button type="button" class="quantity-btn minus">
@@ -73,12 +57,13 @@
                     </div>
                 </div>
 
+                <!-- Mサイズ -->
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="../images/welcome.jpg" alt="ポップコーンL">
+                        <img src="../images/welcome.jpg" alt="ドリンクM">
                     </div>
                     <div class="product-info">
-                        <h3 class="product-title">ポップコーンL</h3>
+                        <h3 class="product-title">ドリンクM</h3>
                         <p class="product-price">¥1,000</p>
                         <div class="quantity-control">
                             <button type="button" class="quantity-btn minus">
@@ -92,9 +77,28 @@
                     </div>
                 </div>
 
-                <!-- 他の商品も同様に追加 -->
+                <!-- Lサイズ -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="../images/welcome.jpg" alt="ドリンクL">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">ドリンクL</h3>
+                        <p class="product-price">¥1,200</p>
+                        <div class="quantity-control">
+                            <button type="button" class="quantity-btn minus">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <input type="text" value="0" class="quantity-input" readonly>
+                            <button type="button" class="quantity-btn plus">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
+            <!-- ページネーション -->
             <div class="pagination">
                 <button class="pagination-btn" disabled>
                     <i class="fas fa-chevron-left"></i>

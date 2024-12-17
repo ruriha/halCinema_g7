@@ -3,38 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="stylesheet" href="../css/systemtop.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <title>HALCINEMA | システムTOP</title>
 </head>
 <body>
     <div class="flex-box">
         <div class="logo">
-            <img src="../images/logo.svg" alt="ロゴ">
+            <img src="../images/logo.svg" alt="HAL CINEMA">
         </div>
     </div>
 
-    <div class="sections-container">
-        <div class="section">
-            <div class="content">
-                <h2>会員登録</h2>
-                <button class="button-modern">NEXT</button>
+<div class="sections-container">
+    <!-- 会員登録 -->
+    <div class="section">
+        <div class="content">
+            <div class="content-left">
+                <div class="icon-circle">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <div class="text-content">
+                    <h2>会員登録</h2>
+                    <p class="section-description">新規会員登録はこちら</p>
+                </div>
             </div>
-        </div>
-
-        <div class="section reverse">
-            <div class="content">
-                <h2>ご予約</h2>
-                <button class="button-modern">NEXT</button>
-            </div>
-        </div>
-
-        <div class="section">
-            <div class="content">
-                <h2>物品販売</h2>
-                <button class="button-modern">NEXT</button>
-            </div>
+            <button class="button-modern" onclick="location.href='input_info.html'">
+                NEXT
+                <i class="fas fa-arrow-right"></i>
+            </button>
         </div>
     </div>
+
+    <!-- ご予約 -->
+    <div class="section">
+        <div class="content">
+            <div class="content-left">
+                <div class="icon-circle">
+                    <i class="fas fa-ticket"></i>
+                </div>
+                <div class="text-content">
+                    <h2>ご予約</h2>
+                    <p class="section-description">チケットのご予約はこちら</p>
+                </div>
+            </div>
+            <button class="button-modern" onclick="location.href='member_auth.html'">
+                NEXT
+                <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- 物品販売 -->
+    <div class="section">
+        <div class="content">
+            <div class="content-left">
+                <div class="icon-circle">
+                    <i class="fas fa-shopping-bag"></i>
+                </div>
+                <div class="text-content">
+                    <h2>物品販売</h2>
+                    <p class="section-description">グッズ・フードの購入はこちら</p>
+                </div>
+            </div>
+            <button class="button-modern" onclick="location.href='shop.html'">
+                NEXT
+                <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+</div>
 </body>
 </html>
