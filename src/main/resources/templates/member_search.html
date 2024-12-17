@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HALCINEMA｜会員検索</title>
+    <link rel="stylesheet" type="text/css" href="../css/reset.css">
+    <link rel="stylesheet" type="text/css" href="../css/member_search.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="background-overlay"></div>
+    <div class="container">
+        <figure class="logo-box">
+            <img class="logo" id="icon" src="../images/logo.svg" alt="HAL CINEMA">
+        </figure>
+
+        <div class="search-container">
+            <h1 class="title">会員検索</h1>
+            
+            <form class="search-form" method="post">
+                <div class="search-box">
+
+                    <div class="input-group">
+                        <label for="memberName">お名前</label>
+                        <input type="text" id="memberName" name="memberName" placeholder="例：山田太郎">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="memberPhone">電話番号</label>
+                        <input type="tel" id="memberPhone" name="memberPhone" placeholder="例：0901234567">
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="search-submit-btn">
+                        <i class="fas fa-search"></i>
+                        検索する
+                    </button>
+                </div>
+            </form>
+
+            <!-- 検索結果テーブル（初期状態では非表示） -->
+            <div class="search-results" style="display: none;">
+                <h2>検索結果</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>会員ID</th>
+                                <th>お名前</th>
+                                <th>電話番号</th>
+                                <th>メールアドレス</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- 検索結果が動的に追加される -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="button-container">
+                <button onclick="location.href='/member/auth'" class="return-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    戻る
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

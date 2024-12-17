@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 // sessionStorageから注文データを取得
 const orderData = JSON.parse(sessionStorage.getItem('orderData')) || {};
-
 // 表のtbodyにデータを追加
 const tableBody = document.querySelector('table').getElementsByTagName('tbody')[0];
 let totalAmount = 0;
