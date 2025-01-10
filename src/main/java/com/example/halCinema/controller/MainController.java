@@ -1044,14 +1044,16 @@ public class MainController {
 	//  店頭システムトップではloggedInMemberIdセッションは削除する 
 	@RequestMapping("/memberAuth")
 	public String memberAuth(Model model, @RequestParam(required = false) String next) {
+		next = "/shop";
 		model.addAttribute("next", next);
-		return "member_auth";
+		return "member_auth2";
 	}
 
 	@RequestMapping("/memberSave")
 	public String memberSave(HttpSession session, @RequestParam(required = false) UUID getMemberId,
 			@RequestParam(required = false) String next) {
 		session.setAttribute("loggedInMemberId", getMemberId);
+		System.out.println(getMemberId);
 		return "redirect:" + next;
 	}
 
@@ -1060,24 +1062,56 @@ public class MainController {
 	public String shop(Model model, HttpSession session) {
 		// 会員認証状態を確認
 		UUID loggedInMemberId = (UUID) session.getAttribute("loggedInMemberId");
+//		UUID loggedInMemberId = UUID.fromString("6d78b80b-8207-44a3-8ece-82737e26c74a");
 		if (loggedInMemberId == null) {
 			return "redirect:/systemtop";
 		} else {
-			List<Object[]> products = ProductService.findAllProduct();
+			List<Object[]> products = ProductService.findAllDrinkProduct();
 			model.addAttribute("products", products);
-			return "shop";
+			return "shop0";
+		}
+	}
+
+	@RequestMapping("/shop2")
+	public String shop2(Model model, HttpSession session) {
+		// 会員認証状態を確認
+		UUID loggedInMemberId = (UUID) session.getAttribute("loggedInMemberId");
+//		UUID loggedInMemberId = UUID.fromString("6d78b80b-8207-44a3-8ece-82737e26c74a");
+		if (loggedInMemberId == null) {
+			return "redirect:/systemtop";
+		} else {
+			List<Object[]> products = ProductService.findAllFoodProduct();
+			model.addAttribute("products", products);
+			return "shop2";
+		}
+	}
+
+	@RequestMapping("/shop3")
+	public String shop3(Model model, HttpSession session) {
+		// 会員認証状態を確認
+		UUID loggedInMemberId = (UUID) session.getAttribute("loggedInMemberId");
+//		UUID loggedInMemberId = UUID.fromString("6d78b80b-8207-44a3-8ece-82737e26c74a");
+		if (loggedInMemberId == null) {
+			return "redirect:/systemtop";
+		} else {
+			List<Object[]> products = ProductService.findAllGoodsProduct();
+			model.addAttribute("products", products);
+			return "shop3";
 		}
 	}
 
 	@RequestMapping("/shopConf")
-	public String shopConf(Model model) {
-		return "shop_conf";
+	public String shopConf(Model model, HttpSession session) {
+		UUID loggedInMemberId = (UUID) session.getAttribute("loggedInMemberId");
+//		UUID loggedInMemberId = UUID.fromString("6d78b80b-8207-44a3-8ece-82737e26c74a");
+		model.addAttribute("loggedInMemberId", loggedInMemberId);
+		return "shop_conf2";
 	}
 
 	@RequestMapping("/buy")
 	public String buy(@RequestBody Map<String, Object> orderData, HttpSession session) {
 		UUID memberId = (UUID) session.getAttribute("loggedInMemberId");
-		//		  UUID memberId = UUID.fromString("6d78b80b-8207-44a3-8ece-82737e26c74a");
+//		UUID memberId = UUID.fromString("6d78b80b-8207-44a3-8ece-82737e26c74a");
 
 		Member member = MemberService.findMemberById(memberId);
 		LocalDateTime orderDatetime = LocalDateTime.now();
@@ -1114,7 +1148,7 @@ public class MainController {
 
 	@RequestMapping("/shopConp")
 	public String shopConp() {
-		return "shop_conp";
+		return "shop_conp2";
 	}
 
 }
