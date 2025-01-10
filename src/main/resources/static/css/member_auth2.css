@@ -74,6 +74,7 @@ body {
 }
 
 #qr-reader video {
+	height: 510px;
   border-radius: 10px;
 }
 

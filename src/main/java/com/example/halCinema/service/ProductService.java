@@ -23,9 +23,17 @@ public class ProductService {
     }
     
 	
-	//  すべての商品情報を取得
-    public List<Object[]> findAllProduct() {
-        return ProductRepository.findAllProduct();
+	//  すべての食品商品情報を取得
+    public List<Object[]> findAllFoodProduct() {
+        return ProductRepository.findAllFoodProduct();
+    }	
+	//  すべての飲料商品情報を取得
+    public List<Object[]> findAllDrinkProduct() {
+        return ProductRepository.findAllDrinkProduct();
+    }	
+	//  すべてのグッズ商品情報を取得
+    public List<Object[]> findAllGoodsProduct() {
+        return ProductRepository.findAllGoodsProduct();
     }
 
     
