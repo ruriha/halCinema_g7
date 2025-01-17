@@ -21,6 +21,8 @@ public class Product {
     private Integer price;
 
     private Integer productCategory;
+
+    private String productImg;
     
     
     @OneToMany(mappedBy="product")
@@ -61,6 +63,14 @@ public class Product {
     public void setProductCategory(Integer productCategory) {
         this.productCategory = productCategory;
     }
+    
+    public String getProductImg() {
+		return productImg;
+	}
+    
+    public void setProductImg(String productImg) {
+		this.productImg = productImg;
+	}
     
     
     

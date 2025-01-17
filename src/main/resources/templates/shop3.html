@@ -39,7 +39,7 @@
                 
                 <div class="product-card" th:each="product : ${products}">
                     <div class="product-image">
-                        <img src="../images/welcome.jpg" alt="">
+                        <img th:src="@{'/images/' + ${product[3]}}" alt="">
                     </div>
                     <div class="product-info">
                         <h3 class="product-title" th:text="${product[1]}"></h3>

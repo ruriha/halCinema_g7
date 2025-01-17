@@ -14,13 +14,13 @@ import com.example.halCinema.model.Product;
 public interface ProductRepository extends JpaRepository<Product, UUID>  {
 	
 	//  すべての食品商品情報を取得
-    @Query("select p.productId, p.productName, p.price from product p where p.productCategory = 1")
+    @Query("select p.productId, p.productName, p.price, p.productImg from product p where p.productCategory = 1")
 	List<Object[]> findAllFoodProduct();
 	//  すべての飲料商品情報を取得
-    @Query("select p.productId, p.productName, p.price from product p where p.productCategory = 2")
+    @Query("select p.productId, p.productName, p.price, p.productImg from product p where p.productCategory = 2")
 	List<Object[]> findAllDrinkProduct();
 	//  すべてのグッズ商品情報を取得
-    @Query("select p.productId, p.productName, p.price from product p where p.productCategory = 3")
+    @Query("select p.productId, p.productName, p.price, p.productImg from product p where p.productCategory = 3")
 	List<Object[]> findAllGoodsProduct();
 	
 	//  商品ID取得
