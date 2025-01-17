@@ -10,13 +10,13 @@
     <div class="background-overlay"></div>
     <div class="container">
         <h2>決済情報入力</h2>
-        <form id="payment-form">
+		<form id="payment-form" action="/configration" method="POST">
             <div class="payment-details">
                 <label>支払内容</label>
-                <div class="amount-box">
-                    <span class="amount-label">入会手数料</span>
-                    <span class="amount-value">¥1,000</span>
-                </div>
+<!--                <div class="amount-box">-->
+<!--                    <span class="amount-label">入会手数料</span>-->
+<!--                    <span class="amount-value">¥1,000</span>-->
+<!--                </div>-->
             </div>
 
             <div class="payment-method">
@@ -34,15 +34,34 @@
                     <div class="input-group">
                         <label for="expiry-month">有効期限 (月/年)</label>
                         <div class="expiry-inputs">
-                            <select id="expiry-month" required>
-                                <option value="">月</option>
-                                <!-- 01-12のオプション -->
-                            </select>
-                            <span class="expiry-separator">/</span>
-                            <select id="expiry-year" required>
-                                <option value="">年</option>
-                                <!-- 年のオプション -->
-                            </select>
+							<select id="expiry-month" required>
+							    <option value="">月</option>
+							    <!-- 月のオプションを追加 -->
+							    <option value="01">01</option>
+							    <option value="02">02</option>
+							    <option value="03">03</option>
+							    <option value="04">04</option>
+							    <option value="05">05</option>
+							    <option value="06">06</option>
+							    <option value="07">07</option>
+							    <option value="08">08</option>
+							    <option value="09">09</option>
+							    <option value="10">10</option>
+							    <option value="11">11</option>
+							    <option value="12">12</option>
+							</select>
+							
+							<select id="expiry-year" required>
+							    <option value="">年</option>
+							    <!-- 年のオプションを追加 -->
+							    <option value="2025">2025</option>
+							    <option value="2026">2026</option>
+							    <option value="2027">2027</option>
+							    <option value="2028">2028</option>
+							    <option value="2029">2029</option>
+							    <option value="2030">2030</option>
+							</select>
+
                         </div>
                     </div>
                     <div class="input-group security-code">

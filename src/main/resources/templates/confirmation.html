@@ -11,7 +11,7 @@
     <div class="container">
         <div class="form-container">
             <h2>会員情報確認</h2>
-            <form id="confirmationForm">
+			<form id="confirmationForm" action="/save" method="POST">
                 <div class="info-section">
                     <div class="form-group">
                         <label>氏名</label>
@@ -49,10 +49,10 @@
                     </div>
                 </div>
 
-                <div class="button-group">
-                    <button type="button" id="back-to-form" class="btn btn-secondary">修正する</button>
-                    <button type="button" id="confirm-registration" class="btn btn-primary">次へ</button>
-                </div>
+				<div class="button-group">
+				    <button type="button" id="back-to-form" class="btn btn-secondary" onclick="history.back()">修正する</button>
+				    <button type="submit" id="confirm-registration" class="btn btn-primary">次へ</button>
+				</div>
             </form>
         </div>
     </div>
