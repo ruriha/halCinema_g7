@@ -1150,5 +1150,13 @@ public class MainController {
 	public String shopConp() {
 		return "shop_conp2";
 	}
+	
+	@RequestMapping("/systemtop")
+	public String sytemtop() {
+		return "systemtop";
+	}
+	
+	
+	
 
 }
