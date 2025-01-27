@@ -2,245 +2,208 @@
 
 <html lang="ja">
 
-  <head>
+<head>
 
-    <meta charset="utf-8">
+	<meta charset="utf-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>管理者：スケジュール</title>
+	<title>管理者：スケジュール</title>
 
-    <link rel="stylesheet" type="text/css" href="../css/reset.css">
-    <link rel="stylesheet" type="text/css" href="../css/toppage.css">
-    <link rel="stylesheet" type="text/css" href="../css/showmovie.css">
-    <link rel="stylesheet" type="text/css" href="../css/common.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../css/toppage.css">
+	<link rel="stylesheet" type="text/css" href="../css/showmovie.css">
+	<link rel="stylesheet" type="text/css" href="../css/common.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+		integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+		rel="stylesheet">
 
-<!-- jQuary本体 CDN -->
-<!-- <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script> -->
-<!-- jQuaryの実行 -->
-<!-- <script type="text/javascript" src="js/common.js"></script> -->
+	<!-- jQuary本体 CDN -->
+	<!-- <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script> -->
+	<!-- jQuaryの実行 -->
+	<!-- <script type="text/javascript" src="js/common.js"></script> -->
 
-  </head>
+</head>
 
-  <body>
+<body>
 
-    <!-- ヘッダー ------------------------------------------------->
-    <header class="commonHeader">
+	<!-- ヘッダー ------------------------------------------------->
+	<header class="commonHeader">
 
-        <!-- ロゴ -->
-        <figure class="commonLogoBox">
-            <img class="commonLogo" src="../images/logo.svg" alt="HAL CINEMA">
-        </figure>
-
-
-        <!-- ナビゲーション：メニュー項目と遷移先は適宜変更してください -->
-        <nav class="commonNav">
-            <ul>
-              <li class="commonMenu"><a class="commonMenuLink" href=".html">LOGOUT</a></li>
-            </ul>
-        </nav>
-    </header>
+		<!-- ロゴ -->
+		<figure class="commonLogoBox">
+			<img class="commonLogo" src="../images/logo.svg" alt="HAL CINEMA">
+		</figure>
 
 
-
-
-  <div id="mid">
-    <div id="hidari">
-
-<!-- スケジュールタイトル -->
-    <div id="sche_b">
-      <div id="sche_d">
-        <p id="sche">S&thinsp;C&thinsp;H&thinsp;E&thinsp;D&thinsp;U&thinsp;L&thinsp;E</p>
-      </div>
-      <p id="name">HAL CHINEMA 上映スケジュール</p>
-    </div>
-    <!-- スケジュール中身 -->
-
-      <!-- カレンダー -->
-            <div class="calendar-wrapper">
-              <button id="scroll-left1" class="scroll-button">◀</button>
-              <div class="calendar-container">
-                <div class="calendar">
-                  <!-- ここに日付を追加 -->
-                  <div class="day select">
-                    <p class="today">05/15<span class="mini">(水)</span></p>
-                  </div>
-                  <div class="day">
-                    <p class="day_f">05/15<span class="mini">(水)</span></p>
-                  </div>
-                  <div class="day">
-                    <p class="day_f">05/15<span class="mini">(水)</span></p>
-                  </div>
-                  <div class="day">
-                    <p class="day_f">05/15<span class="mini">(水)</span></p>
-                  </div>
-                  <div class="day">
-                    <p class="day_f">05/15<span class="mini">(水)</span></p>
-                  </div>
-                  <div class="day">
-                    <p class="day_f">05/15<span class="mini">(水)</span></p>
-                  </div>
-                  <div class="day">
-                    <p class="day_f">05/15<span class="mini">(水)</span></p>
-                  </div>
-                  <div class="day">
-                    <p class="day_f">05/15<span class="mini">(水)</span></p>
-                  </div>
-                  <div class="day">
-                    <p class="day_f">05/15<span class="mini">(水)</span></p>
-                  </div>
-                  <div class="day">
-                    <p class="day_f">05/15<span class="mini">(水)</span></p>
-                  </div>
-                  <div class="day">
-                    <p class="day_f">05/15<span class="mini">(水)</span></p>
-                  </div>
-                  <div class="day">
-                    <p class="day_f">05/15<span class="mini">(水)</span></p>
-                  </div>
-                  <div class="day">
-                    <p class="day_f">05/15<span class="mini">(水)</span></p>
-                  </div>
-                  <div class="day">
-                    <p class="day_f">05/15<span class="mini">(水)</span></p>
-                  </div>
-                </div>
-              </div>
-              <button id="scroll-right1" class="scroll-button">▶</button>
-            </div>
-
-
-    <div id="s_div">
-
-
-      <div id="s_top">
-        <p id="now">2024/05/15<span class="mini">(水)</span></p>
-        <div class="dropdown">
-            <button id="drop_btn">作品一覧　　　　　　　　　　　　　　　　　　　　　　　▼</button>
-            <div class="dropdown-content">
-                <a href="#BLUELOCK">劇場版ブルーロック -EPISODE 凪-</a>
-                <a href="#DETECTIVE CONAN 2024">名探偵コナン 100万ドルの五稜星</a>
-            </div>
-        </div>
-      </div>
+		<!-- ナビゲーション：メニュー項目と遷移先は適宜変更してください -->
+		<nav class="commonNav">
+			<ul>
+				<li class="commonMenu"><a class="commonMenuLink" href=".html">LOGOUT</a></li>
+			</ul>
+		</nav>
+	</header>
 
 
 
 
-      <div class="s_waku">
+	<div id="mid">
+		<div id="hidari">
+
+			<!-- スケジュールタイトル -->
+			<div id="sche_b">
+				<div id="sche_d">
+					<p id="sche">S&thinsp;C&thinsp;H&thinsp;E&thinsp;D&thinsp;U&thinsp;L&thinsp;E</p>
+				</div>
+				<p id="name">HAL CHINEMA 上映スケジュール</p>
+			</div>
+			<!-- スケジュール中身 -->
+
+			<!-- カレンダー -->
+			<div class="calendar-wrapper">
+				<button id="scroll-left1" class="scroll-button">◀</button>
+				<div class="calendar-container">
+					<div class="calendar" th:each="date: ${dates}" th:utext="${date}">
+					</div>
+				</div>
+				<button id="scroll-right1" class="scroll-button">▶</button>
+			</div>
+
+
+			<div id="s_div">
+
+
+				<div id="s_top">
+					<!--上映スケジュール-->
+					<p id="now" th:utext="${nowScreeningSchedule}">></p>
+					
+					<!--ドロップダウン-->
+					<div class="dropdown">
+						<button id="drop_btn">作品一覧　　　　　　　　　　　　　　　　　　　　　　　▼</button>
+						<div class="dropdown-content" th:each="titleLink:${titleLinkList}" th:utext="${titleLink}">
+						</div>
+					</div>
+				</div>
 
 
 
 
-        <div class="s_all">
-          <div id="BLUELOCK"></div>
-          <div class="s_head">
-            <p class="jp">劇場版ブルーロック -EPISODE 凪-<span class="eng">BLUELOCK</span></p>
-            <a href="showmovie.html" class="s_more">more&thinsp;⇀</a>
-          </div>
+				<div class="s_waku" th:each="screenSchedule:${screenScheduleList}" th:utext="${screenSchedule}">
+				</div>
 
-          <p class="s_sp">★NEW</p>
 
-          <div class="s_rooms">
-            <div class="s_room">
-              <p class="theater">THEATER&thinsp;&thinsp;<span class="big">2</span></p>
-              <p class="xd">2D</p>
-              <p class="min">145min</p>
-            </div>
 
-            <div class="s_time">
-              <p class="start s_bought">10:10</p>
-              <p class="finish f_bought">~12:12</p>
-              <a class="buyFl1" href="#">
-                <img src="../images/cantBuy.png" alt="購入不可" />
-                <div class="cantBuy">購入不可</div>
-              </a>
-            </div>
 
-            <div class="s_time">
-              <p class="start">13:10</p>
-              <p class="finish">~15:12</p>
-              <a class="buyFl2" href="admin_seat2.html">  <!--  ここの行先は変更して -->
-                <img src="../images/canBuy.png" alt="購入可" class="marubatsu" />
-                <div class="canBuy">購入</div>
-              </a>
-            </div>
-          </div>
+				<!--        <div class="s_all">-->
+				<!--          <div id="BLUELOCK"></div>-->
+				<!--          <div class="s_head">-->
+				<!--            <p class="jp">劇場版ブルーロック -EPISODE 凪-<span class="eng">BLUELOCK</span></p>-->
+				<!--            <a href="showmovie.html" class="s_more">more&thinsp;⇀</a>-->
+				<!--          </div>-->
 
-          <div class="s_rooms">
+				<!--          <p class="s_sp">★NEW</p>-->
 
-            <div class="s_room">
-              <p class="theater">THEATER&thinsp;&thinsp;<span class="big">4</span></p>
-              <p class="xd">2D</p>
-              <p class="min">118min</p>
-            </div>
+				<!--          <div class="s_rooms">-->
+				<!--            <div class="s_room">-->
+				<!--              <p class="theater">THEATER&thinsp;&thinsp;<span class="big">2</span></p>-->
+				<!--              <p class="xd">2D</p>-->
+				<!--              <p class="min">145min</p>-->
+				<!--            </div>-->
 
-            <div class="s_time">
-              <p class="start">13:10</p>
-              <p class="finish">~15:12</p>
-              <a class="buyFl2" href="#">
-                <img src="../images/canBuy.png" alt="購入可" class="marubatsu" />
-                <div class="canBuy">購入</div>
-              </a>
-            </div>
-          
-          </div>
-        </div>
+				<!--            <div class="s_time">-->
+				<!--              <p class="start s_bought">10:10</p>-->
+				<!--              <p class="finish f_bought">~12:12</p>-->
+				<!--              <a class="buyFl1" href="#">-->
+				<!--                <img src="../images/cantBuy.png" alt="購入不可" />-->
+				<!--                <div class="cantBuy">購入不可</div>-->
+				<!--              </a>-->
+				<!--            </div>-->
+
+				<!--            <div class="s_time">-->
+				<!--              <p class="start">13:10</p>-->
+				<!--              <p class="finish">~15:12</p>-->
+				<!--              <a class="buyFl2" href="admin_seat2.html">    ここの行先は変更して -->
+				<!--                <img src="../images/canBuy.png" alt="購入可" class="marubatsu" />-->
+				<!--                <div class="canBuy">購入</div>-->
+				<!--              </a>-->
+				<!--            </div>-->
+				<!--          </div>-->
+
+				<!--          <div class="s_rooms">-->
+
+				<!--            <div class="s_room">-->
+				<!--              <p class="theater">THEATER&thinsp;&thinsp;<span class="big">4</span></p>-->
+				<!--              <p class="xd">2D</p>-->
+				<!--              <p class="min">118min</p>-->
+				<!--            </div>-->
+
+				<!--            <div class="s_time">-->
+				<!--              <p class="start">13:10</p>-->
+				<!--              <p class="finish">~15:12</p>-->
+				<!--              <a class="buyFl2" href="#">-->
+				<!--                <img src="../images/canBuy.png" alt="購入可" class="marubatsu" />-->
+				<!--                <div class="canBuy">購入</div>-->
+				<!--              </a>-->
+				<!--            </div>-->
+
+				<!--          </div>-->
+				<!--        </div>-->
 
 
 
 
 
-        <div class="s_all">
+				<!--        <div class="s_all">-->
 
-          <div id="DETECTIVE CONAN 2024"></div>
+				<!--          <div id="DETECTIVE CONAN 2024"></div>-->
 
-          <div class="s_head">
-            <p class="jp">名探偵コナン 100万ドルの五稜星<span class="eng">DETECTIVE CONAN 2024</span></p>
-            <a href="showmovie.html" class="s_more">more&thinsp;⇀</a>
-          </div>
+				<!--          <div class="s_head">-->
+				<!--            <p class="jp">名探偵コナン 100万ドルの五稜星<span class="eng">DETECTIVE CONAN 2024</span></p>-->
+				<!--            <a href="showmovie.html" class="s_more">more&thinsp;⇀</a>-->
+				<!--          </div>-->
 
-          <p class="s_sp">★NEW</p>
+				<!--          <p class="s_sp">★NEW</p>-->
 
-          <div class="s_rooms">
-            <div class="s_room">
-              <p class="theater">THEATER&thinsp;&thinsp;<span class="big">1</span></p>
-              <p class="xd">2D</p>
-              <p class="min">117min</p>
-            </div>
+				<!--          <div class="s_rooms">-->
+				<!--            <div class="s_room">-->
+				<!--              <p class="theater">THEATER&thinsp;&thinsp;<span class="big">1</span></p>-->
+				<!--              <p class="xd">2D</p>-->
+				<!--              <p class="min">117min</p>-->
+				<!--            </div>-->
 
-            <div class="s_time">
-              <p class="start">13:10</p>
-              <p class="finish">~15:12</p>
-              <a class="buyFl2" href="#">
-                <img src="../images/canBuy.png" alt="購入可" class="marubatsu" />
-                <div class="canBuy">購入</div>
-              </a>
-            </div>
-          </div>
+				<!--            <div class="s_time">-->
+				<!--              <p class="start">13:10</p>-->
+				<!--              <p class="finish">~15:12</p>-->
+				<!--              <a class="buyFl2" href="#">-->
+				<!--                <img src="../images/canBuy.png" alt="購入可" class="marubatsu" />-->
+				<!--                <div class="canBuy">購入</div>-->
+				<!--              </a>-->
+				<!--            </div>-->
+				<!--          </div>-->
 
-        </div>
-      </div>
-    </div>
-
-
+				<!--        </div>-->
+				<!--      </div>-->
+				<!--    </div>-->
 
 
 
-    <!-- フッター ------------------------------------------------->
-    <footer class="commonFooter">
-
-      </nav>
-        <p class="commonFooterCopyright">&copy;2024 HAL CINEMA</p>
-    </footer>
 
 
+				<!-- フッター ------------------------------------------------->
+				<footer class="commonFooter">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="../js/toppage.js"></script>
-  </body>
+					</nav>
+					<p class="commonFooterCopyright">&copy;2024 HAL CINEMA</p>
+				</footer>
+
+
+
+				<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+				<script src="../js/toppage.js"></script>
+</body>
+
 </html>
