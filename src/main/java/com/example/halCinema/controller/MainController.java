@@ -83,6 +83,8 @@ public class MainController {
 			Model model, HttpSession session) {
 		String loggedInUserEmail = (String) session.getAttribute("loggedInUserEmail");
 		model.addAttribute("loggedInUserEmail", loggedInUserEmail);
+
+		// ここからやる
 		//  カレンダー  ////////
 		List<String> dates = new ArrayList<>();
 		LocalDate today = LocalDate.now();
@@ -646,14 +648,15 @@ public class MainController {
 	}
 
 	//  ３次開発  //////////////////////////////////////////////////////////////////////////////////////////////
+	//data1.html
 	@RequestMapping("/data1")
 	public String data1(Model model, @RequestParam(required = false) String titleName,
 			@RequestParam(required = false) LocalDate publicationDate,
 			@RequestParam(required = false) Integer runningTime, @RequestParam(required = false) String discription,
 			@RequestParam(required = false) String imgPath, @RequestParam(required = false) Boolean tgl,
 			@RequestParam(required = false) String searchTitle, @RequestParam(required = false) Boolean searchStatus,
-			@RequestParam(required = false) Integer seachDate,HttpSession session) {
-		
+			@RequestParam(required = false) Integer seachDate, HttpSession session) {
+
 		//  管理者ログインの状態確認
 		String loggedInUserId = (String) session.getAttribute("loggedInUserId");
 		String btnStatus = null;
@@ -691,10 +694,10 @@ public class MainController {
 		for (Movie movie : movies) {
 			Integer movieId = movie.getMovieId();
 			List<Object[]> onScheduleMovie = ScreeningScheduleService.findMovieScreeningSchedule(movieId);
-			if(onScheduleMovie.isEmpty() == true) {
+			if (onScheduleMovie.isEmpty() == true) {
 				deleteBtn = false;
-			}else {
-				deleteBtn = true;				
+			} else {
+				deleteBtn = true;
 			}
 			movie.setDeleteBtn(deleteBtn);
 		}
@@ -708,9 +711,9 @@ public class MainController {
 	// 映画情報を削除するエンドポイント
 	@PostMapping("/deleteMovie")
 	public String deleteMovie(@RequestParam(required = false) Integer movieId) {
-//		if (movieId == null) {
-//			throw new IllegalArgumentException("movieId must not be null");
-//		}
+		//		if (movieId == null) {
+		//			throw new IllegalArgumentException("movieId must not be null");
+		//		}
 		MovieService.deleteMovie(movieId);
 		return "redirect:/data1"; // 削除後のリダイレクト先
 	}
@@ -760,56 +763,53 @@ public class MainController {
 		return "redirect:/data1"; // 保存後に一覧ページにリダイレクト
 	}
 
+	@PostMapping("/update")
+	public String updateMovie(@RequestParam Integer movieId,
+			@RequestParam String titleNameUpdate,
+			@RequestParam LocalDate publicationDateUpdate,
+			@RequestParam Integer runningTimeUpdate,
+			@RequestParam String descriptionUpdate,
+			@RequestParam(value = "imgPathUpdate", required = false) MultipartFile imgPathUpdate,
+			@RequestParam String imgPath,
+			@RequestParam String urlUpdate,
+			@RequestParam String staff,
+			Boolean releaseStatus) {
+		System.out.println(imgPath);
 
-    @PostMapping("/update")
-    public String updateMovie(@RequestParam Integer movieId,
-                              @RequestParam String titleNameUpdate,
-                              @RequestParam LocalDate publicationDateUpdate,
-                              @RequestParam Integer runningTimeUpdate,
-                              @RequestParam String descriptionUpdate,
-                              @RequestParam(value = "imgPathUpdate", required = false) MultipartFile imgPathUpdate,
-                              @RequestParam String imgPath,
-                              @RequestParam String urlUpdate,
-                              @RequestParam String staff,
-                              Boolean releaseStatus) {   	
-    	System.out.println(imgPath);
-    	
+		if (imgPathUpdate != null) {
 
+			String fileName = imgPathUpdate.getOriginalFilename();
 
-    	if(imgPathUpdate != null) {
+			if (!imgPath.equals(fileName)) {
+				String uploadDir = new File("src/main/resources/static/images").getAbsolutePath();
+				if (imgPathUpdate != null && !imgPathUpdate.isEmpty()) { // アップロードされたファイル名を取得
 
-    		String fileName = imgPathUpdate.getOriginalFilename();
-    		
-        	if(!imgPath.equals(fileName)) {
-        		String uploadDir = new File("src/main/resources/static/images").getAbsolutePath();
-        		if (imgPathUpdate != null && !imgPathUpdate.isEmpty()) { // アップロードされたファイル名を取得
+					try {
+						// 保存先ファイルのフルパスを作成
+						File saveFile = new File(uploadDir, fileName);
 
-        			try {
-        				// 保存先ファイルのフルパスを作成
-        				File saveFile = new File(uploadDir, fileName);
+						// 保存先フォルダが存在しない場合は作成
+						if (!saveFile.getParentFile().exists()) {
+							saveFile.getParentFile().mkdirs();
+						}
 
-        				// 保存先フォルダが存在しない場合は作成
-        				if (!saveFile.getParentFile().exists()) {
-        					saveFile.getParentFile().mkdirs();
-        				}
+						// ファイルを保存
+						imgPathUpdate.transferTo(saveFile);
+						imgPath = fileName;
 
-        				// ファイルを保存
-        				imgPathUpdate.transferTo(saveFile);
-        				imgPath = fileName;
+					} catch (IOException e) {
+						e.printStackTrace(); // エラー時のログ出力
+					}
+				}
 
-        			} catch (IOException e) {
-        				e.printStackTrace(); // エラー時のログ出力
-        			}
-        		}
-        		
-        	}
-    		
-    	}
+			}
 
-    	MovieService.updateMovie(titleNameUpdate, publicationDateUpdate, runningTimeUpdate,
-                                 descriptionUpdate, urlUpdate, staff, releaseStatus, movieId, imgPath); 
-        return  "redirect:/data1";
-    }
+		}
+
+		MovieService.updateMovie(titleNameUpdate, publicationDateUpdate, runningTimeUpdate,
+				descriptionUpdate, urlUpdate, staff, releaseStatus, movieId, imgPath);
+		return "redirect:/data1";
+	}
 
 	//  data2.html
 	@RequestMapping("/data2")
@@ -860,7 +860,8 @@ public class MainController {
 		List<Object[]> screeningSchedules3 = ScreeningScheduleService.findAllScreeningSchedule();
 
 		for (Object[] screeningSchedule : screeningSchedules) {
-			List<Object[]> screeningSchedules2 = ScreeningScheduleService.findElseScreeningSchedule((Integer)screeningSchedule[0]);
+			List<Object[]> screeningSchedules2 = ScreeningScheduleService
+					.findElseScreeningSchedule((Integer) screeningSchedule[0]);
 			LocalTime startTime = LocalTime.of(8, 0);
 			LocalTime endTime = LocalTime.of(21, 59);
 			List<String> updateTimes = new ArrayList<>();
@@ -1061,7 +1062,7 @@ public class MainController {
 	@RequestMapping("/shop")
 	public String shop(Model model, HttpSession session) {
 		// 会員認証状態を確認
-//		UUID loggedInMemberId = (UUID) session.getAttribute("loggedInMemberId");
+		//		UUID loggedInMemberId = (UUID) session.getAttribute("loggedInMemberId");
 		UUID loggedInMemberId = UUID.fromString("6d78b80b-8207-44a3-8ece-82737e26c74a");
 		if (loggedInMemberId == null) {
 			return "redirect:/systemtop";
@@ -1075,7 +1076,7 @@ public class MainController {
 	@RequestMapping("/shop2")
 	public String shop2(Model model, HttpSession session) {
 		// 会員認証状態を確認
-//		UUID loggedInMemberId = (UUID) session.getAttribute("loggedInMemberId");
+		//		UUID loggedInMemberId = (UUID) session.getAttribute("loggedInMemberId");
 		UUID loggedInMemberId = UUID.fromString("6d78b80b-8207-44a3-8ece-82737e26c74a");
 		if (loggedInMemberId == null) {
 			return "redirect:/systemtop";
@@ -1089,7 +1090,7 @@ public class MainController {
 	@RequestMapping("/shop3")
 	public String shop3(Model model, HttpSession session) {
 		// 会員認証状態を確認
-//		UUID loggedInMemberId = (UUID) session.getAttribute("loggedInMemberId");
+		//		UUID loggedInMemberId = (UUID) session.getAttribute("loggedInMemberId");
 		UUID loggedInMemberId = UUID.fromString("6d78b80b-8207-44a3-8ece-82737e26c74a");
 		if (loggedInMemberId == null) {
 			return "redirect:/systemtop";
@@ -1103,7 +1104,7 @@ public class MainController {
 	@RequestMapping("/shopConf")
 	public String shopConf(Model model, HttpSession session) {
 		UUID loggedInMemberId = (UUID) session.getAttribute("loggedInMemberId");
-//		UUID loggedInMemberId = UUID.fromString("6d78b80b-8207-44a3-8ece-82737e26c74a");
+		//		UUID loggedInMemberId = UUID.fromString("6d78b80b-8207-44a3-8ece-82737e26c74a");
 		model.addAttribute("loggedInMemberId", loggedInMemberId);
 		return "shop_conf2";
 	}
@@ -1111,7 +1112,7 @@ public class MainController {
 	@RequestMapping("/buy")
 	public String buy(@RequestBody Map<String, Object> orderData, HttpSession session) {
 		UUID memberId = (UUID) session.getAttribute("loggedInMemberId");
-//		UUID memberId = UUID.fromString("6d78b80b-8207-44a3-8ece-82737e26c74a");
+		//		UUID memberId = UUID.fromString("6d78b80b-8207-44a3-8ece-82737e26c74a");
 
 		Member member = MemberService.findMemberById(memberId);
 		LocalDateTime orderDatetime = LocalDateTime.now();
@@ -1150,13 +1151,276 @@ public class MainController {
 	public String shopConp() {
 		return "shop_conp2";
 	}
-	
+
 	@RequestMapping("/systemtop")
 	public String sytemtop() {
 		return "systemtop";
 	}
-	
-	
-	
+
+	// 上映スケジュール一覧画面
+	@RequestMapping("/adminSche")
+	public String sdminSche(@RequestParam(name = "screenScheduleDate", required = false) String screenScheduleDate,
+			Model model, HttpSession session) {
+		//  カレンダー  ////////
+		List<String> dates = new ArrayList<>();
+		LocalDate today = LocalDate.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd");
+		DateTimeFormatter screenScheduleDateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		// 14日分の日付を生成
+		for (int i = 0; i < 14; i++) {
+			LocalDate date = today.plusDays(i);
+			String formattedDate = date.format(formatter);
+			String selectScreenScheduleDate = date.format(screenScheduleDateFormatter);
+			String dayOfWeek = date.getDayOfWeek().toString().substring(0, 3);
+
+			// スケジュールのクリック作成 　aタグ
+			String dayInfo = "<a class=\"day\" href=/adminSche?screenScheduleDate="
+					+ selectScreenScheduleDate + ">" + formattedDate + "<span class=\"mini\">(" + dayOfWeek
+					+ ")</span></a>";
+			dates.add(dayInfo);
+		}
+		model.addAttribute("dates", dates);
+
+		//  上映スケジュール  //////////////////////
+		String nowScreenScheduleDate;
+		String nowOfWeek;
+		LocalDate nowDate;
+		if (screenScheduleDate == null) {
+			nowDate = today;
+			DateTimeFormatter todayFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+			nowScreenScheduleDate = today.format(todayFormatter);
+			nowOfWeek = today.getDayOfWeek().toString().substring(0, 3);
+		} else {
+			LocalDate selectedDate = LocalDate.parse(screenScheduleDate, screenScheduleDateFormatter);
+			nowDate = selectedDate;
+			DateTimeFormatter todayFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+			nowScreenScheduleDate = selectedDate.format(todayFormatter);
+			nowOfWeek = selectedDate.getDayOfWeek().toString().substring(0, 3);
+		}
+		String nowScreeningSchedule = nowScreenScheduleDate + "<span class=\"mini\">(" + nowOfWeek + ")</span>";
+		model.addAttribute("nowScreeningSchedule", nowScreeningSchedule);
+
+		//  作品一覧&上映時間
+		List<String> titleLinkList = new ArrayList<>();
+		List<String> screenScheduleList = new ArrayList<>();
+		List<Object[]> titleList = ScreeningScheduleService.findSelectScreeningTitle(nowDate);
+		String titleInfo = "";
+		for (Object[] title : titleList) {
+			String titleId = title[0].toString();
+			String titleName = (String) title[1];
+			titleInfo = titleInfo + "<a href=\"#m" + titleId + "\">" + titleName + "</a>";
+		}
+		titleLinkList.add(titleInfo);
+		model.addAttribute("titleLinkList", titleLinkList);
+		for (Object[] title : titleList) {
+			String titleId = title[0].toString();
+			Integer movieId = Integer.parseInt(titleId);
+			String titleName = (String) title[1];
+
+			String screenScheduleInfo1 = "<div class=\"s_all\">"
+					+ "          <div id=\"m" + titleId + "\"></div>"
+					+ "          <div class=\"s_head\">"
+					+ "            <p class=\"jp\">" + titleName + "</p>"
+					+ "            <a href=\"showmovie.html\" class=\"s_more\">more&thinsp;⇀</a>"
+					+ "          </div>";
+
+			List<Object[]> screenList = ScreeningScheduleService.findSelectScreeningScreen(movieId, nowDate);
+			String screenScheduleInfo2 = "";
+			String screenScheduleInfo4 = "";
+			for (Object[] screen : screenList) {
+				String screenId = screen[1].toString();
+				Integer intScreenId = Integer.parseInt(screenId);
+				String runningTime = screen[2].toString();
+				Integer intRunningTime = Integer.parseInt(runningTime);
+				screenScheduleInfo2 = screenScheduleInfo4
+						+ "<div class=\"s_rooms\">"
+						+ "            <div class=\"s_room\">"
+						+ "              <p class=\"theater\">THEATER&thinsp;&thinsp;<span class=\"big\">"
+						+ screenId + "</span></p>"
+						+ "              <p class=\"xd\">2D</p>"
+						+ "              <p class=\"min\">"
+						+ runningTime + "min</p>"
+						+ "            </div>";
+
+				List<Object[]> screenDatetimeList = ScreeningScheduleService.findSelectScreeningDatetime(intScreenId,
+						nowDate, movieId);
+				String screenScheduleInfo3 = "";
+				LocalDateTime now = LocalDateTime.now();
+				for (Object[] screenDatetime : screenDatetimeList) {
+					LocalDateTime screeningDatetime = (LocalDateTime) screenDatetime[1];
+					DateTimeFormatter screeningDatetimeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+					String strScreeningDatetime = screeningDatetime.format(screeningDatetimeFormatter);
+					LocalDateTime endScreeningDatetime = screeningDatetime.plus(intRunningTime, ChronoUnit.MINUTES);
+					String strEndScreeningDatetime = endScreeningDatetime.format(screeningDatetimeFormatter);
+					String sBought;
+					String fBought;
+					String buyStatus;
+					String buyStatusJp;
+					String reserve;
+					if (now.isAfter(screeningDatetime)) {
+						buyStatus = "cantBuy";
+						buyStatusJp = "購入不可";
+						sBought = "s_bought";
+						fBought = "f_bought";
+						reserve = "href=#";
+					} else {
+						buyStatus = "canBuy";
+						buyStatusJp = "購入";
+						sBought = "";
+						fBought = "";
+						//ここで遷移先決定
+						reserve = "href=/adminReserve?screeningScheduleId=" + (Integer) screenDatetime[0];
+					}
+
+					screenScheduleInfo3 = screenScheduleInfo3
+							+ "<div class=\"s_time\">"
+							+ "              <p class=\"start " + sBought + "\">"
+							+ strScreeningDatetime
+							+ "</p>"
+							+ "              <p class=\"finish " + fBought + "\">~"
+							+ strEndScreeningDatetime
+							+ "</p>"
+							+ "              <a class=\"buyFl1\" " + reserve + ">"
+							+ "                <img src=\"../images/" + buyStatus + ".png\" alt=\"" + buyStatusJp
+							+ "\" />"
+							+ "                <div class=\"" + buyStatus + "\">" + buyStatusJp + "</div>"
+							+ "              </a>"
+							+ "            </div>";
+				}
+				screenScheduleInfo4 = screenScheduleInfo2 + screenScheduleInfo3 + "</div>";
+			}
+			String screenScheduleInfo5 = screenScheduleInfo1 + screenScheduleInfo4 + "</div>";
+			screenScheduleList.add(screenScheduleInfo5);
+		}
+		model.addAttribute("screenScheduleList", screenScheduleList);
+
+		return "admin_sche";
+	}
+
+	// 座席予約画面 (seat.html)
+	// seat.html
+	@RequestMapping("/adminReserve")
+	public String adminReserve(@RequestParam(name = "screeningScheduleId") Integer screeningScheduleId, Model model,
+			HttpSession session) {
+		//		会員情報取得
+		//UUID memberId = (UUID) session.getAttribute("userId");//  ログイン時のセッションからID取得
+		UUID memberId = UUID.fromString("6d78b80b-8207-44a3-8ece-82737e26c74a");
+		List<Object[]> memberList = MemberService.findReservationMember(memberId);
+		model.addAttribute("memberList", memberList);
+		model.addAttribute("memberId", memberId);
+		//      上映スケジュール取得        
+		List<Object[]> screeningScheduleList = ScreeningScheduleService
+				.findSelectScreeningSchedule(screeningScheduleId);
+		model.addAttribute("screeningScheduleList", screeningScheduleList);
+		model.addAttribute("screeningScheduleId", screeningScheduleId);
+		Object[] screeningScheduleElement = screeningScheduleList.get(0);
+		Integer capacity = (Integer) screeningScheduleElement[2];
+		String seatCapacity = "seat";
+		Integer seatNumberCapacity = 83;
+		if (capacity == 70) {
+			seatCapacity = "admin_seat";
+			seatNumberCapacity = 83;
+		} else if (capacity == 120) {
+			seatCapacity = "admin_seat2";
+			seatNumberCapacity = 140;
+		} else {
+			seatCapacity = "admin_seat3";
+			seatNumberCapacity = 220;
+		}
+		//      空き座席状況取得
+		List<Object[]> seatList = ReservationService.findReservationSeat(screeningScheduleId);
+		for (Integer seatNumber = 1; seatNumber <= seatNumberCapacity; seatNumber++) {
+			String reserved = "s" + seatNumber;
+			boolean isReserved = false;
+			for (Object[] seat : seatList) {
+				Integer seatNum = (Integer) seat[0];
+				if (seatNum.equals(seatNumber)) {
+					isReserved = true;
+					break;
+				}
+			}
+			model.addAttribute(reserved, isReserved);
+		}
+
+		return seatCapacity;
+	}
+
+	// テスト用
+	@RequestMapping("/adminReserveConf")
+	public String adminReserve_conf(
+			@RequestParam(required = false) Integer seatNumber,
+			@RequestParam(required = false) Integer guestSeatNumber,
+			@RequestParam(required = false) Integer screeningScheduleId,
+			//@RequestParam(required = false) UUID memberId,
+			@RequestParam(required = false) String selectedCell1Content,
+			@RequestParam(required = false) String selectedCell2Content,
+			Model model,
+			HttpSession session) {
+
+		//UUID memberId = (UUID) session.getAttribute("userId");//  ログイン時のセッションからID取得
+		UUID memberId = UUID.fromString("6d78b80b-8207-44a3-8ece-82737e26c74a");
+
+		//		上映スケジュール取得
+		List<Object[]> screeningScheduleList = ScreeningScheduleService
+				.findSelectScreeningSchedule(screeningScheduleId);
+
+			System.out.println("screeningScheduleId: " + screeningScheduleId);
+
+		model.addAttribute("screeningScheduleList", screeningScheduleList);
+
+		//		会員情報取得
+		List<Object[]> memberList = MemberService.findReservationMember(memberId);
+
+		// デバッグ用
+		/*if (memberList == null || memberList.isEmpty()) {
+			System.out.println("memberList is empty or null");
+		} else {
+			for (Object[] member : memberList) {
+				System.out.println("Member Record: " + Arrays.toString(member));
+			}
+		}*/
+		
+		model.addAttribute("memberList", memberList);
+
+		//		予約内容確認
+		model.addAttribute("seatNumber", seatNumber);
+		model.addAttribute("guestSeatNumber", guestSeatNumber);
+		model.addAttribute("selectedCell1Content", selectedCell1Content);
+		model.addAttribute("selectedCell2Content", selectedCell2Content);
+		model.addAttribute("screeningScheduleId", screeningScheduleId);
+		model.addAttribute("memberId", memberId);
+
+		return "admin_conf";
+	}
+
+	//	元のやつ
+	//	admin_conf.html
+	//	@RequestMapping("/adminReserveConf")
+	//	public String adminReserve_conf(@RequestParam(required = false) Integer seatNumber,
+	//			@RequestParam(required = false) Integer guestSeatNumber,
+	//			@RequestParam(required = false) Integer screeningScheduleId, 
+	//			//@RequestParam(required = false) UUID memberId,
+	//			@RequestParam(required = false) String selectedCell1Content,
+	//			@RequestParam(required = false) String selectedCell2Content, Model model,HttpSession session) {
+	//		
+	//		//UUID memberId = (UUID) session.getAttribute("userId");//  ログイン時のセッションからID取得
+	//		UUID memberId = UUID.fromString("6d78b80b-8207-44a3-8ece-82737e26c74a");
+	//		
+	//		//		上映スケジュール取得
+	//		List<Object[]> screeningScheduleList = ScreeningScheduleService
+	//				.findSelectScreeningSchedule(screeningScheduleId);
+	//		model.addAttribute("screeningScheduleList", screeningScheduleList);
+	//		//		会員情報取得
+	//		List<Object[]> memberList = MemberService.findReservationMember(memberId);
+	//		model.addAttribute("memberList", memberList);
+	//		//		予約内容確認
+	//		model.addAttribute("seatNumber", seatNumber);
+	//		model.addAttribute("guestSeatNumber", guestSeatNumber);
+	//		model.addAttribute("selectedCell1Content", selectedCell1Content);
+	//		model.addAttribute("selectedCell2Content", selectedCell2Content);
+	//		model.addAttribute("screeningScheduleId", screeningScheduleId);
+	//		model.addAttribute("memberId", memberId);
+	//		return "admin_conf";
+	//	}
 
 }
