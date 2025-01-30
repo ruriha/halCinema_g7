@@ -1302,18 +1302,24 @@ public class MainController {
 	@RequestMapping("/adminReserve")
 	public String adminReserve(@RequestParam(name = "screeningScheduleId") Integer screeningScheduleId, Model model,
 			HttpSession session) {
+		System.out.println("0");
+		
 		//		会員情報取得
 		//UUID memberId = (UUID) session.getAttribute("userId");//  ログイン時のセッションからID取得
 		UUID memberId = UUID.fromString("6d78b80b-8207-44a3-8ece-82737e26c74a");
+
 		List<Object[]> memberList = MemberService.findReservationMember(memberId);
 		model.addAttribute("memberList", memberList);
 		model.addAttribute("memberId", memberId);
+		System.out.println("1");
 		//      上映スケジュール取得        
 		List<Object[]> screeningScheduleList = ScreeningScheduleService
 				.findSelectScreeningSchedule(screeningScheduleId);
 		model.addAttribute("screeningScheduleList", screeningScheduleList);
 		model.addAttribute("screeningScheduleId", screeningScheduleId);
 		Object[] screeningScheduleElement = screeningScheduleList.get(0);
+
+		System.out.println("2");
 		Integer capacity = (Integer) screeningScheduleElement[2];
 		String seatCapacity = "seat";
 		Integer seatNumberCapacity = 83;
@@ -1327,6 +1333,8 @@ public class MainController {
 			seatCapacity = "admin_seat3";
 			seatNumberCapacity = 220;
 		}
+
+		System.out.println("3");
 		//      空き座席状況取得
 		List<Object[]> seatList = ReservationService.findReservationSeat(screeningScheduleId);
 		for (Integer seatNumber = 1; seatNumber <= seatNumberCapacity; seatNumber++) {
@@ -1345,9 +1353,9 @@ public class MainController {
 		return seatCapacity;
 	}
 
-	// テスト用
+	// adminReserveConf.html
 	@RequestMapping("/adminReserveConf")
-	public String adminReserve_conf(
+	public String adminReserveConf(
 			@RequestParam(required = false) Integer seatNumber,
 			@RequestParam(required = false) Integer guestSeatNumber,
 			@RequestParam(required = false) Integer screeningScheduleId,
@@ -1364,8 +1372,6 @@ public class MainController {
 		List<Object[]> screeningScheduleList = ScreeningScheduleService
 				.findSelectScreeningSchedule(screeningScheduleId);
 
-			System.out.println("screeningScheduleId: " + screeningScheduleId);
-
 		model.addAttribute("screeningScheduleList", screeningScheduleList);
 
 		//		会員情報取得
@@ -1379,7 +1385,7 @@ public class MainController {
 				System.out.println("Member Record: " + Arrays.toString(member));
 			}
 		}*/
-		
+
 		model.addAttribute("memberList", memberList);
 
 		//		予約内容確認
@@ -1393,34 +1399,65 @@ public class MainController {
 		return "admin_conf";
 	}
 
-	//	元のやつ
-	//	admin_conf.html
-	//	@RequestMapping("/adminReserveConf")
-	//	public String adminReserve_conf(@RequestParam(required = false) Integer seatNumber,
-	//			@RequestParam(required = false) Integer guestSeatNumber,
-	//			@RequestParam(required = false) Integer screeningScheduleId, 
-	//			//@RequestParam(required = false) UUID memberId,
-	//			@RequestParam(required = false) String selectedCell1Content,
-	//			@RequestParam(required = false) String selectedCell2Content, Model model,HttpSession session) {
-	//		
-	//		//UUID memberId = (UUID) session.getAttribute("userId");//  ログイン時のセッションからID取得
-	//		UUID memberId = UUID.fromString("6d78b80b-8207-44a3-8ece-82737e26c74a");
-	//		
-	//		//		上映スケジュール取得
-	//		List<Object[]> screeningScheduleList = ScreeningScheduleService
-	//				.findSelectScreeningSchedule(screeningScheduleId);
-	//		model.addAttribute("screeningScheduleList", screeningScheduleList);
-	//		//		会員情報取得
-	//		List<Object[]> memberList = MemberService.findReservationMember(memberId);
-	//		model.addAttribute("memberList", memberList);
-	//		//		予約内容確認
-	//		model.addAttribute("seatNumber", seatNumber);
-	//		model.addAttribute("guestSeatNumber", guestSeatNumber);
-	//		model.addAttribute("selectedCell1Content", selectedCell1Content);
-	//		model.addAttribute("selectedCell2Content", selectedCell2Content);
-	//		model.addAttribute("screeningScheduleId", screeningScheduleId);
-	//		model.addAttribute("memberId", memberId);
-	//		return "admin_conf";
-	//	}
+	// rsv_comp.html
+	@RequestMapping("/adminReserveComp")
+	public String adminReserveComp(
+			@RequestParam(required = false) Integer seatNumber,
+			@RequestParam(required = false) Integer guestSeatNumber,
+			@RequestParam(required = false) Integer screeningScheduleId,
+			@RequestParam(required = false) UUID memberId,
+			Model model) {
+		//		予約
+		if (guestSeatNumber == null) {
+			guestSeatNumber = 0;
+		}
+		Member member = MemberService.findMemberById(memberId);
+
+		ScreeningSchedule screeningSchedule = ScreeningScheduleService.findScreeningScheduleById(screeningScheduleId);
+		System.out.println("error");
+		LocalDateTime reservationDatetime = LocalDateTime.now();
+		ReservationService.saveReservation(seatNumber, guestSeatNumber, member, screeningSchedule, reservationDatetime);
+
+		
+		//	    メールアドレス取得
+		List<Object[]> memberMail = MemberService.findMailaddress(memberId);
+		Object[] mailElement = memberMail.get(0);
+		String mailAddress = (String) mailElement[0];
+		model.addAttribute("mailAddress", mailAddress);
+//		System.out.println(mailAddress);
+		
+		//		予約ID取得
+		List<Object[]> nowReservationId = ReservationService.findReservationId(memberId, reservationDatetime);
+		Object[] reservationIdElement = nowReservationId.get(0);
+		UUID reservationId = (UUID) reservationIdElement[0];
+		String strReservationId = reservationId.toString();
+		model.addAttribute("strReservationId", strReservationId);
+//		System.out.println(strReservationId);
+		
+		//		上映スケジュール取得
+		List<Object[]> screeningScheduleList = ScreeningScheduleService
+				.findSelectScreeningSchedule(screeningScheduleId);
+		Object[] screeningScheduleElement = screeningScheduleList.get(0);
+		String movieTitle = (String) screeningScheduleElement[0];
+		LocalDateTime screeningDatetime = (LocalDateTime) screeningScheduleElement[1];
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		String strScreeningDatetime = screeningDatetime.format(formatter);
+		Integer screenId = (Integer) screeningScheduleElement[3];
+		String screenName = "THEATER" + screenId;
+		
+		//		会員情報取得
+		List<Object[]> memberList = MemberService.findReservationMember(memberId);
+		Object[] memberElement = memberList.get(0);
+		String memberName = (String) memberElement[0];
+		model.addAttribute("memberName", memberName);
+//		System.out.println(memberName);
+
+		//		QRコード生成とメール送信
+		String subject = "HALCINEMA | 映画の予約が完了しました";
+		EmailService.sendQRCodeEmail(mailAddress, subject, strReservationId, movieTitle, strScreeningDatetime,
+				screenName, memberName);
+
+		return "admin_conp";
+	}
 
 }
