@@ -47,10 +47,13 @@
                     <p class="section-description">チケットのご予約はこちら</p>
                 </div>
             </div>
-            <button class="button-modern" onclick="location.href='/memberAuth'">
+            <form method="post" action="/memberAuth">	
+      		<input type="hidden" name="next" value="/adminSche">
+            <button type="submit" class="button-modern">
                 NEXT
                 <i class="fas fa-arrow-right"></i>
             </button>
+            </form>
         </div>
     </div>
 
@@ -66,10 +69,13 @@
                     <p class="section-description">グッズ・フードの購入はこちら</p>
                 </div>
             </div>
-            <button class="button-modern" onclick="location.href='/memberAuth'">
+            <form method="post"  action="/memberAuth">	
+      		<input type="hidden" name="next" value="/shop">
+            <button type="submit" class="button-modern" >
                 NEXT
                 <i class="fas fa-arrow-right"></i>
             </button>
+            </form>
         </div>
     </div>
 </div>
