@@ -1045,9 +1045,29 @@ public class MainController {
 	//  店頭システムトップではloggedInMemberIdセッションは削除する 
 	@RequestMapping("/memberAuth")
 	public String memberAuth(Model model, @RequestParam(required = false) String next) {
-		next = "/shop";
 		model.addAttribute("next", next);
+		System.out.println(next);
 		return "member_auth2";
+	}
+	
+
+	@RequestMapping("/memberSearch")
+	public String memberSearch(Model model, @RequestParam(required = false) String next) {
+		model.addAttribute("next", next);
+		System.out.println(next);
+		return "member_search";
+	}
+	
+
+	@RequestMapping("/memberSearching")
+	public String memberSearching(HttpSession session, @RequestParam(required = false) String next, @RequestParam(required = false) String memberName, @RequestParam(required = false) String memberPhone) {
+		System.out.println(memberName + memberPhone);		
+		List<Object[]> member = MemberService.findMember(memberName, memberPhone);
+		Object[] memberElement = member.get(0);
+		UUID memberId = (UUID) memberElement[0];
+		session.setAttribute("loggedInMemberId", memberId);
+		System.out.println(memberId);		
+		return "redirect:" + next;
 	}
 
 	@RequestMapping("/memberSave")

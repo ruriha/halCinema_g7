@@ -38,6 +38,14 @@ public class MemberService {
         return MemberRepository.loginEntry(memberMailaddress, memberPassword);
     }
     
+	//  会員検索
+    public List<Object[]> findMember(String memberName, String memberTel) {
+        return MemberRepository.findMember(memberName, memberTel);
+    }
+    
+    
+    
+    
     
 
     
