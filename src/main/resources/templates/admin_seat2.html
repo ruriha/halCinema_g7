@@ -212,7 +212,7 @@
 			<td th:classappend="${s140 ? 'unselectable' : ''}">12</td>
           </tr>
       </table>
-      <form id="myForm" method="post" action="adminReserveConf">
+      <form id="myForm" method="post" th:action="@{/adminReserveConf}">
           <!-- Nunberはバック座席番号  Contentはフロント座席番号 -->
           <!-- バック座席番号の増加はセル番号を数えているため「A]などの文字も数えているから -->
           <input type="hidden" name="selectedCell1Number" id="selectedCell1Number" value="">

@@ -40,22 +40,22 @@
 				<tr>
 					<td class="item">作品名</td>
 					<td class="item2" th:text="${screeningScheduleList[0][0]}"></td>
-<!--					<td class="item2"></td>-->
+					<!--					<td class="item2"></td>-->
 				</tr>
 				<tr>
 					<td class="item">シアター</td>
 					<td class="item2" th:text="${'THEATER'+screeningScheduleList[0][3]}"></td>
-<!--					<td class="item2"></td>-->
+					<!--					<td class="item2"></td>-->
 				</tr>
 				<tr>
 					<td class="item">座席番号</td>
 					<td class="item2" th:text="${selectedCell1Content}"></td>
-<!--					<td class="item2"></td>-->
+					<!--					<td class="item2"></td>-->
 				</tr>
 				<tr>
 					<td class="item">座席番号(同伴者)</td>
 					<td class="item2" th:text="${selectedCell2Content}"></td>
-<!--					<td class="item2"></td>-->
+					<!--					<td class="item2"></td>-->
 				</tr>
 				<!--<tr>
             <td class="item">購入商品</td>
@@ -74,36 +74,41 @@
 				<tr>
 					<td class="item">氏名</td>
 					<td class="item2"><span id="name" th:text="${memberList[0][0]}"></span></td>
-<!--					<td class="item2"><span id="name"></span></td>-->
+					<!--					<td class="item2"><span id="name"></span></td>-->
 				</tr>
 				<tr>
 					<td class="item">氏名（かな）</td>
 
 					<td class="item2"><span id="kana" th:text="${memberList[0][1]}"></span></td>
-<!--					<td class="item2"><span id="kana"></span></td>-->
+					<!--					<td class="item2"><span id="kana"></span></td>-->
 				</tr>
 				<tr>
 
 					<td class="item">電話番号</td>
 					<td class="item2"><span id="phone" th:text="${memberList[0][2]}"></span></td>
-<!--					<td class="item2"><span id="phone"></span></td>-->
+					<!--					<td class="item2"><span id="phone"></span></td>-->
 				</tr>
 				<tr>
 					<td class="item">メールアドレス
 					</td>
 
 					<td class="item2"><span id="email" th:text="${memberList[0][3]}"></span></td>
-<!--					<td class="item2"><span id="email"></span></td>-->
+					<!--					<td class="item2"><span id="email"></span></td>-->
 				</tr>
 			</table>
 		</div>
 
 		<hr class="line2" color="#565656">
 
-		<div class="btn">
-			<button class="back-btn">戻る</button>
-			<button onclick="location.href='admin_conp.html'" class="confirm-btn">確定する</button>
-		</div>
+		<form class="btn" method="post" th:action="@{/adminReserveComp}">
+			<input type="hidden" th:value="${seatNumber}" name="seatNumber">
+			<input type="hidden" th:value="${guestSeatNumber}" name="guestSeatNumber">
+			<input type="hidden" th:value="${screeningScheduleId}" name="screeningScheduleId">
+			<input type="hidden" th:value="${memberId}" name="memberId">
+
+			<a class="back-btn" th:href="@{/adminReserve(screeningScheduleId=${screeningScheduleId})}">戻る</a>
+			<button type="submit" class="confirm-btn">確定する</button>
+		</form>
 	</div>
 
 
