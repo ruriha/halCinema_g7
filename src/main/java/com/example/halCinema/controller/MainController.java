@@ -1082,8 +1082,8 @@ public class MainController {
 	@RequestMapping("/shop")
 	public String shop(Model model, HttpSession session) {
 		// 会員認証状態を確認
-		//		UUID loggedInMemberId = (UUID) session.getAttribute("loggedInMemberId");
-		UUID loggedInMemberId = UUID.fromString("6d78b80b-8207-44a3-8ece-82737e26c74a");
+		UUID loggedInMemberId = (UUID) session.getAttribute("loggedInMemberId");
+//		UUID loggedInMemberId = UUID.fromString("6d78b80b-8207-44a3-8ece-82737e26c74a");
 		if (loggedInMemberId == null) {
 			return "redirect:/systemtop";
 		} else {
@@ -1096,8 +1096,8 @@ public class MainController {
 	@RequestMapping("/shop2")
 	public String shop2(Model model, HttpSession session) {
 		// 会員認証状態を確認
-		//		UUID loggedInMemberId = (UUID) session.getAttribute("loggedInMemberId");
-		UUID loggedInMemberId = UUID.fromString("6d78b80b-8207-44a3-8ece-82737e26c74a");
+		UUID loggedInMemberId = (UUID) session.getAttribute("loggedInMemberId");
+//		UUID loggedInMemberId = UUID.fromString("6d78b80b-8207-44a3-8ece-82737e26c74a");
 		if (loggedInMemberId == null) {
 			return "redirect:/systemtop";
 		} else {
@@ -1110,8 +1110,8 @@ public class MainController {
 	@RequestMapping("/shop3")
 	public String shop3(Model model, HttpSession session) {
 		// 会員認証状態を確認
-		//		UUID loggedInMemberId = (UUID) session.getAttribute("loggedInMemberId");
-		UUID loggedInMemberId = UUID.fromString("6d78b80b-8207-44a3-8ece-82737e26c74a");
+		UUID loggedInMemberId = (UUID) session.getAttribute("loggedInMemberId");
+//		UUID loggedInMemberId = UUID.fromString("6d78b80b-8207-44a3-8ece-82737e26c74a");
 		if (loggedInMemberId == null) {
 			return "redirect:/systemtop";
 		} else {
