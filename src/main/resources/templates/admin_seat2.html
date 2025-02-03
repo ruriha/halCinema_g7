@@ -215,10 +215,10 @@
       <form id="myForm" method="post" th:action="@{/adminReserveConf}">
           <!-- Nunberはバック座席番号  Contentはフロント座席番号 -->
           <!-- バック座席番号の増加はセル番号を数えているため「A]などの文字も数えているから -->
-          <input type="hidden" name="selectedCell1Number" id="selectedCell1Number" value="">
           <input type="hidden" name="selectedCell1Content" id="selectedCell1Content" value="">
-          <input type="hidden" name="selectedCell2Number" id="selectedCell2Number" value="">
           <input type="hidden" name="selectedCell2Content" id="selectedCell2Content" value="">
+          <input type="hidden" name="seatNumber" id="selectedCell1Number" value="">
+          <input type="hidden" name="guestSeatNumber" id="selectedCell2Number" value="">
 		  <div class="btnBox">
 	          <a class="back-button" th:href="@{/adminSche(screenScheduleDate=${#temporals.format(screeningScheduleList[0][1], 'yyyy-MM-dd')})}">戻る</a>
 	          <button class="next-button" type="submit">送信</button>			  
