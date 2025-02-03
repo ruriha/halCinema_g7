@@ -1161,6 +1161,9 @@ public class MainController {
 	@RequestMapping("/adminSche")
 	public String sdminSche(@RequestParam(name = "screenScheduleDate", required = false) String screenScheduleDate,
 			Model model, HttpSession session) {
+
+		//UUID memberId = (UUID) session.getAttribute("userId");//  ログイン時のセッションからID取得
+		
 		//  カレンダー  ////////
 		List<String> dates = new ArrayList<>();
 		LocalDate today = LocalDate.now();
@@ -1269,6 +1272,7 @@ public class MainController {
 						sBought = "";
 						fBought = "";
 						//ここで遷移先決定
+						System.out.println("2");
 						reserve = "href=/adminReserve?screeningScheduleId=" + (Integer) screenDatetime[0];
 					}
 
@@ -1302,26 +1306,20 @@ public class MainController {
 	@RequestMapping("/adminReserve")
 	public String adminReserve(@RequestParam(name = "screeningScheduleId") Integer screeningScheduleId, Model model,
 			HttpSession session) {
-		System.out.println("0");
-		
 		//		会員情報取得
-		//UUID memberId = (UUID) session.getAttribute("userId");//  ログイン時のセッションからID取得
-		UUID memberId = UUID.fromString("6d78b80b-8207-44a3-8ece-82737e26c74a");
-
+		UUID memberId = (UUID) session.getAttribute("userId");//  ログイン時のセッションからID取得
+		//System.out.println("memberid:" + memberId);
 		List<Object[]> memberList = MemberService.findReservationMember(memberId);
 		model.addAttribute("memberList", memberList);
 		model.addAttribute("memberId", memberId);
-		System.out.println("1");
 		//      上映スケジュール取得        
 		List<Object[]> screeningScheduleList = ScreeningScheduleService
 				.findSelectScreeningSchedule(screeningScheduleId);
 		model.addAttribute("screeningScheduleList", screeningScheduleList);
 		model.addAttribute("screeningScheduleId", screeningScheduleId);
 		Object[] screeningScheduleElement = screeningScheduleList.get(0);
-
-		System.out.println("2");
 		Integer capacity = (Integer) screeningScheduleElement[2];
-		String seatCapacity = "seat";
+		String seatCapacity = "admin_seat";
 		Integer seatNumberCapacity = 83;
 		if (capacity == 70) {
 			seatCapacity = "admin_seat";
@@ -1333,8 +1331,6 @@ public class MainController {
 			seatCapacity = "admin_seat3";
 			seatNumberCapacity = 220;
 		}
-
-		System.out.println("3");
 		//      空き座席状況取得
 		List<Object[]> seatList = ReservationService.findReservationSeat(screeningScheduleId);
 		for (Integer seatNumber = 1; seatNumber <= seatNumberCapacity; seatNumber++) {
@@ -1342,6 +1338,8 @@ public class MainController {
 			boolean isReserved = false;
 			for (Object[] seat : seatList) {
 				Integer seatNum = (Integer) seat[0];
+				System.out.println("seat" + seatNum);
+				
 				if (seatNum.equals(seatNumber)) {
 					isReserved = true;
 					break;
@@ -1385,6 +1383,7 @@ public class MainController {
 				System.out.println("Member Record: " + Arrays.toString(member));
 			}
 		}*/
+		System.out.println("bbbbbb:"+seatNumber+guestSeatNumber);
 
 		model.addAttribute("memberList", memberList);
 
@@ -1408,6 +1407,7 @@ public class MainController {
 			@RequestParam(required = false) UUID memberId,
 			Model model) {
 		//		予約
+		System.out.println("aaaaaaa:"+seatNumber+guestSeatNumber);
 		if (guestSeatNumber == null) {
 			guestSeatNumber = 0;
 		}
