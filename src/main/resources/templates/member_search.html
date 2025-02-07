@@ -20,17 +20,18 @@
         <div class="search-container">
             <h1 class="title">会員検索</h1>
             
-            <form class="search-form" method="post">
+            <form class="search-form" method="post" action="/memberSearching">
+      			<input type="hidden" name="next" th:value="${next}">
                 <div class="search-box">
 
                     <div class="input-group">
                         <label for="memberName">お名前</label>
-                        <input type="text" id="memberName" name="memberName" placeholder="例：山田太郎">
+                        <input type="text" id="memberName" name="memberName" placeholder="例：山田太郎" required>
                     </div>
 
                     <div class="input-group">
                         <label for="memberPhone">電話番号</label>
-                        <input type="tel" id="memberPhone" name="memberPhone" placeholder="例：0901234567">
+                        <input type="tel" id="memberPhone" name="memberPhone" placeholder="例：0901234567" required>
                     </div>
                 </div>
 

@@ -12,7 +12,7 @@
     <title>HALCINEMA｜TOP</title>
 
     <link rel="stylesheet" type="text/css" href="../css/reset.css">
-    <link rel="stylesheet" type="text/css" href="../css/shop_conf.css">
+    <link rel="stylesheet" type="text/css" href="../css/shop_conf2.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,7 +30,7 @@
 
 
     <div id="waku">
-        <p id="cus_name">会員ID：NGY0001</p>
+        <p id="cus_name">会員ID：<span th:text="${loggedInMemberId}"></span></p>
         <table>
             <tr>
                 <td id="long">商品名</td>
@@ -42,15 +42,15 @@
         <p id="kane">合計：0円</p>
 
         <div class="btn">
-            <button onclick="location.href='shop.html'" class="back-btn">取り消し</button>
-            <button onclick="location.href='shop_conp.html'" class="confirm-btn">確定する</button>
+            <button onclick="location.href='/shop'" class="back-btn">取り消し</button>
+            <button id="buyBtn" class="confirm-btn">確定する</button>
         </div>
     </div>
 
 
 
 </body>
-<script type="text/javascript" src="../js/shop.js"></script>
+<script type="text/javascript" src="../js/shop2.js"></script>
 
-<script type="text/javascript" src="../js/shop_con.js"></script>
+<script type="text/javascript" src="../js/shop_con2.js"></script>
 </html>

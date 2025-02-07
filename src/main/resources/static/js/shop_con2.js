@@ -32,4 +32,27 @@ Object.keys(orderData).forEach(title => {
 
 // 合計金額を表示
 document.getElementById('kane').textContent = `合計：${totalAmount}円`;
+
+
+//  送信
+document.getElementById("buyBtn").addEventListener("click", function() {
+
+    const orderData = JSON.parse(sessionStorage.getItem('orderData')) || {};
+
+    fetch("/buy", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(orderData)
+    })
+    .then(response => {
+        if (response.redirected) {
+            window.location.href = response.url;
+        }
+    })
+    .catch(error => console.error("Error:", error));
+	
+});
+
 });
