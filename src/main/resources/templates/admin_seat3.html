@@ -45,7 +45,6 @@
           <p>|</p>
           <p id="time" th:text="${#temporals.format(screeningScheduleList[0][1], 'yyyy/MM/dd HH:mm')}"></p>
           <p>|</p>
-          <p id="name" th:text="${memberList[0][0]+' 様'}"></p>
         </div>
         <p class="attention">座席を選択して下さい。<span style="color: #A2936B;">■</span>：選択済み / <span style="color: aqua;">■</span>：選択中</p>
       </div>
@@ -300,11 +299,10 @@
           <input type="hidden" name="seatNumber" id="selectedCell1Number" value="">
           <input type="hidden" name="guestSeatNumber" id="selectedCell2Number" value="">
           <p class="attention2">座席は会員様1名につき、2つまでお取り頂けます。但し、同伴者がいない場合の座席確保は、<br>他のお客様のご迷惑となりますのでお控え頂きますようお願い申し上げます。</p>
-		  
+		  <input type="hidden" th:value="${screeningScheduleId}" name="screeningScheduleId">
 		  <div class="btnBox">
 	          <a class="back-button" th:href="@{/adminSche(screenScheduleDate=${#temporals.format(screeningScheduleList[0][1], 'yyyy-MM-dd')})}">戻る</a>
 	          <button class="next-button" type="submit">送信</button>			  
-		  
 		  </div>
       </form>
     </div>
