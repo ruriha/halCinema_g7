@@ -17,22 +17,21 @@ import com.example.halCinema.service.NewsService;
 
 import jakarta.servlet.http.HttpSession;
 
-
 @Controller
 public class LoginController {
 
     private final LoginService service;
-    private final MemberService MemberService;
+    private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
     private final MessageSource messageSource;
-    private final NewsService newsService; // NewsServiceのインジェクション
+    private final NewsService newsService;
 
-    public LoginController(LoginService service, MemberService MemberService, PasswordEncoder passwordEncoder, MessageSource messageSource, NewsService newsService) {
+    public LoginController(LoginService service, MemberService memberService, PasswordEncoder passwordEncoder, MessageSource messageSource, NewsService newsService) {
         this.service = service;
-        this.MemberService = MemberService;
+        this.memberService = memberService;
         this.passwordEncoder = passwordEncoder;
         this.messageSource = messageSource;
-        this.newsService = newsService; // コンストラクタに追加
+        this.newsService = newsService;
     }
 
     @GetMapping("/login")
@@ -41,7 +40,7 @@ public class LoginController {
         session.invalidate();
 
         // newsListを取得し、モデルに追加
-        List<Object[]> newsList = newsService.findNewsStreamingDate(); // インスタンスメソッドとして呼び出す
+        List<Object[]> newsList = newsService.findNewsStreamingDate();
         model.addAttribute("newsList", newsList);
 
         return "login";
@@ -50,10 +49,20 @@ public class LoginController {
     @PostMapping("/login")
     public String login(Model model, LoginForm form, HttpSession session) {
         var userInfo = service.searchUserById(form.getMemberMailaddress());
-        var isCorrectUserAuth = userInfo.isPresent() &&
-                passwordEncoder.matches(form.getMemberPassword(), userInfo.get().getMemberPassword());
+
+        // newsListを取得し、モデルに追加（ログイン失敗時も表示されるように修正）
+        List<Object[]> newsList = newsService.findNewsStreamingDate();
+        model.addAttribute("newsList", newsList);
+
+        // メールアドレスが登録されていない場合
+        if (userInfo.isEmpty()) {
+            model.addAttribute("errorMessage", "メールアドレスが登録されていません");
+            return "login";
+        }
+
+        var isCorrectUserAuth = passwordEncoder.matches(form.getMemberPassword(), userInfo.get().getMemberPassword());
         
-        List<Object[]> users = MemberService.loginEntry(form.getMemberMailaddress(), userInfo.get().getMemberPassword());
+        List<Object[]> users = memberService.loginEntry(form.getMemberMailaddress(), userInfo.get().getMemberPassword());
 
         if (!users.isEmpty()) {
             Object[] usersElement = users.get(0);
@@ -69,7 +78,8 @@ public class LoginController {
             session.setAttribute("loggedInUserEmail", form.getMemberMailaddress());
             return "redirect:/toppage";
         } else {
-            return "redirect:/login";
+            model.addAttribute("errorMessage", "パスワードが正しくありません");
+            return "login";
         }
     }
 }
