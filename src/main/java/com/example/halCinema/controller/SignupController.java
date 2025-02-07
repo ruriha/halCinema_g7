@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.example.halCinema.dto.FormData;
+import com.example.halCinema.model.Member;
 import com.example.halCinema.repository.FormDataRepository;
+import com.example.halCinema.repository.UserRepository;
 import com.example.halCinema.service.EmailService;
 import com.example.halCinema.service.SignupService;
 
@@ -33,6 +35,9 @@ public class SignupController {
     private PasswordEncoder passwordEncoder;
     
     @Autowired
+    private UserRepository userRepository;
+    
+    @Autowired
     private EmailService emailService;
 
     public SignupController(SignupService service) {
@@ -46,8 +51,7 @@ public class SignupController {
 
     @GetMapping("/input_info")
     public String showInputForm(Model model) {
-        FormData formData = new FormData();
-        model.addAttribute("formData", formData);
+        model.addAttribute("formData", new FormData());
         return "input_info";
     }
 
@@ -55,11 +59,17 @@ public class SignupController {
     public String handleFormSubmission(
         @Valid @ModelAttribute("formData") FormData formData, BindingResult result, Model model) {
         
+        // メールアドレスの重複チェック
+        if (userRepository.existsByMemberMailaddress(formData.getEmail())) {
+            result.rejectValue("email", "error.formData", "このメールアドレスは既に使用されています");
+        }
+
+        // バリデーションエラーがある場合、フォームを再表示
         if (result.hasErrors()) {
             return "input_info";
         }
 
-        // birthdate をそのまま利用する
+        // 正常なら次のページへ
         return "redirect:/card";
     }
     
@@ -109,21 +119,37 @@ public class SignupController {
         String hashedPassword = passwordEncoder.encode(formData.getPassword());
         formData.setPassword(hashedPassword);
 
-        // データをDBに登録（memberId は自動生成）
-        formDataRepository.save(formData);
+        // FormData を Member に変換
+        Member member = new Member();
+        member.setMemberMailaddress(formData.getEmail());
+        member.setMemberPassword(formData.getPassword());
+        member.setMemberName(formData.getName());
+        member.setMemberNameKana(formData.getKana());
+        member.setMemberBirthday(formData.getBirthdate());
+        member.setMemberTel(formData.getPhone());
+        member.setCardNumber(formData.getCardNumber());
+        member.setCardName(formData.getCardName());
+        member.setCardMonth(formData.getCardMonth());
+        member.setCardYear(formData.getCardYear());
+        member.setCardCvc(formData.getCardCvc());
+
+
+        // DB に登録
+        userRepository.save(member); // formDataRepository ではなく userRepository を使用
 
         // QRコード用のテキスト（UUID をそのまま利用）
-        String qrCodeText = formData.getId().toString();
+        String qrCodeText = member.getMemberId().toString();
 
         // 会員登録完了のメールを送信
         emailService.sendAccountCreationEmail(
-            formData.getEmail(),
-            formData.getName(),
+            member.getMemberMailaddress(),
+            member.getMemberName(),
             qrCodeText
         );
 
         return "redirect:/success";
     }
+
 
     @GetMapping("/success")
     public String viewSuccessPage(@ModelAttribute("formData") FormData formData, Model model) {
