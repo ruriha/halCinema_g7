@@ -189,11 +189,11 @@
 
 									<!-- 削除ボタン -->
 										<input type="hidden" name="movieId" th:value="${movie.movieId}" class="delMovieId" />
-										<button onclick="delSbm(this);" class="del" data-id="${movie.movieId}" th:if="${movie.deleteBtn == true}">
+										<button onclick="delSbm(this);" class="del" data-id="${movie.movieId}" th:if="${movie.deleteBtn != true}">
 											<i class="fas fa-trash-alt"></i>
 										</button>
 										
-										<button onclick="delSbm(this);" class="del del2" data-id="${movie.movieId}" th:if="${movie.deleteBtn != true}" disabled>
+										<button onclick="delSbm(this);" class="del del2" data-id="${movie.movieId}" th:if="${movie.deleteBtn == true}" disabled>
 											<i class="fas fa-trash-alt"></i>
 										</button>
 								</div>
