@@ -114,7 +114,8 @@ public class SignupController {
     }
 
     @PostMapping("/confirmation")
-    public String processConfirmation(@ModelAttribute("formData") FormData formData) {
+    public String processConfirmation(@ModelAttribute("formData") FormData formData, Model model) {
+
         // パスワードをハッシュ化
         String hashedPassword = passwordEncoder.encode(formData.getPassword());
         formData.setPassword(hashedPassword);
@@ -133,9 +134,8 @@ public class SignupController {
         member.setCardYear(formData.getCardYear());
         member.setCardCvc(formData.getCardCvc());
 
-
         // DB に登録
-        userRepository.save(member); // formDataRepository ではなく userRepository を使用
+        userRepository.save(member);
 
         // QRコード用のテキスト（UUID をそのまま利用）
         String qrCodeText = member.getMemberId().toString();
@@ -149,7 +149,6 @@ public class SignupController {
 
         return "redirect:/success";
     }
-
 
     @GetMapping("/success")
     public String viewSuccessPage(@ModelAttribute("formData") FormData formData, Model model) {
