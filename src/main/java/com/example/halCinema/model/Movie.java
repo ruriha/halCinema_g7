@@ -113,12 +113,12 @@ public class Movie {
     public void setStaff(String staff) {
         this.staff = staff;
     }
-    
-    public Boolean getDeleteBtn() {
+	
+	public Boolean getDeleteBtn() {
 		return deleteBtn;
 	}
-    
-    public void setDeleteBtn(Boolean deleteBtn) {
+	
+	public void setDeleteBtn(Boolean deleteBtn) {
 		this.deleteBtn = deleteBtn;
 	}
     

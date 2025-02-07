@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html lang="ja">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
 
   <head>
 
@@ -39,189 +39,190 @@
 
     </header>
     <div>
-        <p id="title">名探偵コナン 100万ドルの五稜星</p>
+        <p id="title" th:text="${screeningScheduleList[0][0]}"></p>
         <div id="side">
           <p id="screen">スクリーン1</p>
           <p>|</p>
-          <p id="time">2024/5/31 15:30~17:45</p>
+          <p id="time" th:text="${#temporals.format(screeningScheduleList[0][1], 'yyyy/MM/dd HH:mm')}"></p>
           <p>|</p>
-          <p id="name">レッドテール様</p>
+          <p id="name" th:text="${memberList[0][0]+' 様'}"></p>
         </div>
         <p class="attention">座席を選択して下さい。<span style="color: #A2936B;">■</span>：選択済み / <span style="color: aqua;">■</span>：選択中</p>
       </div>
     <div id="tyuu">
       <table id="myTable">
           <tr>
-              <td>1</td>
-              <td>2</td>
+			<td th:classappend="${s1 ? 'unselectable' : ''}">1</td>
+			<td th:classappend="${s2 ? 'unselectable' : ''}">2</td>
               <td class="mozi">A</td>
-              <td>3</td>
-              <td>4</td>
-              <td class="unselectable">5</td>
-              <td class="unselectable">6</td>
-              <td>7</td>
-              <td>8</td>
-              <td>9</td>
-              <td>10</td>
+			<td th:classappend="${s4 ? 'unselectable' : ''}">3</td>
+			<td th:classappend="${s5 ? 'unselectable' : ''}">4</td>
+			<td th:classappend="${s6 ? 'unselectable' : ''}">5</td>
+			<td th:classappend="${s7 ? 'unselectable' : ''}">6</td>
+			<td th:classappend="${s8 ? 'unselectable' : ''}">7</td>
+			<td th:classappend="${s9 ? 'unselectable' : ''}">8</td>
+			<td th:classappend="${s10 ? 'unselectable' : ''}">9</td>
+			<td th:classappend="${s11 ? 'unselectable' : ''}">10</td>
               <td class="mozi">A</td>
-              <td>11</td>
-              <td>12</td>
+			<td th:classappend="${s13 ? 'unselectable' : ''}">11</td>
+			<td th:classappend="${s14 ? 'unselectable' : ''}">12</td>
           </tr>
           <tr>
-              <td>1</td>
-              <td>2</td>
+			<td th:classappend="${s15 ? 'unselectable' : ''}">1</td>
+			<td th:classappend="${s16 ? 'unselectable' : ''}">2</td>
               <td class="mozi">B</td>
-              <td>3</td>
-              <td>4</td>
-              <td>5</td>
-              <td>6</td>
-              <td>7</td>
-              <td>8</td>
-              <td>9</td>
-              <td>10</td>
+			<td th:classappend="${s18 ? 'unselectable' : ''}">3</td>
+			<td th:classappend="${s19 ? 'unselectable' : ''}">4</td>
+			<td th:classappend="${s20 ? 'unselectable' : ''}">5</td>
+			<td th:classappend="${s21 ? 'unselectable' : ''}">6</td>
+			<td th:classappend="${s22 ? 'unselectable' : ''}">7</td>
+			<td th:classappend="${s23 ? 'unselectable' : ''}">8</td>
+			<td th:classappend="${s24 ? 'unselectable' : ''}">9</td>
+			<td th:classappend="${s25 ? 'unselectable' : ''}">10</td>
               <td class="mozi">B</td>
-              <td>11</td>
-              <td>12</td>
+			<td th:classappend="${s27 ? 'unselectable' : ''}">11</td>
+			<td th:classappend="${s28 ? 'unselectable' : ''}">12</td>
           </tr>
           <tr>
-              <td class="unselectable">1</td>
-              <td class="unselectable">2</td>
+			<td th:classappend="${s29 ? 'unselectable' : ''}">1</td>
+			<td th:classappend="${s30 ? 'unselectable' : ''}">2</td>
               <td class="mozi">C</td>
-              <td>3</td>
-              <td>4</td>
-              <td>5</td>
-              <td>6</td>
-              <td>7</td>
-              <td>8</td>
-              <td>9</td>
-              <td>10</td>
+			<td th:classappend="${s32 ? 'unselectable' : ''}">3</td>
+			<td th:classappend="${s33 ? 'unselectable' : ''}">4</td>
+			<td th:classappend="${s34 ? 'unselectable' : ''}">5</td>
+			<td th:classappend="${s35 ? 'unselectable' : ''}">6</td>
+			<td th:classappend="${s36 ? 'unselectable' : ''}">7</td>
+			<td th:classappend="${s37 ? 'unselectable' : ''}">8</td>
+			<td th:classappend="${s38 ? 'unselectable' : ''}">9</td>
+			<td th:classappend="${s39 ? 'unselectable' : ''}">10</td>
               <td class="mozi">C</td>
-              <td>11</td>
-              <td>12</td>
+			<td th:classappend="${s41 ? 'unselectable' : ''}">11</td>
+			<td th:classappend="${s42 ? 'unselectable' : ''}">12</td>
           </tr>
           <tr>
-              <td>1</td>
-              <td>2</td>
+			<td th:classappend="${s43 ? 'unselectable' : ''}">1</td>
+			<td th:classappend="${s44 ? 'unselectable' : ''}">2</td>
               <td class="mozi">D</td>
-              <td>3</td>
-              <td class="unselectable">4</td>
-              <td>5</td>
-              <td>6</td>
-              <td>7</td>
-              <td>8</td>
-              <td>9</td>
-              <td>10</td>
+			<td th:classappend="${s46 ? 'unselectable' : ''}">3</td>
+			<td th:classappend="${s47 ? 'unselectable' : ''}">4</td>
+			<td th:classappend="${s48 ? 'unselectable' : ''}">5</td>
+			<td th:classappend="${s49 ? 'unselectable' : ''}">6</td>
+			<td th:classappend="${s50 ? 'unselectable' : ''}">7</td>
+			<td th:classappend="${s51 ? 'unselectable' : ''}">8</td>
+			<td th:classappend="${s52 ? 'unselectable' : ''}">9</td>
+			<td th:classappend="${s53 ? 'unselectable' : ''}">10</td>
               <td class="mozi">D</td>
-              <td>11</td>
-              <td>12</td>
+			<td th:classappend="${s55 ? 'unselectable' : ''}">11</td>
+			<td th:classappend="${s56 ? 'unselectable' : ''}">12</td>
           </tr>
           <tr>
-              <td>1</td>
-              <td>2</td>
+			<td th:classappend="${s57 ? 'unselectable' : ''}">1</td>
+			<td th:classappend="${s58 ? 'unselectable' : ''}">2</td>
               <td class="mozi">E</td>
-              <td>3</td>
-              <td>4</td>
-              <td>5</td>
-              <td>6</td>
-              <td>7</td>
-              <td>8</td>
-              <td>9</td>
-              <td>10</td>
+			<td th:classappend="${s60 ? 'unselectable' : ''}">3</td>
+			<td th:classappend="${s61 ? 'unselectable' : ''}">4</td>
+			<td th:classappend="${s62 ? 'unselectable' : ''}">5</td>
+			<td th:classappend="${s63 ? 'unselectable' : ''}">6</td>
+			<td th:classappend="${s64 ? 'unselectable' : ''}">7</td>
+			<td th:classappend="${s65 ? 'unselectable' : ''}">8</td>
+			<td th:classappend="${s66 ? 'unselectable' : ''}">9</td>
+			<td th:classappend="${s67 ? 'unselectable' : ''}">10</td>
               <td class="mozi">E</td>
-              <td>11</td>
-              <td>12</td>
+			<td th:classappend="${s69 ? 'unselectable' : ''}">11</td>
+			<td th:classappend="${s70 ? 'unselectable' : ''}">12</td>
           </tr>
           <tr>
-              <td>1</td>
-              <td>2</td>
+			<td th:classappend="${s71 ? 'unselectable' : ''}">1</td>
+			<td th:classappend="${s72 ? 'unselectable' : ''}">2</td>
               <td class="mozi">F</td>
-              <td>3</td>
-              <td>4</td>
-              <td>5</td>
-              <td>6</td>
-              <td>7</td>
-              <td>8</td>
-              <td>9</td>
-              <td>10</td>
+			<td th:classappend="${s74 ? 'unselectable' : ''}">3</td>
+			<td th:classappend="${s75 ? 'unselectable' : ''}">4</td>
+			<td th:classappend="${s76 ? 'unselectable' : ''}">5</td>
+			<td th:classappend="${s77 ? 'unselectable' : ''}">6</td>
+			<td th:classappend="${s78 ? 'unselectable' : ''}">7</td>
+			<td th:classappend="${s79 ? 'unselectable' : ''}">8</td>
+			<td th:classappend="${s80 ? 'unselectable' : ''}">9</td>
+			<td th:classappend="${s81 ? 'unselectable' : ''}">10</td>
               <td class="mozi">F</td>
-              <td>11</td>
-              <td>12</td>
+			<td th:classappend="${s83 ? 'unselectable' : ''}">11</td>
+			<td th:classappend="${s84 ? 'unselectable' : ''}">12</td>
           </tr>
           <tr>
-              <td>1</td>
-              <td>2</td>
+			<td th:classappend="${s85 ? 'unselectable' : ''}">1</td>
+			<td th:classappend="${s86 ? 'unselectable' : ''}">2</td>
               <td class="mozi">G</td>
-              <td>3</td>
-              <td>4</td>
-              <td class="unselectable">5</td>
-              <td class="unselectable">6</td>
-              <td class="unselectable">7</td>
-              <td>8</td>
-              <td>9</td>
-              <td>10</td>
+			<td th:classappend="${s88 ? 'unselectable' : ''}">3</td>
+			<td th:classappend="${s89 ? 'unselectable' : ''}">4</td>
+			<td th:classappend="${s90 ? 'unselectable' : ''}">5</td>
+			<td th:classappend="${s91 ? 'unselectable' : ''}">6</td>
+			<td th:classappend="${s92 ? 'unselectable' : ''}">7</td>
+			<td th:classappend="${s93 ? 'unselectable' : ''}">8</td>
+			<td th:classappend="${s94 ? 'unselectable' : ''}">9</td>
+			<td th:classappend="${s95 ? 'unselectable' : ''}">10</td>
               <td class="mozi">G</td>
-              <td>11</td>
-              <td>12</td>
+			<td th:classappend="${s97 ? 'unselectable' : ''}">11</td>
+			<td th:classappend="${s98 ? 'unselectable' : ''}">12</td>
           </tr>
           <tr>
-              <td>1</td>
-              <td>2</td>
+			<td th:classappend="${s99 ? 'unselectable' : ''}">1</td>
+			<td th:classappend="${s100 ? 'unselectable' : ''}">2</td>
               <td class="mozi">H</td>
-              <td>3</td>
-              <td>4</td>
-              <td>5</td>
-              <td>6</td>
-              <td>7</td>
-              <td>8</td>
-              <td>9</td>
-              <td>10</td>
+			<td th:classappend="${s102 ? 'unselectable' : ''}">3</td>
+			<td th:classappend="${s103 ? 'unselectable' : ''}">4</td>
+			<td th:classappend="${s104 ? 'unselectable' : ''}">5</td>
+			<td th:classappend="${s105 ? 'unselectable' : ''}">6</td>
+			<td th:classappend="${s106 ? 'unselectable' : ''}">7</td>
+			<td th:classappend="${s107 ? 'unselectable' : ''}">8</td>
+			<td th:classappend="${s108 ? 'unselectable' : ''}">9</td>
+			<td th:classappend="${s109 ? 'unselectable' : ''}">10</td>
               <td class="mozi">H</td>
-              <td>11</td>
-              <td>12</td>
+			<td th:classappend="${s111 ? 'unselectable' : ''}">11</td>
+			<td th:classappend="${s112 ? 'unselectable' : ''}">12</td>
           </tr>
           <tr>
-              <td>1</td>
-              <td>2</td>
+			<td th:classappend="${s113 ? 'unselectable' : ''}">1</td>
+			<td th:classappend="${s114 ? 'unselectable' : ''}">2</td>
               <td class="mozi">I</td>
-              <td>3</td>
-              <td>4</td>
-              <td>5</td>
-              <td>6</td>
-              <td>7</td>
-              <td>8</td>
-              <td>9</td>
-              <td>10</td>
+			<td th:classappend="${s116 ? 'unselectable' : ''}">3</td>
+			<td th:classappend="${s117 ? 'unselectable' : ''}">4</td>
+			<td th:classappend="${s118 ? 'unselectable' : ''}">5</td>
+			<td th:classappend="${s119 ? 'unselectable' : ''}">6</td>
+			<td th:classappend="${s120 ? 'unselectable' : ''}">7</td>
+			<td th:classappend="${s121 ? 'unselectable' : ''}">8</td>
+			<td th:classappend="${s122 ? 'unselectable' : ''}">9</td>
+			<td th:classappend="${s123 ? 'unselectable' : ''}">10</td>
               <td class="mozi">I</td>
-              <td>11</td>
-              <td>12</td>
+			<td th:classappend="${s125 ? 'unselectable' : ''}">11</td>
+			<td th:classappend="${s126 ? 'unselectable' : ''}">12</td>
           </tr>
           <tr>
-              <td>1</td>
-              <td>2</td>
+			<td th:classappend="${s127 ? 'unselectable' : ''}">1</td>
+			<td th:classappend="${s128 ? 'unselectable' : ''}">2</td>
               <td class="mozi">J</td>
-              <td>3</td>
-              <td>4</td>
-              <td>5</td>
-              <td>6</td>
-              <td>7</td>
-              <td>8</td>
-              <td>9</td>
-              <td>10</td>
+			<td th:classappend="${s130 ? 'unselectable' : ''}">3</td>
+			<td th:classappend="${s131 ? 'unselectable' : ''}">4</td>
+			<td th:classappend="${s132 ? 'unselectable' : ''}">5</td>
+			<td th:classappend="${s133 ? 'unselectable' : ''}">6</td>
+			<td th:classappend="${s134 ? 'unselectable' : ''}">7</td>
+			<td th:classappend="${s135 ? 'unselectable' : ''}">8</td>
+			<td th:classappend="${s136 ? 'unselectable' : ''}">9</td>
+			<td th:classappend="${s137 ? 'unselectable' : ''}">10</td>
               <td class="mozi">J</td>
-              <td>11</td>
-              <td class="unselectable">12</td>
+			<td th:classappend="${s139 ? 'unselectable' : ''}">11</td>
+			<td th:classappend="${s140 ? 'unselectable' : ''}">12</td>
           </tr>
       </table>
-      <form id="myForm" method="post" action="">
+      <form id="myForm" method="post" th:action="@{/adminReserveConf}">
           <!-- Nunberはバック座席番号  Contentはフロント座席番号 -->
           <!-- バック座席番号の増加はセル番号を数えているため「A]などの文字も数えているから -->
-          <input type="hidden" name="selectedCell1Number" id="selectedCell1Number" value="">
           <input type="hidden" name="selectedCell1Content" id="selectedCell1Content" value="">
-          <input type="hidden" name="selectedCell2Number" id="selectedCell2Number" value="">
           <input type="hidden" name="selectedCell2Content" id="selectedCell2Content" value="">
-          <p class="attention2">座席は会員様1名につき、2つまでお取り頂けます。但し、同伴者がいない場合の座席確保は、<br>他のお客様のご迷惑となりますのでお控え頂きますようお願い申し上げます。</p>
-          <button type="button" class="back-button" onclick="goBack()">戻る</button>
-          <button class="next-button" type="submit">送信</button>
+          <input type="hidden" name="seatNumber" id="selectedCell1Number" value="">
+          <input type="hidden" name="guestSeatNumber" id="selectedCell2Number" value="">
+		  <div class="btnBox">
+	          <a class="back-button" th:href="@{/adminSche(screenScheduleDate=${#temporals.format(screeningScheduleList[0][1], 'yyyy-MM-dd')})}">戻る</a>
+	          <button class="next-button" type="submit">送信</button>			  
+		  </div>
       </form>
     </div>
 

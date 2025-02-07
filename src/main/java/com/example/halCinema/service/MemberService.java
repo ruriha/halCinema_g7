@@ -36,6 +36,16 @@ public class MemberService {
     public List<Object[]> loginEntry(String memberMailaddress, String memberPassword) {
         return memberRepository.loginEntry(memberMailaddress, memberPassword);
     }
+    
+	//  会員検索
+    public List<Object[]> findMember(String memberName, String memberTel) {
+        return MemberRepository.findMember(memberName, memberTel);
+    }
+    
+    
+    
+    
+    
 
     // 会員情報保存 (新規または更新)
     public void saveMemberInfo(Member member) {

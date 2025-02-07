@@ -19,6 +19,10 @@ public class Product {
     private String productName;
 
     private Integer price;
+
+    private Integer productCategory;
+
+    private String productImg;
     
     
     @OneToMany(mappedBy="product")
@@ -50,6 +54,23 @@ public class Product {
     public void setPrice(Integer price) {
         this.price = price;
     }
+    
+    
+    public Integer getProductCategory() {
+        return productCategory;
+    }
+
+    public void setProductCategory(Integer productCategory) {
+        this.productCategory = productCategory;
+    }
+    
+    public String getProductImg() {
+		return productImg;
+	}
+    
+    public void setProductImg(String productImg) {
+		this.productImg = productImg;
+	}
     
     
     

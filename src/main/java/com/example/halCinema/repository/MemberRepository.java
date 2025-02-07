@@ -32,6 +32,14 @@ public interface MemberRepository  extends JpaRepository<Member, UUID>{
 	           "where m.memberMailaddress = ?1 " +
 	           "and m.memberPassword = ?2")
 	List<Object[]> loginEntry(String memberMailaddress, String memberPassword);
+	
+	
+	//  会員検索
+	@Query("select m.memberId " +
+	           "from member m " +
+	           "where m.memberName = ?1 " +
+	           "and m.memberTel = ?2")
+	List<Object[]> findMember(String memberName, String memberTel);
 		
 
 }

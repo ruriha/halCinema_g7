@@ -1,107 +1,124 @@
 <!DOCTYPE html>
 
-<html lang="ja">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
 
-  <head>
+<head>
 
-    <meta charset="utf-8">
+	<meta charset="utf-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>管理者：予約確認</title>
+	<title>管理者：予約確認</title>
 
-    <link rel="stylesheet" href="../css/reset.css">
-    <link rel="stylesheet" href="../css/common.css">
-    <link rel="stylesheet" href="../css/rsv_cfm.css">
+	<link rel="stylesheet" href="../css/reset.css">
+	<link rel="stylesheet" href="../css/common.css">
+	<link rel="stylesheet" href="../css/rsv_cfm.css">
 
-  </head>
+</head>
 
-  <body>
-<!-- ヘッダー ------------------------------------------------->
-    <header class="commonHeader">
+<body>
+	<!-- ヘッダー ------------------------------------------------->
+	<header class="commonHeader">
 
-        <!-- ロゴ -->
-        <figure class="commonLogoBox">
-            <img class="commonLogo" src="../images/logo.svg" alt="HAL CINEMA">
-        </figure>
+		<!-- ロゴ -->
+		<figure class="commonLogoBox">
+			<img class="commonLogo" src="../images/logo.svg" alt="HAL CINEMA">
+		</figure>
 
-    </header>
+	</header>
 
-    <div class="container">
-      <h1>予約内容確認</h1>
-      <hr color="#1FD9D9">
-      <div class="info-block">
-        <h2>ご予約の内容をご確認下さい。</h2>
-        <table>  
-          <tr>
-            <td class="item">劇場名</td>
-            <td class="item2">HAL CINEMA</td>
-          </tr>
-          <tr>
-            <td class="item">作品名</td>
-            <td class="item2"> 猫の惑星／キングダム【字幕】</td>
-          </tr>
-          <tr>
-            <td class="item">シアター</td>
-            <td class="item2"> THEATER1</td>
-          </tr>
-          <tr>
-            <td class="item">座席番号</td>
-            <td class="item2">A-1</td>
-          </tr>
-          <tr>
-            <td class="item">座席番号(同伴者)</td>
-            <td class="item2">A-2</td>
-          </tr>
-          <tr>
+	<div class="container">
+		<h1>予約内容確認</h1>
+		<hr color="#1FD9D9">
+		<div class="info-block">
+			<h2>ご予約の内容をご確認下さい。</h2>
+			<table>
+				<tr>
+					<td class="item">劇場名</td>
+					<td class="item2">HAL CINEMA</td>
+				</tr>
+				<tr>
+					<td class="item">作品名</td>
+					<td class="item2" th:text="${screeningScheduleList[0][0]}"></td>
+					<!--					<td class="item2"></td>-->
+				</tr>
+				<tr>
+					<td class="item">シアター</td>
+					<td class="item2" th:text="${'THEATER'+screeningScheduleList[0][3]}"></td>
+					<!--					<td class="item2"></td>-->
+				</tr>
+				<tr>
+					<td class="item">座席番号</td>
+					<td class="item2" th:text="${selectedCell1Content}"></td>
+					<!--					<td class="item2"></td>-->
+				</tr>
+				<tr>
+					<td class="item">座席番号(同伴者)</td>
+					<td class="item2" th:text="${selectedCell2Content}"></td>
+					<!--					<td class="item2"></td>-->
+				</tr>
+				<!--<tr>
             <td class="item">購入商品</td>
             <td class="item2">コーラ（L）</td>
-          </tr>
-        </table>
-        <p class="total">購入金額　：</p>
-      </div>
-      
-
-      
-      <div class="info-block">
-        <h2>お客様情報をご確認下さい。
-        </h2>
-        <table>
-          <tr>
-            <td class="item">氏名</td>
-            <td class="item2"><span id="name"></span></td>
-          </tr>
-          <tr>
-            <td class="item">氏名（かな）</td>
-            <td class="item2"><span id="kana"></span></td>
-          </tr>
-          <tr>
-            <td class="item">電話番号</td>
-            <td class="item2"><span id="phone"></span></td>
-          </tr>
-          <tr>
-            <td class="item">メールアドレス</td>
-            <td class="item2"><span id="email"></span></td>
-          </tr>
-        </table>
-      </div>
-
-      <hr class="line2" color="#565656">
-
-      <div class="btn">
-        <button class="back-btn">戻る</button>
-        <button onclick="location.href='admin_conp.html'" class="confirm-btn">確定する</button>
-      </div>
-    </div>
+          </tr>-->
+			</table>
+			<!--        <p class="total">購入金額　：</p>-->
+		</div>
 
 
-    <!-- フッター ------------------------------------------------->
-    <footer class="commonFooter">
 
-      </nav>
-        <p class="commonFooterCopyright">&copy;2024 HAL CINEMA</p>
-    </footer>
+		<div class="info-block">
+			<h2>お客様情報をご確認下さい。
+			</h2>
+			<table>
+				<tr>
+					<td class="item">氏名</td>
+					<td class="item2"><span id="name" th:text="${memberList[0][0]}"></span></td>
+					<!--					<td class="item2"><span id="name"></span></td>-->
+				</tr>
+				<tr>
+					<td class="item">氏名（かな）</td>
 
-  </body>
+					<td class="item2"><span id="kana" th:text="${memberList[0][1]}"></span></td>
+					<!--					<td class="item2"><span id="kana"></span></td>-->
+				</tr>
+				<tr>
+
+					<td class="item">電話番号</td>
+					<td class="item2"><span id="phone" th:text="${memberList[0][2]}"></span></td>
+					<!--					<td class="item2"><span id="phone"></span></td>-->
+				</tr>
+				<tr>
+					<td class="item">メールアドレス
+					</td>
+
+					<td class="item2"><span id="email" th:text="${memberList[0][3]}"></span></td>
+					<!--					<td class="item2"><span id="email"></span></td>-->
+				</tr>
+			</table>
+		</div>
+
+		<hr class="line2" color="#565656">
+
+		<form class="btn" method="post" th:action="@{/adminReserveComp}">
+			<input type="hidden" th:value="${seatNumber}" name="seatNumber">
+			<input type="hidden" th:value="${guestSeatNumber}" name="guestSeatNumber">
+			<input type="hidden" th:value="${screeningScheduleId}" name="screeningScheduleId">
+			<input type="hidden" th:value="${memberId}" name="memberId">
+
+			<a class="back-btn" th:href="@{/adminReserve(screeningScheduleId=${screeningScheduleId})}">戻る</a>
+			<button type="submit" class="confirm-btn">確定する</button>
+		</form>
+	</div>
+
+
+	<!-- フッター ------------------------------------------------->
+	<footer class="commonFooter">
+
+		</nav>
+		<p class="commonFooterCopyright">&copy;2024 HAL CINEMA</p>
+	</footer>
+
+</body>
 
 </html>

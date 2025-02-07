@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>HALCINEMA｜ショップ</title>
     <link rel="stylesheet" type="text/css" href="../css/reset.css">
-    <link rel="stylesheet" type="text/css" href="../css/shop.css">
+    <link rel="stylesheet" type="text/css" href="../css/shop2.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600&display=swap" rel="stylesheet">
 </head>
@@ -17,69 +17,33 @@
                 <img class="logo" id="icon" src="../images/logo.svg" alt="HAL CINEMA">
             </figure>
             <nav class="nav-buttons">
-                <button onclick="location.href='index.html'" class="nav-button">
+                <button onclick="location.href='/systemtop'" class="nav-button">
                     <i class="fas fa-home"></i>
                     <span>TOPに戻る</span>
                 </button>
-                <button onclick="location.href='shop_conf.html'" class="nav-button" id="kakunin">
+                <button onclick="location.href='/shopConf'" class="nav-button" id="kakunin">
                     <i class="fas fa-shopping-cart"></i>
                     <span>注文内容確認</span>
                 </button>
             </nav>
             <div class="category-nav">
-                <button onclick="location.href='shop.html'" class="category-btn">ドリンク</button>
+                <button onclick="location.href='/shop'" class="category-btn">ドリンク</button>
                 <button class="category-btn active">フード</button>
-                <button onclick="location.href='shop3.html'" class="category-btn">グッズ</button>
+                <button onclick="location.href='/shop3'" class="category-btn">グッズ</button>
             </div>
         </aside>
 
         <main class="main-content">
             <div class="products-grid">
-                <div class="product-card">
+				
+                
+                <div class="product-card" th:each="product : ${products}">
                     <div class="product-image">
-                        <img src="../images/welcome.jpg" alt="ポップコーンS">
+                        <img th:src="@{'/images/' + ${product[3]}}" alt="">
                     </div>
                     <div class="product-info">
-                        <h3 class="product-title">ポップコーンS</h3>
-                        <p class="product-price">¥600</p>
-                        <div class="quantity-control">
-                            <button type="button" class="quantity-btn minus">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                            <input type="text" value="0" class="quantity-input" readonly>
-                            <button type="button" class="quantity-btn plus">
-                                <i class="fas fa-plus"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="../images/welcome.jpg" alt="ポップコーンM">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">ポップコーンM</h3>
-                        <p class="product-price">¥800</p>
-                        <div class="quantity-control">
-                            <button type="button" class="quantity-btn minus">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                            <input type="text" value="0" class="quantity-input" readonly>
-                            <button type="button" class="quantity-btn plus">
-                                <i class="fas fa-plus"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="../images/welcome.jpg" alt="ポップコーンL">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">ポップコーンL</h3>
-                        <p class="product-price">¥1,000</p>
+                        <h3 class="product-title" th:text="${product[1]}"></h3>
+                        <p class="product-price" th:text="'￥' + ${product[2]}"></p>
                         <div class="quantity-control">
                             <button type="button" class="quantity-btn minus">
                                 <i class="fas fa-minus"></i>
@@ -95,21 +59,21 @@
                 <!-- 他の商品も同様に追加 -->
             </div>
 
-            <div class="pagination">
-                <button class="pagination-btn" disabled>
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <div class="page-numbers">
-                    <button class="page-btn active">1</button>
-                    <button class="page-btn">2</button>
-                    <button class="page-btn">3</button>
-                </div>
-                <button class="pagination-btn">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
+<!--            <div class="pagination">-->
+<!--                <button class="pagination-btn" disabled>-->
+<!--                    <i class="fas fa-chevron-left"></i>-->
+<!--                </button>-->
+<!--                <div class="page-numbers">-->
+<!--                    <button class="page-btn active">1</button>-->
+<!--                    <button class="page-btn">2</button>-->
+<!--                    <button class="page-btn">3</button>-->
+<!--                </div>-->
+<!--                <button class="pagination-btn">-->
+<!--                    <i class="fas fa-chevron-right"></i>-->
+<!--                </button>-->
+<!--            </div>-->
         </main>
     </div>
-    <script type="text/javascript" src="../js/shop.js"></script>
+    <script type="text/javascript" src="../js/shop2.js"></script>
 </body>
 </html>

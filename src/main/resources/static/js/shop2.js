@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
     items.forEach(item => {
         const title = item.querySelector('.product-title')?.textContent.trim();
         const priceText = item.querySelector('.product-price')?.textContent.trim();
-        const price = parseInt(priceText?.replace('¥', '').replace(',', '').trim(), 10);
+        const price = parseInt(priceText?.replace('￥', '').replace(',', '').trim(), 10);
         const quantityInput = item.querySelector('.quantity-input');
 
         // 保存されていた数量があれば復元
@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const currentOrderData = {};
             items.forEach(item => {
                 const title = item.querySelector('.product-title')?.textContent.trim();
-                const priceText = item.querySelector('.product-price')?.textContent.replace('¥', '').replace(',', '').trim();
+                const priceText = item.querySelector('.product-price')?.textContent.replace('￥', '').replace(',', '').trim();
                 const quantity = parseInt(item.querySelector('.quantity-input')?.value, 10) || 0;
                 const price = parseInt(priceText, 10) || 0;
                 
@@ -157,6 +157,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // 確認ページへ遷移
-        window.location.href = 'shop_conf.html';
+        window.location.href = '/shopConf';
     });
 });
