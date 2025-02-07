@@ -9,13 +9,13 @@ document.addEventListener("DOMContentLoaded", function() {
     const address = localStorage.getItem('address');
 
     // それぞれの確認用フィールドに表示
-    document.getElementById('confirm-name').textContent = name || '未入力';
-    document.getElementById('confirm-kana').textContent = kana || '未入力';
-    document.getElementById('confirm-birthdate').textContent = birthdate || '未入力';
-    document.getElementById('confirm-phone').textContent = phone || '未入力';
-    document.getElementById('confirm-gender').textContent = gender === 'male' ? '男性' : gender === 'female' ? '女性' : '回答しない';
-    document.getElementById('confirm-postal').textContent = postal || '未入力';
-    document.getElementById('confirm-address').textContent = address || '未入力';
+//    document.getElementById('confirm-name').textContent = name || '未入力';
+//    document.getElementById('confirm-kana').textContent = kana || '未入力';
+//    document.getElementById('confirm-birthdate').textContent = birthdate || '未入力';
+//    document.getElementById('confirm-phone').textContent = phone || '未入力';
+//    document.getElementById('confirm-gender').textContent = gender === 'male' ? '男性' : gender === 'female' ? '女性' : '回答しない';
+//    document.getElementById('confirm-postal').textContent = postal || '未入力';
+//    document.getElementById('confirm-address').textContent = address || '未入力';
 
     // 修正するボタンの動作
     document.getElementById('back-to-form').addEventListener('click', function() {
@@ -24,10 +24,10 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // 登録を確定するボタンの動作
-    document.getElementById('confirm-registration').addEventListener('click', function() {
-        // 確認画面で登録確定処理（例：サーバーへの送信など）
-        alert('登録が確定しました！');
-        localStorage.clear(); // 登録が完了したら localStorage をクリア
-        window.location.href = 'card.html'; // サンクスページに遷移（thankyou.html は登録完了後のページ）
-    });
+//    document.getElementById('confirm-registration').addEventListener('click', function() {
+//        // 確認画面で登録確定処理（例：サーバーへの送信など）
+//        alert('登録が確定しました！');
+//        localStorage.clear(); // 登録が完了したら localStorage をクリア
+//        window.location.href = 'card.html'; // サンクスページに遷移（thankyou.html は登録完了後のページ）
+//    });
 });

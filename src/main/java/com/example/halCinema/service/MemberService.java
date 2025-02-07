@@ -13,32 +13,32 @@ import com.example.halCinema.repository.MemberRepository;
 @Service
 @Transactional
 public class MemberService {
-	
-    @Autowired
-    MemberRepository MemberRepository;
-    
-    //  座席予約時に必要
-    public Member findMemberById(UUID memberId) {
-        return MemberRepository.findById(memberId).orElse(null);
-    }
-    
-	
-	//  会員情報取得
-    public List<Object[]> findReservationMember(UUID memberId) {
-        return MemberRepository.findReservationMember(memberId);
-    }
-    
-	//  会員のメールアドレス取得
-    public List<Object[]> findMailaddress(UUID memberId) {
-        return MemberRepository.findMailaddress(memberId);
-    }
-    
-	//  ログイン
-    public List<Object[]> loginEntry(String memberMailaddress, String memberPassword) {
-        return MemberRepository.loginEntry(memberMailaddress, memberPassword);
-    }
-    
-    
 
-    
+    @Autowired
+    private MemberRepository memberRepository;
+
+    // 会員情報をIDで検索
+    public Member findMemberById(UUID memberId) {
+        return memberRepository.findById(memberId).orElse(null);
+    }
+
+    // 会員情報取得
+    public List<Object[]> findReservationMember(UUID memberId) {
+        return memberRepository.findReservationMember(memberId);
+    }
+
+    // 会員のメールアドレス取得
+    public List<Object[]> findMailaddress(UUID memberId) {
+        return memberRepository.findMailaddress(memberId);
+    }
+
+    // ログイン
+    public List<Object[]> loginEntry(String memberMailaddress, String memberPassword) {
+        return memberRepository.loginEntry(memberMailaddress, memberPassword);
+    }
+
+    // 会員情報保存 (新規または更新)
+    public void saveMemberInfo(Member member) {
+        memberRepository.save(member);
+    }
 }

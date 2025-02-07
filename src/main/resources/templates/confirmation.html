@@ -11,51 +11,115 @@
     <div class="container">
         <div class="form-container">
             <h2>会員情報確認</h2>
-			<form id="confirmationForm" action="/save" method="POST">
+            <form id="confirmationForm" action="/confirmation" method="POST">
                 <div class="info-section">
+                    <h3>基本情報</h3>
                     <div class="form-group">
                         <label>氏名</label>
-                        <p id="confirm-name" class="confirm-data"></p>
+                        <p id="confirm-name" class="confirm-data" th:text="${formData.name}">氏名</p>
                     </div>
-                    
+
                     <div class="form-group">
                         <label>氏名（かな）</label>
-                        <p id="confirm-kana" class="confirm-data"></p>
+                        <p id="confirm-kana" class="confirm-data" th:text="${formData.kana}">氏名（かな）</p>
                     </div>
 
                     <div class="form-group">
                         <label>生年月日</label>
-                        <p id="confirm-birthdate" class="confirm-data"></p>
+                        <p id="confirm-birthdate" class="confirm-data" th:text="${formData.birthdate}">生年月日</p>
                     </div>
 
                     <div class="form-group">
                         <label>電話番号</label>
-                        <p id="confirm-phone" class="confirm-data"></p>
+                        <p id="confirm-phone" class="confirm-data" th:text="${formData.phone}">電話番号</p>
+                    </div>
+
+                </div>
+
+                <div class="info-section">
+                    <h3>カード情報</h3>
+                    <div class="form-group">
+                        <label>カード番号</label>
+                        <p id="confirm-card-number" class="confirm-data" th:text="${formData.cardNumber}">カード番号</p>
                     </div>
 
                     <div class="form-group">
-                        <label>性別</label>
-                        <p id="confirm-gender" class="confirm-data"></p>
+                        <label>カード名義</label>
+                        <p id="confirm-card-name" class="confirm-data" th:text="${formData.cardName}">カード名義</p>
                     </div>
 
                     <div class="form-group">
-                        <label>郵便番号</label>
-                        <p id="confirm-postal" class="confirm-data"></p>
+                        <label>有効期限</label>
+                        <p id="confirm-card-expiry" class="confirm-data" th:text="${formData.cardMonth + '月/' + formData.cardYear + '年'}">有効期限</p>
                     </div>
 
                     <div class="form-group">
-                        <label>住所</label>
-                        <p id="confirm-address" class="confirm-data"></p>
+                        <label>セキュリティコード</label>
+                        <p id="confirm-card-cvc" class="confirm-data" th:text="${formData.cardCvc}">セキュリティコード</p>
                     </div>
                 </div>
 
-				<div class="button-group">
-				    <button type="button" id="back-to-form" class="btn btn-secondary" onclick="history.back()">修正する</button>
-				    <button type="submit" id="confirm-registration" class="btn btn-primary">次へ</button>
-				</div>
+                <div class="button-group">
+                    <button type="button" id="back-to-form" class="btn btn-secondary" onclick="history.back()">修正する</button>
+                    <button type="submit" id="confirm-registration" class="btn btn-primary">登録</button>
+                </div>
             </form>
         </div>
     </div>
-    <script src="../js/confirmation.js"></script>
+
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+		    const form = document.getElementById('payment-form');
+		
+		    form.addEventListener('submit', function (event) {
+		        event.preventDefault();
+		
+		        // フォームデータを取得
+		        const formData = new FormData(form);
+		        const cardData = {};
+		
+		        formData.forEach((value, key) => {
+		            cardData[key] = value;
+		        });
+		
+		        // 入力確認データをHTML要素から取得
+		        const userInfo = {
+		            name: document.querySelector("[data-name='memberName']").textContent,
+		            kana: document.querySelector("[data-name='memberNameKana']").textContent,
+		            birthdate: document.querySelector("[data-name='memberBirthday']").textContent,
+		            phone: document.querySelector("[data-name='memberTel']").textContent,
+		            email: document.querySelector("[data-name='memberMailaddress']").textContent,
+		            cardNumber: getValue("confirm-card-number"),
+	                cardName: getValue("confirm-card-name"),
+	                cardMonth: getValue("confirm-card-expiry") ? getValue("confirm-card-expiry").split('/')[0] : null,
+	                cardYear: getValue("confirm-card-expiry") ? getValue("confirm-card-expiry").split('/')[1] : null,
+	                cardCvc: getValue("confirm-card-cvc"),
+		        };
+		
+		        // サーバーにデータを送信
+		        fetch('/confirmation', {
+		            method: 'POST',
+		            headers: {
+		                'Content-Type': 'application/json',
+		            },
+		            body: JSON.stringify(sessionData),
+		        })
+		            .then((response) => {
+		                if (response.ok) {
+		                    // 成功時に確認ページへ遷移
+		                    window.location.href = '/confirmation';
+		                } else {
+		                    throw new Error('サーバーエラーが発生しました。');
+		                }
+		            })
+		            .catch((error) => {
+		                console.error(error);
+		                alert('エラーが発生しました。もう一度お試しください。');
+		            });
+		    });
+		});
+	
+	</script>
+
 </body>
 </html>
