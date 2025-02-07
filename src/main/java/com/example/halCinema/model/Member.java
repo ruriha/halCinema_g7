@@ -6,20 +6,24 @@ import java.util.UUID;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 @Entity(name = "member")
 public class Member {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID memberId;
 
     private String memberName;
 
     private String memberNameKana;
 
+    @Temporal(TemporalType.DATE)
     private Date memberBirthday;
 
     private String memberAddress;
@@ -28,8 +32,10 @@ public class Member {
 
     private String memberMailaddress;
 
+    @Temporal(TemporalType.TIMESTAMP)
     private Date memberJoinday;
 
+    @Temporal(TemporalType.TIMESTAMP)
     private Date memberUpdateday;
 
     private Boolean memberStatus;
@@ -47,12 +53,10 @@ public class Member {
     private Integer cardMonth;
 
     private Boolean delete;
-    
-    
-    @OneToMany(mappedBy="member")
+
+    @OneToMany(mappedBy = "member")
     private List<Reservation> reservation;
-    
-    
+
     public UUID getMemberId() {
         return memberId;
     }
@@ -60,7 +64,7 @@ public class Member {
     public void setMemberId(UUID memberId) {
         this.memberId = memberId;
     }
-    
+
     public String getMemberName() {
         return memberName;
     }
@@ -68,7 +72,7 @@ public class Member {
     public void setMemberName(String memberName) {
         this.memberName = memberName;
     }
-    
+
     public String getMemberNameKana() {
         return memberNameKana;
     }
@@ -76,7 +80,7 @@ public class Member {
     public void setMemberNameKana(String memberNameKana) {
         this.memberNameKana = memberNameKana;
     }
-    
+
     public Date getMemberBirthday() {
         return memberBirthday;
     }
@@ -85,30 +89,30 @@ public class Member {
         this.memberBirthday = memberBirthday;
     }
 
+    public String getMemberAddress() {
+        return memberAddress;
+    }
+
     public void setMemberAddress(String memberAddress) {
         this.memberAddress = memberAddress;
     }
-    
-    public String getMemberAddress() {
-        return memberAddress;
+
+    public String getMemberTel() {
+        return memberTel;
     }
 
     public void setMemberTel(String memberTel) {
         this.memberTel = memberTel;
     }
-    
-    public String getMemberTel() {
-        return memberTel;
+
+    public String getMemberMailaddress() {
+        return memberMailaddress;
     }
 
     public void setMemberMailaddress(String memberMailaddress) {
         this.memberMailaddress = memberMailaddress;
     }
-    
-    public String getMemberMailaddress() {
-        return memberMailaddress;
-    }
-    
+
     public Date getMemberJoinday() {
         return memberJoinday;
     }
@@ -116,7 +120,7 @@ public class Member {
     public void setMemberJoinday(Date memberJoinday) {
         this.memberJoinday = memberJoinday;
     }
-    
+
     public Date getMemberUpdateday() {
         return memberUpdateday;
     }
@@ -124,7 +128,7 @@ public class Member {
     public void setMemberUpdateday(Date memberUpdateday) {
         this.memberUpdateday = memberUpdateday;
     }
-    
+
     public Boolean getMemberStatus() {
         return memberStatus;
     }
@@ -133,54 +137,54 @@ public class Member {
         this.memberStatus = memberStatus;
     }
 
+    public String getMemberPassword() {
+        return memberPassword;
+    }
+
     public void setMemberPassword(String memberPassword) {
         this.memberPassword = memberPassword;
     }
-    
-    public String getMemberPassword() {
-        return memberPassword;
+
+    public String getCardNumber() {
+        return cardNumber;
     }
 
     public void setCardNumber(String cardNumber) {
         this.cardNumber = cardNumber;
     }
-    
-    public String getCardNumber() {
-        return cardNumber;
+
+    public String getCardName() {
+        return cardName;
     }
 
     public void setCardName(String cardName) {
         this.cardName = cardName;
     }
-    
-    public String getCardName() {
-        return cardName;
+
+    public Integer getCardCvc() {
+        return cardCvc;
     }
 
     public void setCardCvc(Integer cardCvc) {
         this.cardCvc = cardCvc;
     }
-    
-    public Integer getCardCvc() {
-        return cardCvc;
+
+    public Integer getCardYear() {
+        return cardYear;
     }
 
     public void setCardYear(Integer cardYear) {
         this.cardYear = cardYear;
     }
-    
-    public Integer getCardYear() {
-        return cardYear;
+
+    public Integer getCardMonth() {
+        return cardMonth;
     }
 
     public void setCardMonth(Integer cardMonth) {
         this.cardMonth = cardMonth;
     }
-    
-    public Integer getCardMonth() {
-        return cardMonth;
-    }
-    
+
     public Boolean getDelete() {
         return delete;
     }
@@ -188,8 +192,7 @@ public class Member {
     public void setDelete(Boolean delete) {
         this.delete = delete;
     }
-    
-    
+
     public List<Reservation> getReservation() {
         return reservation;
     }
@@ -197,5 +200,4 @@ public class Member {
     public void setReservation(List<Reservation> reservation) {
         this.reservation = reservation;
     }
-
 }

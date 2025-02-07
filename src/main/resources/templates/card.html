@@ -10,77 +10,120 @@
     <div class="background-overlay"></div>
     <div class="container">
         <h2>決済情報入力</h2>
-		<form id="payment-form" action="/configration" method="POST">
-            <div class="payment-details">
-                <label>支払内容</label>
-<!--                <div class="amount-box">-->
-<!--                    <span class="amount-label">入会手数料</span>-->
-<!--                    <span class="amount-value">¥1,000</span>-->
-<!--                </div>-->
-            </div>
+        <!-- カード情報入力フォーム -->
+		<form id="payment-form" th:action="@{/card}" method="post">
+		    <div class="payment-method">
+		        <!-- カード番号 -->
+		        <div class="input-group">
+		            <label for="card-number">カード番号</label>
+		            <input type="text" id="card-number" name="cardNumber" th:value="*{cardNumber}" required>
+		        </div>
+				
+				<!-- カード名 -->
+				<div class="input-group">
+				    <label for="card-name">カード名義</label>
+				    <input type="text" id="card-name" name="cardName" th:value="*{cardName}" required>
+				</div>
+		
+		        <!-- 有効期限 -->
+				<div class="security-info">
+				    <div class="input-group">
+				        <label for="expiry-month">有効期限 (月)</label>
+				        <select id="expiry-month" name="cardMonth" th:value="*{expiryMonth}" required>
+				            <option value="">月</option>
+				            <option value="01">01</option>
+				            <option value="02">02</option>
+				            <option value="03">03</option>
+				            <option value="04">04</option>
+				            <option value="05">05</option>
+				            <option value="06">06</option>
+				            <option value="07">07</option>
+				            <option value="08">08</option>
+				            <option value="09">09</option>
+				            <option value="10">10</option>
+				            <option value="11">11</option>
+				            <option value="12">12</option>
+				        </select>
+				    </div>
+				    <div class="input-group">
+				        <label for="expiry-year">有効期限 (年)</label>
+				        <select id="expiry-year" name="cardYear" th:value="*{expiryYear}" required>
+				            <option value="">年</option>
+				            <option value="2025">2025</option>
+				            <option value="2026">2026</option>
+				            <option value="2027">2027</option>
+				            <option value="2028">2028</option>
+				            <option value="2029">2029</option>
+				            <option value="2030">2030</option>
+				        </select>
+				    </div>
+				</div>
 
-            <div class="payment-method">
-                <div class="input-group">
-                    <label for="card-number">カード番号</label>
-                    <input type="text" id="card-number" placeholder="1234 5678 9012 3456" maxlength="19" required>
-                </div>
+		
+		        <!-- セキュリティコード -->
+		        <div class="input-group security-code">
+		            <label for="security-code">セキュリティコード</label>
+		            <input type="text" id="security-code" name="cardCvc" th:value="*{cardCvc}" maxlength="3" required>
+		        </div>
+		    </div>
+		
+		    <div class="button-container">
+		        <button type="submit">次へ</button>
+		    </div>
+		</form>
 
-                <div class="input-group">
-                    <label for="card-name">カード名義</label>
-                    <input type="text" id="card-name" placeholder="TARO YAMADA" required>
-                </div>
-
-                <div class="security-info">
-                    <div class="input-group">
-                        <label for="expiry-month">有効期限 (月/年)</label>
-                        <div class="expiry-inputs">
-							<select id="expiry-month" required>
-							    <option value="">月</option>
-							    <!-- 月のオプションを追加 -->
-							    <option value="01">01</option>
-							    <option value="02">02</option>
-							    <option value="03">03</option>
-							    <option value="04">04</option>
-							    <option value="05">05</option>
-							    <option value="06">06</option>
-							    <option value="07">07</option>
-							    <option value="08">08</option>
-							    <option value="09">09</option>
-							    <option value="10">10</option>
-							    <option value="11">11</option>
-							    <option value="12">12</option>
-							</select>
-							
-							<select id="expiry-year" required>
-							    <option value="">年</option>
-							    <!-- 年のオプションを追加 -->
-							    <option value="2025">2025</option>
-							    <option value="2026">2026</option>
-							    <option value="2027">2027</option>
-							    <option value="2028">2028</option>
-							    <option value="2029">2029</option>
-							    <option value="2030">2030</option>
-							</select>
-
-                        </div>
-                    </div>
-                    <div class="input-group security-code">
-                        <label for="security-code">セキュリティコード</label>
-                        <input type="text" id="security-code" placeholder="123" maxlength="3" required>
-                    </div>
-                </div>
-            </div>
-
-            <div class="button-container">
-                <button type="submit">支払う</button>
-            </div>
-
-            <div class="notes">
-                <p class="note">※お支払方法は一括払いのみとなります。</p>
-                <p class="note">※一部プリペイド式クレジットカードはご利用いただけない場合がございます。</p>
-                <p class="note">※カード情報は保存されません。</p>
-            </div>
-        </form>
     </div>
+
+    <script src="../js/card.js"></script>
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+		    const form = document.getElementById('payment-form');
+		
+		    form.addEventListener('submit', function (event) {
+		
+		        // フォームデータを取得
+		        const formData = new FormData(form);
+		        const cardData = {};
+		
+		        formData.forEach((value, key) => {
+		            cardData[key] = value;
+		        });
+		
+		        // 入力確認データをHTML要素から取得
+		        const userInfo = {
+		            name: document.querySelector("[data-name='memberName']").textContent,
+		            kana: document.querySelector("[data-name='memberNameKana']").textContent,
+		            birthdate: document.querySelector("[data-name='memberBirthday']").textContent,
+		            phone: document.querySelector("[data-name='memberTel']").textContent,
+		            email: document.querySelector("[data-name='memberMailaddress']").textContent,
+		        };
+		
+		        // ユーザー情報とカード情報を統合
+		        const sessionData = { ...userInfo, ...cardData };
+		
+		        // サーバーにデータを送信
+		        fetch('/card', {
+		            method: 'POST',
+		            headers: {
+		                'Content-Type': 'application/json',
+		            },
+		            body: JSON.stringify(sessionData),
+		        })
+		            .then((response) => {
+		                if (response.ok) {
+		                    // 成功時に確認ページへ遷移
+		                    window.location.href = '/confirmation';
+		                } else {
+		                    throw new Error('サーバーエラーが発生しました。');
+		                }
+		            })
+		            .catch((error) => {
+		                console.error(error);
+		                alert('エラーが発生しました。もう一度お試しください。');
+		            });
+		    });
+		});
+
+	</script>
 </body>
 </html>

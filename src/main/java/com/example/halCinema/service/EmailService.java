@@ -20,6 +20,43 @@ public class EmailService {
     @Autowired
     JavaMailSender emailSender;
 
+    public void sendAccountCreationEmail(String recipientEmail, String memberName, String memberId) {
+        MimeMessage message = emailSender.createMimeMessage();
+        try {
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, StandardCharsets.UTF_8.name());
+
+            helper.setTo(recipientEmail);
+            helper.setSubject("【会員登録完了】QRコードのご案内");
+
+            // HTML形式のメール本文を設定
+            String text = String.format(
+                "<html><body>" +
+                "こんにちは、%s様<br><br>" +
+                "このたびは、当サービスにご登録いただきありがとうございます。<br><br>" +
+                "以下はあなたの会員情報です。<br><br>" +
+                "会員ID: %s<br><br>" +
+                "会員IDのQRコードを添付いたしましたので、大切に保管してください。<br><br>" +
+                "今後ともよろしくお願いいたします。" +
+                "</body></html>",
+                memberName, memberId
+            );
+
+            helper.setText(text, true); // HTML形式のメール本文を設定
+
+            // QRコードを生成
+            byte[] qrCodeImage = QRCodeGenerator.generateQRCodeImage(memberId);
+
+            // QRコードを添付
+            if (qrCodeImage != null) {
+                helper.addAttachment("member_qr.png", new ByteArrayResource(qrCodeImage));
+            }
+
+            emailSender.send(message);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void sendQRCodeEmail(String recipientEmail, String subject, String qrCodeText, String movieTitle, String strScreeningDatetime, String screenName, String memberName) {
         MimeMessage message = emailSender.createMimeMessage();
         try {

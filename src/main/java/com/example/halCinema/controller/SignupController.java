@@ -1,72 +1,134 @@
 package com.example.halCinema.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.example.halCinema.form.SignupForm;
+import com.example.halCinema.dto.FormData;
+import com.example.halCinema.repository.FormDataRepository;
+import com.example.halCinema.service.EmailService;
 import com.example.halCinema.service.SignupService;
 
+import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
+
 @Controller
+@RequestMapping("/")
+@SessionAttributes({"formData"})
 public class SignupController {
 
     private final SignupService service;
+    
+    @Autowired
+    private FormDataRepository formDataRepository;
+    
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    
+    @Autowired
+    private EmailService emailService;
 
     public SignupController(SignupService service) {
         this.service = service;
     }
 
+    @ModelAttribute("formData")
+    public FormData setupFormData() {
+        return new FormData();
+    }
+
     @GetMapping("/input_info")
-    public String viewInputInfo(Model model, SignupForm form) {
+    public String showInputForm(Model model) {
+        FormData formData = new FormData();
+        model.addAttribute("formData", formData);
         return "input_info";
     }
 
     @PostMapping("/input_info")
-    public String goToCardPage(@ModelAttribute SignupForm form, Model model) {
-        // input_infoからcardに遷移
-        return "redirect:/card"; // card.htmlにリダイレクト
-    }
+    public String handleFormSubmission(
+        @Valid @ModelAttribute("formData") FormData formData, BindingResult result, Model model) {
+        
+        if (result.hasErrors()) {
+            return "input_info";
+        }
 
+        // birthdate をそのまま利用する
+        return "redirect:/card";
+    }
+    
     @GetMapping("/card")
-    public String viewCardPage(Model model, SignupForm form) {
+    public String showCardPage(@ModelAttribute("formData") FormData formData, Model model) {
+        model.addAttribute("formData", formData); // セッションデータをビューに渡す
         return "card";
     }
 
     @PostMapping("/card")
-    public String saveMemberInfo(@ModelAttribute SignupForm form, Model model) {
-        // 必要な処理を実行
-        model.addAttribute("form", form); // 必要に応じてデータを渡す
-        return "card";
+    public String processCardPage(@ModelAttribute FormData formData, HttpSession session, Model model) {
+        // セッションから既存の入力情報を取得
+        FormData existingFormData = (FormData) session.getAttribute("formData");
+
+        // 入力情報とカード情報をマージ
+        if (existingFormData != null) {
+            if (formData.getCardNumber() != null) existingFormData.setCardNumber(formData.getCardNumber());
+            if (formData.getCardName() != null && !formData.getCardName().isEmpty()) {
+                existingFormData.setCardName(formData.getCardName());
+            }
+            if (formData.getCardMonth() != null && formData.getCardYear() != null) {
+                existingFormData.setCardMonth(formData.getCardMonth());
+                existingFormData.setCardYear(formData.getCardYear());
+            }
+            if (formData.getCardCvc() != null) existingFormData.setCardCvc(formData.getCardCvc());
+        } else {
+            existingFormData = formData;
+        }
+
+        // セッションに保存
+        session.setAttribute("formData", existingFormData);
+
+        // 確認画面にリダイレクト
+        return "redirect:/confirmation";
     }
 
-    @PostMapping("/configration")
-    public String processPayment(@ModelAttribute SignupForm form, Model model) {
-        // 決済情報を処理するロジックを追加（必要に応じて）
-        model.addAttribute("form", form); // 必要に応じてデータを渡す
-        return "redirect:/configration"; // configration.html にリダイレクト
+    @GetMapping("/confirmation")
+    public String viewConfirmationPage(@ModelAttribute("formData") FormData formData, Model model) {
+        model.addAttribute("formData", formData);
+        
+        return "confirmation"; // 確認ページに遷移
     }
 
-    @GetMapping("/configration")
-    public String viewConfigrationPage(Model model) {
-        return "confirmation";  // 修正：configration -> confirmation
-    }
-    
-    @PostMapping("/save")
-    public String saveMemberData(@ModelAttribute SignupForm form, Model model) {
-        // データ保存の処理を実行
-        service.saveMemberInfo(form); // SignupServiceに保存処理を委譲
-        model.addAttribute("message", "会員情報が保存されました。");
+    @PostMapping("/confirmation")
+    public String processConfirmation(@ModelAttribute("formData") FormData formData) {
+        // パスワードをハッシュ化
+        String hashedPassword = passwordEncoder.encode(formData.getPassword());
+        formData.setPassword(hashedPassword);
 
-        // 保存完了画面にリダイレクト
-        return "redirect:/success"; // 完了画面に遷移
+        // データをDBに登録（memberId は自動生成）
+        formDataRepository.save(formData);
+
+        // QRコード用のテキスト（UUID をそのまま利用）
+        String qrCodeText = formData.getId().toString();
+
+        // 会員登録完了のメールを送信
+        emailService.sendAccountCreationEmail(
+            formData.getEmail(),
+            formData.getName(),
+            qrCodeText
+        );
+
+        return "redirect:/success";
     }
-    
+
     @GetMapping("/success")
-    public String viewSuccess(Model model) {
-        return "success";
+    public String viewSuccessPage(@ModelAttribute("formData") FormData formData, Model model) {
+        model.addAttribute("formData", formData);
+        
+        return "success"; // 確認ページに遷移
     }
-
-
 }
