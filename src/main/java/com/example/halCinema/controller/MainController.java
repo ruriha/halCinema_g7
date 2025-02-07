@@ -1327,7 +1327,7 @@ public class MainController {
 	public String adminReserve(@RequestParam(name = "screeningScheduleId") Integer screeningScheduleId, Model model,
 			HttpSession session) {
 		//		会員情報取得
-		UUID memberId = (UUID) session.getAttribute("userId");//  ログイン時のセッションからID取得
+		UUID memberId = (UUID) session.getAttribute("loggedInMemberId");//  ログイン時のセッションからID取得
 		//System.out.println("memberid:" + memberId);
 		List<Object[]> memberList = MemberService.findReservationMember(memberId);
 		model.addAttribute("memberList", memberList);
@@ -1383,14 +1383,14 @@ public class MainController {
 			Model model,
 			HttpSession session) {
 
-		//UUID memberId = (UUID) session.getAttribute("userId");//  ログイン時のセッションからID取得
-		UUID memberId = UUID.fromString("6d78b80b-8207-44a3-8ece-82737e26c74a");
-
+		UUID memberId = (UUID) session.getAttribute("loggedInMemberId");
+//		UUID memberId = UUID.fromString("6d78b80b-8207-44a3-8ece-82737e26c74a");
 		//		上映スケジュール取得
 		List<Object[]> screeningScheduleList = ScreeningScheduleService
 				.findSelectScreeningSchedule(screeningScheduleId);
 
 		model.addAttribute("screeningScheduleList", screeningScheduleList);
+		System.out.println(screeningScheduleList);
 
 		//		会員情報取得
 		List<Object[]> memberList = MemberService.findReservationMember(memberId);
@@ -1406,6 +1406,7 @@ public class MainController {
 		System.out.println("bbbbbb:"+seatNumber+guestSeatNumber);
 
 		model.addAttribute("memberList", memberList);
+		System.out.println(memberList);
 
 		//		予約内容確認
 		model.addAttribute("seatNumber", seatNumber);
@@ -1414,7 +1415,6 @@ public class MainController {
 		model.addAttribute("selectedCell2Content", selectedCell2Content);
 		model.addAttribute("screeningScheduleId", screeningScheduleId);
 		model.addAttribute("memberId", memberId);
-
 		return "admin_conf";
 	}
 
