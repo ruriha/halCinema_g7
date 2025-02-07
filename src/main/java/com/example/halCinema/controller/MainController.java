@@ -1390,7 +1390,6 @@ public class MainController {
 				.findSelectScreeningSchedule(screeningScheduleId);
 
 		model.addAttribute("screeningScheduleList", screeningScheduleList);
-		System.out.println(screeningScheduleList);
 
 		//		会員情報取得
 		List<Object[]> memberList = MemberService.findReservationMember(memberId);
@@ -1406,7 +1405,6 @@ public class MainController {
 		System.out.println("bbbbbb:"+seatNumber+guestSeatNumber);
 
 		model.addAttribute("memberList", memberList);
-		System.out.println(memberList);
 
 		//		予約内容確認
 		model.addAttribute("seatNumber", seatNumber);
