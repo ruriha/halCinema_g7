@@ -1173,7 +1173,8 @@ public class MainController {
 	}
 
 	@RequestMapping("/systemtop")
-	public String sytemtop() {
+	public String sytemtop(HttpSession session) {
+		session.invalidate();
 		return "systemtop";
 	}
 
