@@ -1059,16 +1059,16 @@ public class MainController {
 	}
 	
 
-//	@RequestMapping("/memberSearching")
-//	public String memberSearching(HttpSession session, @RequestParam(required = false) String next, @RequestParam(required = false) String memberName, @RequestParam(required = false) String memberPhone) {
-//		System.out.println(memberName + memberPhone);		
-//		List<Object[]> member = MemberService.findMember(memberName, memberPhone);
-//		Object[] memberElement = member.get(0);
-//		UUID memberId = (UUID) memberElement[0];
-//		session.setAttribute("loggedInMemberId", memberId);
-//		System.out.println(memberId);		
-//		return "redirect:" + next;
-//	}
+	@RequestMapping("/memberSearching")
+	public String memberSearching(HttpSession session, @RequestParam(required = false) String next, @RequestParam(required = false) String memberName, @RequestParam(required = false) String memberPhone) {
+		System.out.println(memberName + memberPhone);		
+		List<Object[]> member = MemberService.findMember(memberName, memberPhone);
+		Object[] memberElement = member.get(0);
+		UUID memberId = (UUID) memberElement[0];
+		session.setAttribute("loggedInMemberId", memberId);
+		System.out.println(memberId);		
+		return "redirect:" + next;
+	}
 
 	@RequestMapping("/memberSave")
 	public String memberSave(HttpSession session, @RequestParam(required = false) UUID getMemberId,
